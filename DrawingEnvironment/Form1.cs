@@ -16,5 +16,25 @@ namespace DrawingEnvironment
         {
             InitializeComponent();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void variousColorsPlaceholderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void variousShapesPlaceholderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
