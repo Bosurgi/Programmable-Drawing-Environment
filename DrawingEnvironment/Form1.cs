@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,29 +52,46 @@ namespace DrawingEnvironment
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void runButton_Click(object sender, EventArgs e)
-        {
-            // Storing the input from the first TextBox
-            // Testing commands
-            //TODO: Implementing a method which will parse the strings as commands that the user can use.
-            
-            // ExecuteCommand();
-            
-            /*string UserInput = userInput.Text;
-            label1.Text = UserInput;*/
-            
-        }
+        {            
+            Parser parser = new Parser();
+            if(parser.validateCommand(userInput.Text))
+            {
+                string cmd = userInput.Text;
+                Graphics areaGraphics = drawingArea.CreateGraphics();
+                areaGraphics.Clear(Color.Black);
+                areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                Pen pen = new Pen(Color.White);
+                if (userInput.Text != null)
+                {
+                    switch (cmd.ToUpper())
+                    {
+                        case "RECTANGLE":
+                            Rectangle rect = new Rectangle(10, 10, 50, 100);
+                            rect.Draw(areaGraphics, pen);
+                            break;
+                    }
+                }
 
+            }
+                
+        }
+        
         private void userInput_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
+                /*
                 // Store the command into a container to check it
                 string UserInput = userInput.Text;
-                parser.spaceParser(UserInput);
-                // checkCommand(ListOfCommand);
-                // executeCommand(command);
-            }
-        }
+                List<string> parsedCommands = parser.spaceParser(UserInput);
+                CommandsDraw commandsDraw = new CommandsDraw();
+
+                commandsDraw.CheckValidCommand(parsedCommands[0]);
+                commandsDraw.executeDrawing(drawingArea);
+                
+                */
+            }    
+        } 
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
@@ -82,21 +100,17 @@ namespace DrawingEnvironment
 
         private void userInput_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void drawingArea_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-            Cursor cursor = new Cursor(2, 2, Color.White);
-            cursor.Draw(g);
-            cursor.moveTo(80, 90, g);
 
         }
 
         private void drawingArea_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

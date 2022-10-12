@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,17 @@ namespace DrawingEnvironment
     /// </summary>
     abstract class Shape
     {
+        /// <summary>
+        /// Enumerating different types of shapes to be used as command.
+        /// </summary>
+       public enum Shapes
+        {
+            RECTANGLE, // 0
+            ELLIPSE,   // 1
+            CIRCLE,    // 2
+            TRIANGLE,  // 3
+            LINE       // 4
+        }
         // Position of the shape
         protected int x { get; set; }
         protected int y { get; set; }
@@ -20,7 +32,8 @@ namespace DrawingEnvironment
         // Color of the shape
         protected Color colour;
 
-        public abstract void Draw(Graphics graphics);
+        public abstract void Draw(Graphics graphics, Pen pen);
+
 
         /// <summary>
         /// Constructor of the Class Shape.
@@ -34,5 +47,26 @@ namespace DrawingEnvironment
             this.y = y;
             this.colour = colour;
         }
+
+        /// <summary>
+        /// Constructor to make a shape with just its position
+        /// </summary>
+        /// <param name="x"> the position in the x axis</param>
+        /// <param name="y"> the position in the y axis</param>
+        public Shape(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+        
+        /// <summary>
+        /// Empty constructor to create a new shape with no values
+        /// </summary>
+        public Shape()
+        {
+
+        }
+
     }
+
 }

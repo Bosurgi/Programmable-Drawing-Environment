@@ -198,8 +198,6 @@
             // 
             resources.ApplyResources(this.userInput, "userInput");
             this.userInput.Name = "userInput";
-            this.userInput.TextChanged += new System.EventHandler(this.userInput_TextChanged);
-            this.userInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.userInput_KeyDown);
             // 
             // programmingArea
             // 

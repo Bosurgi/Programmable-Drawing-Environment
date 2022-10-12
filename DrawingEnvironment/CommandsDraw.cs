@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,8 +22,8 @@ namespace DrawingEnvironment
         // List containing available commands
         List<string> commandList = new List<string>
         {
-            "PENDOWN",
-            "DRAW"
+            "RECTANGLE",
+            "CIRCLE"
         };
 
         // Constructor
@@ -31,6 +32,11 @@ namespace DrawingEnvironment
             name = this.name;
             parameters = this.parameters;
             
+        }
+
+        public CommandsDraw()
+        {
+
         }
 
         public override bool Execute()
@@ -44,21 +50,33 @@ namespace DrawingEnvironment
         /// <param name="name">the command name</param>
         /// <returns>true if the command is valid and false if the command is not.</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public bool checkValidCommand(string name)
+        /*public bool CheckValidCommand(string name)
         {
             if (!commandList.Contains(name))
             {
                 this.execute = false;
-                throw new NotImplementedException();
+                
             }
-            else { return true; }
-        }
-
-        public void executeDrawing(Canvas canvas, PaintEventArgs e)
-        {
-            if (this.execute && this.name.Equals("DRAW"))
+            else if (commandList.Contains(name)) 
             {
-                canvas.canvasPaint(e, 3, 10);
+                return Execute(); 
+            }
+
+            else
+            {
+                throw new NotImplementedException();
+                return false;
+            }
+        }
+        */
+        public void executeDrawing(PictureBox pb)
+        {
+            
+            if (this.execute && this.name.Equals("RECTANGLE"))
+            {
+                Graphics g = pb.CreateGraphics();
+                Pen pen = new Pen(Color.White);
+                g.DrawRectangle(pen, 10, 10, 3, 3);
             }
         }
     }

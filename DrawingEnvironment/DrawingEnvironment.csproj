@@ -53,7 +53,9 @@
       <DependentUpon>Canvas.cs</DependentUpon>
     </Compile>
     <Compile Include="CanvasTest.cs" />
-    <Compile Include="Cursor.cs" />
+    <Compile Include="Circle.cs" />
+    <Compile Include="Rectangle.cs" />
+    <Compile Include="CustomCursor.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="CommandsDraw.cs" />
     <Compile Include="Commands.cs" />

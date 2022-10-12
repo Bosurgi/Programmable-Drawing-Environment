@@ -19,6 +19,11 @@ namespace DrawingEnvironment
             parameters = this.parameters;
         }
 
+        public Commands()
+        {
+
+        }
+
     }
 
 
