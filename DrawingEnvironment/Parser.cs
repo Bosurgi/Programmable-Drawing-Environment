@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,8 +12,8 @@ namespace DrawingEnvironment
 {
     public class Parser
     {
-        List<string> commands = new List<string>();        
-        
+        List<string> commands = new List<string>();
+
         /// <summary>
         /// This method takes a string and separates the elements by spacing.
         /// </summary>
@@ -29,23 +30,30 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
-        /// 
+        /// Methods which checks if the commands is valid among the options available
         /// </summary>
-        /// <param name="userInput"></param>
-        /// <returns></returns>
-        public bool ValidateCommand(string userInput)
+        /// <param name="userInput">the input inserted by the user</param>
+        /// <returns>true if the command is present, and false if is not</returns>
+        public bool CheckCommand(string userInput)
         {
             var cmd = userInput.ToUpper().Split(' ');
-            
             var commands = Enum.GetNames(typeof(Command.Commands));
             var shapes = Enum.GetNames(typeof(Shape.Shapes));
-            
-            if (cmd.Length > 3 || !commands.Contains(cmd[0]) && !shapes.Contains(cmd[0]))
+            try
             {
-                MessageBox.Show("Enter a valid command");
+                if (cmd.Length > 3 || !commands.Contains(cmd[0]) && !shapes.Contains(cmd[0]))
+                {
+                    throw new ArgumentException("Invalid command");
+
+                }
+                else { return true; }
+            }
+
+            catch (ArgumentException)
+            {
+                // MessageBox.Show("Invalid command");
                 return false;
             }
-            else { return true; }           
         }
 
         /// <summary>
@@ -57,21 +65,39 @@ namespace DrawingEnvironment
         {
             List<int> parameterList = new List<int>();
             string[] commandArray = userInput.ToUpper().Split(' ');
-            // Excluding the first element which is going to be the command
-            for(int i = 1; i < commandArray.Length; i++)
+                        
+            try
             {
-                try
+                for (int i = 1; i < commandArray.Length; i++)
                 {
-                    // It adds the parameters in the list if they are valid integers
-                    parameterList.Add(Convert.ToInt32(commandArray[i]));
+                    // If it can be converted to int from string it will add it to the list
+                    int parameter = Convert.ToInt32(commandArray[i]);
+                    parameterList.Add(parameter);
+                }
+                // returns the list of parameters in int
+                return parameterList;
+            }
+            // Catching the error if can't be converted
+            catch (FormatException)
+            {
+                return parameterList = new List<int>();
+                // Messagebox
+            }            
+        } // End of method
 
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Invalid Parameter");
-                }
-            } // End of for
-            return parameterList;
+        /// <summary>
+        /// Method that returns the first element of the passed array, which will determine,
+        /// which command the user is trying to invoke.
+        /// </summary>
+        /// <param name="userInput">the user input</param>
+        /// <returns>returns a list of strings with the command the user wants to execute</returns>
+        public string[] ValidateCommand(string userInput)
+        {
+            List<string> command = new List<string>();
+            var cmd = userInput.ToUpper().Split(' ');
+            command.Add(cmd[0]);
+
+            return command.ToArray();
         }
         // Constructor
 

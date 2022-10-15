@@ -17,7 +17,8 @@ namespace DrawingEnvironment
     public class CommandsDraw : Command
     {
         // Attributes
-        string name, parameters;
+        string name;
+        string[] parameters;
         bool execute = false;
         // List containing available commands
         List<string> commandList = new List<string>
@@ -27,7 +28,7 @@ namespace DrawingEnvironment
         };
 
         // Constructor
-        public CommandsDraw(string name, string parameters, Graphics g) : base(name, parameters)
+        public CommandsDraw(string name, string[] parameters, Graphics g) : base(name, parameters)
         {
             name = this.name;
             parameters = this.parameters;

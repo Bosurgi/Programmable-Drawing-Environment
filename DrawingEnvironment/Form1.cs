@@ -59,23 +59,35 @@ namespace DrawingEnvironment
         private void runButton_Click(object sender, EventArgs e)
         {            
             Parser parser = new Parser();
-            if(parser.ValidateCommand(userInput.Text))
+            if(parser.CheckCommand(userInput.Text))
             {
                 string cmd = userInput.Text;
+                string[] userCommand = parser.ValidateCommand(cmd);
                 Graphics areaGraphics = drawingArea.CreateGraphics();
-                areaGraphics.Clear(Color.Black);
                 areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                 Pen pen = new Pen(Color.White);
                 
                 if (userInput.Text != null)
                 {
+                    if (userCommand[0].Equals("RECTANGLE"))
+                    {
+                        // TODO: throwing error if parameters not correct
+                        List<int> dimensions = parser.ValidateParameters(cmd);
+                        Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
+                        rect.Draw(areaGraphics, pen);
+                    }
                     switch (cmd.ToUpper())
                     {
-                        case "RECTANGLE":
-                            Rectangle rect = new Rectangle(pointer.X, pointer.Y, 50, 100);
+                        case "CLEAR":
+                            areaGraphics.Clear(drawingArea.BackColor);
+                            break;
+                        /*
+                        case userCommand[0].Equals("RECTANGLE"):
+                            List<int> dimensions = parser.ValidateParameters(cmd);
+                            Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
                             rect.Draw(areaGraphics, pen);
                             break;
-
+                        */
                         case "CIRCLE":
                             Circle circle = new Circle(pointer.X, pointer.Y, 50);
                             circle.Draw(areaGraphics, pen);
@@ -114,5 +126,9 @@ namespace DrawingEnvironment
             
         }
 
+        private void drawingArea_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
