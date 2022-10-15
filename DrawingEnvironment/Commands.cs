@@ -11,8 +11,8 @@ namespace DrawingEnvironment
         /// <summary>
         /// Command class properties, names and parameters.
         /// </summary>
-        private string name { get; set; }
-        private string parameters { get; set; }
+        protected string name { get; set; }
+        protected string[] parameters { get; set; }
 
         public abstract bool Execute();
 
@@ -25,12 +25,17 @@ namespace DrawingEnvironment
             CLEAR,  // 2
         }
 
+        public override string ToString()
+        {
+            return name;
+        }
+
         /// <summary>
         /// Constructor for the Command class
         /// </summary>
         /// <param name="name">the name of the command</param>
         /// <param name="parameters">the parameters passed for the command</param>
-        public Command(string name, string parameters)
+        public Command(string name, string[] parameters)
         {
             name = this.name;
             parameters = this.parameters;

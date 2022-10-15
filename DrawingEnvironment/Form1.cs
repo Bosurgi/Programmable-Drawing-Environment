@@ -66,6 +66,7 @@ namespace DrawingEnvironment
                 areaGraphics.Clear(Color.Black);
                 areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                 Pen pen = new Pen(Color.White);
+                
                 if (userInput.Text != null)
                 {
                     switch (cmd.ToUpper())
