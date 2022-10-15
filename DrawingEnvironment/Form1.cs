@@ -76,7 +76,7 @@ namespace DrawingEnvironment
                         Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
                         rect.Draw(areaGraphics, pen);
                     }
-                    switch (cmd.ToUpper())
+                    switch (userCommand[0].ToUpper())
                     {
                         case "CLEAR":
                             areaGraphics.Clear(drawingArea.BackColor);
@@ -89,7 +89,8 @@ namespace DrawingEnvironment
                             break;
                         */
                         case "CIRCLE":
-                            Circle circle = new Circle(pointer.X, pointer.Y, 50);
+                            List<int> radius = parser.ValidateParameters(cmd);
+                            Circle circle = new Circle(pointer.X, pointer.Y, radius[0]);
                             circle.Draw(areaGraphics, pen);
                             break;
                     } // End of switch
@@ -154,7 +155,8 @@ namespace DrawingEnvironment
                                 break;
                             */
                             case "CIRCLE":
-                                Circle circle = new Circle(pointer.X, pointer.Y, 50);
+                                List<int> radius = parser.ValidateParameters(cmd);
+                                Circle circle = new Circle(pointer.X, pointer.Y, radius[0]);
                                 circle.Draw(areaGraphics, pen);
                                 break;
                         } // End of switch
