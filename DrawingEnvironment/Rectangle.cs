@@ -15,8 +15,8 @@ namespace DrawingEnvironment
 
         public Rectangle(int x, int y, int w, int h)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
             width = w;
             height = h;
         }
@@ -28,7 +28,7 @@ namespace DrawingEnvironment
         public override void Draw(Graphics graphics, Pen pen)
         {
             // It uses the Method to Draw a rectangle taking the position of the Shape and properties from the Rectangle class
-            graphics.DrawRectangle(pen, x, y, width, height);
+            graphics.DrawRectangle(pen, X, Y, width, height);
         }
     }
 }

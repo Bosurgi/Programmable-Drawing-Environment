@@ -14,7 +14,7 @@ namespace DrawingEnvironment
     /// This is a class which manages the commands related to drawing.
     /// This class takes two parameters. The name of the command and the parameters, and also the Canvas to draw into.
     /// </summary>
-    public class CommandsDraw : Commands
+    public class CommandsDraw : Command
     {
         // Attributes
         string name, parameters;
@@ -27,7 +27,7 @@ namespace DrawingEnvironment
         };
 
         // Constructor
-        public CommandsDraw(string name, string parameters, Canvas canvas) : base(name, parameters)
+        public CommandsDraw(string name, string parameters, Graphics g) : base(name, parameters)
         {
             name = this.name;
             parameters = this.parameters;

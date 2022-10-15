@@ -14,6 +14,14 @@ namespace DrawingEnvironment
 {
     public partial class Form1 : Form
     {
+
+        /// <summary>
+        /// Initialising the parser;
+        /// </summary>
+        Parser parser = new Parser();
+
+        CustomCursor pointer = new CustomCursor();
+
         /// <summary>
         /// Entry point for initialising the Form and it's components
         /// </summary>
@@ -21,10 +29,7 @@ namespace DrawingEnvironment
         {
             InitializeComponent();
         }
-        /// <summary>
-        /// Initialising the parser;
-        /// </summary>
-        Parser parser = new Parser();
+
 
         private void helpButton_Click(object sender, EventArgs e)
         {
@@ -54,7 +59,7 @@ namespace DrawingEnvironment
         private void runButton_Click(object sender, EventArgs e)
         {            
             Parser parser = new Parser();
-            if(parser.validateCommand(userInput.Text))
+            if(parser.ValidateCommand(userInput.Text))
             {
                 string cmd = userInput.Text;
                 Graphics areaGraphics = drawingArea.CreateGraphics();
@@ -66,8 +71,13 @@ namespace DrawingEnvironment
                     switch (cmd.ToUpper())
                     {
                         case "RECTANGLE":
-                            Rectangle rect = new Rectangle(10, 10, 50, 100);
+                            Rectangle rect = new Rectangle(pointer.X, pointer.Y, 50, 100);
                             rect.Draw(areaGraphics, pen);
+                            break;
+
+                        case "CIRCLE":
+                            Circle circle = new Circle(pointer.X, pointer.Y, 50);
+                            circle.Draw(areaGraphics, pen);
                             break;
                     }
                 }
@@ -98,19 +108,10 @@ namespace DrawingEnvironment
 
         }
 
-        private void userInput_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void drawingArea_Paint(object sender, PaintEventArgs e)
         {
-
-        }
-
-        private void drawingArea_Click(object sender, EventArgs e)
-        {
             
         }
+
     }
 }

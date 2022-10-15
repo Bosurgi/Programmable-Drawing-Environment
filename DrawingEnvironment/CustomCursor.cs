@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -9,9 +10,37 @@ using System.Xml;
 
 namespace DrawingEnvironment
 {
-    internal class CustomCursor : Shape
+    public class CustomCursor
     {
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        Point location = new Point();
         
+        public CustomCursor()
+        {
+            X = 10;
+            Y = 10;
+            location = new Point(X, Y);
+        }
+
+        public void Draw(Graphics g)
+        {
+            Pen pen = new Pen(Color.White);
+            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(X, Y, 20, 20);
+            g.DrawRectangle(pen, rect);
+        }
+
+        public void UpdatePosition(int x, int y)
+        {
+            X = x;
+            Y = y;
+            location = new Point(X, Y);
+            
+        }
+
+
+        /*
         Pen pen = new Pen(Color.White);
         /// <summary>
         /// Constructor for the class Cursor.
@@ -42,5 +71,7 @@ namespace DrawingEnvironment
         }
 
     }
+        */
 
+    }
 }

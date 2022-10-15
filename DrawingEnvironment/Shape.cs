@@ -26,8 +26,8 @@ namespace DrawingEnvironment
             LINE       // 4
         }
         // Position of the shape
-        protected int x { get; set; }
-        protected int y { get; set; }
+        internal int X { get; set; }
+        internal int Y { get; set; }
 
         // Color of the shape
         protected Color colour;
@@ -43,8 +43,8 @@ namespace DrawingEnvironment
         /// <param name="colour">The color of the shape</param>
         public Shape(int x, int y, Color colour)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
             this.colour = colour;
         }
 
@@ -55,8 +55,8 @@ namespace DrawingEnvironment
         /// <param name="y"> the position in the y axis</param>
         public Shape(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
         }
         
         /// <summary>
@@ -64,7 +64,7 @@ namespace DrawingEnvironment
         /// </summary>
         public Shape()
         {
-
+            
         }
 
     }

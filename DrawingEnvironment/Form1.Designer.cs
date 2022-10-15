@@ -216,7 +216,6 @@
             resources.ApplyResources(this.drawingArea, "drawingArea");
             this.drawingArea.Name = "drawingArea";
             this.drawingArea.TabStop = false;
-            this.drawingArea.Click += new System.EventHandler(this.drawingArea_Click);
             this.drawingArea.Paint += new System.Windows.Forms.PaintEventHandler(this.drawingArea_Paint);
             // 
             // Form1

@@ -45,7 +45,7 @@ namespace DrawingEnvironment
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
 
-            // Commands to the canvas will be passed here.
+            // Command to the canvas will be passed here.
             Graphics g = e.Graphics;
             Color black = Color.Black;
             Pen pen = new Pen(black, 3);

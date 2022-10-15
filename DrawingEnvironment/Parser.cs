@@ -27,20 +27,25 @@ namespace DrawingEnvironment
             return commands;
         }
 
-        public bool validateCommand(string userInput)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userInput"></param>
+        /// <returns></returns>
+        public bool ValidateCommand(string userInput)
         {
             var cmd = userInput.ToUpper().Split(' ');
-            var validCommand = Enum.GetNames(typeof(Shape.Shapes));
-            if (cmd.Length > 3 || !validCommand.Contains(cmd[0]))
+            
+            var validCommand = Enum.GetNames(typeof(Command.Commands));
+            var validShape = Enum.GetNames(typeof(Shape.Shapes));
+            
+            if (cmd.Length > 3 || !validShape.Contains(cmd[0]) || !validCommand.Contains(cmd[0]))
             {
                 MessageBox.Show("Enter a valid command");
                 return false;
             }
             else { return true; }
-        }
-
-        
-
+        }  
 
         // Constructor
 

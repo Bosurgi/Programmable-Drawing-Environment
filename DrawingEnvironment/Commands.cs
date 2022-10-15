@@ -6,20 +6,40 @@ using System.Threading.Tasks;
 
 namespace DrawingEnvironment
 {
-    public abstract class Commands : ICommand
+    public abstract class Command : ICommand
     {
+        /// <summary>
+        /// Command class properties, names and parameters.
+        /// </summary>
         private string name { get; set; }
         private string parameters { get; set; }
 
         public abstract bool Execute();
 
-        public Commands(string name, string parameters)
+        /// <summary>
+        /// Enumerator for commands available
+        /// </summary>
+        public enum Commands
+        {
+            MOVETO, // 1
+            CLEAR,  // 2
+        }
+
+        /// <summary>
+        /// Constructor for the Command class
+        /// </summary>
+        /// <param name="name">the name of the command</param>
+        /// <param name="parameters">the parameters passed for the command</param>
+        public Command(string name, string parameters)
         {
             name = this.name;
             parameters = this.parameters;
         }
 
-        public Commands()
+        /// <summary>
+        /// Empty Constructor for command class
+        /// </summary>
+        public Command()
         {
 
         }
