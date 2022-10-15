@@ -198,6 +198,7 @@
             // 
             resources.ApplyResources(this.userInput, "userInput");
             this.userInput.Name = "userInput";
+            this.userInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.userInput_KeyDown_1);
             // 
             // programmingArea
             // 

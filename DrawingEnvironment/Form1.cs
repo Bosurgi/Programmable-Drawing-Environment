@@ -92,29 +92,17 @@ namespace DrawingEnvironment
                             Circle circle = new Circle(pointer.X, pointer.Y, 50);
                             circle.Draw(areaGraphics, pen);
                             break;
-                    }
-                }
+                    } // End of switch
+                }// End of if text null
 
             }
                 
-        }
-        
+        } // End of Method
+
         private void userInput_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                /*
-                // Store the command into a container to check it
-                string UserInput = userInput.Text;
-                List<string> parsedCommands = parser.spaceParser(UserInput);
-                CommandsDraw commandsDraw = new CommandsDraw();
-
-                commandsDraw.CheckValidCommand(parsedCommands[0]);
-                commandsDraw.executeDrawing(drawingArea);
-                
-                */
-            }    
-        } 
+            
+        }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
@@ -129,6 +117,54 @@ namespace DrawingEnvironment
         private void drawingArea_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void userInput_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Parser parser = new Parser();
+                if (parser.CheckCommand(userInput.Text))
+                {
+                    string cmd = userInput.Text;
+                    string[] userCommand = parser.ValidateCommand(cmd);
+                    Graphics areaGraphics = drawingArea.CreateGraphics();
+                    areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    Pen pen = new Pen(Color.White);
+
+                    if (userInput.Text != null)
+                    {
+                        if (userCommand[0].Equals("RECTANGLE"))
+                        {
+                            // TODO: throwing error if parameters not correct
+                            List<int> dimensions = parser.ValidateParameters(cmd);
+                            Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
+                            rect.Draw(areaGraphics, pen);
+                        }
+                        switch (cmd.ToUpper())
+                        {
+                            case "CLEAR":
+                                areaGraphics.Clear(drawingArea.BackColor);
+                                break;
+                            /*
+                            case userCommand[0].Equals("RECTANGLE"):
+                                List<int> dimensions = parser.ValidateParameters(cmd);
+                                Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
+                                rect.Draw(areaGraphics, pen);
+                                break;
+                            */
+                            case "CIRCLE":
+                                Circle circle = new Circle(pointer.X, pointer.Y, 50);
+                                circle.Draw(areaGraphics, pen);
+                                break;
+                        } // End of switch
+                    }// End of if text null
+                }
+                else
+                {
+                    return;
+                }
+            }
         }
     }
 }
