@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,13 +25,16 @@ namespace DrawingEnvironment
             location = new Point(X, Y);
         }
 
-        public void Draw(Graphics g)
+        public void Draw(Graphics g, PaintEventArgs e)
         {
-            Bitmap myBitmap = new Bitmap(10, 10);
+            Bitmap myBitmap = new Bitmap(15, 15);
             g = Graphics.FromImage(myBitmap);
             Pen p = new Pen(Color.White, 2);
-            g.DrawRectangle(p, X, Y, myBitmap.Width, myBitmap.Height);
-            
+            g.DrawEllipse(p, X, Y, 5, 5);
+            Graphics windowG = e.Graphics;
+            windowG.DrawImageUnscaled(myBitmap, 5, 5);
+            p.Dispose();
+
             /*
             Pen pen = new Pen(Color.White);
             System.Drawing.Rectangle rect = new System.Drawing.Rectangle(X, Y, 20, 20);

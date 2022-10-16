@@ -113,12 +113,11 @@ namespace DrawingEnvironment
         private void drawingArea_Paint(object sender, PaintEventArgs e)
         {
             // Bitmap for cursor - Testing it out
-            Bitmap myBitmap = new Bitmap(15,15);
-            Graphics g = Graphics.FromImage(myBitmap);
-            Pen p = new Pen(Color.White, 2);
-            g.DrawRectangle(p, pointer.X, pointer.Y, 5, 5);
-            Graphics windowG = e.Graphics;
-            windowG.DrawImageUnscaled(myBitmap, 5, 5);
+            Graphics g = e.Graphics;
+            pointer.Draw(g, e);
+            pointer.UpdatePosition(40, 50);
+            pointer.Draw(g, e);
+            Invalidate();
         }
 
         private void drawingArea_Click(object sender, EventArgs e)
@@ -152,6 +151,7 @@ namespace DrawingEnvironment
                         {
                             case "CLEAR":
                                 areaGraphics.Clear(drawingArea.BackColor);
+                                Invalidate();
                                 break;
                             /*
                             case userCommand[0].Equals("RECTANGLE"):
