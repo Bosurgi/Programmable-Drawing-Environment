@@ -19,24 +19,30 @@ namespace DrawingEnvironment
         
         public CustomCursor()
         {
-            X = 10;
-            Y = 10;
+            X = 0;
+            Y = 0;
             location = new Point(X, Y);
         }
 
         public void Draw(Graphics g)
         {
+            Bitmap myBitmap = new Bitmap(10, 10);
+            g = Graphics.FromImage(myBitmap);
+            Pen p = new Pen(Color.White, 2);
+            g.DrawRectangle(p, X, Y, myBitmap.Width, myBitmap.Height);
+            
+            /*
             Pen pen = new Pen(Color.White);
             System.Drawing.Rectangle rect = new System.Drawing.Rectangle(X, Y, 20, 20);
             g.DrawRectangle(pen, rect);
+            */
         }
 
         public void UpdatePosition(int x, int y)
         {
             X = x;
             Y = y;
-            location = new Point(X, Y);
-            
+            location = new Point(X, Y);            
         }
 
 

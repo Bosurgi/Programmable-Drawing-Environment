@@ -112,7 +112,13 @@ namespace DrawingEnvironment
 
         private void drawingArea_Paint(object sender, PaintEventArgs e)
         {
-            
+            // Bitmap for cursor - Testing it out
+            Bitmap myBitmap = new Bitmap(15,15);
+            Graphics g = Graphics.FromImage(myBitmap);
+            Pen p = new Pen(Color.White, 2);
+            g.DrawRectangle(p, pointer.X, pointer.Y, 5, 5);
+            Graphics windowG = e.Graphics;
+            windowG.DrawImageUnscaled(myBitmap, 5, 5);
         }
 
         private void drawingArea_Click(object sender, EventArgs e)
