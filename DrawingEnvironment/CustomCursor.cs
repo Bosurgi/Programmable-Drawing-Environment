@@ -27,12 +27,13 @@ namespace DrawingEnvironment
 
         public void Draw(Graphics g, PaintEventArgs e)
         {
+            Circle circle = new Circle(X, Y, 15);
             Bitmap myBitmap = new Bitmap(15, 15);
             g = Graphics.FromImage(myBitmap);
-            Pen p = new Pen(Color.White, 2);
-            g.DrawEllipse(p, X, Y, 5, 5);
+            Pen p = new Pen(Color.White, 2);           
+            circle.Draw(g, p);
             Graphics windowG = e.Graphics;
-            windowG.DrawImageUnscaled(myBitmap, 5, 5);
+            windowG.DrawImageUnscaled(myBitmap, 15, 15);
             p.Dispose();
 
             /*

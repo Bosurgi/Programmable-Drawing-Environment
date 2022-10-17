@@ -33,8 +33,8 @@ namespace DrawingEnvironment
         /// <param name="y">the y position of the circle</param>
         public Circle(int x, int y, float radius)
         {
-            x = X;
-            x = Y;
+            X = x;
+            Y = y;
             this.radius = radius;
         }
 

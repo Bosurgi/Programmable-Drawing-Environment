@@ -54,6 +54,8 @@
             this.programmingArea = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.drawingArea = new System.Windows.Forms.PictureBox();
+            this.XPosition = new System.Windows.Forms.Label();
+            this.YPositon = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).BeginInit();
             this.SuspendLayout();
@@ -220,10 +222,22 @@
             this.drawingArea.Click += new System.EventHandler(this.drawingArea_Click);
             this.drawingArea.Paint += new System.Windows.Forms.PaintEventHandler(this.drawingArea_Paint);
             // 
+            // XPosition
+            // 
+            resources.ApplyResources(this.XPosition, "XPosition");
+            this.XPosition.Name = "XPosition";
+            // 
+            // YPositon
+            // 
+            resources.ApplyResources(this.YPositon, "YPositon");
+            this.YPositon.Name = "YPositon";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.YPositon);
+            this.Controls.Add(this.XPosition);
             this.Controls.Add(this.drawingArea);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.programmingArea);
@@ -269,6 +283,8 @@
         private System.Windows.Forms.TextBox programmingArea;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox drawingArea;
+        private System.Windows.Forms.Label XPosition;
+        private System.Windows.Forms.Label YPositon;
     }
 
 }
