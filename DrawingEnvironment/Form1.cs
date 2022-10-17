@@ -146,50 +146,11 @@ namespace DrawingEnvironment
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Parser parser = new Parser();
-                if (parser.CheckCommand(userInput.Text))
-                {
-                    string cmd = userInput.Text;
-                    string[] userCommand = parser.ValidateCommand(cmd);
-                    Graphics areaGraphics = drawingArea.CreateGraphics();
-                    areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                    Pen pen = new Pen(Color.White);
-
-                    if (userInput.Text != null)
-                    {
-                        if (userCommand[0].Equals("RECTANGLE"))
-                        {
-                            // TODO: throwing error if parameters not correct
-                            List<int> dimensions = parser.ValidateParameters(cmd);
-                            Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
-                            rect.Draw(areaGraphics, pen);
-                        }
-                        switch (cmd.ToUpper())
-                        {
-                            case "CLEAR":
-                                areaGraphics.Clear(drawingArea.BackColor);
-                                Invalidate();
-                                break;
-                            /*
-                            case userCommand[0].Equals("RECTANGLE"):
-                                List<int> dimensions = parser.ValidateParameters(cmd);
-                                Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
-                                rect.Draw(areaGraphics, pen);
-                                break;
-                            */
-                            case "CIRCLE":
-                                List<int> radius = parser.ValidateParameters(cmd);
-                                Circle circle = new Circle(pointer.X, pointer.Y, radius[0]);
-                                circle.Draw(areaGraphics, pen);
-                                break;
-                        } // End of switch
-                    }// End of if text null
-                }
-                else
-                {
-                    return;
-                }
+                runBtn.PerformClick();
+            }
+            else
+            {
+                return;
             }
         }
     }
-}

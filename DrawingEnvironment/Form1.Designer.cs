@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.button1 = new System.Windows.Forms.Button();
+            this.runBtn = new System.Windows.Forms.Button();
             this.syntaxCheckButton = new System.Windows.Forms.Button();
             this.helpButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -60,12 +60,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // runBtn
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.runButton_Click);
+            resources.ApplyResources(this.runBtn, "runBtn");
+            this.runBtn.Name = "runBtn";
+            this.runBtn.UseVisualStyleBackColor = true;
+            this.runBtn.Click += new System.EventHandler(this.runButton_Click);
             // 
             // syntaxCheckButton
             // 
@@ -244,7 +244,7 @@
             this.Controls.Add(this.userInput);
             this.Controls.Add(this.helpButton);
             this.Controls.Add(this.syntaxCheckButton);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.runBtn);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -258,7 +258,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button runBtn;
         private System.Windows.Forms.Button syntaxCheckButton;
         private System.Windows.Forms.Button helpButton;
         private System.Windows.Forms.MenuStrip menuStrip1;

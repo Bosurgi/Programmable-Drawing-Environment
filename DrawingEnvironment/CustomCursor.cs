@@ -11,29 +11,26 @@ using System.Xml;
 
 namespace DrawingEnvironment
 {
-    public class CustomCursor
+    internal class CustomCursor : Shape
     {
-        public int X { get; set; }
-        public int Y { get; set; }
 
         Point location = new Point();
         
         public CustomCursor()
         {
-            X = 0;
-            Y = 0;
             location = new Point(X, Y);
         }
 
+        //TODO need to modify this method.
         public void Draw(Graphics g, PaintEventArgs e)
         {
             Circle circle = new Circle(X, Y, 15);
-            Bitmap myBitmap = new Bitmap(15, 15);
-            g = Graphics.FromImage(myBitmap);
-            Pen p = new Pen(Color.White, 2);           
+            Bitmap myBitmap = new Bitmap(20, 20);
+            g = Graphics.FromImage(myBitmap);            
+            Pen p = new Pen(Color.White, 2);
             circle.Draw(g, p);
             Graphics windowG = e.Graphics;
-            windowG.DrawImageUnscaled(myBitmap, 15, 15);
+            windowG.DrawImageUnscaled(myBitmap, 20, 20);
             p.Dispose();
 
             /*
@@ -41,6 +38,11 @@ namespace DrawingEnvironment
             System.Drawing.Rectangle rect = new System.Drawing.Rectangle(X, Y, 20, 20);
             g.DrawRectangle(pen, rect);
             */
+        }
+
+        public override void Draw(Graphics graphics, Pen pen)
+        {
+            throw new NotImplementedException();
         }
 
         public void UpdatePosition(int x, int y)
