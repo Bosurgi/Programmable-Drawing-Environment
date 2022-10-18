@@ -61,14 +61,14 @@ namespace DrawingEnvironment
         {
 
 
-            if(parser.CheckCommand(userInput.Text))
+            if (parser.CheckCommand(userInput.Text))
             {
                 string cmd = userInput.Text; // The user input
                 string[] userCommand = parser.ValidateCommand(cmd); // The array with the commands of the user
                 Graphics areaGraphics = drawingArea.CreateGraphics(); // The area where to draw
                 areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                 Pen pen = new Pen(Color.White); // The pen
-                
+
                 if (userInput.Text != null)
                 {
                     if (userCommand[0].Equals("RECTANGLE"))
@@ -79,14 +79,14 @@ namespace DrawingEnvironment
                         Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
                         rect.Draw(areaGraphics, pen);
                     }
-                    
+
                     if (userCommand[0].Equals("MOVETO"))
                     {
                         List<int> parameters = parser.ValidateParameters(cmd);
                         // assigning X and Y values to the pointer
                         pointer.X = parameters[0];
                         pointer.Y = parameters[1];
-                        
+
                         // Updating pointer position
                         XPosition.Text = "X: " + pointer.X.ToString();
                         YPositon.Text = "Y: " + pointer.Y.ToString();
@@ -121,7 +121,7 @@ namespace DrawingEnvironment
                 }// End of if text null
 
             }
-                
+
         } // End of Method
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -154,3 +154,4 @@ namespace DrawingEnvironment
             }
         }
     }
+}

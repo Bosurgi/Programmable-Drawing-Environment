@@ -13,16 +13,17 @@ namespace DrawingEnvironment
         /// <summary>
         /// Radius property of the circle
         /// </summary>
-        private float radius { get; set; }
+        private float Radius { get; set; }
 
         /// <summary>
         /// Drawing method to display a circle in a canvas
         /// </summary>
         /// <param name="graphics">the graphic object where to draw</param>
         /// <param name="pen">the pen to draw the circle</param>
-        public override void Draw(Graphics graphics, Pen pen)
+        public override void Draw(Graphics graphics)
         {
-            graphics.DrawEllipse(pen, X - radius, Y - radius, 2 * radius, 2 * radius);
+            Pen pen = new Pen(Color.White);
+            graphics.DrawEllipse(pen, X - Radius, Y - Radius, 2 * Radius, 2 * Radius);
         }
 
         /// <summary>
@@ -31,12 +32,20 @@ namespace DrawingEnvironment
         /// <param name="radius">the radius of the circle</param>
         /// <param name="x">the x position of the circle</param>
         /// <param name="y">the y position of the circle</param>
-        public Circle(int x, int y, float radius)
+        public Circle(Color colour, int x, int y, float radius) : base(colour, x, y)
         {
-            X = x;
-            Y = y;
-            this.radius = radius;
+            this.Radius = radius;
         }
-
+        
+        public Circle(int x, int y, float radius) : base(x, y)
+        {
+            this.Radius = radius;
+        }
+        
+        public override void Set(Color colour, params int[] parameterList)
+        {
+            base.Set(colour, parameterList[0], parameterList[1]);
+            this.Radius = parameterList[2];
+        }
     }
 }

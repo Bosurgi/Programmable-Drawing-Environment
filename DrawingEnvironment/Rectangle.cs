@@ -10,25 +10,33 @@ namespace DrawingEnvironment
     internal class Rectangle : Shape
     {
         // Rectangle properties
-        private int width { get; set; }
-        private int height { get; set; }
+        private int Width { get; set; }
+        private int Height { get; set; }
 
         public Rectangle(int x, int y, int w, int h)
         {
             this.X = x;
             this.Y = y;
-            width = w;
-            height = h;
+            Width = w;
+            Height = h;
         }
         /// <summary>
         /// Draw method to draw a rectangle on the canvas.
         /// </summary>
         /// <param name="graphics">the canvas where to draw</param>
         /// <param name="pen">the pen used to draw</param>
-        public override void Draw(Graphics graphics, Pen pen)
+        public override void Draw(Graphics graphics)
         {
+            Pen pen = new Pen(Color.White);
             // It uses the Method to Draw a rectangle taking the position of the Shape and properties from the Rectangle class
-            graphics.DrawRectangle(pen, X, Y, width, height);
+            graphics.DrawRectangle(pen, X, Y, Width, Height);
+        }
+
+        public override void Set(Color color, params int[] parametersList)
+        {
+            base.Set(color, parametersList[0], parametersList[1]);
+            this.Width = parametersList[2];
+            this.Height = parametersList[3];
         }
     }
 }

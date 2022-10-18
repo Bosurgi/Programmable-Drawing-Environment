@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="CanvasTest.cs" />
     <Compile Include="Circle.cs" />
+    <Compile Include="IShape.cs" />
     <Compile Include="MoveCommand.cs" />
     <Compile Include="Rectangle.cs" />
     <Compile Include="CustomCursor.cs" />

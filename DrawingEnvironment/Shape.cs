@@ -12,7 +12,7 @@ namespace DrawingEnvironment
     /// This is an abstract class which represents a shape.
     /// It will be used for subsequent classes to implement various types of shape.
     /// </summary>
-    abstract class Shape
+    abstract class Shape : IShape
     {
         /// <summary>
         /// Enumerating different types of shapes to be used as command.
@@ -32,8 +32,20 @@ namespace DrawingEnvironment
         // Color of the shape
         protected Color colour;
 
-        public abstract void Draw(Graphics graphics, Pen pen);
+        public abstract void Draw(Graphics graphics);
 
+        /// <summary>
+        /// Setter method to set the colour and the paramters of the shape.
+        /// It is inherited by the Interface IShape
+        /// </summary>
+        /// <param name="color">the color of the shape</param>
+        /// <param name="parametersList">List of parameters with index 0 as X and index 1 as Y</param>
+        public virtual void Set (Color color, params int[] parametersList)
+        {
+            color = colour;
+            this.X = parametersList[0];
+            this.Y = parametersList[1];            
+        }
 
         /// <summary>
         /// Constructor of the Class Shape.
@@ -41,11 +53,11 @@ namespace DrawingEnvironment
         /// <param name="x">It's starting position on X axis</param>
         /// <param name="y">It's starting position on Y axis</param>
         /// <param name="colour">The color of the shape</param>
-        public Shape(int x, int y, Color colour)
+        public Shape(Color colour, int x, int y)
         {
+            this.colour = colour;
             this.X = x;
             this.Y = y;
-            this.colour = colour;
         }
 
         /// <summary>

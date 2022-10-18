@@ -28,7 +28,7 @@ namespace DrawingEnvironment
             Bitmap myBitmap = new Bitmap(20, 20);
             g = Graphics.FromImage(myBitmap);            
             Pen p = new Pen(Color.White, 2);
-            circle.Draw(g, p);
+            circle.Draw(g);
             Graphics windowG = e.Graphics;
             windowG.DrawImageUnscaled(myBitmap, 20, 20);
             p.Dispose();
@@ -40,7 +40,7 @@ namespace DrawingEnvironment
             */
         }
 
-        public override void Draw(Graphics graphics, Pen pen)
+        public override void Draw(Graphics graphics)
         {
             throw new NotImplementedException();
         }
