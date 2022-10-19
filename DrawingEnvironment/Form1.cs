@@ -151,8 +151,9 @@ namespace DrawingEnvironment
         {
             
             if (e.KeyCode == Keys.Enter)
-            {
+            {                
                 runBtn.PerformClick();
+                e.SuppressKeyPress = true; // Suppressing the noise after key pressed
             }
             else
             {
