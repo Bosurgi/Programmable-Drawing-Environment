@@ -13,13 +13,30 @@ namespace DrawingEnvironment
         private int Width { get; set; }
         private int Height { get; set; }
 
-        public Rectangle(int x, int y, int w, int h)
+        /// <summary>
+        /// Constructor for Rectangle taking four parameters
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="w"></param>
+        /// <param name="h"></param>
+        public Rectangle(int x, int y, int w, int h) : base(x, y)
         {
             this.X = x;
             this.Y = y;
             Width = w;
             Height = h;
         }
+
+        /// <summary>
+        /// Empty Constructor for Rectangle used in Factory
+        /// </summary>
+        public Rectangle() : base()
+        {
+
+        }
+
+
         /// <summary>
         /// Draw method to draw a rectangle on the canvas.
         /// </summary>

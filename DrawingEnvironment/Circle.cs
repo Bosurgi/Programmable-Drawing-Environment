@@ -41,6 +41,14 @@ namespace DrawingEnvironment
         {
             this.Radius = radius;
         }
+
+        /// <summary>
+        /// Constructor for empty Circle shape for Factory class
+        /// </summary>
+        public Circle() : base()
+        {
+
+        }
         
         public override void Set(Color colour, params int[] parameterList)
         {

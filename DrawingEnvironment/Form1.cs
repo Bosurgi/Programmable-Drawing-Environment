@@ -77,7 +77,7 @@ namespace DrawingEnvironment
                         // TODO: refactor the code
                         List<int> dimensions = parser.ValidateParameters(cmd);
                         Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
-                        rect.Draw(areaGraphics, pen);
+                        rect.Draw(areaGraphics);
                     }
 
                     if (userCommand[0].Equals("MOVETO"))
@@ -95,7 +95,7 @@ namespace DrawingEnvironment
                     {
                         List<int> parameters = parser.ValidateParameters(cmd);
                         Circle circle = new Circle(pointer.X, pointer.Y, parameters[0]);
-                        circle.Draw(areaGraphics, pen);
+                        circle.Draw(areaGraphics);
                     }
 
                     /*

@@ -40,9 +40,14 @@ namespace DrawingEnvironment
             */
         }
 
+        /// <summary>
+        /// Method to draw the cursor in the canvas.
+        /// </summary>
+        /// <param name="graphics">the graphic elements where the method will draw</param>
         public override void Draw(Graphics graphics)
         {
-            throw new NotImplementedException();
+            Circle circle = new Circle(X, Y, 15);
+
         }
 
         public void UpdatePosition(int x, int y)
