@@ -15,6 +15,7 @@ namespace DrawingEnvironment
     {
 
         Point location = new Point();
+        Bitmap cursor = new Bitmap(10, 10);
         
         public CustomCursor()
         {
@@ -24,6 +25,8 @@ namespace DrawingEnvironment
         //TODO need to modify this method.
         public void Draw(Graphics g, PaintEventArgs e)
         {
+
+            /*
             Circle circle = new Circle(X, Y, 15);
             Bitmap myBitmap = new Bitmap(20, 20);
             g = Graphics.FromImage(myBitmap);            
@@ -32,12 +35,8 @@ namespace DrawingEnvironment
             Graphics windowG = e.Graphics;
             windowG.DrawImageUnscaled(myBitmap, 20, 20);
             p.Dispose();
-
-            /*
-            Pen pen = new Pen(Color.White);
-            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(X, Y, 20, 20);
-            g.DrawRectangle(pen, rect);
             */
+
         }
 
         /// <summary>
@@ -46,8 +45,10 @@ namespace DrawingEnvironment
         /// <param name="graphics">the graphic elements where the method will draw</param>
         public override void Draw(Graphics graphics)
         {
-            Circle circle = new Circle(X, Y, 15);
-
+            Rectangle rect = new Rectangle(X, Y, 5, 5);
+            graphics.DrawImageUnscaled(cursor, X, Y);
+            rect.Draw(graphics);
+            
         }
 
         public void UpdatePosition(int x, int y)
@@ -56,40 +57,6 @@ namespace DrawingEnvironment
             Y = y;
             location = new Point(X, Y);            
         }
-
-
-        /*
-        Pen pen = new Pen(Color.White);
-        /// <summary>
-        /// Constructor for the class Cursor.
-        /// </summary>
-        /// <param name="x">The position on the X axis where it is.</param>
-        /// <param name="y">The position on the X axis where it is.</param>
-        /// <param name="colour">The color of the cursor</param>
-        public CustomCursor(Pen pen, int x, int y) : base(x, y)
-        {
-            this.pen = pen;
-            var cursorBitmap = new Bitmap(x, y);
-            Graphics g = Graphics.FromImage(cursorBitmap);
-            g.DrawRectangle(pen, new System.Drawing.Rectangle(10, 10, cursorBitmap.Width +2 , cursorBitmap.Height + 2));
-
-            IntPtr ptr = cursorBitmap.GetHicon();
-            var c = new Cursor(ptr);
-            
-        }
-
-        public override void Draw(Graphics graphics, Pen pen)
-        {
-            graphics.DrawLine( this.pen, 10, 10, 4, 4);
-        }
-
-        public void moveTo(int x, int y, Graphics graphics)
-        {
-
-        }
-
-    }
-        */
 
     }
 }

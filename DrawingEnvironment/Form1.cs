@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,13 +15,15 @@ namespace DrawingEnvironment
 {
     public partial class Form1 : Form
     {
-
+        public const int canX = 480;
+        public const int canY = 270;
         /// <summary>
         /// Initialising the parser;
         /// </summary>
         Parser parser = new Parser();
-
         CustomCursor pointer = new CustomCursor();
+        Bitmap OutputBitmap = new Bitmap(canX, canY);
+        CanvasCustom myCanvas;
 
         /// <summary>
         /// Entry point for initialising the Form and it's components
@@ -28,7 +31,9 @@ namespace DrawingEnvironment
         public Form1()
         {
             InitializeComponent();
-
+            myCanvas = new CanvasCustom(Graphics.FromImage(OutputBitmap)); // Initialise the Canvas which will handle the drawing
+            pointer.Draw(Graphics.FromImage(OutputBitmap));
+            
         }
 
 
@@ -59,7 +64,6 @@ namespace DrawingEnvironment
         /// <param name="e"></param>
         private void runButton_Click(object sender, EventArgs e)
         {
-
 
             if (parser.CheckCommand(userInput.Text))
             {
@@ -119,8 +123,9 @@ namespace DrawingEnvironment
                     } // End of switch
                 */
                 }// End of if text null
-
-            }
+                
+            }            
+            userInput.Text = "";
 
         } // End of Method
 
@@ -133,8 +138,8 @@ namespace DrawingEnvironment
         {
             // Bitmap for cursor - Testing it out
             Graphics g = e.Graphics;
-            pointer.Draw(g, e);
-            Invalidate();
+            g.DrawImageUnscaled(OutputBitmap, pointer.X, pointer.Y);
+            Refresh();
         }
 
         private void drawingArea_Click(object sender, EventArgs e)
@@ -144,6 +149,7 @@ namespace DrawingEnvironment
 
         private void userInput_KeyDown_1(object sender, KeyEventArgs e)
         {
+            
             if (e.KeyCode == Keys.Enter)
             {
                 runBtn.PerformClick();

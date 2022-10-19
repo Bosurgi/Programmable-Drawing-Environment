@@ -52,7 +52,7 @@
     <Compile Include="Canvas.Designer.cs">
       <DependentUpon>Canvas.cs</DependentUpon>
     </Compile>
-    <Compile Include="CanvasTest.cs" />
+    <Compile Include="CanvasCustom.cs" />
     <Compile Include="Circle.cs" />
     <Compile Include="ShapeFactory.cs" />
     <Compile Include="IShape.cs" />
