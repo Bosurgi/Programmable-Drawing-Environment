@@ -15,6 +15,9 @@ namespace DrawingEnvironment
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Canvas size parameters set as constants.
+        /// </summary>
         public const int canX = 480;
         public const int canY = 270;
         /// <summary>
@@ -23,6 +26,7 @@ namespace DrawingEnvironment
         Parser parser = new Parser();
         CustomCursor pointer = new CustomCursor();
         Bitmap OutputBitmap = new Bitmap(canX, canY);
+
         CanvasCustom myCanvas;
 
         /// <summary>
@@ -33,7 +37,6 @@ namespace DrawingEnvironment
             InitializeComponent();
             myCanvas = new CanvasCustom(Graphics.FromImage(OutputBitmap)); // Initialise the Canvas which will handle the drawing
             pointer.Draw(Graphics.FromImage(OutputBitmap));
-            
         }
 
 
@@ -70,6 +73,7 @@ namespace DrawingEnvironment
                 string cmd = userInput.Text; // The user input
                 string[] userCommand = parser.ValidateCommand(cmd); // The array with the commands of the user
                 Graphics areaGraphics = drawingArea.CreateGraphics(); // The area where to draw
+                
                 areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                 Pen pen = new Pen(Color.White); // The pen
 
@@ -80,16 +84,18 @@ namespace DrawingEnvironment
                         // TODO: throwing error if parameters not correct
                         // TODO: refactor the code
                         List<int> dimensions = parser.ValidateParameters(cmd);
-                        Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
-                        rect.Draw(areaGraphics);
+                        Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);                                                
+                        rect.Draw(areaGraphics);                        
                     }
 
                     if (userCommand[0].Equals("MOVETO"))
                     {
                         List<int> parameters = parser.ValidateParameters(cmd);
-                        // assigning X and Y values to the pointer
-                        pointer.X = parameters[0];
-                        pointer.Y = parameters[1];
+                        // assigning X and Y values to the pointer                                                
+                        pointer.UpdatePosition(parameters[0], parameters[1], areaGraphics);
+                        
+                        //pointer.X = parameters[0];
+                        //pointer.Y = parameters[1];
 
                         // Updating pointer position
                         XPosition.Text = "X: " + pointer.X.ToString();
@@ -98,8 +104,8 @@ namespace DrawingEnvironment
                     if (userCommand[0].Equals("CIRCLE"))
                     {
                         List<int> parameters = parser.ValidateParameters(cmd);
-                        Circle circle = new Circle(pointer.X, pointer.Y, parameters[0]);
-                        circle.Draw(areaGraphics);
+                        Circle circle = new Circle(pointer.X, pointer.Y, parameters[0]);                        
+                        circle.Draw(areaGraphics);                        
                     }
 
                     /*
@@ -139,7 +145,8 @@ namespace DrawingEnvironment
             // Bitmap for cursor - Testing it out
             Graphics g = e.Graphics;
             g.DrawImageUnscaled(OutputBitmap, pointer.X, pointer.Y);
-            Refresh();
+            //Refresh(); Doesn't keep the image with refresh.
+            Invalidate();
         }
 
         private void drawingArea_Click(object sender, EventArgs e)

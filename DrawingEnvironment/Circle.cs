@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +13,9 @@ namespace DrawingEnvironment
 {
     internal class Circle : Shape
     {
+
+        Bitmap circle = new Bitmap(10, 10); // New bitmap
+
         /// <summary>
         /// Radius property of the circle
         /// </summary>
@@ -23,6 +29,7 @@ namespace DrawingEnvironment
         public override void Draw(Graphics graphics)
         {
             Pen pen = new Pen(Color.White);
+            graphics.DrawImageUnscaled(circle, X, Y);
             graphics.DrawEllipse(pen, X - Radius, Y - Radius, 2 * Radius, 2 * Radius);
         }
 

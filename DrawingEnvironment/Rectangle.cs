@@ -44,7 +44,7 @@ namespace DrawingEnvironment
         /// <param name="pen">the pen used to draw</param>
         public override void Draw(Graphics graphics)
         {
-            Pen pen = new Pen(Color.White);
+            Pen pen = new Pen(colour);
             // It uses the Method to Draw a rectangle taking the position of the Shape and properties from the Rectangle class
             graphics.DrawRectangle(pen, X, Y, Width, Height);
         }

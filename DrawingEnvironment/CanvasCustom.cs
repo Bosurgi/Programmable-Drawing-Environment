@@ -25,6 +25,11 @@ namespace DrawingEnvironment
             pen = new Pen(Color.White);
         }
 
+        public Graphics GetGraphics()
+        {
+            return g;
+        }
+
 
     }
 }

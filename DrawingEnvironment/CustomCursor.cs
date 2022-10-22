@@ -13,12 +13,11 @@ namespace DrawingEnvironment
 {
     internal class CustomCursor : Shape
     {
-
         Point location = new Point();
         Bitmap cursor = new Bitmap(10, 10);
-        
+
         public CustomCursor()
-        {
+        {            
             location = new Point(X, Y);
         }
 
@@ -46,17 +45,32 @@ namespace DrawingEnvironment
         public override void Draw(Graphics graphics)
         {
             Rectangle rect = new Rectangle(X, Y, 5, 5);
-            graphics.DrawImageUnscaled(cursor, X, Y);
+            graphics.DrawImageUnscaled(cursor, X, Y);            
+            rect.SetColour(Color.White);
             rect.Draw(graphics);
-            
         }
 
-        public void UpdatePosition(int x, int y)
-        {
+        /// <summary>
+        /// Method to refresh the position of the cursor.
+        /// Making the previous one transparent and drawing a new one.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="g"></param>
+        public void UpdatePosition(int x, int y, Graphics g)
+        { 
+            
+            Bitmap updatedCursor = new Bitmap(10, 10);
+            cursor.MakeTransparent();
+            cursor.SetPixel(0, 0, Color.Transparent);           
+            g.DrawImageUnscaled(updatedCursor, x, y);
+            Rectangle rect = new Rectangle(x, y, 5, 5);
+            rect.SetColour(Color.White);
+            rect.Draw(g);                     
+
             X = x;
             Y = y;
             location = new Point(X, Y);            
         }
-
     }
 }

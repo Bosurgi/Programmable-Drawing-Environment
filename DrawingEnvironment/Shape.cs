@@ -42,9 +42,18 @@ namespace DrawingEnvironment
         /// <param name="parametersList">List of parameters with index 0 as X and index 1 as Y</param>
         public virtual void Set (Color color, params int[] parametersList)
         {
-            color = colour;
+            colour = color;
             this.X = parametersList[0];
             this.Y = parametersList[1];            
+        }
+
+        /// <summary>
+        /// Virtual method to set just the colour of the shape.
+        /// </summary>
+        /// <param name="color">the color of the shape to be set</param>
+        public virtual void SetColour(Color color)
+        {
+            colour = color;
         }
 
         /// <summary>
