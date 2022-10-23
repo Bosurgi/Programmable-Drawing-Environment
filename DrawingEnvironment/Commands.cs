@@ -23,6 +23,7 @@ namespace DrawingEnvironment
         {
             MOVETO, // 1
             CLEAR,  // 2
+            DRAWTO, // 3
         }
 
         public override string ToString()

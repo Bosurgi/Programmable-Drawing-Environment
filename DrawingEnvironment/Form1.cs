@@ -128,6 +128,7 @@ namespace DrawingEnvironment
                         XPosition.Text = "X: " + pointer.X.ToString();
                         YPositon.Text = "Y: " + pointer.Y.ToString();
                     }
+                    // Command Circle draw a circle
                     if (userCommand[0].Equals("CIRCLE"))
                     {
                         List<int> parameters = parser.AssigningParameters(cmd);
@@ -139,6 +140,15 @@ namespace DrawingEnvironment
                         */
 
                         circle.Draw(areaGraphics);
+                    }
+
+                    // Command to draw a line from the pointer to a set point
+                    // TODO: adding try catch to deal with invalid parameters.
+                    if (userCommand[0].Equals("DRAWTO"))
+                    {
+                        List<int> parameters = parser.AssigningParameters(cmd);
+                        areaGraphics.DrawLine(pen, pointer.X, pointer.Y, parameters[0], parameters[1]);
+                        pointer.UpdatePosition(parameters[0], parameters[1], areaGraphics);
                     }
 
                     if (userCommand[0].Equals("CLEAR"))
