@@ -15,9 +15,10 @@ namespace DrawingEnvironment
     {
         Point location = new Point();
         Bitmap cursor = new Bitmap(10, 10);
+        //Rectangle rect = new Rectangle(0, 0, 5, 5);
 
         public CustomCursor()
-        {            
+        {           
             location = new Point(X, Y);
         }
 
@@ -58,13 +59,11 @@ namespace DrawingEnvironment
         /// <param name="y"></param>
         /// <param name="g"></param>
         public void UpdatePosition(int x, int y, Graphics g)
-        { 
-            
+        {             
             Bitmap updatedCursor = new Bitmap(10, 10);
-            cursor.MakeTransparent();
-            cursor.SetPixel(0, 0, Color.Transparent);           
-            g.DrawImageUnscaled(updatedCursor, x, y);
             Rectangle rect = new Rectangle(x, y, 5, 5);
+            cursor.MakeTransparent();          
+            g.DrawImageUnscaled(updatedCursor, x, y);           
             rect.SetColour(Color.White);
             rect.Draw(g);                     
 

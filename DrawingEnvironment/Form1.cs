@@ -9,7 +9,6 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace DrawingEnvironment
 {
@@ -27,7 +26,15 @@ namespace DrawingEnvironment
         CustomCursor pointer = new CustomCursor();
         Bitmap OutputBitmap = new Bitmap(canX, canY);
 
+        // My canvas
         CanvasCustom myCanvas;
+
+        /*
+        // Testing new images
+        Bitmap testImage = new Bitmap(50, 50);
+        Shape shape;
+        bool shapeDrawn = false;
+        */
 
         /// <summary>
         /// Entry point for initialising the Form and it's components
@@ -37,6 +44,14 @@ namespace DrawingEnvironment
             InitializeComponent();
             myCanvas = new CanvasCustom(Graphics.FromImage(OutputBitmap)); // Initialise the Canvas which will handle the drawing
             pointer.Draw(Graphics.FromImage(OutputBitmap));
+
+            /*
+            if (shapeDrawn)
+            {
+                CanvasCustom imageContext = new CanvasCustom(Graphics.FromImage(testImage));
+                shape.Draw(Graphics.FromImage(testImage));
+            }
+            */
         }
 
 
@@ -72,8 +87,7 @@ namespace DrawingEnvironment
             {
                 string cmd = userInput.Text; // The user input
                 string[] userCommand = parser.ValidateCommand(cmd); // The array with the commands of the user
-                Graphics areaGraphics = drawingArea.CreateGraphics(); // The area where to draw
-                
+                Graphics areaGraphics = drawingArea.CreateGraphics(); // The area where to draw                             
                 areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                 Pen pen = new Pen(Color.White); // The pen
 
@@ -84,15 +98,18 @@ namespace DrawingEnvironment
                         // TODO: throwing error if parameters not correct
                         // TODO: refactor the code
                         List<int> dimensions = parser.ValidateParameters(cmd);
-                        Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);                                                
+                        Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
+                        rect.SetColour(pen.Color);
                         rect.Draw(areaGraphics);                        
                     }
 
                     if (userCommand[0].Equals("MOVETO"))
                     {
                         List<int> parameters = parser.ValidateParameters(cmd);
-                        // assigning X and Y values to the pointer                                                
+                        // assigning X and Y values to the pointer
                         pointer.UpdatePosition(parameters[0], parameters[1], areaGraphics);
+                        pointer.SetColour(Color.White);
+                        //Refresh();
                         
                         //pointer.X = parameters[0];
                         //pointer.Y = parameters[1];
@@ -104,8 +121,21 @@ namespace DrawingEnvironment
                     if (userCommand[0].Equals("CIRCLE"))
                     {
                         List<int> parameters = parser.ValidateParameters(cmd);
-                        Circle circle = new Circle(pointer.X, pointer.Y, parameters[0]);                        
+                        Circle circle = new Circle(pointer.X, pointer.Y, parameters[0]);
+
+                        /*
+                        // New code to test
+                        shapeDrawn = true;
+                        */
+
                         circle.Draw(areaGraphics);                        
+                    }
+
+                    if (userCommand[0].Equals("CLEAR"))
+                    {
+                        // Refreshing the canvas without deleting the pointer. IMPORTANT
+
+                        Refresh();
                     }
 
                     /*
@@ -145,8 +175,15 @@ namespace DrawingEnvironment
             // Bitmap for cursor - Testing it out
             Graphics g = e.Graphics;
             g.DrawImageUnscaled(OutputBitmap, pointer.X, pointer.Y);
-            //Refresh(); Doesn't keep the image with refresh.
-            Invalidate();
+            Refresh();
+
+            /*
+            // Testing out other graphic context
+            Graphics g2 = e.Graphics;
+            //g2.DrawImageUnscaled(testImage, pointer.X, pointer.Y);
+            //Refresh();
+            //Invalidate();
+            */
         }
 
         private void drawingArea_Click(object sender, EventArgs e)
