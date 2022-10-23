@@ -56,6 +56,7 @@
             this.drawingArea = new System.Windows.Forms.PictureBox();
             this.XPosition = new System.Windows.Forms.Label();
             this.YPositon = new System.Windows.Forms.Label();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).BeginInit();
             this.SuspendLayout();
@@ -231,10 +232,16 @@
             resources.ApplyResources(this.YPositon, "YPositon");
             this.YPositon.Name = "YPositon";
             // 
+            // errorLabel
+            // 
+            resources.ApplyResources(this.errorLabel, "errorLabel");
+            this.errorLabel.Name = "errorLabel";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.YPositon);
             this.Controls.Add(this.XPosition);
             this.Controls.Add(this.drawingArea);
@@ -284,6 +291,7 @@
         private System.Windows.Forms.PictureBox drawingArea;
         private System.Windows.Forms.Label XPosition;
         private System.Windows.Forms.Label YPositon;
+        private System.Windows.Forms.Label errorLabel;
     }
 
 }

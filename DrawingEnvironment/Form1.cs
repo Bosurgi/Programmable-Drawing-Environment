@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -85,6 +86,8 @@ namespace DrawingEnvironment
 
             if (parser.CheckCommand(userInput.Text))
             {
+                errorLabel.Text = ""; // Resetting the error label
+
                 string cmd = userInput.Text; // The user input
                 string[] userCommand = parser.ValidateCommand(cmd); // The array with the commands of the user
                 Graphics areaGraphics = drawingArea.CreateGraphics(); // The area where to draw                             
@@ -95,22 +98,29 @@ namespace DrawingEnvironment
                 {
                     if (userCommand[0].Equals("RECTANGLE"))
                     {
-                        // TODO: throwing error if parameters not correct
+                        List<int> dimensions = new List<int>();                        
                         // TODO: refactor the code
-                        List<int> dimensions = parser.ValidateParameters(cmd);
-                        Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
-                        rect.SetColour(pen.Color);
-                        rect.Draw(areaGraphics);                        
+                        // Drawing a rectangle and catching errors. Displaying the error message.
+                        try
+                        {
+                            dimensions = parser.AssigningParameters(cmd);
+                            Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
+                            rect.SetColour(pen.Color);
+                            rect.Draw(areaGraphics);
+                        }
+                        catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
+                        catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Rectangle <width> <height>"; }                        
+
                     }
 
                     if (userCommand[0].Equals("MOVETO"))
                     {
-                        List<int> parameters = parser.ValidateParameters(cmd);
+                        List<int> parameters = parser.AssigningParameters(cmd);
                         // assigning X and Y values to the pointer
                         pointer.UpdatePosition(parameters[0], parameters[1], areaGraphics);
                         pointer.SetColour(Color.White);
                         //Refresh();
-                        
+
                         //pointer.X = parameters[0];
                         //pointer.Y = parameters[1];
 
@@ -120,7 +130,7 @@ namespace DrawingEnvironment
                     }
                     if (userCommand[0].Equals("CIRCLE"))
                     {
-                        List<int> parameters = parser.ValidateParameters(cmd);
+                        List<int> parameters = parser.AssigningParameters(cmd);
                         Circle circle = new Circle(pointer.X, pointer.Y, parameters[0]);
 
                         /*
@@ -128,7 +138,7 @@ namespace DrawingEnvironment
                         shapeDrawn = true;
                         */
 
-                        circle.Draw(areaGraphics);                        
+                        circle.Draw(areaGraphics);
                     }
 
                     if (userCommand[0].Equals("CLEAR"))
@@ -138,29 +148,13 @@ namespace DrawingEnvironment
                         Refresh();
                     }
 
-                    /*
-                    switch (userCommand[0].ToUpper())
-                    {
-                        case "CLEAR":
-                            areaGraphics.Clear(drawingArea.BackColor);
-                            break;
-                        /*
-                        case userCommand[0].Equals("RECTANGLE"):
-                            List<int> dimensions = parser.ValidateParameters(cmd);
-                            Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
-                            rect.Draw(areaGraphics, pen);
-                            break;
-                        
-                        case "CIRCLE":
-                            List<int> radius = parser.ValidateParameters(cmd);
-                            Circle circle = new Circle(pointer.X, pointer.Y, radius[0]);
-                            circle.Draw(areaGraphics, pen);
-                            break;
-                    } // End of switch
-                */
                 }// End of if text null
-                
-            }            
+
+            }
+            else
+            {
+                errorLabel.Text = "Invalid command";
+            }
             userInput.Text = "";
 
         } // End of Method
@@ -193,9 +187,9 @@ namespace DrawingEnvironment
 
         private void userInput_KeyDown_1(object sender, KeyEventArgs e)
         {
-            
+
             if (e.KeyCode == Keys.Enter)
-            {                
+            {
                 runBtn.PerformClick();
                 e.SuppressKeyPress = true; // Suppressing the noise after key pressed
             }

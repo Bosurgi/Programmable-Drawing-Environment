@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -50,10 +51,26 @@ namespace DrawingEnvironment
             }
 
             catch (ArgumentException)
-            {
-                // MessageBox.Show("Invalid command");
+            {               
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Method which checks if a parameter could be converted into a number to avoid errors.
+        /// </summary>
+        /// <param name="parameter">the parameter in string we are trying to convert.</param>
+        /// <returns></returns>
+        public bool CheckNumbers(string parameter)
+        {
+            int number;
+            bool success = Int32.TryParse(parameter, out number);
+
+            if (!success)
+            {
+                return false;
+            }
+            else return true;
         }
 
         /// <summary>
@@ -61,29 +78,27 @@ namespace DrawingEnvironment
         /// </summary>
         /// <param name="userInput">the input the users inserts in the command line</param>
         /// <returns>A list of integers which represents the parameters provided</returns>
-        public List<int> ValidateParameters(string userInput)
+        public List<int> AssigningParameters(string userInput)
         {
             List<int> parameterList = new List<int>();
             string[] commandArray = userInput.ToUpper().Split(' ');
-                        
-            try
+
+            foreach (var element in commandArray.Skip(1))
             {
-                for (int i = 1; i < commandArray.Length; i++)
+                if (!CheckNumbers(element))
                 {
-                    // If it can be converted to int from string it will add it to the list
-                    int parameter = Convert.ToInt32(commandArray[i]);
-                    parameterList.Add(parameter);
+                    throw new FormatException();
                 }
-                // returns the list of parameters in int
-                return parameterList;
+                else
+                {
+                    int parameter = Convert.ToInt32(element);
+                    parameterList.Add(parameter);
+                }            
             }
-            // Catching the error if can't be converted
-            catch (FormatException)
-            {
-                return parameterList = new List<int>();
-                // Messagebox
-            }            
+            return parameterList;
+
         } // End of method
+
 
         /// <summary>
         /// Method that returns the first element of the passed array, which will determine,

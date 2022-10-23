@@ -35,7 +35,7 @@ namespace AseTests
             List<int> expectedInt = new List<int>{ 100, 200 };
 
             // Act
-            List<int> parameters = parser.ValidateParameters(example);
+            List<int> parameters = parser.AssigningParameters(example);
             
             // Assert
             Assert.IsTrue(parser.CheckCommand(example));
@@ -49,7 +49,7 @@ namespace AseTests
             Assert.AreEqual(expectedInt[0], 100);
             Assert.AreEqual(expectedInt[1], 200);
            
-            // Assert.AreEqual(0, parser.ValidateParameters(example2));
+            // Assert.AreEqual(0, parser.AssigningParameters(example2));
         }
 
     }
