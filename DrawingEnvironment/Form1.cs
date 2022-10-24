@@ -112,21 +112,27 @@ namespace DrawingEnvironment
                         catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Rectangle <width> <height>"; }                        
 
                     }
-
+                    // Move command
                     if (userCommand[0].Equals("MOVETO"))
                     {
-                        List<int> parameters = parser.AssigningParameters(cmd);
-                        // assigning X and Y values to the pointer
-                        pointer.UpdatePosition(parameters[0], parameters[1], areaGraphics);
-                        pointer.SetColour(Color.White);
-                        //Refresh();
+                        try
+                        {
+                            List<int> parameters = parser.AssigningParameters(cmd);
+                            // assigning X and Y values to the pointer
+                            pointer.UpdatePosition(parameters[0], parameters[1], areaGraphics);
+                            pointer.SetColour(Color.White);
+                            //Refresh();
 
-                        //pointer.X = parameters[0];
-                        //pointer.Y = parameters[1];
+                            //pointer.X = parameters[0];
+                            //pointer.Y = parameters[1];
 
-                        // Updating pointer position
-                        XPosition.Text = "X: " + pointer.X.ToString();
-                        YPositon.Text = "Y: " + pointer.Y.ToString();
+                            // Updating pointer position
+                            XPosition.Text = "X: " + pointer.X.ToString();
+                            YPositon.Text = "Y: " + pointer.Y.ToString();
+                        }
+                        catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
+                        catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Moveto <x Value> <y Value>"; }
+                    
                     }
                     // Command Circle draw a circle
                     if (userCommand[0].Equals("CIRCLE"))
@@ -179,7 +185,7 @@ namespace DrawingEnvironment
             // Bitmap for cursor - Testing it out
             Graphics g = e.Graphics;
             g.DrawImageUnscaled(OutputBitmap, pointer.X, pointer.Y);
-            Refresh();
+            //Refresh();
 
             /*
             // Testing out other graphic context
