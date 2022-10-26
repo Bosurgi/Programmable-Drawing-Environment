@@ -41,8 +41,6 @@ namespace DrawingEnvironment
         /// <param name="y">the Y position of the shape on the canvas based on where the cursor is</param>
         public Triangle(int lenght, Pen pen, int x, int y) : base(x, y)
         {
-            this.X = x;
-            this.Y = y;
             this.lenght = lenght;
             this.pen = pen;
             A = new Point(X, Y);
