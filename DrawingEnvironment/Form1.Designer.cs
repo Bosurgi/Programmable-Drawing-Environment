@@ -74,6 +74,7 @@
             resources.ApplyResources(this.syntaxCheckButton, "syntaxCheckButton");
             this.syntaxCheckButton.Name = "syntaxCheckButton";
             this.syntaxCheckButton.UseVisualStyleBackColor = true;
+            this.syntaxCheckButton.Click += new System.EventHandler(this.syntaxCheckButton_Click);
             // 
             // helpButton
             // 

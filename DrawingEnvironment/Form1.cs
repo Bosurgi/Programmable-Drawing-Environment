@@ -104,5 +104,9 @@ namespace DrawingEnvironment
         {
             Refresh();
         }
+
+        private void syntaxCheckButton_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

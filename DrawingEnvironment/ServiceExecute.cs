@@ -71,6 +71,18 @@ namespace DrawingEnvironment
                 catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
                 catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Circle <Radius>"; }
 
+                try
+                {
+                    if (organizedCommands[0].Equals("TRIANGLE"))
+                    {
+                        List<int> parameters = parser.AssigningParameters(command);
+                        Triangle tri = new Triangle(parameters[0], pen, pointer.X, pointer.Y);
+                        tri.Draw(g);
+                    }
+                }
+                catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
+                catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Circle <Radius>"; }
+
                 // Command to draw a line from the pointer to a set point
                 // TODO: adding try catch to deal with invalid parameters.
                 try
