@@ -111,6 +111,20 @@ namespace DrawingEnvironment
                 }
                 catch (FormatException) { errorLabel.Text = "Invalid Command"; }
                 catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Clear"; }
+
+                try
+                {
+                    if (organizedCommands[0].Equals("RESET"))
+                    {
+                        // Refreshing the canvas without deleting the pointer.                      
+                        pointer.X = 0;
+                        pointer.Y = 0;
+                        PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
+                        g.Clear(Color.Black);
+                        pointer.Draw(g);
+                    }
+                }
+                catch (FormatException) { errorLabel.Text = "Invalid Command"; }
             }
             else
             {
