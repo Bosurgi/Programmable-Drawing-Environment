@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="CanvasCustom.cs" />
     <Compile Include="Circle.cs" />
+    <Compile Include="ServiceExecute.cs" />
     <Compile Include="ShapeFactory.cs" />
     <Compile Include="IShape.cs" />
     <Compile Include="MoveCommand.cs" />

@@ -54,9 +54,10 @@
             this.programmingArea = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.drawingArea = new System.Windows.Forms.PictureBox();
-            this.XPosition = new System.Windows.Forms.Label();
-            this.YPositon = new System.Windows.Forms.Label();
+            this.PositionLabel = new System.Windows.Forms.Label();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.CursorPosLabelInfo = new System.Windows.Forms.Label();
+            this.BtnClear = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).BeginInit();
             this.SuspendLayout();
@@ -222,28 +223,38 @@
             this.drawingArea.TabStop = false;
             this.drawingArea.Paint += new System.Windows.Forms.PaintEventHandler(this.drawingArea_Paint);
             // 
-            // XPosition
+            // PositionLabel
             // 
-            resources.ApplyResources(this.XPosition, "XPosition");
-            this.XPosition.Name = "XPosition";
-            // 
-            // YPositon
-            // 
-            resources.ApplyResources(this.YPositon, "YPositon");
-            this.YPositon.Name = "YPositon";
+            this.PositionLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.PositionLabel, "PositionLabel");
+            this.PositionLabel.Name = "PositionLabel";
             // 
             // errorLabel
             // 
             resources.ApplyResources(this.errorLabel, "errorLabel");
             this.errorLabel.Name = "errorLabel";
             // 
+            // CursorPosLabelInfo
+            // 
+            resources.ApplyResources(this.CursorPosLabelInfo, "CursorPosLabelInfo");
+            this.CursorPosLabelInfo.Name = "CursorPosLabelInfo";
+            // 
+            // BtnClear
+            // 
+            resources.ApplyResources(this.BtnClear, "BtnClear");
+            this.BtnClear.Name = "BtnClear";
+            this.BtnClear.UseVisualStyleBackColor = true;
+            this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.BtnClear);
+            this.Controls.Add(this.CursorPosLabelInfo);
             this.Controls.Add(this.errorLabel);
-            this.Controls.Add(this.YPositon);
-            this.Controls.Add(this.XPosition);
+            this.Controls.Add(this.PositionLabel);
             this.Controls.Add(this.drawingArea);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.programmingArea);
@@ -252,6 +263,8 @@
             this.Controls.Add(this.syntaxCheckButton);
             this.Controls.Add(this.runBtn);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.menuStrip1.ResumeLayout(false);
@@ -289,9 +302,10 @@
         private System.Windows.Forms.TextBox programmingArea;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox drawingArea;
-        private System.Windows.Forms.Label XPosition;
-        private System.Windows.Forms.Label YPositon;
+        private System.Windows.Forms.Label PositionLabel;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.Label CursorPosLabelInfo;
+        private System.Windows.Forms.Button BtnClear;
     }
 
 }
