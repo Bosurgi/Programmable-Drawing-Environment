@@ -98,7 +98,7 @@ namespace DrawingEnvironment
                 {
                     if (userCommand[0].Equals("RECTANGLE"))
                     {
-                        List<int> dimensions = new List<int>();                        
+                        List<int> dimensions = new List<int>();
                         // TODO: refactor the code
                         // Drawing a rectangle and catching errors. Displaying the error message.
                         try
@@ -109,7 +109,7 @@ namespace DrawingEnvironment
                             rect.Draw(areaGraphics);
                         }
                         catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
-                        catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Rectangle <width> <height>"; }                        
+                        catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Rectangle <width> <height>"; }
 
                     }
                     // Move command
@@ -132,37 +132,55 @@ namespace DrawingEnvironment
                         }
                         catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
                         catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Moveto <x Value> <y Value>"; }
-                    
+
                     }
                     // Command Circle draw a circle
-                    if (userCommand[0].Equals("CIRCLE"))
+                    try
                     {
-                        List<int> parameters = parser.AssigningParameters(cmd);
-                        Circle circle = new Circle(pointer.X, pointer.Y, parameters[0]);
+                        if (userCommand[0].Equals("CIRCLE"))
+                        {
+                            List<int> parameters = parser.AssigningParameters(cmd);
+                            Circle circle = new Circle(pointer.X, pointer.Y, parameters[0]);
 
-                        /*
-                        // New code to test
-                        shapeDrawn = true;
-                        */
+                            /*
+                            // New code to test
+                            shapeDrawn = true;
+                            */
 
-                        circle.Draw(areaGraphics);
+                            circle.Draw(areaGraphics);
+                        }
                     }
+                    catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
+                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Circle <Radius>"; }
 
                     // Command to draw a line from the pointer to a set point
                     // TODO: adding try catch to deal with invalid parameters.
-                    if (userCommand[0].Equals("DRAWTO"))
+                    try
                     {
-                        List<int> parameters = parser.AssigningParameters(cmd);
-                        areaGraphics.DrawLine(pen, pointer.X, pointer.Y, parameters[0], parameters[1]);
-                        pointer.UpdatePosition(parameters[0], parameters[1], areaGraphics);
+                        if (userCommand[0].Equals("DRAWTO"))
+                        {
+                            List<int> parameters = parser.AssigningParameters(cmd);
+                            areaGraphics.DrawLine(pen, pointer.X, pointer.Y, parameters[0], parameters[1]);
+                            pointer.UpdatePosition(parameters[0], parameters[1], areaGraphics);
+                            // Update label positions
+                            XPosition.Text = "X: " + pointer.X.ToString();
+                            YPositon.Text = "Y: " + pointer.Y.ToString();
+                        }
                     }
+                    catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
+                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - drawTo <x Value> <y Value>"; }
 
-                    if (userCommand[0].Equals("CLEAR"))
+                    try
                     {
-                        // Refreshing the canvas without deleting the pointer. IMPORTANT
+                        if (userCommand[0].Equals("CLEAR"))
+                        {
+                            // Refreshing the canvas without deleting the pointer. IMPORTANT
 
-                        Refresh();
+                            Refresh();
+                        }
                     }
+                    catch (FormatException) { errorLabel.Text = "Invalid Command"; }
+                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Clear"; }
 
                 }// End of if text null
 
