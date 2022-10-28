@@ -108,7 +108,9 @@ namespace DrawingEnvironment
 
         private void BtnClear_Click(object sender, EventArgs e)
         {
-            Refresh();
+            Graphics areaGraphics = drawingArea.CreateGraphics();
+            areaGraphics.Clear(Color.Black);
+            pointer.Draw(areaGraphics);
         }
 
         private void syntaxCheckButton_Click(object sender, EventArgs e)
