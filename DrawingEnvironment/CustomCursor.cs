@@ -15,28 +15,10 @@ namespace DrawingEnvironment
     {
         Point location = new Point();
         Bitmap cursor = new Bitmap(10, 10);
-        //Rectangle rect = new Rectangle(0, 0, 5, 5);
 
         public CustomCursor()
         {           
             location = new Point(X, Y);
-        }
-
-        //TODO need to modify this method.
-        public void Draw(Graphics g, PaintEventArgs e)
-        {
-
-            /*
-            Circle circle = new Circle(X, Y, 15);
-            Bitmap myBitmap = new Bitmap(20, 20);
-            g = Graphics.FromImage(myBitmap);            
-            Pen p = new Pen(Color.White, 2);
-            circle.Draw(g);
-            Graphics windowG = e.Graphics;
-            windowG.DrawImageUnscaled(myBitmap, 20, 20);
-            p.Dispose();
-            */
-
         }
 
         /// <summary>
@@ -46,9 +28,9 @@ namespace DrawingEnvironment
         public override void Draw(Graphics graphics)
         {
             Rectangle rect = new Rectangle(X, Y, 5, 5);
-            graphics.DrawImageUnscaled(cursor, X, Y);            
-            rect.SetColour(Color.White);
+            rect.SetColour(colour);
             rect.Draw(graphics);
+            graphics.DrawImageUnscaled(cursor, X, Y);            
         }
 
         /// <summary>
@@ -62,10 +44,11 @@ namespace DrawingEnvironment
         {             
             Bitmap updatedCursor = new Bitmap(10, 10);
             Rectangle rect = new Rectangle(x, y, 5, 5);
-            cursor.MakeTransparent();          
+            cursor.MakeTransparent();
+            rect.SetColour(colour);
+            rect.Draw(g);
             g.DrawImageUnscaled(updatedCursor, x, y);           
-            rect.SetColour(Color.White);
-            rect.Draw(g);                     
+                     
 
             X = x;
             Y = y;

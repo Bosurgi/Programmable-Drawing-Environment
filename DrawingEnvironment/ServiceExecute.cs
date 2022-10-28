@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DrawingEnvironment
@@ -43,7 +44,7 @@ namespace DrawingEnvironment
                         List<int> parameters = parser.AssigningParameters(command);
                         // assigning X and Y values to the pointer
                         pointer.UpdatePosition(parameters[0], parameters[1], g);
-                        pointer.SetColour(Color.White);
+                        pointer.SetColour(pointer.colour);
 
                         // Updating the cursor
                         PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
@@ -53,41 +54,38 @@ namespace DrawingEnvironment
 
                 }
                 // Command Circle draw a circle
-                try
+                if (organizedCommands[0].Equals("CIRCLE"))
                 {
-                    if (organizedCommands[0].Equals("CIRCLE"))
+                    try
                     {
                         List<int> parameters = parser.AssigningParameters(command);
-                        Circle circle = new Circle(pointer.X, pointer.Y, parameters[0]);
-
-                        /*
-                        // New code to test
-                        shapeDrawn = true;
-                        */
-
+                        Circle circle = new Circle(pen.Color, pointer.X, pointer.Y, parameters[0]);
                         circle.Draw(g);
                     }
-                }
-                catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
-                catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Circle <Radius>"; }
 
-                try
+                    catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
+                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Circle <Radius>"; }
+                }
+
+
+                // Triangle figure
+                if (organizedCommands[0].Equals("TRIANGLE"))
                 {
-                    if (organizedCommands[0].Equals("TRIANGLE"))
+                    try
                     {
                         List<int> parameters = parser.AssigningParameters(command);
                         Triangle tri = new Triangle(parameters[0], pen, pointer.X, pointer.Y);
                         tri.Draw(g);
                     }
+                    catch (FormatException) { errorLabel.Text = "Invalid Parameter - Triangle <Length>"; }
+                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Triangle <Length>"; }
                 }
-                catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
-                catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Circle <Radius>"; }
+
 
                 // Command to draw a line from the pointer to a set point
-                // TODO: adding try catch to deal with invalid parameters.
-                try
+                if (organizedCommands[0].Equals("DRAWTO"))
                 {
-                    if (organizedCommands[0].Equals("DRAWTO"))
+                    try
                     {
                         List<int> parameters = parser.AssigningParameters(command);
                         g.DrawLine(pen, pointer.X, pointer.Y, parameters[0], parameters[1]);
@@ -95,37 +93,69 @@ namespace DrawingEnvironment
                         // Update label positions
                         PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
                     }
-                }
-                catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
-                catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - drawTo <x Value> <y Value>"; }
 
-                try
+                    catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
+                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - drawTo <x Value> <y Value>"; }
+                }
+
+                if (organizedCommands[0].Equals("CLEAR"))
                 {
-                    if (organizedCommands[0].Equals("CLEAR"))
+                    try
                     {
-                        // Refreshing the canvas without deleting the pointer.                      
-                        g.Clear(Color.Black);
-                        pointer.Draw(g);
-
+                        {
+                            // Refreshing the canvas without deleting the pointer.                 
+                            g.Clear(Color.Black);                            
+                            pointer.Draw(g);
+                        }
                     }
+                    catch (FormatException) { errorLabel.Text = "Invalid Command"; }
+                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Clear"; }
                 }
-                catch (FormatException) { errorLabel.Text = "Invalid Command"; }
-                catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Clear"; }
 
-                try
+                if (organizedCommands[0].Equals("RESET"))
                 {
-                    if (organizedCommands[0].Equals("RESET"))
+                    try
                     {
-                        // Refreshing the canvas without deleting the pointer.                      
-                        pointer.X = 0;
-                        pointer.Y = 0;
-                        PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
-                        g.Clear(Color.Black);
-                        pointer.Draw(g);
+                        {
+                            // Refreshing the canvas without deleting the pointer.                      
+                            pointer.X = 0;
+                            pointer.Y = 0;
+                            PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
+                            g.Clear(Color.Black);
+                            pointer.Draw(g);
+                        }
                     }
+                    catch (FormatException) { errorLabel.Text = "Invalid Command"; }
                 }
-                catch (FormatException) { errorLabel.Text = "Invalid Command"; }
-            }
+                //***************
+                //  COLOURS
+                //***************
+                if (organizedCommands[0].Equals("RED"))
+                {
+                    pointer.SetColour(Color.Red);
+                    pen.Color = Color.Red;
+                }
+
+                if (organizedCommands[0].Equals("GREEN"))
+                {
+                    pointer.SetColour(Color.Green);
+                    pen.Color = Color.Green;
+                }
+
+                if (organizedCommands[0].Equals("BLUE"))
+                {
+                    pointer.SetColour(Color.Blue);
+                    pen.Color = Color.Blue;
+                }
+
+                if (organizedCommands[0].Equals("WHITE"))
+                {
+                    pointer.SetColour(Color.White);
+                    pen.Color = Color.White;
+                }
+            } // End of CheckCommand
+
+
             else
             {
                 errorLabel.Text = "Invalid command";

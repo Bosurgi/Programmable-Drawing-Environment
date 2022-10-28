@@ -37,12 +37,13 @@ namespace DrawingEnvironment
         /// <returns>true if the command is present, and false if is not</returns>
         public bool CheckCommand(string userInput)
         {
-            var cmd = userInput.ToUpper().Split(' ');
+            var cmd = userInput.ToUpper().Trim().Split(' ');
             var commands = Enum.GetNames(typeof(Command.Commands));
             var shapes = Enum.GetNames(typeof(Shape.Shapes));
+            var availableColours = Enum.GetNames(typeof(Colors.ColorTypes));
             try
             {
-                if (cmd.Length > 3 || !commands.Contains(cmd[0]) && !shapes.Contains(cmd[0]))
+                if (cmd.Length > 3 || !commands.Contains(cmd[0]) && !shapes.Contains(cmd[0]) && !availableColours.Contains(cmd[0]))
                 {
                     throw new ArgumentException("Invalid command");
 

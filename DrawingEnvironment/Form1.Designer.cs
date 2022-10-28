@@ -58,8 +58,11 @@
             this.errorLabel = new System.Windows.Forms.Label();
             this.CursorPosLabelInfo = new System.Windows.Forms.Label();
             this.BtnClear = new System.Windows.Forms.Button();
+            this.LabelCurrentColor = new System.Windows.Forms.Label();
+            this.BoxCurrentColor = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BoxCurrentColor)).BeginInit();
             this.SuspendLayout();
             // 
             // runBtn
@@ -247,11 +250,26 @@
             this.BtnClear.UseVisualStyleBackColor = true;
             this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
+            // LabelCurrentColor
+            // 
+            resources.ApplyResources(this.LabelCurrentColor, "LabelCurrentColor");
+            this.LabelCurrentColor.Name = "LabelCurrentColor";
+            // 
+            // BoxCurrentColor
+            // 
+            this.BoxCurrentColor.BackColor = System.Drawing.Color.White;
+            this.BoxCurrentColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.BoxCurrentColor, "BoxCurrentColor");
+            this.BoxCurrentColor.Name = "BoxCurrentColor";
+            this.BoxCurrentColor.TabStop = false;
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.BoxCurrentColor);
+            this.Controls.Add(this.LabelCurrentColor);
             this.Controls.Add(this.BtnClear);
             this.Controls.Add(this.CursorPosLabelInfo);
             this.Controls.Add(this.errorLabel);
@@ -271,6 +289,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BoxCurrentColor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,6 +326,8 @@
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.Label CursorPosLabelInfo;
         private System.Windows.Forms.Button BtnClear;
+        private System.Windows.Forms.Label LabelCurrentColor;
+        private System.Windows.Forms.PictureBox BoxCurrentColor;
     }
 
 }

@@ -24,7 +24,8 @@ namespace DrawingEnvironment
             MOVETO, // 1
             CLEAR,  // 2
             DRAWTO, // 3
-            RESET,  // 4
+            RESET,  // 4           
+            FILL,   // 5
         }
 
         public override string ToString()

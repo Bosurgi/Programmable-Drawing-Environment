@@ -15,6 +15,7 @@ namespace DrawingEnvironment
     {
 
         Bitmap circle = new Bitmap(10, 10); // New bitmap
+        Pen pen;
 
         /// <summary>
         /// Radius property of the circle
@@ -28,9 +29,20 @@ namespace DrawingEnvironment
         /// <param name="pen">the pen to draw the circle</param>
         public override void Draw(Graphics graphics)
         {
-            Pen pen = new Pen(Color.White);
+            pen = new Pen(this.colour);
             graphics.DrawImageUnscaled(circle, X, Y);
             graphics.DrawEllipse(pen, X - Radius, Y - Radius, 2 * Radius, 2 * Radius);
+        }
+        /// <summary>
+        /// Set method for the circle, it sets the color and coordinates of the specified circle shape.
+        /// </summary>
+        /// <param name="colour">the color of the circle</param>
+        /// <param name="parameterList">the list of parameters the circle takes.
+        /// 0 - X , 1 - Y, 2 - Radius</param>
+        public override void Set(Color colour, params int[] parameterList)
+        {
+            base.Set(colour, parameterList[0], parameterList[1]);
+            this.Radius = parameterList[2];
         }
 
         /// <summary>
@@ -44,6 +56,12 @@ namespace DrawingEnvironment
             this.Radius = radius;
         }
         
+        /// <summary>
+        /// Constructor for the Circle with just position and radius.
+        /// </summary>
+        /// <param name="x">X position</param>
+        /// <param name="y">y position</param>
+        /// <param name="radius">the radius of the circle</param>
         public Circle(int x, int y, float radius) : base(x, y)
         {
             this.Radius = radius;
@@ -55,12 +73,6 @@ namespace DrawingEnvironment
         public Circle() : base()
         {
 
-        }
-        
-        public override void Set(Color colour, params int[] parameterList)
-        {
-            base.Set(colour, parameterList[0], parameterList[1]);
-            this.Radius = parameterList[2];
-        }
+        }        
     }
 }

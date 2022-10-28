@@ -30,7 +30,10 @@ namespace DrawingEnvironment
         internal int Y { get; set; }
 
         // Color of the shape
-        protected Color colour;
+        internal Color colour;
+
+        // Pen to draw the shape
+        Pen pen;
 
         public abstract void Draw(Graphics graphics);
 
@@ -42,6 +45,7 @@ namespace DrawingEnvironment
         /// <param name="parametersList">List of parameters with index 0 as X and index 1 as Y</param>
         public virtual void Set (Color color, params int[] parametersList)
         {
+            pen = new Pen(color);
             colour = color;
             this.X = parametersList[0];
             this.Y = parametersList[1];            
@@ -54,6 +58,7 @@ namespace DrawingEnvironment
         public virtual void SetColour(Color color)
         {
             colour = color;
+            pen = new Pen(color);
         }
 
         /// <summary>
@@ -65,6 +70,7 @@ namespace DrawingEnvironment
         public Shape(Color colour, int x, int y)
         {
             this.colour = colour;
+            pen = new Pen(colour);
             this.X = x;
             this.Y = y;
         }
