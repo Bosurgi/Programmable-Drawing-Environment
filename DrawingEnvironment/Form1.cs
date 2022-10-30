@@ -43,23 +43,12 @@ namespace DrawingEnvironment
             
         }
 
-
         private void helpButton_Click(object sender, EventArgs e)
         {
 
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void variousColorsPlaceholderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void variousShapesPlaceholderToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
@@ -84,11 +73,6 @@ namespace DrawingEnvironment
             userInput.Text = ""; // Resetting the user input text field to empty text
             BoxCurrentColor.BackColor = pointer.colour; // Updating the color of the current colour picture box
             LabelFill.Text = "Fill: " + isFilling.ToString();
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void drawingArea_Paint(object sender, PaintEventArgs e)

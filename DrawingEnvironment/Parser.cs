@@ -13,13 +13,11 @@ namespace DrawingEnvironment
 {
     public class Parser
     {
-        List<string> commands = new List<string>();
-
         /// <summary>
         /// This method takes a string and separates the elements by spacing.
         /// </summary>
         /// <param name="command"> it is the string to split by spacing</param>
-        public List<string> spaceParser(string command)
+        public List<string> SpaceParser(string command)
         {
             List<string> commands = new List<string>();
             string[] commandArray = command.ToUpper().Split(' ');
@@ -102,7 +100,7 @@ namespace DrawingEnvironment
 
 
         /// <summary>
-        /// Method that returns the first element of the passed array, which will determine,
+        /// Method that returns the input of the passed string, which will determine,
         /// which command the user is trying to invoke.
         /// </summary>
         /// <param name="userInput">the user input</param>
@@ -110,7 +108,7 @@ namespace DrawingEnvironment
         public string[] ValidateCommand(string userInput)
         {
             List<string> command = new List<string>();
-            var cmd = userInput.ToUpper().Split(' ');
+            var cmd = userInput.ToUpper().Trim().Split(' ');
             foreach(var element in cmd)
             {
                 command.Add(element);
@@ -121,8 +119,7 @@ namespace DrawingEnvironment
         // Constructor
 
         public Parser()
-        {
-            List<string> commands = this.commands;
+        {            
         }
 
     }
