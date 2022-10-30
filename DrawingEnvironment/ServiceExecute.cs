@@ -208,6 +208,10 @@ namespace DrawingEnvironment
             else { shape.isFill = false; }
         }
 
+        /// <summary>
+        /// Getter method to retrieve the status of the Filling flag.
+        /// </summary>
+        /// <returns>true if needs filling, false if it doesn't</returns>
         internal bool getFill()
         {
             if (isFilling)
@@ -218,18 +222,17 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
-        /// Constructor
+        /// Constructor for the service which will be used to execute the commands out of the Form context
         /// </summary>
-        /// <param name="g"></param>
-        /// <param name="pen"></param>
-        /// <param name="parser"></param>
-        /// <param name="cmd"></param>
-        /// <param name="organizedCommands"></param>
-        /// <param name="factory"></param>
-        /// <param name="pointer"></param>
-        /// <param name="errorLabel"></param>
-        /// <param name="xPosition"></param>
-        /// <param name="yPosition"></param>
+        /// <param name="g">Graphical element</param>
+        /// <param name="pen">the pen used to draw</param>
+        /// <param name="parser">the parser used to fetch the commands</param>
+        /// <param name="organizedCommands">the list of commands after parsing</param>
+        /// <param name="factory">TO BE IMPLEMENTED: The shape factory which will create shapes</param>
+        /// <param name="pointer">the cursor</param>
+        /// <param name="errorLabel">the error label to display the messages on the form</param>
+        /// <param name="LablePosition">the label which manages the current position of the cursor</param>
+        /// <param name="isFilling">the current state of the filling function</param>
         public ServiceExecute(Graphics g, Pen pen, Parser parser, string command, string[] organizedCommands, CustomCursor pointer, Label errorLabel, Label LablePosition, bool isFilling)
         {
             this.g = g;
