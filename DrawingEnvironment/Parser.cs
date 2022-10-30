@@ -82,7 +82,7 @@ namespace DrawingEnvironment
         public List<int> AssigningParameters(string userInput)
         {
             List<int> parameterList = new List<int>();
-            string[] commandArray = userInput.ToUpper().Split(' ');
+            string[] commandArray = userInput.ToUpper().Trim().Split(' ');
 
             foreach (var element in commandArray.Skip(1))
             {
@@ -111,7 +111,10 @@ namespace DrawingEnvironment
         {
             List<string> command = new List<string>();
             var cmd = userInput.ToUpper().Split(' ');
-            command.Add(cmd[0]);
+            foreach(var element in cmd)
+            {
+                command.Add(element);
+            }
 
             return command.ToArray();
         }

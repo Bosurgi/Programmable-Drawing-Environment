@@ -24,6 +24,9 @@ namespace DrawingEnvironment
         // Pen in use and default color
         Color penColour = Color.White;
         Pen pen;
+        // The brush to use it for filling shapes
+        Brush brush;
+        bool isFilling = false;
 
         /// <summary>
         /// Entry point for initialising the Form and it's components
@@ -35,7 +38,9 @@ namespace DrawingEnvironment
             pointer.SetColour(penColour);
             pointer.Draw(Graphics.FromImage(OutputBitmap));
             PositionLabel.Text = "X: " + pointer.X.ToString() + " - Y: " + pointer.Y.ToString();
+            LabelFill.Text = "Fill: " + isFilling.ToString();
             pen = new Pen(penColour, 1);
+            
         }
 
 
@@ -73,10 +78,12 @@ namespace DrawingEnvironment
             areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;         
 
             // Initialising the service which will manage all the input and execution of commands
-            ServiceExecute ex = new ServiceExecute(areaGraphics, pen, parser, cmd, userCommand, pointer, errorLabel, PositionLabel);
+            ServiceExecute ex = new ServiceExecute(areaGraphics, pen, parser, cmd, userCommand, pointer, errorLabel, PositionLabel, isFilling);
             ex.executeService(cmd); // Executing the service
+            isFilling = ex.getFill(); // Updating form filling flag
             userInput.Text = ""; // Resetting the user input text field to empty text
             BoxCurrentColor.BackColor = pointer.colour; // Updating the color of the current colour picture box
+            LabelFill.Text = "Fill: " + isFilling.ToString();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -86,7 +93,6 @@ namespace DrawingEnvironment
 
         private void drawingArea_Paint(object sender, PaintEventArgs e)
         {
-            // Bitmap for cursor - Testing it out
             Graphics g = e.Graphics;
             pointer.SetColour(penColour);
             g.DrawImageUnscaled(OutputBitmap, pointer.X, pointer.Y);

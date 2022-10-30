@@ -29,11 +29,16 @@ namespace DrawingEnvironment
         internal int X { get; set; }
         internal int Y { get; set; }
 
+        internal bool isFill;
+
         // Color of the shape
         internal Color colour;
 
         // Pen to draw the shape
-        Pen pen;
+        protected Pen pen;
+        
+        // Brush used to fill shapes
+        protected Brush brush;
 
         public abstract void Draw(Graphics graphics);
 
@@ -46,6 +51,7 @@ namespace DrawingEnvironment
         public virtual void Set (Color color, params int[] parametersList)
         {
             pen = new Pen(color);
+            brush = new SolidBrush(color);
             colour = color;
             this.X = parametersList[0];
             this.Y = parametersList[1];            
@@ -58,6 +64,7 @@ namespace DrawingEnvironment
         public virtual void SetColour(Color color)
         {
             colour = color;
+            brush = new SolidBrush(color);
             pen = new Pen(color);
         }
 
@@ -71,6 +78,7 @@ namespace DrawingEnvironment
         {
             this.colour = colour;
             pen = new Pen(colour);
+            brush = new SolidBrush(colour);
             this.X = x;
             this.Y = y;
         }

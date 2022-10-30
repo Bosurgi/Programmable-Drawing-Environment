@@ -19,7 +19,6 @@ namespace DrawingEnvironment
         private Point C { get; set; }
         private Point D { get; set; }
 
-        Pen pen;
         
         /// <summary>
         /// It draws the triangle into a graphic context.
@@ -28,7 +27,20 @@ namespace DrawingEnvironment
         public override void Draw(Graphics graphics)
         {
             Point[] vertices = { A, B, C, D }; // Array of points where the lines are going to be
-            graphics.DrawLines(pen, vertices); // drawing the lines using the method which takes a pen and an array of points.
+            // Checking if the shape needs to be filled in
+            if (!isFill)
+            {
+                pen = new Pen(colour);
+                graphics.DrawLines(pen, vertices); // drawing the lines using the method which takes a pen and an array of points.
+                pen.Dispose();
+            }
+            // If fill flag is on it will fill the shape.
+            else
+            {
+                brush = new SolidBrush(colour);
+                graphics.FillPolygon(brush, vertices);
+                brush.Dispose();
+            }
 
         }
 

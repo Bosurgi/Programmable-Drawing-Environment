@@ -60,6 +60,7 @@
             this.BtnClear = new System.Windows.Forms.Button();
             this.LabelCurrentColor = new System.Windows.Forms.Label();
             this.BoxCurrentColor = new System.Windows.Forms.PictureBox();
+            this.LabelFill = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BoxCurrentColor)).BeginInit();
@@ -263,11 +264,17 @@
             this.BoxCurrentColor.Name = "BoxCurrentColor";
             this.BoxCurrentColor.TabStop = false;
             // 
+            // LabelFill
+            // 
+            resources.ApplyResources(this.LabelFill, "LabelFill");
+            this.LabelFill.Name = "LabelFill";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.LabelFill);
             this.Controls.Add(this.BoxCurrentColor);
             this.Controls.Add(this.LabelCurrentColor);
             this.Controls.Add(this.BtnClear);
@@ -328,6 +335,7 @@
         private System.Windows.Forms.Button BtnClear;
         private System.Windows.Forms.Label LabelCurrentColor;
         private System.Windows.Forms.PictureBox BoxCurrentColor;
+        private System.Windows.Forms.Label LabelFill;
     }
 
 }

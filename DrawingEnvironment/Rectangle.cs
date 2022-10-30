@@ -43,12 +43,28 @@ namespace DrawingEnvironment
         /// <param name="graphics">the canvas where to draw</param>
         /// <param name="pen">the pen used to draw</param>
         public override void Draw(Graphics graphics)
-        {
-            Pen pen = new Pen(colour);
-            // It uses the Method to Draw a rectangle taking the position of the Shape and properties from the Rectangle class
-            graphics.DrawRectangle(pen, X, Y, Width, Height);
+        {            
+            if (!isFill)
+            {
+                pen = new Pen(colour);
+                // It uses the Method to Draw a rectangle taking the position of the Shape and properties from the Rectangle class
+                graphics.DrawRectangle(pen, X, Y, Width, Height);
+                pen.Dispose();
+            }
+            else 
+            {
+                brush = new SolidBrush(colour);
+                graphics.FillRectangle(brush, X, Y, Width, Height);               
+                brush.Dispose();
+            }
+            
         }
 
+        /// <summary>
+        /// Method which sets the colors and parameters of the Rectangle
+        /// </summary>
+        /// <param name="color">the color of the rectangle</param>
+        /// <param name="parametersList">parameters passed for the rectangle</param>
         public override void Set(Color color, params int[] parametersList)
         {
             base.Set(color, parametersList[0], parametersList[1]);

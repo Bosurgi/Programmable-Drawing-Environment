@@ -10,6 +10,7 @@ namespace DrawingEnvironment
     {
         Graphics g;
         Pen pen;
+        bool isFilling;
         Parser parser = new Parser();
         string[] organizedCommands;
         //ShapeFactory factory = new ShapeFactory();
@@ -30,6 +31,10 @@ namespace DrawingEnvironment
                     {
                         dimensions = parser.AssigningParameters(command);
                         Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
+                        if (isFilling)
+                        {
+                            setFill(rect);
+                        }
                         rect.SetColour(pen.Color);
                         rect.Draw(g);
                     }
@@ -60,6 +65,11 @@ namespace DrawingEnvironment
                     {
                         List<int> parameters = parser.AssigningParameters(command);
                         Circle circle = new Circle(pen.Color, pointer.X, pointer.Y, parameters[0]);
+                        
+                        if (isFilling)
+                        {
+                            setFill(circle);
+                        }
                         circle.Draw(g);
                     }
 
@@ -75,6 +85,11 @@ namespace DrawingEnvironment
                     {
                         List<int> parameters = parser.AssigningParameters(command);
                         Triangle tri = new Triangle(parameters[0], pen, pointer.X, pointer.Y);
+                        if (isFilling)
+                        {
+                            setFill(tri);
+                        }
+                        tri.SetColour(pen.Color);
                         tri.Draw(g);
                     }
                     catch (FormatException) { errorLabel.Text = "Invalid Parameter - Triangle <Length>"; }
@@ -104,7 +119,7 @@ namespace DrawingEnvironment
                     {
                         {
                             // Refreshing the canvas without deleting the pointer.                 
-                            g.Clear(Color.Black);                            
+                            g.Clear(Color.Black);
                             pointer.Draw(g);
                         }
                     }
@@ -127,6 +142,25 @@ namespace DrawingEnvironment
                     }
                     catch (FormatException) { errorLabel.Text = "Invalid Command"; }
                 }
+
+                // Filling commands options
+                try
+                {
+                    if (organizedCommands[0].Equals("FILL"))
+                    {
+                        if (organizedCommands[1].Equals("ON"))
+                        {
+                            isFilling = true;
+                        }
+                        else if (organizedCommands[1].Equals("OFF"))
+                        {
+                            isFilling = false;
+                        }
+                        // TODO: Implementing try catch to catch this exception
+                        else { throw new FormatException("Invalid parameter"); }
+                    }
+                }
+                catch (FormatException) { errorLabel.Text = "Invalid Command - Fill <ON> <OFF>"; }
                 //***************
                 //  COLOURS
                 //***************
@@ -155,12 +189,33 @@ namespace DrawingEnvironment
                 }
             } // End of CheckCommand
 
-
             else
             {
                 errorLabel.Text = "Invalid command";
             }
         } // End of method
+
+        /// <summary>
+        /// Setting a shape to be fillable changing its attribute.
+        /// </summary>
+        /// <param name="shape">the shape we want to change the parameter</param>
+        private void setFill(Shape shape)
+        {
+            if (isFilling)
+            {
+                shape.isFill = true;
+            }
+            else { shape.isFill = false; }
+        }
+
+        internal bool getFill()
+        {
+            if (isFilling)
+            {
+                return true;
+            }
+            else { return false; }
+        }
 
         /// <summary>
         /// Constructor
@@ -175,7 +230,7 @@ namespace DrawingEnvironment
         /// <param name="errorLabel"></param>
         /// <param name="xPosition"></param>
         /// <param name="yPosition"></param>
-        public ServiceExecute(Graphics g, Pen pen, Parser parser, string command, string[] organizedCommands, CustomCursor pointer, Label errorLabel, Label LablePosition)
+        public ServiceExecute(Graphics g, Pen pen, Parser parser, string command, string[] organizedCommands, CustomCursor pointer, Label errorLabel, Label LablePosition, bool isFilling)
         {
             this.g = g;
             this.pen = pen;
@@ -185,11 +240,7 @@ namespace DrawingEnvironment
             this.pointer = pointer;
             this.errorLabel = errorLabel;
             PositionLabel = LablePosition;
-        }
-
-        public ServiceExecute(Graphics g)
-        {
-            this.g = g;
+            this.isFilling = isFilling;
         }
     }
 }

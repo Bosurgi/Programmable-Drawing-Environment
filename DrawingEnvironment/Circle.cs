@@ -15,7 +15,6 @@ namespace DrawingEnvironment
     {
 
         Bitmap circle = new Bitmap(10, 10); // New bitmap
-        Pen pen;
 
         /// <summary>
         /// Radius property of the circle
@@ -23,15 +22,24 @@ namespace DrawingEnvironment
         private float Radius { get; set; }
 
         /// <summary>
-        /// Drawing method to display a circle in a canvas
+        /// Drawing method to display a circle in a canvas if fill on it will fill the area if not just drawing the shape empty.
         /// </summary>
         /// <param name="graphics">the graphic object where to draw</param>
         /// <param name="pen">the pen to draw the circle</param>
         public override void Draw(Graphics graphics)
         {
-            pen = new Pen(this.colour);
-            graphics.DrawImageUnscaled(circle, X, Y);
-            graphics.DrawEllipse(pen, X - Radius, Y - Radius, 2 * Radius, 2 * Radius);
+            if (!isFill)
+            {
+                pen = new Pen(this.colour);
+                graphics.DrawEllipse(pen, X - Radius, Y - Radius, 2 * Radius, 2 * Radius);
+                pen.Dispose();
+            }
+            else
+            {
+                brush = new SolidBrush(colour);               
+                graphics.FillEllipse(brush, X - Radius, Y - Radius, 2 * Radius, 2 * Radius);               
+                brush.Dispose();
+            }
         }
         /// <summary>
         /// Set method for the circle, it sets the color and coordinates of the specified circle shape.
