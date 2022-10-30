@@ -204,80 +204,44 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="saveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 22</value>
-  </data>
-  <data name="saveToolStripMenuItem.Text" xml:space="preserve">
-    <value>New</value>
-  </data>
-  <data name="loadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 22</value>
-  </data>
-  <data name="loadToolStripMenuItem.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="loadToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 22</value>
-  </data>
-  <data name="loadToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Load</value>
-  </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 20</value>
   </data>
   <data name="fileToolStripMenuItem.Text" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="variousColorsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="variousColorsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Various colors</value>
-  </data>
-  <data name="variousColorsPlaceholderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="variousColorsPlaceholderToolStripMenuItem.Text" xml:space="preserve">
-    <value>Various colors placeholder</value>
-  </data>
-  <data name="variousColorsPlaceholderToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
-  </data>
-  <data name="variousColorsPlaceholderToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Various colors placeholder</value>
-  </data>
   <data name="coloursToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="coloursToolStripMenuItem.Text" xml:space="preserve">
     <value>Colours</value>
   </data>
-  <data name="variousShapesPlaceholderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+  <data name="ToolsCircleItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="variousShapesPlaceholderToolStripMenuItem.Text" xml:space="preserve">
-    <value>Various shapes placeholder</value>
+  <data name="ToolsCircleItem.Text" xml:space="preserve">
+    <value>Circle</value>
   </data>
-  <data name="variousColorsPlaceholderToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+  <data name="ToolsTriangleItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="variousColorsPlaceholderToolStripMenuItem3.Text" xml:space="preserve">
-    <value>Various shapes placeholder</value>
+  <data name="ToolsTriangleItem.Text" xml:space="preserve">
+    <value>Triangle</value>
   </data>
-  <data name="variousShapesPlaceholderToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+  <data name="ToolsSquareItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="variousShapesPlaceholderToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Various shapes placeholder</value>
+  <data name="ToolsSquareItem.Text" xml:space="preserve">
+    <value>Square</value>
   </data>
-  <data name="variousShapesPlaceholderToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+  <data name="ToolsRectangleItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="variousShapesPlaceholderToolStripMenuItem2.Text" xml:space="preserve">
-    <value>Various shapes placeholder</value>
+  <data name="ToolsRectangleItem.Text" xml:space="preserve">
+    <value>Rectangle</value>
   </data>
   <data name="shapesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="shapesToolStripMenuItem.Text" xml:space="preserve">
     <value>Shapes</value>
@@ -287,18 +251,6 @@
   </data>
   <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
     <value>Tools</value>
-  </data>
-  <data name="commandListToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="commandListToolStripMenuItem.Text" xml:space="preserve">
-    <value>Command List</value>
-  </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Help</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 20</value>
@@ -329,6 +281,60 @@
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="saveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 22</value>
+  </data>
+  <data name="saveToolStripMenuItem.Text" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="loadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 22</value>
+  </data>
+  <data name="loadToolStripMenuItem.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="loadToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 22</value>
+  </data>
+  <data name="loadToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="ToolsRedItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="ToolsRedItem.Text" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="ToolsGreenItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="ToolsGreenItem.Text" xml:space="preserve">
+    <value>Green</value>
+  </data>
+  <data name="ToolsBlueItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="ToolsBlueItem.Text" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="ToolsWhiteItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="ToolsWhiteItem.Text" xml:space="preserve">
+    <value>White</value>
+  </data>
+  <data name="commandListToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="commandListToolStripMenuItem.Text" xml:space="preserve">
+    <value>Command List</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="userInput.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 245</value>
@@ -1454,22 +1460,28 @@
   <data name="&gt;&gt;coloursToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;variousColorsToolStripMenuItem.Name" xml:space="preserve">
-    <value>variousColorsToolStripMenuItem</value>
+  <data name="&gt;&gt;ToolsRedItem.Name" xml:space="preserve">
+    <value>ToolsRedItem</value>
   </data>
-  <data name="&gt;&gt;variousColorsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolsRedItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;variousColorsPlaceholderToolStripMenuItem.Name" xml:space="preserve">
-    <value>variousColorsPlaceholderToolStripMenuItem</value>
+  <data name="&gt;&gt;ToolsGreenItem.Name" xml:space="preserve">
+    <value>ToolsGreenItem</value>
   </data>
-  <data name="&gt;&gt;variousColorsPlaceholderToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolsGreenItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;variousColorsPlaceholderToolStripMenuItem1.Name" xml:space="preserve">
-    <value>variousColorsPlaceholderToolStripMenuItem1</value>
+  <data name="&gt;&gt;ToolsBlueItem.Name" xml:space="preserve">
+    <value>ToolsBlueItem</value>
   </data>
-  <data name="&gt;&gt;variousColorsPlaceholderToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolsBlueItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolsWhiteItem.Name" xml:space="preserve">
+    <value>ToolsWhiteItem</value>
+  </data>
+  <data name="&gt;&gt;ToolsWhiteItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;shapesToolStripMenuItem.Name" xml:space="preserve">
@@ -1478,28 +1490,28 @@
   <data name="&gt;&gt;shapesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;variousShapesPlaceholderToolStripMenuItem.Name" xml:space="preserve">
-    <value>variousShapesPlaceholderToolStripMenuItem</value>
+  <data name="&gt;&gt;ToolsCircleItem.Name" xml:space="preserve">
+    <value>ToolsCircleItem</value>
   </data>
-  <data name="&gt;&gt;variousShapesPlaceholderToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolsCircleItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;variousColorsPlaceholderToolStripMenuItem3.Name" xml:space="preserve">
-    <value>variousColorsPlaceholderToolStripMenuItem3</value>
+  <data name="&gt;&gt;ToolsTriangleItem.Name" xml:space="preserve">
+    <value>ToolsTriangleItem</value>
   </data>
-  <data name="&gt;&gt;variousColorsPlaceholderToolStripMenuItem3.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolsTriangleItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;variousShapesPlaceholderToolStripMenuItem1.Name" xml:space="preserve">
-    <value>variousShapesPlaceholderToolStripMenuItem1</value>
+  <data name="&gt;&gt;ToolsSquareItem.Name" xml:space="preserve">
+    <value>ToolsSquareItem</value>
   </data>
-  <data name="&gt;&gt;variousShapesPlaceholderToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolsSquareItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;variousShapesPlaceholderToolStripMenuItem2.Name" xml:space="preserve">
-    <value>variousShapesPlaceholderToolStripMenuItem2</value>
+  <data name="&gt;&gt;ToolsRectangleItem.Name" xml:space="preserve">
+    <value>ToolsRectangleItem</value>
   </data>
-  <data name="&gt;&gt;variousShapesPlaceholderToolStripMenuItem2.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolsRectangleItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">

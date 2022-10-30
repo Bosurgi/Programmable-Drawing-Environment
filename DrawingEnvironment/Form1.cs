@@ -122,5 +122,69 @@ namespace DrawingEnvironment
         private void syntaxCheckButton_Click(object sender, EventArgs e)
         {
         }
+
+        private void ToolsRedItem_Click(object sender, EventArgs e)
+        {
+            pointer.SetColour(Color.Red); // Pointer colour to red
+            pen.Color = Color.Red;         // Pen colour to red
+            BoxCurrentColor.BackColor = Color.Red; // Updating the current colour box                      
+        }
+
+        private void ToolsGreenItem_Click(object sender, EventArgs e)
+        {
+            pointer.SetColour(Color.Green); // Pointer colour to Green
+            pen.Color = Color.Green;         // Pen colour to Green
+            BoxCurrentColor.BackColor = Color.Green; // Updating the current colour box   
+        }
+
+        private void ToolsBlueItem_Click(object sender, EventArgs e)
+        {
+            pointer.SetColour(Color.Blue); // Pointer colour to Blue
+            pen.Color = Color.Blue;         // Pen colour to Blue
+            BoxCurrentColor.BackColor = Color.Blue; // Updating the current colour box   
+        }
+
+        private void ToolsWhiteItem_Click(object sender, EventArgs e)
+        {
+            pointer.SetColour(Color.White); // Pointer colour to white
+            pen.Color = Color.White;         // Pen colour to white
+            BoxCurrentColor.BackColor = Color.White; // Updating the current colour box   
+        }
+        /// <summary>
+        /// Handler for the button to draw a default circle on canvas.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ToolsCircleItem_Click(object sender, EventArgs e)
+        {
+            Graphics areaGraphics = drawingArea.CreateGraphics();
+            Shape circle = new Circle(penColour, pointer.X, pointer.Y, 50);
+            circle.SetColour(pen.Color);
+            circle.Draw(areaGraphics);
+        }
+        
+        private void ToolsTriangleItem_Click(object sender, EventArgs e)
+        {
+            Graphics areaGraphics = drawingArea.CreateGraphics();
+            Shape tri = new Triangle(50, pointer.X, pointer.Y);
+            tri.SetColour(pen.Color);
+            tri.Draw(areaGraphics);
+        }
+
+        private void ToolsSquareItem_Click(object sender, EventArgs e)
+        {
+            Graphics areaGraphics = drawingArea.CreateGraphics();
+            Shape square = new Rectangle(pointer.X, pointer.Y, 50, 50);
+            square.SetColour(pen.Color);
+            square.Draw(areaGraphics);
+        }
+
+        private void ToolsRectangleItem_Click(object sender, EventArgs e)
+        {
+            Graphics areaGraphics = drawingArea.CreateGraphics();
+            Shape rect = new Rectangle(pointer.X, pointer.Y, 100, 50);
+            rect.SetColour(pen.Color);
+            rect.Draw(areaGraphics);
+        }
     }
 }

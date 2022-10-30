@@ -51,10 +51,9 @@ namespace DrawingEnvironment
         /// <param name="pen">the pen used to draw</param>
         /// <param name="x">the X position of the shape on the canvas based on where the cursor is</param>
         /// <param name="y">the Y position of the shape on the canvas based on where the cursor is</param>
-        public Triangle(int lenght, Pen pen, int x, int y) : base(x, y)
+        public Triangle(int lenght, int x, int y) : base(x, y)
         {
             this.lenght = lenght;
-            this.pen = pen;
             A = new Point(X, Y);
             B = new Point(X, Y + lenght);
             C = new Point(X + lenght, Y + lenght);

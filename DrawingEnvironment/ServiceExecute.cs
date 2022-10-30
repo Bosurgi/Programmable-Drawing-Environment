@@ -84,7 +84,7 @@ namespace DrawingEnvironment
                     try
                     {
                         List<int> parameters = parser.AssigningParameters(command);
-                        Triangle tri = new Triangle(parameters[0], pen, pointer.X, pointer.Y);
+                        Triangle tri = new Triangle(parameters[0], pointer.X, pointer.Y);
                         if (isFilling)
                         {
                             setFill(tri);
@@ -156,7 +156,6 @@ namespace DrawingEnvironment
                         {
                             isFilling = false;
                         }
-                        // TODO: Implementing try catch to catch this exception
                         else { throw new FormatException("Invalid parameter"); }
                     }
                 }

@@ -39,14 +39,15 @@
             this.loadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.coloursToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.variousColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.variousColorsPlaceholderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.variousColorsPlaceholderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolsRedItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolsGreenItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolsBlueItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolsWhiteItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.variousShapesPlaceholderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.variousColorsPlaceholderToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.variousShapesPlaceholderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.variousShapesPlaceholderToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolsCircleItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolsTriangleItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolsSquareItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolsRectangleItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commandListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,58 +133,70 @@
             // coloursToolStripMenuItem
             // 
             this.coloursToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.variousColorsToolStripMenuItem,
-            this.variousColorsPlaceholderToolStripMenuItem,
-            this.variousColorsPlaceholderToolStripMenuItem1});
+            this.ToolsRedItem,
+            this.ToolsGreenItem,
+            this.ToolsBlueItem,
+            this.ToolsWhiteItem});
             this.coloursToolStripMenuItem.Name = "coloursToolStripMenuItem";
             resources.ApplyResources(this.coloursToolStripMenuItem, "coloursToolStripMenuItem");
             // 
-            // variousColorsToolStripMenuItem
+            // ToolsRedItem
             // 
-            this.variousColorsToolStripMenuItem.Name = "variousColorsToolStripMenuItem";
-            resources.ApplyResources(this.variousColorsToolStripMenuItem, "variousColorsToolStripMenuItem");
+            this.ToolsRedItem.Name = "ToolsRedItem";
+            resources.ApplyResources(this.ToolsRedItem, "ToolsRedItem");
+            this.ToolsRedItem.Click += new System.EventHandler(this.ToolsRedItem_Click);
             // 
-            // variousColorsPlaceholderToolStripMenuItem
+            // ToolsGreenItem
             // 
-            this.variousColorsPlaceholderToolStripMenuItem.Name = "variousColorsPlaceholderToolStripMenuItem";
-            resources.ApplyResources(this.variousColorsPlaceholderToolStripMenuItem, "variousColorsPlaceholderToolStripMenuItem");
-            this.variousColorsPlaceholderToolStripMenuItem.Click += new System.EventHandler(this.variousColorsPlaceholderToolStripMenuItem_Click);
+            this.ToolsGreenItem.Name = "ToolsGreenItem";
+            resources.ApplyResources(this.ToolsGreenItem, "ToolsGreenItem");
+            this.ToolsGreenItem.Click += new System.EventHandler(this.ToolsGreenItem_Click);
             // 
-            // variousColorsPlaceholderToolStripMenuItem1
+            // ToolsBlueItem
             // 
-            this.variousColorsPlaceholderToolStripMenuItem1.Name = "variousColorsPlaceholderToolStripMenuItem1";
-            resources.ApplyResources(this.variousColorsPlaceholderToolStripMenuItem1, "variousColorsPlaceholderToolStripMenuItem1");
+            this.ToolsBlueItem.Name = "ToolsBlueItem";
+            resources.ApplyResources(this.ToolsBlueItem, "ToolsBlueItem");
+            this.ToolsBlueItem.Click += new System.EventHandler(this.ToolsBlueItem_Click);
+            // 
+            // ToolsWhiteItem
+            // 
+            this.ToolsWhiteItem.Name = "ToolsWhiteItem";
+            resources.ApplyResources(this.ToolsWhiteItem, "ToolsWhiteItem");
+            this.ToolsWhiteItem.Click += new System.EventHandler(this.ToolsWhiteItem_Click);
             // 
             // shapesToolStripMenuItem
             // 
             this.shapesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.variousShapesPlaceholderToolStripMenuItem,
-            this.variousColorsPlaceholderToolStripMenuItem3,
-            this.variousShapesPlaceholderToolStripMenuItem1,
-            this.variousShapesPlaceholderToolStripMenuItem2});
+            this.ToolsCircleItem,
+            this.ToolsTriangleItem,
+            this.ToolsSquareItem,
+            this.ToolsRectangleItem});
             this.shapesToolStripMenuItem.Name = "shapesToolStripMenuItem";
             resources.ApplyResources(this.shapesToolStripMenuItem, "shapesToolStripMenuItem");
             // 
-            // variousShapesPlaceholderToolStripMenuItem
+            // ToolsCircleItem
             // 
-            this.variousShapesPlaceholderToolStripMenuItem.Name = "variousShapesPlaceholderToolStripMenuItem";
-            resources.ApplyResources(this.variousShapesPlaceholderToolStripMenuItem, "variousShapesPlaceholderToolStripMenuItem");
-            this.variousShapesPlaceholderToolStripMenuItem.Click += new System.EventHandler(this.variousShapesPlaceholderToolStripMenuItem_Click);
+            this.ToolsCircleItem.Name = "ToolsCircleItem";
+            resources.ApplyResources(this.ToolsCircleItem, "ToolsCircleItem");
+            this.ToolsCircleItem.Click += new System.EventHandler(this.ToolsCircleItem_Click);
             // 
-            // variousColorsPlaceholderToolStripMenuItem3
+            // ToolsTriangleItem
             // 
-            this.variousColorsPlaceholderToolStripMenuItem3.Name = "variousColorsPlaceholderToolStripMenuItem3";
-            resources.ApplyResources(this.variousColorsPlaceholderToolStripMenuItem3, "variousColorsPlaceholderToolStripMenuItem3");
+            this.ToolsTriangleItem.Name = "ToolsTriangleItem";
+            resources.ApplyResources(this.ToolsTriangleItem, "ToolsTriangleItem");
+            this.ToolsTriangleItem.Click += new System.EventHandler(this.ToolsTriangleItem_Click);
             // 
-            // variousShapesPlaceholderToolStripMenuItem1
+            // ToolsSquareItem
             // 
-            this.variousShapesPlaceholderToolStripMenuItem1.Name = "variousShapesPlaceholderToolStripMenuItem1";
-            resources.ApplyResources(this.variousShapesPlaceholderToolStripMenuItem1, "variousShapesPlaceholderToolStripMenuItem1");
+            this.ToolsSquareItem.Name = "ToolsSquareItem";
+            resources.ApplyResources(this.ToolsSquareItem, "ToolsSquareItem");
+            this.ToolsSquareItem.Click += new System.EventHandler(this.ToolsSquareItem_Click);
             // 
-            // variousShapesPlaceholderToolStripMenuItem2
+            // ToolsRectangleItem
             // 
-            this.variousShapesPlaceholderToolStripMenuItem2.Name = "variousShapesPlaceholderToolStripMenuItem2";
-            resources.ApplyResources(this.variousShapesPlaceholderToolStripMenuItem2, "variousShapesPlaceholderToolStripMenuItem2");
+            this.ToolsRectangleItem.Name = "ToolsRectangleItem";
+            resources.ApplyResources(this.ToolsRectangleItem, "ToolsRectangleItem");
+            this.ToolsRectangleItem.Click += new System.EventHandler(this.ToolsRectangleItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -309,19 +322,18 @@
         private System.Windows.Forms.Button helpButton;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem coloursToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem variousColorsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem variousColorsPlaceholderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem variousColorsPlaceholderToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ToolsRedItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolsGreenItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolsBlueItem;
         private System.Windows.Forms.ToolStripMenuItem shapesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem variousShapesPlaceholderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem variousColorsPlaceholderToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem variousShapesPlaceholderToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem variousShapesPlaceholderToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem ToolsCircleItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolsTriangleItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolsSquareItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolsRectangleItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem commandListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
@@ -336,6 +348,8 @@
         private System.Windows.Forms.Label LabelCurrentColor;
         private System.Windows.Forms.PictureBox BoxCurrentColor;
         private System.Windows.Forms.Label LabelFill;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolsWhiteItem;
     }
 
 }
