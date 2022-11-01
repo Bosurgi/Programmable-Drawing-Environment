@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -13,6 +14,13 @@ namespace DrawingEnvironment
 {
     public class Parser
     {
+        // TODO: create attributes. Adding command and parameters in the attributes and using them to parse directly inside the methods.
+        /// <summary>
+        /// The command and parameters
+        /// </summary>
+        protected string command;
+        protected int[] parameters;
+        
         /// <summary>
         /// This method takes a string and separates the elements by spacing.
         /// </summary>
@@ -100,15 +108,16 @@ namespace DrawingEnvironment
 
 
         /// <summary>
-        /// Method that returns the input of the passed string, which will determine,
-        /// which command the user is trying to invoke.
+        /// Method that returns a list of elements in the command line dividing the string by the space.
+        /// This will be used to determine the commands and the parameters.
         /// </summary>
         /// <param name="userInput">the user input</param>
-        /// <returns>returns a list of strings with the command the user wants to execute</returns>
-        public string[] ValidateCommand(string userInput)
+        /// <returns>returns a list of strings with the command and parameters the user wants to execute</returns>
+        public string[] ParseCommand(string userInput)
         {
             List<string> command = new List<string>();
             var cmd = userInput.ToUpper().Trim().Split(' ');
+
             foreach(var element in cmd)
             {
                 command.Add(element);
@@ -116,6 +125,26 @@ namespace DrawingEnvironment
 
             return command.ToArray();
         }
+        
+        /// <summary>
+        /// Method that parses multiple lines of commands and it will determine the list of commands to run.
+        /// </summary>
+        /// <param name="userInput"></param>
+        /// <returns></returns>
+        public string[] ParseCommandLines(string userInput)
+        {
+            List<string> commands = new List<string>();
+
+            // TODO: It will not work as it will have another special character \r to check with TextBox.Lines method.
+            var cmd = userInput.ToUpper().Trim().Split('\n');
+            // TODO : Sorting the logic out
+            foreach(var element in cmd)
+            {
+                commands.Add(element);
+            }
+            return commands.ToArray();
+        }
+
         // Constructor
 
         public Parser()

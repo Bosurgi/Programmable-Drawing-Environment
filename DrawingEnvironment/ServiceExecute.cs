@@ -23,7 +23,7 @@ namespace DrawingEnvironment
         {
             if (parser.CheckCommand(command))
             {
-                organizedCommands = parser.ValidateCommand(command);
+                organizedCommands = parser.ParseCommand(command);
                 if (organizedCommands[0].Equals("RECTANGLE"))
                 {
                     List<int> dimensions = new List<int>();

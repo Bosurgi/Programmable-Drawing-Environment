@@ -59,7 +59,7 @@ namespace AseTests
             var expected = new string[] { "HELLO", "300", "TEST" };
 
             // Act
-            var result = parser.ValidateCommand(test);
+            var result = parser.ParseCommand(test);
 
             // Assert
             Assert.IsNotNull(result);

@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="CanvasCustom.cs" />
     <Compile Include="Circle.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Colors.cs" />
     <Compile Include="Triangle.cs" />
     <Compile Include="ServiceExecute.cs" />

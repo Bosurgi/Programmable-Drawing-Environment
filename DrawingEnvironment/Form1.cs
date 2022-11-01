@@ -16,6 +16,9 @@ namespace DrawingEnvironment
         /// Initialising the parser;
         /// </summary>
         Parser parser = new Parser();
+        string cmd;
+        string[] parsedCommands;
+
         CustomCursor pointer = new CustomCursor();
         Bitmap OutputBitmap = new Bitmap(canX, canY);
 
@@ -61,13 +64,28 @@ namespace DrawingEnvironment
         private void runButton_Click(object sender, EventArgs e)
         {
             errorLabel.Text = ""; // Resetting the error label
-            string cmd = userInput.Text; // The user input
-            string[] userCommand = parser.ValidateCommand(cmd); // The array with the commands typed by the user
+            //string cmd = userInput.Text; // The user input
+            //string multiCmd = programmingArea.Text; // The user input in Multiline
+            
+            if (!programmingArea.Text.Equals(""))
+            {
+                cmd = programmingArea.Text;
+                parsedCommands = parser.ParseCommandLines(cmd);
+            }
+            else 
+            { 
+                cmd = userInput.Text;
+                parsedCommands = parser.ParseCommand(cmd);
+            }
+
+            //string[] userCommand = parser.ParseCommand(cmd); // The array with the commands typed by the user
+
+
             Graphics areaGraphics = drawingArea.CreateGraphics(); // The area where to draw                             
             areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;         
 
             // Initialising the service which will manage all the input and execution of commands
-            ServiceExecute ex = new ServiceExecute(areaGraphics, pen, parser, cmd, userCommand, pointer, errorLabel, PositionLabel, isFilling);
+            ServiceExecute ex = new ServiceExecute(areaGraphics, pen, parser, cmd, parsedCommands, pointer, errorLabel, PositionLabel, isFilling);
             ex.executeService(cmd); // Executing the service
             isFilling = ex.getFill(); // Updating form filling flag
             userInput.Text = ""; // Resetting the user input text field to empty text
