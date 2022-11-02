@@ -6,6 +6,10 @@ namespace DrawingEnvironment
 {
     internal class ParserUpdate
     {
+        /// <summary>
+        /// Command property and parameters stored to be processed.
+        /// And as well a list of parsed parameters inserted if they are valid numbers.
+        /// </summary>
         internal string command { get; set; }
         internal string parameters { get; set; }
         internal List<int> parsedParameters = new List<int>();

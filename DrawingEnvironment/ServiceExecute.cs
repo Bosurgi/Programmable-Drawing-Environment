@@ -230,8 +230,6 @@ namespace DrawingEnvironment
         /// </summary>
         /// <param name="g">Graphical element</param>
         /// <param name="pen">the pen used to draw</param>
-        /// <param name="parser">the parser used to fetch the commands</param>
-        /// <param name="organizedCommands">the list of commands after parsing</param>
         /// <param name="factory">TO BE IMPLEMENTED: The shape factory which will create shapes</param>
         /// <param name="pointer">the cursor</param>
         /// <param name="errorLabel">the error label to display the messages on the form</param>
