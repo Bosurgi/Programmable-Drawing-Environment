@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace DrawingEnvironment
 {
@@ -19,10 +20,10 @@ namespace DrawingEnvironment
         /// </summary>
         /// <param name="cmd">the command the user writes in the command line</param>
         /// <exception cref="FormatException">exception thrown when parameter not numerical</exception>
-        public void ParseCommands(string cmd)
+        public KeyValuePair<string, List<int>> ParseCommands(string cmd)
         {
             var line = cmd.ToUpper().Trim(); // Tidying and standardizing the line of command
-            var splitLine = line.Split(' '); // Splitting the command and parameters [0] command and [1] param
+            var splitLine = line.Split(' '); // Splitting the command and parameters [0] command and [1] param            
 
             // If line has arguments then dividing parameters and commands accordingly
             if (splitLine.Length > 1)
@@ -51,20 +52,28 @@ namespace DrawingEnvironment
             }
             // if only command storing just command
             else { command = splitLine[0]; }
+
+            KeyValuePair<string, List<int>> result = new KeyValuePair<string, List<int>>(command, parsedParameters);
+
+            return result;
         }
 
         /// <summary>
         /// This method parses different lines of code in sequence by dividing the commands using \n new line key.
         /// </summary>
         /// <param name="commands">the commands to parse.</param>
-        public void ParseCommandMultiLine(string commands)
+        public List<KeyValuePair<string, List<int>>> ParseCommandMultiLine(string commands)
         {
+            
+            List<KeyValuePair<string, List<int>>> KeyValueList = new List<KeyValuePair<string, List<int>>>();
+
             var standardCommand = commands.Trim().ToUpper();
             var splitCommands = commands.Split('\n');
             for (int i = 0; i < splitCommands.Length; i++)
             {
-                ParseCommands(splitCommands[i]);
+               KeyValueList.Add(ParseCommands(splitCommands[i]));
             }
+            return KeyValueList;           
         }
 
         /// <summary>
