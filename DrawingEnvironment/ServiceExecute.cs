@@ -11,7 +11,10 @@ namespace DrawingEnvironment
         Graphics g;
         Pen pen;
         bool isFilling;
-        Parser parser = new Parser();
+        Parser parser;
+        // Testing new parser
+        ParserUpdate parserUpdate = new ParserUpdate();        
+        
         string[] organizedCommands;
         //ShapeFactory factory = new ShapeFactory();
 
@@ -21,15 +24,17 @@ namespace DrawingEnvironment
 
         public void executeService(string command)
         {
-            if (parser.CheckCommand(command))
+            if (parserUpdate.CheckCommand(command))
             {
-                organizedCommands = parser.ParseCommand(command);
-                if (organizedCommands[0].Equals("RECTANGLE"))
+                parserUpdate.ParseCommands(command);
+                
+                //organizedCommands = parser.ParseCommand(command);
+                if (parserUpdate.command.Equals("RECTANGLE"))
                 {
                     List<int> dimensions = new List<int>();
                     try
                     {
-                        dimensions = parser.AssigningParameters(command);
+                        dimensions = parserUpdate.parsedParameters;
                         Rectangle rect = new Rectangle(pointer.X, pointer.Y, dimensions[0], dimensions[1]);
                         if (isFilling)
                         {

@@ -136,6 +136,7 @@ namespace DrawingEnvironment
             List<string> commands = new List<string>();
 
             // TODO: It will not work as it will have another special character \r to check with TextBox.Lines method.
+            // If 
             var cmd = userInput.ToUpper().Trim().Split('\n');
             // TODO : Sorting the logic out
             foreach(var element in cmd)

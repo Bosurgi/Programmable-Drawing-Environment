@@ -1,0 +1,100 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace DrawingEnvironment
+{
+    internal class ParserUpdate
+    {
+        internal string command { get; set; }
+        internal string parameters { get; set; }
+        internal List<int> parsedParameters = new List<int>();
+
+        /// <summary>
+        /// Command parser which will divide the command and parameters passed and store them into the attributes.
+        /// </summary>
+        /// <param name="cmd">the command the user writes in the command line</param>
+        /// <exception cref="FormatException">exception thrown when parameter not numerical</exception>
+        public void ParseCommands(string cmd)
+        {
+            var line = cmd.ToUpper().Trim(); // Tidying and standardizing the line of command
+            var splitLine = line.Split(' '); // Splitting the command and parameters [0] command and [1] param
+
+            // If line has arguments then dividing parameters and commands accordingly
+            if (splitLine.Length > 1)
+            {
+                // Splitting the commands 0 command and 1 for parameters.
+                command = splitLine[0];
+                parameters = splitLine[1];
+
+                var splitParam = parameters.Split(',');
+
+                for (int i = 0; i < splitParam.Length; i++)
+                {
+                    if (CheckNumbers(splitParam[i]))
+                    {
+                        // Converting the parameters and adding them to the list
+                        parsedParameters.Add(Convert.ToInt32(splitParam[i]));
+                    }
+
+                    else { throw new FormatException("Invalid parameter parsed"); }
+                }
+            }
+            // if only command storing just command
+            else { command = splitLine[0]; }
+
+
+        }
+
+        /// <summary>
+        /// Method which checks if a parameter could be converted into a number to avoid errors.
+        /// </summary>
+        /// <param name="param">the parameter in string we are trying to convert.</param>
+        /// <returns>true if successful, false if not</returns>
+        public bool CheckNumbers(string param)
+        {
+            int number;
+            bool success = Int32.TryParse(param, out number);
+
+            if (!success)
+            {
+                return false;
+            }
+            else return true;
+        }
+
+        /// <summary>
+        /// Methods which checks if the commands is valid among the options available
+        /// </summary>
+        /// <param name="userInput">the input inserted by the user</param>
+        /// <returns>true if the command is present, and false if is not</returns>
+        public bool CheckCommand(string userInput)
+        {
+            var cmd = userInput.ToUpper().Trim().Split(' ');
+            var commands = Enum.GetNames(typeof(Command.Commands));
+            var shapes = Enum.GetNames(typeof(Shape.Shapes));
+            var availableColours = Enum.GetNames(typeof(Colors.ColorTypes));
+            try
+            {
+                if (cmd.Length > 3 || !commands.Contains(cmd[0]) && !shapes.Contains(cmd[0]) && !availableColours.Contains(cmd[0]))
+                {
+                    throw new ArgumentException("Invalid command");
+
+                }
+                else { return true; }
+            }
+
+            catch (ArgumentException)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Empty constructor to initialise the parser
+        /// </summary>
+        public ParserUpdate()
+        {
+        }
+    }
+}
