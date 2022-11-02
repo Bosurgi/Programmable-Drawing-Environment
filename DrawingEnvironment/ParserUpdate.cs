@@ -36,14 +36,17 @@ namespace DrawingEnvironment
                         // Converting the parameters and adding them to the list
                         parsedParameters.Add(Convert.ToInt32(splitParam[i]));
                     }
+                    // Handling the only command with literals parameters (ON and OFF)
+                    else if (command.Equals("FILL") || parameters != null)
+                    {
+                        parameters = splitLine[1];
+                    }
 
                     else { throw new FormatException("Invalid parameter parsed"); }
                 }
             }
             // if only command storing just command
             else { command = splitLine[0]; }
-
-
         }
 
         /// <summary>

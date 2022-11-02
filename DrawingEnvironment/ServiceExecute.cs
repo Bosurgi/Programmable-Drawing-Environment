@@ -11,11 +11,8 @@ namespace DrawingEnvironment
         Graphics g;
         Pen pen;
         bool isFilling;
-        Parser parser;
         // Testing new parser
-        ParserUpdate parserUpdate = new ParserUpdate();        
-        
-        string[] organizedCommands;
+        ParserUpdate parserUpdate = new ParserUpdate();
         //ShapeFactory factory = new ShapeFactory();
 
         CustomCursor pointer = new CustomCursor();
@@ -26,9 +23,9 @@ namespace DrawingEnvironment
         {
             if (parserUpdate.CheckCommand(command))
             {
+                // Parsing the input from the user
                 parserUpdate.ParseCommands(command);
                 
-                //organizedCommands = parser.ParseCommand(command);
                 if (parserUpdate.command.Equals("RECTANGLE"))
                 {
                     List<int> dimensions = new List<int>();
@@ -44,14 +41,14 @@ namespace DrawingEnvironment
                         rect.Draw(g);
                     }
                     catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
-                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Rectangle <width> <height>"; }
+                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Rectangle <width> , <height> NOTE: Use the comma between parameters."; }
                 }
 
-                if (organizedCommands[0].Equals("MOVETO"))
+                if (parserUpdate.command.Equals("MOVETO"))
                 {
                     try
                     {
-                        List<int> parameters = parser.AssigningParameters(command);
+                        List<int> parameters = parserUpdate.parsedParameters;
                         // assigning X and Y values to the pointer
                         pointer.UpdatePosition(parameters[0], parameters[1], g);
                         pointer.SetColour(pointer.colour);
@@ -60,15 +57,15 @@ namespace DrawingEnvironment
                         PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
                     }
                     catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
-                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Moveto <x Value> <y Value>"; }
+                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Moveto <x Value> , <y Value> NOTE: Use the comma between parameters."; }
 
                 }
                 // Command Circle draw a circle
-                if (organizedCommands[0].Equals("CIRCLE"))
+                if (parserUpdate.command.Equals("CIRCLE"))
                 {
                     try
                     {
-                        List<int> parameters = parser.AssigningParameters(command);
+                        List<int> parameters = parserUpdate.parsedParameters;
                         Circle circle = new Circle(pen.Color, pointer.X, pointer.Y, parameters[0]);
                         
                         if (isFilling)
@@ -84,11 +81,11 @@ namespace DrawingEnvironment
 
 
                 // Triangle figure
-                if (organizedCommands[0].Equals("TRIANGLE"))
+                if (parserUpdate.command.Equals("TRIANGLE"))
                 {
                     try
                     {
-                        List<int> parameters = parser.AssigningParameters(command);
+                        List<int> parameters = parserUpdate.parsedParameters;
                         Triangle tri = new Triangle(parameters[0], pointer.X, pointer.Y);
                         if (isFilling)
                         {
@@ -103,11 +100,11 @@ namespace DrawingEnvironment
 
 
                 // Command to draw a line from the pointer to a set point
-                if (organizedCommands[0].Equals("DRAWTO"))
+                if (parserUpdate.command.Equals("DRAWTO"))
                 {
                     try
                     {
-                        List<int> parameters = parser.AssigningParameters(command);
+                        List<int> parameters = parserUpdate.parsedParameters;
                         g.DrawLine(pen, pointer.X, pointer.Y, parameters[0], parameters[1]);
                         pointer.UpdatePosition(parameters[0], parameters[1], g);
                         // Update label positions
@@ -115,10 +112,10 @@ namespace DrawingEnvironment
                     }
 
                     catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
-                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - drawTo <x Value> <y Value>"; }
+                    catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - drawTo <x Value> , <y Value> NOTE: Use the comma between parameters."; }
                 }
 
-                if (organizedCommands[0].Equals("CLEAR"))
+                if (parserUpdate.command.Equals("CLEAR"))
                 {
                     try
                     {
@@ -132,7 +129,7 @@ namespace DrawingEnvironment
                     catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Clear"; }
                 }
 
-                if (organizedCommands[0].Equals("RESET"))
+                if (parserUpdate.command.Equals("RESET"))
                 {
                     try
                     {
@@ -151,42 +148,45 @@ namespace DrawingEnvironment
                 // Filling commands options
                 try
                 {
-                    if (organizedCommands[0].Equals("FILL"))
+                    if (parserUpdate.command.Equals("FILL"))
                     {
-                        if (organizedCommands[1].Equals("ON"))
+                        if (parserUpdate.parameters == null)
+                        {
+                            throw new FormatException("Invalid parameter");
+                        }
+                        else if (parserUpdate.parameters.Equals("ON"))
                         {
                             isFilling = true;
                         }
-                        else if (organizedCommands[1].Equals("OFF"))
+                        else if (parserUpdate.parameters.Equals("OFF"))
                         {
                             isFilling = false;
                         }
-                        else { throw new FormatException("Invalid parameter"); }
                     }
                 }
-                catch (FormatException) { errorLabel.Text = "Invalid Command - Fill <ON> <OFF>"; }
+                catch (FormatException) { errorLabel.Text = "Invalid Command - Fill <ON> or <OFF>"; }
                 //***************
                 //  COLOURS
                 //***************
-                if (organizedCommands[0].Equals("RED"))
+                if (parserUpdate.command.Equals("RED"))
                 {
                     pointer.SetColour(Color.Red);
                     pen.Color = Color.Red;
                 }
 
-                if (organizedCommands[0].Equals("GREEN"))
+                if (parserUpdate.command.Equals("GREEN"))
                 {
                     pointer.SetColour(Color.Green);
                     pen.Color = Color.Green;
                 }
 
-                if (organizedCommands[0].Equals("BLUE"))
+                if (parserUpdate.command.Equals("BLUE"))
                 {
                     pointer.SetColour(Color.Blue);
                     pen.Color = Color.Blue;
                 }
 
-                if (organizedCommands[0].Equals("WHITE"))
+                if (parserUpdate.command.Equals("WHITE"))
                 {
                     pointer.SetColour(Color.White);
                     pen.Color = Color.White;
@@ -237,12 +237,10 @@ namespace DrawingEnvironment
         /// <param name="errorLabel">the error label to display the messages on the form</param>
         /// <param name="LablePosition">the label which manages the current position of the cursor</param>
         /// <param name="isFilling">the current state of the filling function</param>
-        public ServiceExecute(Graphics g, Pen pen, Parser parser, string command, string[] organizedCommands, CustomCursor pointer, Label errorLabel, Label LablePosition, bool isFilling)
+        public ServiceExecute(Graphics g, Pen pen, string command, string[] organizedCommands, CustomCursor pointer, Label errorLabel, Label LablePosition, bool isFilling)
         {
             this.g = g;
             this.pen = pen;
-            this.parser = parser;
-            this.organizedCommands = organizedCommands;
             //this.factory = factory;
             this.pointer = pointer;
             this.errorLabel = errorLabel;
