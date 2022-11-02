@@ -54,6 +54,20 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
+        /// This method parses different lines of code in sequence by dividing the commands using \n new line key.
+        /// </summary>
+        /// <param name="commands">the commands to parse.</param>
+        public void ParseCommandMultiLine(string commands)
+        {
+            var standardCommand = commands.Trim().ToUpper();
+            var splitCommands = commands.Split('\n');
+            for (int i = 0; i < splitCommands.Length; i++)
+            {
+                ParseCommands(splitCommands[i]);
+            }
+        }
+
+        /// <summary>
         /// Method which checks if a parameter could be converted into a number to avoid errors.
         /// </summary>
         /// <param name="param">the parameter in string we are trying to convert.</param>
@@ -75,8 +89,8 @@ namespace DrawingEnvironment
         /// </summary>
         /// <param name="userInput">the input inserted by the user</param>
         /// <returns>true if the command is present, and false if is not</returns>
-        public bool CheckCommand(string userInput)
-        {
+        public bool isValidCommand(string userInput)
+        {           
             var cmd = userInput.ToUpper().Trim().Split(' ');
             var commands = Enum.GetNames(typeof(Command.Commands));
             var shapes = Enum.GetNames(typeof(Shape.Shapes));

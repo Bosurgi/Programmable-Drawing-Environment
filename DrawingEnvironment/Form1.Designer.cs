@@ -224,6 +224,7 @@
             // 
             // programmingArea
             // 
+            this.programmingArea.AcceptsReturn = true;
             resources.ApplyResources(this.programmingArea, "programmingArea");
             this.programmingArea.Name = "programmingArea";
             // 

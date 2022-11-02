@@ -70,12 +70,10 @@ namespace DrawingEnvironment
             if (!programmingArea.Text.Equals(""))
             {
                 cmd = programmingArea.Text;
-                parsedCommands = parser.ParseCommandLines(cmd);
             }
             else 
             { 
                 cmd = userInput.Text;
-                parsedCommands = parser.ParseCommand(cmd);
             }
 
             //string[] userCommand = parser.ParseCommand(cmd); // The array with the commands typed by the user

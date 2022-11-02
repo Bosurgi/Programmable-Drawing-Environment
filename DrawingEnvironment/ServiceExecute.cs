@@ -21,11 +21,11 @@ namespace DrawingEnvironment
 
         public void executeService(string command)
         {
-            if (parserUpdate.CheckCommand(command))
+            if (command.Contains('\n') || parserUpdate.isValidCommand(command))
             {
                 // Parsing the input from the user
-                parserUpdate.ParseCommands(command);
-                
+                parserUpdate.ParseCommandMultiLine(command);
+
                 if (parserUpdate.command.Equals("RECTANGLE"))
                 {
                     List<int> dimensions = new List<int>();
@@ -191,7 +191,7 @@ namespace DrawingEnvironment
                     pointer.SetColour(Color.White);
                     pen.Color = Color.White;
                 }
-            } // End of CheckCommand
+            } // End of isValidCommand
 
             else
             {
