@@ -168,7 +168,7 @@ namespace DrawingEnvironment
             {
                 if (command.Equals("FILL"))
                 {
-                    if (parameters == null)
+                    if (parameters.Count == 0)
                     {
                         throw new FormatException("Invalid parameter");
                     }
