@@ -12,7 +12,7 @@ namespace DrawingEnvironment
         Pen pen;
         bool isFilling;
         // Testing new parser
-        ParserUpdate parserUpdate = new ParserUpdate();
+        Parser parser = new Parser();
         //ShapeFactory factory = new ShapeFactory();
 
         CustomCursor pointer = new CustomCursor();
@@ -24,9 +24,9 @@ namespace DrawingEnvironment
 
         public void ExecuteService(string command)
         {
-            if (command.Contains('\n') || parserUpdate.isValidCommand(command))
+            if (command.Contains('\n') || parser.isValidCommand(command))
             {
-                CommandList = parserUpdate.ParseCommandMultiLine(command);
+                CommandList = parser.ParseCommandMultiLine(command);
                 int lineCounter = 0;
                 for (int i = 0; i < CommandList.Count; i++)
                 {

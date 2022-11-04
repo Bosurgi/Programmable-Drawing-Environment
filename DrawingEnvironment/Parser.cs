@@ -1,39 +1,98 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace DrawingEnvironment
 {
-    public class Parser
+    internal class Parser
     {
-        // TODO: create attributes. Adding command and parameters in the attributes and using them to parse directly inside the methods.
         /// <summary>
-        /// The command and parameters
-        /// </summary>
-        protected string command;
-        protected int[] parameters;
-        
+        /// Command property and parameters stored to be processed.
+        /// And as well a list of parsed parameters inserted if they are valid numbers.
+        /// </summary>     
+
         /// <summary>
-        /// This method takes a string and separates the elements by spacing.
+        /// Command parser which will divide the command and parameters passed and store them into the attributes.
         /// </summary>
-        /// <param name="command"> it is the string to split by spacing</param>
-        public List<string> SpaceParser(string command)
+        /// <param name="cmd">the command the user writes in the command line</param>
+        /// <exception cref="FormatException">exception thrown when parameter not numerical</exception>
+        public Command ParseCommands(string cmd)
         {
-            List<string> commands = new List<string>();
-            string[] commandArray = command.ToUpper().Split(' ');
-            foreach (var word in commandArray)
+            string command;
+            string parameters;
+            
+            var line = cmd.ToUpper().Trim(); // Tidying and standardizing the line of command
+            var splitLine = line.Split(' '); // Splitting the command and parameters [0] command and [1] param            
+            List<int> parsedParameters = new List<int>();
+
+            // If line has arguments then dividing parameters and commands accordingly
+            if (splitLine.Length > 1)
             {
-                commands.Add(word);
+                // Splitting the commands 0 command and 1 for parameters.
+                command = splitLine[0];
+                parameters = splitLine[1];
+
+                var splitParam = parameters.Split(',');
+
+                for (int i = 0; i < splitParam.Length; i++)
+                {
+                    // Handling the only command with literals parameters (ON and OFF)
+                    if (command.Equals("FILL") && parameters != null)
+                    {
+                        parameters = splitLine[1];
+                        // Sets value 1 for On and Value 0 to OFF
+                        if (parameters.Equals("ON")) { parsedParameters.Add(1); }
+                        else if(parameters.Equals("OFF")) { parsedParameters.Add(0); }
+                    }
+
+                    else if (CheckNumbers(splitParam[i]))
+                    {
+                        // Converting the parameters and adding them to the list
+                        parsedParameters.Add(Convert.ToInt32(splitParam[i]));
+                    }
+                }
             }
-            return commands;
+            // if only command storing just command
+            else { command = splitLine[0]; }
+
+            Command parsedCommand = new Command(command, parsedParameters.ToArray());
+
+            return parsedCommand;
+        }
+
+        /// <summary>
+        /// This method parses different lines of code in sequence by dividing the commands using \n new line key.
+        /// </summary>
+        /// <param name="commands">the commands to parse.</param>
+        public List<Command> ParseCommandMultiLine(string commands)
+        {
+
+            List<Command> commandList = new List<Command>();
+
+            var standardCommand = commands.Trim().ToUpper();
+            var splitCommands = commands.Split('\n');
+            for (int i = 0; i < splitCommands.Length; i++)
+            {
+                commandList.Add(ParseCommands(splitCommands[i]));
+            }
+            return commandList;
+        }
+
+        /// <summary>
+        /// Method which checks if a parameter could be converted into a number to avoid errors.
+        /// </summary>
+        /// <param name="param">the parameter in string we are trying to convert.</param>
+        /// <returns>true if successful, false if not</returns>
+        public bool CheckNumbers(string param)
+        {
+            int number;
+            bool success = Int32.TryParse(param, out number);
+
+            if (!success)
+            {
+                return false;
+            }
+            else return true;
         }
 
         /// <summary>
@@ -41,7 +100,7 @@ namespace DrawingEnvironment
         /// </summary>
         /// <param name="userInput">the input inserted by the user</param>
         /// <returns>true if the command is present, and false if is not</returns>
-        public bool CheckCommand(string userInput)
+        public bool isValidCommand(string userInput)
         {
             var cmd = userInput.ToUpper().Trim().Split(' ');
             var commands = Enum.GetNames(typeof(Command.Commands));
@@ -58,99 +117,16 @@ namespace DrawingEnvironment
             }
 
             catch (ArgumentException)
-            {               
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Method which checks if a parameter could be converted into a number to avoid errors.
-        /// </summary>
-        /// <param name="parameter">the parameter in string we are trying to convert.</param>
-        /// <returns></returns>
-        public bool CheckNumbers(string parameter)
-        {
-            int number;
-            bool success = Int32.TryParse(parameter, out number);
-
-            if (!success)
             {
                 return false;
             }
-            else return true;
         }
 
         /// <summary>
-        /// Method which validates eventual numerical parameters provided from the user
+        /// Empty constructor to initialise the parser
         /// </summary>
-        /// <param name="userInput">the input the users inserts in the command line</param>
-        /// <returns>A list of integers which represents the parameters provided</returns>
-        public List<int> AssigningParameters(string userInput)
-        {
-            List<int> parameterList = new List<int>();
-            string[] commandArray = userInput.ToUpper().Trim().Split(' ');
-
-            foreach (var element in commandArray.Skip(1))
-            {
-                if (!CheckNumbers(element))
-                {
-                    throw new FormatException();
-                }
-                else
-                {
-                    int parameter = Convert.ToInt32(element);
-                    parameterList.Add(parameter);
-                }            
-            }
-            return parameterList;
-
-        } // End of method
-
-
-        /// <summary>
-        /// Method that returns a list of elements in the command line dividing the string by the space.
-        /// This will be used to determine the commands and the parameters.
-        /// </summary>
-        /// <param name="userInput">the user input</param>
-        /// <returns>returns a list of strings with the command and parameters the user wants to execute</returns>
-        public string[] ParseCommand(string userInput)
-        {
-            List<string> command = new List<string>();
-            var cmd = userInput.ToUpper().Trim().Split(' ');
-
-            foreach(var element in cmd)
-            {
-                command.Add(element);
-            }
-
-            return command.ToArray();
-        }
-        
-        /// <summary>
-        /// Method that parses multiple lines of commands and it will determine the list of commands to run.
-        /// </summary>
-        /// <param name="userInput"></param>
-        /// <returns></returns>
-        public string[] ParseCommandLines(string userInput)
-        {
-            List<string> commands = new List<string>();
-
-            // TODO: It will not work as it will have another special character \r to check with TextBox.Lines method.
-            // If 
-            var cmd = userInput.ToUpper().Trim().Split('\n');
-            // TODO : Sorting the logic out
-            foreach(var element in cmd)
-            {
-                commands.Add(element);
-            }
-            return commands.ToArray();
-        }
-
-        // Constructor
-
         public Parser()
-        {            
+        {
         }
-
     }
 }

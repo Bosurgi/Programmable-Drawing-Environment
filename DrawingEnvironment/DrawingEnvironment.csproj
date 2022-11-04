@@ -54,7 +54,7 @@
     </Compile>
     <Compile Include="CanvasCustom.cs" />
     <Compile Include="Circle.cs" />
-    <Compile Include="ParserUpdate.cs" />
+    <Compile Include="Parser.cs" />
     <Compile Include="Colors.cs" />
     <Compile Include="Triangle.cs" />
     <Compile Include="ServiceExecute.cs" />
@@ -67,7 +67,6 @@
     <Compile Include="CommandsDraw.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="ICommand.cs" />
-    <Compile Include="Parser.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
