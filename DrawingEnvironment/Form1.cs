@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -45,11 +47,6 @@ namespace DrawingEnvironment
         }
 
         private void helpButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
@@ -119,6 +116,7 @@ namespace DrawingEnvironment
 
         private void syntaxCheckButton_Click(object sender, EventArgs e)
         {
+            // TODO: Implement syntax check
         }
 
         private void ToolsRedItem_Click(object sender, EventArgs e)
@@ -183,6 +181,30 @@ namespace DrawingEnvironment
             Shape rect = new Rectangle(pointer.X, pointer.Y, 100, 50);
             rect.SetColour(pen.Color);
             rect.Draw(areaGraphics);
+        }
+
+        private void saveFileStripItem_Click(object sender, EventArgs e)
+        {
+            // Opening the save dialog and save the file as TXT extension
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "*.txt|*.txt";
+            saveDialog.RestoreDirectory = true;
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                System.IO.File.WriteAllText(saveDialog.FileName, programmingArea.Text);
+            }
+        }
+
+        private void loadFileStripItem_Click(object sender, EventArgs e)
+        {
+            // Load dialog to load a file previously saved.
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter = "*.txt|*.txt";
+            openDialog.RestoreDirectory = true;
+            if(openDialog.ShowDialog() == DialogResult.OK)
+            {                
+                programmingArea.Text = File.ReadAllText(openDialog.FileName);
+            }
         }
     }
 }

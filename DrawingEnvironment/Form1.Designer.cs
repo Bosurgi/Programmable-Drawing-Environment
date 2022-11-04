@@ -35,8 +35,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileStripItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadFileStripItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.coloursToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolsRedItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,8 +101,8 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
-            this.loadToolStripMenuItem,
-            this.loadToolStripMenuItem1});
+            this.saveFileStripItem,
+            this.loadFileStripItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
@@ -111,16 +111,17 @@
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             resources.ApplyResources(this.saveToolStripMenuItem, "saveToolStripMenuItem");
             // 
-            // loadToolStripMenuItem
+            // saveFileStripItem
             // 
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            resources.ApplyResources(this.loadToolStripMenuItem, "loadToolStripMenuItem");
-            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            this.saveFileStripItem.Name = "saveFileStripItem";
+            resources.ApplyResources(this.saveFileStripItem, "saveFileStripItem");
+            this.saveFileStripItem.Click += new System.EventHandler(this.saveFileStripItem_Click);
             // 
-            // loadToolStripMenuItem1
+            // loadFileStripItem
             // 
-            this.loadToolStripMenuItem1.Name = "loadToolStripMenuItem1";
-            resources.ApplyResources(this.loadToolStripMenuItem1, "loadToolStripMenuItem1");
+            this.loadFileStripItem.Name = "loadFileStripItem";
+            resources.ApplyResources(this.loadFileStripItem, "loadFileStripItem");
+            this.loadFileStripItem.Click += new System.EventHandler(this.loadFileStripItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -323,8 +324,8 @@
         private System.Windows.Forms.Button helpButton;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem saveFileStripItem;
+        private System.Windows.Forms.ToolStripMenuItem loadFileStripItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem coloursToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ToolsRedItem;
