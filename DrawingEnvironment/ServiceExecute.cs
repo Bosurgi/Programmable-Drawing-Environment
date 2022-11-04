@@ -85,7 +85,7 @@ namespace DrawingEnvironment
                     PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
                 }
                 catch (FormatException) { ErrorLabel.Text = "Invalid Parameter"; }
-                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters - Moveto <x Value> , <y Value> NOTE: Use the comma between parameters."; }
+                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters at line: " + lineCounter + "\nMoveto <x Value> , <y Value> NOTE: Use the comma between parameters."; }
 
             }
             // Command Circle draw a circle
@@ -103,7 +103,7 @@ namespace DrawingEnvironment
                 }
 
                 catch (FormatException) { ErrorLabel.Text = "Invalid Parameter"; }
-                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters - Circle <Radius>"; }
+                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters at line: " + lineCounter + "\nCircle <Radius>"; }
             }
 
 
@@ -120,7 +120,7 @@ namespace DrawingEnvironment
                     tri.SetColour(pen.Color);
                     tri.Draw(g);
                 }
-                catch (FormatException) { ErrorLabel.Text = "Invalid Parameter - Triangle <Length>"; }
+                catch (FormatException) { ErrorLabel.Text = "Invalid parameters at line: " + lineCounter + "\nTriangle <Length>"; }
                 catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters - Triangle <Length>"; }
             }
 
@@ -137,7 +137,7 @@ namespace DrawingEnvironment
                 }
 
                 catch (FormatException) { ErrorLabel.Text = "Invalid Parameter"; }
-                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters - drawTo <x Value> , <y Value> NOTE: Use the comma between parameters."; }
+                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters at line: " + lineCounter + "\ndrawTo <x Value> , <y Value> NOTE: Use the comma between parameters."; }
             }
 
             if (command.Equals("CLEAR"))
@@ -152,7 +152,7 @@ namespace DrawingEnvironment
                     }
                 }
                 catch (FormatException) { ErrorLabel.Text = "Invalid Command"; }
-                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters - Clear"; }
+                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters at line: " + lineCounter + "\nClear"; }
             }
 
             if (command.Equals("RESET"))
@@ -195,7 +195,7 @@ namespace DrawingEnvironment
                     }
                 }
             }
-            catch (FormatException) { ErrorLabel.Text = "Invalid Command - Fill <ON> or <OFF>"; }
+            catch (FormatException) { ErrorLabel.Text = "Invalid parameters at line: " + lineCounter + "\nFill <ON> or <OFF>"; }
             //***************
             //  COLOURS
             //***************
