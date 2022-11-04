@@ -191,7 +191,7 @@ namespace DrawingEnvironment
             saveDialog.RestoreDirectory = true;
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
-                System.IO.File.WriteAllText(saveDialog.FileName, programmingArea.Text);
+                File.WriteAllText(saveDialog.FileName, programmingArea.Text);
             }
         }
 
