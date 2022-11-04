@@ -112,6 +112,7 @@ namespace DrawingEnvironment
             Graphics areaGraphics = drawingArea.CreateGraphics();
             areaGraphics.Clear(Color.Black);
             pointer.Draw(areaGraphics);
+            errorLabel.Text = "";
         }
 
         private void syntaxCheckButton_Click(object sender, EventArgs e)

@@ -23,22 +23,29 @@ namespace DrawingEnvironment
         List<Command> CommandList;
         int lineCounter = 1;
 
+        /// <summary>
+        /// Method which allows the user input to be parsed and executed if there are no errors.
+        /// </summary>
+        /// <param name="command">the user input</param>
         public void ExecuteService(string command)
         {
             try
             {
+                // If no input throwing an error.
                 if (command == null)
                 {
                     throw new ArgumentException("Insert a valid command");
                 }
 
                 else
-                {                   
+                {    
+                    // Parsing the commands from the user
                     CommandList = parser.ParseCommandMultiLine(command);
                     for (int i = 0; i < CommandList.Count; i++)
                     {
                         if (parser.isValidCommand(CommandList[i].name))
-                        {                         
+                        {   
+                            // Executing the command with Execute method
                             Execute(CommandList[i].name, CommandList[i].parameters.ToList());
                             lineCounter++;
                         }
@@ -140,6 +147,7 @@ namespace DrawingEnvironment
                 catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters at line: " + lineCounter + "\ndrawTo <x Value> , <y Value> NOTE: Use the comma between parameters."; }
             }
 
+            // Clear function.
             if (command.Equals("CLEAR"))
             {
                 try
@@ -155,6 +163,7 @@ namespace DrawingEnvironment
                 catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters at line: " + lineCounter + "\nClear"; }
             }
 
+            // Reset Function
             if (command.Equals("RESET"))
             {
                 try
