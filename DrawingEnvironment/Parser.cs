@@ -6,16 +6,12 @@ namespace DrawingEnvironment
 {
     internal class Parser
     {
-        /// <summary>
-        /// Command property and parameters stored to be processed.
-        /// And as well a list of parsed parameters inserted if they are valid numbers.
-        /// </summary>     
-
-        /// <summary>
+         /// <summary>
         /// Command parser which will divide the command and parameters passed and store them into the attributes.
         /// </summary>
         /// <param name="cmd">the command the user writes in the command line</param>
         /// <exception cref="FormatException">exception thrown when parameter not numerical</exception>
+        /// <returns>the command with its name and parameter stored</returns>
         public Command ParseCommands(string cmd)
         {
             string command;
@@ -63,7 +59,8 @@ namespace DrawingEnvironment
         /// <summary>
         /// This method parses different lines of code in sequence by dividing the commands using \n new line key.
         /// </summary>
-        /// <param name="commands">the commands to parse.</param>
+        /// <param name="commands">the user input</param>
+        /// <returns>a list of different commands with their parameters.</returns>
         public List<Command> ParseCommandMultiLine(string commands)
         {
 

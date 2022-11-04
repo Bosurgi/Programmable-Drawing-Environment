@@ -11,7 +11,7 @@ namespace DrawingEnvironment
         Graphics g;
         Pen pen;
         bool isFilling;
-        // Testing new parser
+        
         Parser parser = new Parser();
         //ShapeFactory factory = new ShapeFactory();
 
@@ -21,23 +21,33 @@ namespace DrawingEnvironment
 
         TextBox programmingArea;
         List<Command> CommandList;
+        int lineCounter = 1;
 
         public void ExecuteService(string command)
         {
-            if (command.Contains('\n') || parser.isValidCommand(command))
+            try
             {
-                CommandList = parser.ParseCommandMultiLine(command);
-                int lineCounter = 0;
-                for (int i = 0; i < CommandList.Count; i++)
+                if (command == null)
                 {
-                    lineCounter += 1;
-                    Execute(CommandList[i].name, CommandList[i].parameters.ToList());
-                }         
+                    throw new ArgumentException("Insert a valid command");
+                }
+
+                else
+                {                   
+                    CommandList = parser.ParseCommandMultiLine(command);
+                    for (int i = 0; i < CommandList.Count; i++)
+                    {
+                        if (parser.isValidCommand(CommandList[i].name))
+                        {                         
+                            Execute(CommandList[i].name, CommandList[i].parameters.ToList());
+                            lineCounter++;
+                        }
+                        else { throw new FormatException("Error at line: " + lineCounter + "\n" + CommandList[i].name + " is not a valid command."); }
+                    }
+                }
             }
-            else
-            {
-                throw new FormatException("Invalid command at line: ");
-            }
+            catch (ArgumentException ex) { ErrorLabel.Text = ex.Message; }
+            catch(FormatException ex) { ErrorLabel.Text = ex.Message; }
         }
 
         /// <summary>
@@ -60,7 +70,7 @@ namespace DrawingEnvironment
                     rect.Draw(g);
                 }
                 catch (FormatException) { ErrorLabel.Text = "Invalid Parameter"; }
-                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters - Rectangle <width> , <height> NOTE: Use the comma between parameters."; }
+                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters at line:  " + lineCounter + "\nRectangle <width> , <height> NOTE: Use the comma between parameters."; }
             }
 
             if (command.Equals("MOVETO"))
@@ -138,6 +148,7 @@ namespace DrawingEnvironment
                         // Refreshing the canvas without deleting the pointer.                 
                         g.Clear(Color.Black);
                         pointer.Draw(g);
+                        ErrorLabel.Text = "";
                     }
                 }
                 catch (FormatException) { ErrorLabel.Text = "Invalid Command"; }
@@ -210,7 +221,7 @@ namespace DrawingEnvironment
             {
                 pointer.SetColour(Color.White);
                 pen.Color = Color.White;
-            }        
+            }
         } // End of Method
 
         /// <summary>

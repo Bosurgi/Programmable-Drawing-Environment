@@ -1,5 +1,6 @@
 ﻿using DrawingEnvironment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace AseTests
 {
@@ -78,10 +79,10 @@ namespace AseTests
         }
 
         [TestMethod]
-        public void isNotValid_withValidCommandsLowerCase()
+        public void isNotValid_withValidCommandsUpperCase()
         {
             // Set up
-            var input = "dra 10,40";
+            var input = "DRA 10,40";
 
             // Act
             Command command = parser.ParseCommands(input);
@@ -127,6 +128,96 @@ namespace AseTests
             Assert.IsTrue(parser.isValidCommand(input));
             Assert.AreEqual(actualCommand.name, expectedCommand.name);
             Assert.AreEqual(actualCommand.parameters[0], expectedCommand.parameters[0]);
+        }
+
+        [TestMethod]
+        public void parseCommand_withInvalidFillOption()
+        {
+            // Set up
+            var input = "Fill c";
+            int[] parameter = { };
+
+            // Act
+            Command actualCommand = parser.ParseCommands(input);
+            Command expectedCommand = new Command("FILL", parameter);
+
+            // Assert
+            Assert.IsNotNull(actualCommand);
+            Assert.IsTrue(parser.isValidCommand(input));
+            Assert.AreEqual(actualCommand.name, expectedCommand.name);
+            Assert.IsTrue(actualCommand.parameters.Length == 0);
+        }
+
+        [TestMethod]
+        public void parseMultipleCommands_lowerCase()
+        {
+            // Set up
+            var input = "drawto 10,30\nrectangle 10,20\ncircle 20";
+
+            Command drawCommand = new Command("DRAWTO", new int[] { 10, 30 });
+            Command rectangleCommand = new Command("RECTANGLE", new int[] { 10, 20 });
+            Command circleCommand = new Command("CIRCLE", new int[] { 20 });
+
+            // Act
+            List<Command> actualCommand = parser.ParseCommandMultiLine(input);
+
+            // Assert
+            // Testing if it returns a list of commands
+            Assert.IsNotNull(actualCommand);
+            Assert.IsInstanceOfType(actualCommand, typeof(List<Command>));
+            // Testing the name of the commands
+            Assert.AreEqual(actualCommand[0].name, drawCommand.name);
+            Assert.AreEqual(actualCommand[1].name, rectangleCommand.name);
+            Assert.AreEqual(actualCommand[2].name, circleCommand.name);
+            // Testing the parameters
+            Assert.IsNotNull(actualCommand);
+            Assert.AreEqual(actualCommand[0].parameters[0], drawCommand.parameters[0]);
+            Assert.AreEqual(actualCommand[0].parameters[1], drawCommand.parameters[1]);
+            Assert.AreEqual(actualCommand[1].parameters[0], rectangleCommand.parameters[0]);
+            Assert.AreEqual(actualCommand[1].parameters[1], rectangleCommand.parameters[1]);
+            Assert.AreEqual(actualCommand[2].parameters[0], circleCommand.parameters[0]);
+            // Passing the parameters manually for each parameter
+            Assert.AreEqual(actualCommand[0].parameters[0], 10);
+            Assert.AreEqual(actualCommand[0].parameters[1], 30);
+            Assert.AreEqual(actualCommand[1].parameters[0], 10);
+            Assert.AreEqual(actualCommand[1].parameters[1], 20);
+            Assert.AreEqual(actualCommand[2].parameters[0], 20);
+        }
+
+        [TestMethod]
+        public void parseMultipleCommands_UpperCase()
+        {
+            // Set up
+            var input = "DRAWTO 10,30\nRECTANGLE 10,20\nCIRCLE 20";
+
+            Command drawCommand = new Command("DRAWTO", new int[] { 10, 30 });
+            Command rectangleCommand = new Command("RECTANGLE", new int[] { 10, 20 });
+            Command circleCommand = new Command("CIRCLE", new int[] { 20 });
+
+            // Act
+            List<Command> actualCommand = parser.ParseCommandMultiLine(input);
+
+            // Assert
+            // Testing if it returns a list of commands
+            Assert.IsNotNull(actualCommand);
+            Assert.IsInstanceOfType(actualCommand, typeof(List<Command>));
+            // Testing the name of the commands
+            Assert.AreEqual(actualCommand[0].name, drawCommand.name);
+            Assert.AreEqual(actualCommand[1].name, rectangleCommand.name);
+            Assert.AreEqual(actualCommand[2].name, circleCommand.name);
+            // Testing the parameters
+            Assert.IsNotNull(actualCommand);
+            Assert.AreEqual(actualCommand[0].parameters[0], drawCommand.parameters[0]);
+            Assert.AreEqual(actualCommand[0].parameters[1], drawCommand.parameters[1]);
+            Assert.AreEqual(actualCommand[1].parameters[0], rectangleCommand.parameters[0]);
+            Assert.AreEqual(actualCommand[1].parameters[1], rectangleCommand.parameters[1]);
+            Assert.AreEqual(actualCommand[2].parameters[0], circleCommand.parameters[0]);
+            // Passing the parameters manually for each parameter
+            Assert.AreEqual(actualCommand[0].parameters[0], 10);
+            Assert.AreEqual(actualCommand[0].parameters[1], 30);
+            Assert.AreEqual(actualCommand[1].parameters[0], 10);
+            Assert.AreEqual(actualCommand[1].parameters[1], 20);
+            Assert.AreEqual(actualCommand[2].parameters[0], 20);
         }
     }
 }
