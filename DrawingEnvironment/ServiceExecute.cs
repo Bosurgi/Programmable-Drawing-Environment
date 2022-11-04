@@ -16,31 +16,35 @@ namespace DrawingEnvironment
         //ShapeFactory factory = new ShapeFactory();
 
         CustomCursor pointer = new CustomCursor();
-        Label errorLabel = new Label();
+        Label ErrorLabel = new Label();
         Label PositionLabel;
 
         TextBox programmingArea;
-        List<KeyValuePair<string, List<int>>> keyValuePairs;
+        List<Command> CommandList;
 
-        public void executeService(string command)
+        public void ExecuteService(string command)
         {
             if (command.Contains('\n') || parserUpdate.isValidCommand(command))
             {
-                keyValuePairs = parserUpdate.ParseCommandMultiLine(command);
+                CommandList = parserUpdate.ParseCommandMultiLine(command);
                 int lineCounter = 0;
-                for (int i = 0; i < keyValuePairs.Count; i++)
+                for (int i = 0; i < CommandList.Count; i++)
                 {
                     lineCounter += 1;
-                    Execute(keyValuePairs[i].Key, keyValuePairs[i].Value);
-                }
-                
+                    Execute(CommandList[i].name, CommandList[i].parameters.ToList());
+                }         
             }
             else
             {
                 throw new FormatException("Invalid command at line: ");
             }
-        } // If uncomment remove this
+        }
 
+        /// <summary>
+        /// Methods which takes a command name and a list of parameters to execute the right command based on command name and its parameters.
+        /// </summary>
+        /// <param name="command">the name of the command</param>
+        /// <param name="parameters">the list of parameters passed</param>
         public void Execute(string command, List<int> parameters)
         {
             if (command.Equals("RECTANGLE"))
@@ -50,13 +54,13 @@ namespace DrawingEnvironment
                     Rectangle rect = new Rectangle(pointer.X, pointer.Y, parameters[0], parameters[1]);
                     if (isFilling)
                     {
-                        setFill(rect);
+                        SetFill(rect);
                     }
                     rect.SetColour(pen.Color);
                     rect.Draw(g);
                 }
-                catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
-                catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Rectangle <width> , <height> NOTE: Use the comma between parameters."; }
+                catch (FormatException) { ErrorLabel.Text = "Invalid Parameter"; }
+                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters - Rectangle <width> , <height> NOTE: Use the comma between parameters."; }
             }
 
             if (command.Equals("MOVETO"))
@@ -70,8 +74,8 @@ namespace DrawingEnvironment
                     // Updating the cursor
                     PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
                 }
-                catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
-                catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Moveto <x Value> , <y Value> NOTE: Use the comma between parameters."; }
+                catch (FormatException) { ErrorLabel.Text = "Invalid Parameter"; }
+                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters - Moveto <x Value> , <y Value> NOTE: Use the comma between parameters."; }
 
             }
             // Command Circle draw a circle
@@ -83,13 +87,13 @@ namespace DrawingEnvironment
 
                     if (isFilling)
                     {
-                        setFill(circle);
+                        SetFill(circle);
                     }
                     circle.Draw(g);
                 }
 
-                catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
-                catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Circle <Radius>"; }
+                catch (FormatException) { ErrorLabel.Text = "Invalid Parameter"; }
+                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters - Circle <Radius>"; }
             }
 
 
@@ -101,13 +105,13 @@ namespace DrawingEnvironment
                     Triangle tri = new Triangle(parameters[0], pointer.X, pointer.Y);
                     if (isFilling)
                     {
-                        setFill(tri);
+                        SetFill(tri);
                     }
                     tri.SetColour(pen.Color);
                     tri.Draw(g);
                 }
-                catch (FormatException) { errorLabel.Text = "Invalid Parameter - Triangle <Length>"; }
-                catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Triangle <Length>"; }
+                catch (FormatException) { ErrorLabel.Text = "Invalid Parameter - Triangle <Length>"; }
+                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters - Triangle <Length>"; }
             }
 
 
@@ -122,8 +126,8 @@ namespace DrawingEnvironment
                     PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
                 }
 
-                catch (FormatException) { errorLabel.Text = "Invalid Parameter"; }
-                catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - drawTo <x Value> , <y Value> NOTE: Use the comma between parameters."; }
+                catch (FormatException) { ErrorLabel.Text = "Invalid Parameter"; }
+                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters - drawTo <x Value> , <y Value> NOTE: Use the comma between parameters."; }
             }
 
             if (command.Equals("CLEAR"))
@@ -136,8 +140,8 @@ namespace DrawingEnvironment
                         pointer.Draw(g);
                     }
                 }
-                catch (FormatException) { errorLabel.Text = "Invalid Command"; }
-                catch (ArgumentOutOfRangeException) { errorLabel.Text = "Invalid parameters - Clear"; }
+                catch (FormatException) { ErrorLabel.Text = "Invalid Command"; }
+                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters - Clear"; }
             }
 
             if (command.Equals("RESET"))
@@ -149,11 +153,14 @@ namespace DrawingEnvironment
                         pointer.X = 0;
                         pointer.Y = 0;
                         PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
+                        isFilling = false;
                         g.Clear(Color.Black);
+                        pen.Color = Color.White;
+                        pointer.SetColour(pen.Color);
                         pointer.Draw(g);
                     }
                 }
-                catch (FormatException) { errorLabel.Text = "Invalid Command"; }
+                catch (FormatException) { ErrorLabel.Text = "Invalid Command"; }
             }
 
             // Filling commands options
@@ -161,21 +168,23 @@ namespace DrawingEnvironment
             {
                 if (command.Equals("FILL"))
                 {
-                    if (parserUpdate.parameters == null)
+                    if (parameters == null)
                     {
                         throw new FormatException("Invalid parameter");
                     }
-                    else if (parserUpdate.parameters.Equals("ON"))
+                    // If command 1 it should be ON
+                    else if (parameters[0] == 1)
                     {
                         isFilling = true;
                     }
-                    else if (parserUpdate.parameters.Equals("OFF"))
+                    // If command 0 = it should be OFF
+                    else if (parameters[0] == 0)
                     {
                         isFilling = false;
                     }
                 }
             }
-            catch (FormatException) { errorLabel.Text = "Invalid Command - Fill <ON> or <OFF>"; }
+            catch (FormatException) { ErrorLabel.Text = "Invalid Command - Fill <ON> or <OFF>"; }
             //***************
             //  COLOURS
             //***************
@@ -201,16 +210,14 @@ namespace DrawingEnvironment
             {
                 pointer.SetColour(Color.White);
                 pen.Color = Color.White;
-            }
-
-            else { errorLabel.Text = "Invalid Command"; }
+            }        
         } // End of Method
 
         /// <summary>
         /// Setting a shape to be fillable changing its attribute.
         /// </summary>
         /// <param name="shape">the shape we want to change the parameter</param>
-        private void setFill(Shape shape)
+        private void SetFill(Shape shape)
         {
             if (isFilling)
             {
@@ -223,7 +230,7 @@ namespace DrawingEnvironment
         /// Getter method to retrieve the status of the Filling flag.
         /// </summary>
         /// <returns>true if needs filling, false if it doesn't</returns>
-        internal bool getFill()
+        internal bool GetFill()
         {
             if (isFilling)
             {
@@ -248,7 +255,7 @@ namespace DrawingEnvironment
             this.pen = pen;
             //this.factory = factory;
             this.pointer = pointer;
-            this.errorLabel = errorLabel;
+            this.ErrorLabel = errorLabel;
             PositionLabel = LablePosition;
             this.isFilling = isFilling;
             this.programmingArea = programmingArea;

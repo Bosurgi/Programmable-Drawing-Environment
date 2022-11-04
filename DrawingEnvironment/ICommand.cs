@@ -11,6 +11,6 @@ namespace DrawingEnvironment
     /// </summary>
     interface ICommand
     {
-        bool Execute();
+
     }
 }

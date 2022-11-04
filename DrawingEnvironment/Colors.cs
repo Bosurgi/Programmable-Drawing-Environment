@@ -8,11 +8,6 @@ namespace DrawingEnvironment
 {
     abstract class Colors : Command
     {
-        public override bool Execute()
-        {
-            throw new NotImplementedException();
-        }
-
         public enum ColorTypes
         {
             RED,

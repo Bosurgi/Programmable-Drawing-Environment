@@ -41,8 +41,7 @@ namespace DrawingEnvironment
             pointer.Draw(Graphics.FromImage(OutputBitmap));
             PositionLabel.Text = "X: " + pointer.X.ToString() + " - Y: " + pointer.Y.ToString();
             LabelFill.Text = "Fill: " + isFilling.ToString();
-            pen = new Pen(penColour, 1);
-            
+            pen = new Pen(penColour, 1);            
         }
 
         private void helpButton_Click(object sender, EventArgs e)
@@ -83,8 +82,8 @@ namespace DrawingEnvironment
 
             // Initialising the service which will manage all the input and execution of commands
             ServiceExecute ex = new ServiceExecute(areaGraphics, pen, cmd, pointer, errorLabel, PositionLabel, isFilling, programmingArea);
-            ex.executeService(cmd); // Executing the service
-            isFilling = ex.getFill(); // Updating form filling flag
+            ex.ExecuteService(cmd); // Executing the service
+            isFilling = ex.GetFill(); // Updating form filling flag
             userInput.Text = ""; // Resetting the user input text field to empty text
             BoxCurrentColor.BackColor = pointer.colour; // Updating the color of the current colour picture box
             LabelFill.Text = "Fill: " + isFilling.ToString();

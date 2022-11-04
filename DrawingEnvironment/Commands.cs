@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace DrawingEnvironment
 {
-    public abstract class Command : ICommand
+    public class Command : ICommand
     {
         /// <summary>
         /// Command class properties, names and parameters.
         /// </summary>
-        protected string name { get; set; }
-        protected string[] parameters { get; set; }
-
-        public abstract bool Execute();
+        internal string name { get; set; }
+        internal int[] parameters { get; set; }
 
         /// <summary>
         /// Enumerator for commands available
@@ -38,10 +36,10 @@ namespace DrawingEnvironment
         /// </summary>
         /// <param name="name">the name of the command</param>
         /// <param name="parameters">the parameters passed for the command</param>
-        public Command(string name, string[] parameters)
+        public Command(string name, int[] parameters)
         {
-            name = this.name;
-            parameters = this.parameters;
+            this.name = name;
+            this.parameters = parameters;
         }
 
         /// <summary>

@@ -18,7 +18,7 @@ namespace DrawingEnvironment
     {
         // Attributes
         string name;
-        string[] parameters;
+        int[] parameters;
         bool execute = false;
         // List containing available commands
         List<string> commandList = new List<string>
@@ -28,7 +28,7 @@ namespace DrawingEnvironment
         };
 
         // Constructor
-        public CommandsDraw(string name, string[] parameters, Graphics g) : base(name, parameters)
+        public CommandsDraw(string name, int[] parameters, Graphics g) : base(name, parameters)
         {
             name = this.name;
             parameters = this.parameters;
@@ -38,11 +38,6 @@ namespace DrawingEnvironment
         public CommandsDraw()
         {
 
-        }
-
-        public override bool Execute()
-        {
-            return this.execute = true;
         }
 
         /// <summary>

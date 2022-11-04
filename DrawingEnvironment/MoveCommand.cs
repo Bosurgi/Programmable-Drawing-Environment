@@ -31,6 +31,7 @@ namespace DrawingEnvironment
                 MessageBox.Show("Invalid Parameters. Insert a valid number");
             }
         }
+        /*
         public override bool Execute()
         {
             if(position.GetType() == typeof(int))
@@ -39,5 +40,6 @@ namespace DrawingEnvironment
             }
             else { return false; }
         }
+        */
     }
 }

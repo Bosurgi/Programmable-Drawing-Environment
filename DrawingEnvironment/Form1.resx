@@ -454,13 +454,13 @@
     <value>6</value>
   </data>
   <data name="errorLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 337</value>
+    <value>9, 327</value>
   </data>
   <data name="errorLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 59</value>
+    <value>100, 23</value>
   </data>
   <data name="errorLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;errorLabel.Name" xml:space="preserve">
     <value>errorLabel</value>
