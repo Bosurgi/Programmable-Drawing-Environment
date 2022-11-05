@@ -32,7 +32,7 @@ namespace DrawingEnvironment
             try
             {
                 // If no input throwing an error.
-                if (command == null)
+                if (command == "")
                 {
                     throw new ArgumentException("Insert a valid command");
                 }
@@ -100,12 +100,13 @@ namespace DrawingEnvironment
             {
                 try
                 {
-                    Circle circle = new Circle(pen.Color, pointer.X, pointer.Y, parameters[0]);
+                    Circle circle = new Circle(pointer.X, pointer.Y, parameters[0]);
 
                     if (isFilling)
                     {
                         SetFill(circle);
                     }
+                    circle.SetColour(pen.Color);
                     circle.Draw(g);
                 }
 
@@ -269,7 +270,7 @@ namespace DrawingEnvironment
         /// <param name="errorLabel">the error label to display the messages on the form</param>
         /// <param name="LablePosition">the label which manages the current position of the cursor</param>
         /// <param name="isFilling">the current state of the filling function</param>
-        public ServiceExecute(Graphics g, Pen pen, string command, CustomCursor pointer, Label errorLabel, Label LablePosition, bool isFilling, TextBox programmingArea)
+        public ServiceExecute(Graphics g, Pen pen, CustomCursor pointer, Label errorLabel, Label LablePosition, bool isFilling, TextBox programmingArea)
         {
             this.g = g;
             this.pen = pen;

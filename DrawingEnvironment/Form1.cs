@@ -28,8 +28,6 @@ namespace DrawingEnvironment
         // Pen in use and default color
         Color penColour = Color.White;
         Pen pen;
-        // The brush to use it for filling shapes
-        Brush brush;
         bool isFilling = false;
 
         /// <summary>
@@ -70,15 +68,11 @@ namespace DrawingEnvironment
             { 
                 cmd = userInput.Text;
             }
-
-            //string[] userCommand = parser.ParseCommand(cmd); // The array with the commands typed by the user
-
-
             Graphics areaGraphics = drawingArea.CreateGraphics(); // The area where to draw                             
             areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;         
 
             // Initialising the service which will manage all the input and execution of commands
-            ServiceExecute ex = new ServiceExecute(areaGraphics, pen, cmd, pointer, errorLabel, PositionLabel, isFilling, programmingArea);
+            ServiceExecute ex = new ServiceExecute(areaGraphics, pen, pointer, errorLabel, PositionLabel, isFilling, programmingArea);
             ex.ExecuteService(cmd); // Executing the service
             isFilling = ex.GetFill(); // Updating form filling flag
             userInput.Text = ""; // Resetting the user input text field to empty text

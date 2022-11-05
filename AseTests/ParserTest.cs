@@ -7,8 +7,17 @@ namespace AseTests
     [TestClass]
     public class ParserTest
     {
+        /// <summary>
+        /// This test will test the Parser class present in the Drawing environment program.
+        /// It will test the ParseCommand, Multiline parser, isValid method.
+        /// </summary>
         DrawingEnvironment.Parser parser = new Parser();
-        [TestMethod]
+        
+        /// <summary>
+        /// Testing if a command is a valid command.
+        /// If it is it will return true, if not false
+        /// </summary>
+        [TestMethod]       
         public void TestValidating()
         {
             // Setting up
@@ -27,6 +36,9 @@ namespace AseTests
             Assert.AreEqual(command.name, "MOVETO");
         }
 
+        /// <summary>
+        /// Testing the standardization of the command. It will be passed a lowercase command.
+        /// </summary>
         [TestMethod]
         public void isValid_withValidCommandsLowerCase()
         {
@@ -43,6 +55,9 @@ namespace AseTests
             Assert.IsTrue(actual);
         }
 
+        /// <summary>
+        /// Testing the standardization of the command. It will be passed an uppercase command.
+        /// </summary>
         [TestMethod]
         public void isValid_withValidCommandsUpperCase()
         {
@@ -59,6 +74,9 @@ namespace AseTests
             Assert.IsTrue(actual);
         }
 
+        /// <summary>
+        /// Testing if the parser recognize an invalid command.
+        /// </summary>
         [TestMethod]
         public void isNotValid_withCommandLowerCase()
         {
@@ -78,6 +96,9 @@ namespace AseTests
             Assert.AreEqual(command.parameters[1], expectedParameters[1]);
         }
 
+        /// <summary>
+        /// Testing if the parser recognize an invalid command with uppercase command.
+        /// </summary>
         [TestMethod]
         public void isNotValid_withValidCommandsUpperCase()
         {
@@ -94,6 +115,9 @@ namespace AseTests
             Assert.IsFalse(actual);
         }
 
+        /// <summary>
+        /// Testing if the parser sets up the Fill on option correctly.
+        /// </summary>
         [TestMethod]
         public void parseCommand_withFillOptionOn()
         {
@@ -111,7 +135,9 @@ namespace AseTests
             Assert.AreEqual(actualCommand.name, expectedCommand.name);
             Assert.AreEqual(actualCommand.parameters[0], expectedCommand.parameters[0]);
         }
-
+        /// <summary>
+        /// Testing if the parser sets up the Fill off option correctly.
+        /// </summary>
         [TestMethod]
         public void parseCommand_withFillOptionOff()
         {
@@ -130,6 +156,9 @@ namespace AseTests
             Assert.AreEqual(actualCommand.parameters[0], expectedCommand.parameters[0]);
         }
 
+        /// <summary>
+        /// Testing if the parser sets up an invalid parameter in fill command.
+        /// </summary>
         [TestMethod]
         public void parseCommand_withInvalidFillOption()
         {
@@ -148,6 +177,9 @@ namespace AseTests
             Assert.IsTrue(actualCommand.parameters.Length == 0);
         }
 
+        /// <summary>
+        /// Testing if the parser is able to parse multiple lines of commands.
+        /// </summary>
         [TestMethod]
         public void parseMultipleCommands_lowerCase()
         {
@@ -184,6 +216,9 @@ namespace AseTests
             Assert.AreEqual(actualCommand[2].parameters[0], 20);
         }
 
+        /// <summary>
+        /// Testing if the parser is able to parse multiple lines of commands in uppercase
+        /// </summary>
         [TestMethod]
         public void parseMultipleCommands_UpperCase()
         {
