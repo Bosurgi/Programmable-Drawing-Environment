@@ -35,7 +35,6 @@ namespace DrawingEnvironment
                     // Handling the only command with literals parameters (ON and OFF)
                     if (command.Equals("FILL") && parameters != null)
                     {
-                        parameters = splitLine[1];
                         // Sets value 1 for On and Value 0 to OFF
                         if (parameters.Equals("ON")) { parsedParameters.Add(1); }
                         else if(parameters.Equals("OFF")) { parsedParameters.Add(0); }
@@ -46,12 +45,6 @@ namespace DrawingEnvironment
                         // Converting the parameters and adding them to the list
                         parsedParameters.Add(Convert.ToInt32(splitParam[i]));
                     }
-                    /*
-                    else if (!CheckNumbers(splitParam[i]))
-                    {
-                        throw new ArgumentException("Invalid parameter");
-                    }
-                    */
                 }
             }
             // if only command storing just command
@@ -74,6 +67,7 @@ namespace DrawingEnvironment
 
             var standardCommand = commands.Trim().ToUpper();
             var splitCommands = commands.Split('\n');
+            
             for (int i = 0; i < splitCommands.Length; i++)
             {
                 commandList.Add(ParseCommands(splitCommands[i]));

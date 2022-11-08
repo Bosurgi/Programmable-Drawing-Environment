@@ -23,7 +23,7 @@ namespace AseTests
         /// Initialising the component needed for the service to be initialised.
         /// </summary>
         Graphics g;
-        Pen pen;
+        Pen pen = new Pen(Color.White);
         Parser parser = new Parser();
         CustomCursor cursor = new CustomCursor();
         Label ErrorLabel = new Label();
@@ -153,19 +153,73 @@ namespace AseTests
         [TestMethod]
 
         /// Testing Rectangle
-        public void executeCommand_Rectangle()
+        public void executeCommand_Rectangle_withWrongInput()
         {
             // Set up
-            Rectangle rect;
             g = pictureBox.CreateGraphics();
             ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
-            Command createRectangle = new Command("RECTANGLE", new int[] { 10, 30 });
-            
-            // Act
-            ex.Execute(createRectangle.name, createRectangle.parameters);
+            Command rectCommand = parser.ParseCommands("Rectangle 40,x");
 
-            // Assert
-            
+            // Act
+            try
+            {
+                //ex.Execute(rectCommand.name, rectCommand.parameters);
+                ex.Execute(rectCommand);
+            }
+
+            catch(ArgumentOutOfRangeException e)
+            {
+                // Assert
+                Assert.AreEqual("Invalid parameters at line:  1\nRectangle <width> , <height> NOTE: Use the comma between parameters.", e.Message);
+            }                                
+        }
+
+        [TestMethod]
+
+        /// Testing Rectangle
+        public void executeCommand_Rectangle_withEmptyInput()
+        {
+            // Set up
+            g = pictureBox.CreateGraphics();
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            Command rectCommand = parser.ParseCommands("Rectangle ");
+
+            // Act
+            try
+            {
+                //ex.Execute(rectCommand.name, rectCommand.parameters);
+                ex.Execute(rectCommand);
+            }
+
+            catch (ArgumentOutOfRangeException e)
+            {
+                // Assert
+                Assert.AreEqual("Invalid parameters at line:  1\nRectangle <width> , <height> NOTE: Use the comma between parameters.", e.Message);
+            }
+        }
+
+        [TestMethod]
+
+        /// Testing Circle
+        public void executeCommand_Circle_withWrongInput()
+        {
+            // Set up
+            g = pictureBox.CreateGraphics();
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            Command rectCommand = parser.ParseCommands("Circle x");
+
+            // Act
+            try
+            {
+                //ex.Execute(rectCommand.name, rectCommand.parameters);
+                ex.Execute(rectCommand);
+            }
+
+            catch (ArgumentOutOfRangeException e)
+            {
+                // Assert
+                Assert.AreEqual("Invalid parameters at line:  1\nRectangle <width> , <height> NOTE: Use the comma between parameters.", e.Message);
+            }
         }
     }
 }
