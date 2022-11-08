@@ -46,6 +46,12 @@ namespace DrawingEnvironment
                         // Converting the parameters and adding them to the list
                         parsedParameters.Add(Convert.ToInt32(splitParam[i]));
                     }
+                    /*
+                    else if (!CheckNumbers(splitParam[i]))
+                    {
+                        throw new ArgumentException("Invalid parameter");
+                    }
+                    */
                 }
             }
             // if only command storing just command

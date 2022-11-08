@@ -77,7 +77,7 @@ namespace DrawingEnvironment
                     rect.Draw(g);
                 }
                 catch (FormatException) { ErrorLabel.Text = "Invalid Parameter"; }
-                catch (ArgumentOutOfRangeException) { ErrorLabel.Text = "Invalid parameters at line:  " + lineCounter + "\nRectangle <width> , <height> NOTE: Use the comma between parameters."; }
+                catch (ArgumentException) { ErrorLabel.Text = "Invalid parameters at line:  " + lineCounter + "\nRectangle <width> , <height> NOTE: Use the comma between parameters."; }
             }
 
             if (command.Equals("MOVETO"))
@@ -189,7 +189,7 @@ namespace DrawingEnvironment
             {
                 if (command.Equals("FILL"))
                 {
-                    if (parameters.Count == 0)
+                    if (parameters.Length == 0)
                     {
                         throw new FormatException("Invalid parameter");
                     }
