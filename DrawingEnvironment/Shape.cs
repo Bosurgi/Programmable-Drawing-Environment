@@ -48,7 +48,7 @@ namespace DrawingEnvironment
         /// </summary>
         /// <param name="color">the color of the shape</param>
         /// <param name="parametersList">List of parameters with index 0 as X and index 1 as Y</param>
-        public virtual void Set (Color color, params int[] parametersList)
+        public virtual void Set(Color color, params int[] parametersList)
         {
             pen = new Pen(color);
             brush = new SolidBrush(color);

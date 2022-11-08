@@ -64,8 +64,6 @@ namespace DrawingEnvironment
         {
 
             List<Command> commandList = new List<Command>();
-
-            var standardCommand = commands.Trim().ToUpper();
             var splitCommands = commands.Split('\n');
             
             for (int i = 0; i < splitCommands.Length; i++)

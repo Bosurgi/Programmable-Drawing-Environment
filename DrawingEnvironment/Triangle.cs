@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 
 namespace DrawingEnvironment
 {
@@ -17,7 +18,6 @@ namespace DrawingEnvironment
         private Point A { get; set; }
         private Point B { get; set; }
         private Point C { get; set; }
-        private Point D { get; set; }
 
         
         /// <summary>
@@ -26,12 +26,12 @@ namespace DrawingEnvironment
         /// <param name="graphics">the graphic context we want to draw into</param>
         public override void Draw(Graphics graphics)
         {
-            Point[] vertices = { A, B, C, D }; // Array of points where the lines are going to be
+            Point[] vertices = { A, B, C }; // Array of points where the lines are going to be
             // Checking if the shape needs to be filled in
             if (!isFill)
             {
                 pen = new Pen(colour);
-                graphics.DrawLines(pen, vertices); // drawing the lines using the method which takes a pen and an array of points.
+                graphics.DrawPolygon(pen, vertices); // drawing the poligon using the method which takes a pen and an array of points.
                 pen.Dispose();
             }
             // If fill flag is on it will fill the shape.
@@ -41,12 +41,12 @@ namespace DrawingEnvironment
                 graphics.FillPolygon(brush, vertices);
                 brush.Dispose();
             }
-
         }
 
         /// <summary>
         /// Setter for a triangle. To be used to set X and Y in parameter list 0 - X and 1 - Y.
         /// And lenght of the triangle as parameter list 2.
+        /// It then sets the vertices of the Triangle using the Point class.
         /// </summary>
         /// <param name="color"></param>
         /// <param name="parametersList"></param>
@@ -54,6 +54,9 @@ namespace DrawingEnvironment
         {
             base.Set(color, parametersList[0], parametersList[1]);
             lenght = parametersList[2];
+            A = new Point(X, Y);
+            B = new Point(X, Y + lenght);
+            C = new Point(X + lenght, Y + lenght);
         }
 
         /// <summary>
@@ -69,7 +72,6 @@ namespace DrawingEnvironment
             A = new Point(X, Y);
             B = new Point(X, Y + lenght);
             C = new Point(X + lenght, Y + lenght);
-            D = new Point(X, Y);
         }
         
         /// <summary>

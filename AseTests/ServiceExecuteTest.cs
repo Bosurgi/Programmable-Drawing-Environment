@@ -187,7 +187,6 @@ namespace AseTests
             // Act
             try
             {
-                //ex.Execute(rectCommand.name, rectCommand.parameters);
                 ex.Execute(rectCommand);
             }
 
@@ -211,7 +210,6 @@ namespace AseTests
             // Act
             try
             {
-                //ex.Execute(rectCommand.name, rectCommand.parameters);
                 ex.Execute(rectCommand);
             }
 
