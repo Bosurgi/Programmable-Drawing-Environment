@@ -6,25 +6,29 @@ namespace DrawingEnvironment
 {
     internal class Parser
     {
-         /// <summary>
+        /// <summary>
         /// Command parser which will divide the command and parameters passed and store them into the attributes.
         /// </summary>
         /// <param name="cmd">the command the user writes in the command line</param>
         /// <exception cref="FormatException">exception thrown when parameter not numerical</exception>
-        /// <returns>the command with its name and parameter stored</returns>
+        /// <returns>the command with its name and parameter stored.</returns>
         public Command ParseCommands(string cmd)
         {
             string command;
             string parameters;
-            
+
             var line = cmd.ToUpper().Trim(); // Tidying and standardizing the line of command
             var splitLine = line.Split(' '); // Splitting the command and parameters [0] command and [1] param            
             List<int> parsedParameters = new List<int>();
 
-            // If line has arguments then dividing parameters and commands accordingly
-            if (splitLine.Length > 1)
+            if (splitLine.Length > 2)
             {
-                // Splitting the commands 0 command and 1 for parameters.
+                throw new ArgumentException("Invalid number of parameters");
+            }
+            // If line has arguments then dividing parameters and commands accordingly
+            else if( splitLine.Length == 2)
+            {
+                // Splitting the commands: 0 command and 1 for parameters.
                 command = splitLine[0];
                 parameters = splitLine[1];
 
@@ -37,7 +41,7 @@ namespace DrawingEnvironment
                     {
                         // Sets value 1 for On and Value 0 to OFF
                         if (parameters.Equals("ON")) { parsedParameters.Add(1); }
-                        else if(parameters.Equals("OFF")) { parsedParameters.Add(0); }
+                        else if (parameters.Equals("OFF")) { parsedParameters.Add(0); }
                     }
 
                     else if (CheckNumbers(splitParam[i]))

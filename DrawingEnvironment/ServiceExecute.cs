@@ -55,7 +55,6 @@ namespace DrawingEnvironment
                         if (parser.isValidCommand(CommandList[i].name))
                         {
                             // Executing the command with Execute method
-                            //Execute(CommandList[i].name, CommandList[i].parameters);
                             Execute(CommandList[i]);
                             lineCounter++;
                         }
