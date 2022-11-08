@@ -45,6 +45,18 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
+        /// Setter for a triangle. To be used to set X and Y in parameter list 0 - X and 1 - Y.
+        /// And lenght of the triangle as parameter list 2.
+        /// </summary>
+        /// <param name="color"></param>
+        /// <param name="parametersList"></param>
+        public override void Set(Color color, params int[] parametersList)
+        {
+            base.Set(color, parametersList[0], parametersList[1]);
+            lenght = parametersList[2];
+        }
+
+        /// <summary>
         /// Constructor for the class Triangle.
         /// </summary>
         /// <param name="lenght">the length of the sides</param>
@@ -58,6 +70,14 @@ namespace DrawingEnvironment
             B = new Point(X, Y + lenght);
             C = new Point(X + lenght, Y + lenght);
             D = new Point(X, Y);
-        }   
+        }
+        
+        /// <summary>
+        /// Empty constructor for the Triangle class
+        /// </summary>
+        public Triangle() : base()
+        {
+
+        }
     }
 }

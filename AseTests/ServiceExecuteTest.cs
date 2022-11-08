@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DrawingEnvironment;
+using Rectangle = DrawingEnvironment.Rectangle;
 
 namespace AseTests
 {
@@ -144,6 +145,27 @@ namespace AseTests
                 // Assert
                 Assert.AreEqual(ErrorLabel.Text, ErrorMessage);
             }
+        }
+
+        /// <summary>
+        /// Testing the Execute method to execute commands.
+        /// </summary>
+        [TestMethod]
+
+        /// Testing Rectangle
+        public void executeCommand_Rectangle()
+        {
+            // Set up
+            Rectangle rect;
+            g = pictureBox.CreateGraphics();
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            Command createRectangle = new Command("RECTANGLE", new int[] { 10, 30 });
+            
+            // Act
+            ex.Execute(createRectangle.name, createRectangle.parameters);
+
+            // Assert
+            
         }
     }
 }

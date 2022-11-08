@@ -46,7 +46,7 @@ namespace DrawingEnvironment
                         if (parser.isValidCommand(CommandList[i].name))
                         {   
                             // Executing the command with Execute method
-                            Execute(CommandList[i].name, CommandList[i].parameters.ToList());
+                            Execute(CommandList[i].name, CommandList[i].parameters);
                             lineCounter++;
                         }
                         else { throw new FormatException("Error at line: " + lineCounter + "\n" + CommandList[i].name + " is not a valid command."); }
@@ -62,7 +62,7 @@ namespace DrawingEnvironment
         /// </summary>
         /// <param name="command">the name of the command</param>
         /// <param name="parameters">the list of parameters passed</param>
-        public void Execute(string command, List<int> parameters)
+        public void Execute(string command, int[] parameters)
         {
             if (command.Equals("RECTANGLE"))
             {

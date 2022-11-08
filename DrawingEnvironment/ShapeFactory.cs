@@ -30,6 +30,12 @@ namespace DrawingEnvironment
                 return new Rectangle();
             }
 
+            else if (shape.Equals("TRIANGLE"))
+            {
+                return new Triangle();
+            }
+
+
             // If the shape doesn't exist throwing an error.
             else
             {
