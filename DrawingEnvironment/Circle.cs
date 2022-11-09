@@ -13,9 +13,6 @@ namespace DrawingEnvironment
 {
     internal class Circle : Shape
     {
-
-        Bitmap circle = new Bitmap(10, 10); // New bitmap
-
         /// <summary>
         /// Radius property of the circle
         /// </summary>

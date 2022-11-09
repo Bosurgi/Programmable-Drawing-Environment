@@ -71,12 +71,14 @@ namespace AseTests
 
             // act
             Shape shape = factory.GetShape(makeCircle.name);
-            shape.Set(Color.White, 0, 0, makeCircle.parameters[0]);
+            shape.Set(Color.White, 0, 10, makeCircle.parameters[0]);
 
             // assert
             Assert.IsNotNull(shape);
             Assert.IsInstanceOfType(shape, typeof(Circle)); // Testing the class - Polymorphism | Inheritance
             Assert.AreEqual(30, makeCircle.parameters[0]);
+            Assert.AreEqual(0, shape.X);
+            Assert.AreEqual(10, shape.Y);
         }
 
         [TestMethod]
@@ -90,12 +92,15 @@ namespace AseTests
 
             // act
             Shape shape = factory.GetShape(makeCircle.name);
-            shape.Set(Color.White, 0, 0, makeCircle.parameters[0]);
+            shape.Set(Color.White, 0, 10, makeCircle.parameters[0]);
+
 
             // assert
             Assert.IsNotNull(shape);
             Assert.IsInstanceOfType(shape, typeof(Circle));
             Assert.AreEqual(30, makeCircle.parameters[0]);
+            Assert.AreEqual(0, shape.X);
+            Assert.AreEqual(10, shape.Y);
         }
 
         [TestMethod]
@@ -109,12 +114,14 @@ namespace AseTests
 
             // act
             Shape shape = factory.GetShape(makeTriangle.name);
-            shape.Set(Color.White, 0, 0, makeTriangle.parameters[0]);
+            shape.Set(Color.White, 0, 10, makeTriangle.parameters[0]);
 
             // assert
             Assert.IsNotNull(shape);
             Assert.IsInstanceOfType(shape, typeof(Triangle));
             Assert.AreEqual(40, makeTriangle.parameters[0]);
+            Assert.AreEqual(0, shape.X);
+            Assert.AreEqual(10, shape.Y);
         }
 
         [TestMethod]
@@ -136,6 +143,9 @@ namespace AseTests
             Assert.AreEqual(40, makeTriangle.parameters[0]);
         }
 
+        /// <summary>
+        /// Testing invalid input such as an invalid shape which does not exist in the Factory.
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void testFactory_TestingWrongTypeOfShapes()
@@ -148,6 +158,24 @@ namespace AseTests
 
             // assert
             Assert.IsNotNull(makeNotValidShape);
+            Assert.IsInstanceOfType(shape, typeof(Shape));
+        }
+
+        /// <summary>
+        /// Testing invalid input such as a null shape which does not exist in the Factory.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void testFactory_TestingNullTypeOfShapes()
+        {
+            // Set up
+            Command makeNotValidShape = parser.ParseCommands("");
+
+            // Act
+            Shape shape = factory.GetShape(makeNotValidShape.name);
+
+            // assert
+            Assert.IsNull(makeNotValidShape);
             Assert.IsInstanceOfType(shape, typeof(Shape));
         }
     }

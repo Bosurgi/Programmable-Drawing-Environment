@@ -16,6 +16,8 @@ namespace DrawingEnvironment
 
         /// <summary>
         /// Enumerator for commands available
+        /// All the commands to be implemented need to be inserted here first.
+        /// The parser will check if the command is among these before executing.
         /// </summary>
         public enum Commands
         {
@@ -24,6 +26,7 @@ namespace DrawingEnvironment
             DRAWTO, // 3
             RESET,  // 4           
             FILL,   // 5
+            RUN,    // 6
         }
 
         public override string ToString()
@@ -43,7 +46,7 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
-        /// Empty Constructor for command class
+        /// Empty Constructor for command class.
         /// </summary>
         public Command()
         {
