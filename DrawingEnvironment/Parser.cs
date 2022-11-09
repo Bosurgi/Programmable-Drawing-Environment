@@ -7,6 +7,12 @@ namespace DrawingEnvironment
     internal class Parser
     {
         /// <summary>
+        /// Parser has a property - LineCounter which will be used to count the lines for multiple line commands.
+        /// This will help to keep track where an error is thrown.
+        /// </summary>
+        public int LineCounter { get; set; }
+        
+        /// <summary>
         /// Command parser which will divide the command and parameters passed and store them into the attributes.
         /// </summary>
         /// <param name="cmd">the command the user writes in the command line</param>
@@ -44,6 +50,11 @@ namespace DrawingEnvironment
                         else if (parameters.Equals("OFF")) { parsedParameters.Add(0); }
                     }
 
+                    if (!CheckNumbers(splitParam[i]))
+                    {
+                        throw new ArgumentException("Not numerical parameter");
+                    }
+
                     else if (CheckNumbers(splitParam[i]))
                     {
                         // Converting the parameters and adding them to the list
@@ -66,13 +77,14 @@ namespace DrawingEnvironment
         /// <returns>a list of different commands with their parameters.</returns>
         public List<Command> ParseCommandMultiLine(string commands)
         {
-
             List<Command> commandList = new List<Command>();
             var splitCommands = commands.Split('\n');
+            LineCounter = 0;
             
             for (int i = 0; i < splitCommands.Length; i++)
             {
-                commandList.Add(ParseCommands(splitCommands[i]));
+                    LineCounter++; // Updating LineCounter to keep track of the line executing.
+                    commandList.Add(ParseCommands(splitCommands[i])); // applying the single line parsecommand to the current line and adding it to the list.
             }
             return commandList;
         }

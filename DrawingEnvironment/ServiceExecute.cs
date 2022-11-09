@@ -62,7 +62,7 @@ namespace DrawingEnvironment
                     }
                 }
             }
-            catch (ArgumentException ex) { ErrorLabel.Text = "Line: " + lineCounter + " " + ex.Message; }
+            catch (ArgumentException ex) { ErrorLabel.Text = "Line: " + parser.LineCounter + " " + ex.Message; }
             catch (FormatException ex) { ErrorLabel.Text = ex.Message; }
         }
 
