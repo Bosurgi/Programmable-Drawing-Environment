@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DrawingEnvironment
 {
-    public class Command : ICommand
+    public class Command
     {
         /// <summary>
         /// Command class properties, names and parameters.
