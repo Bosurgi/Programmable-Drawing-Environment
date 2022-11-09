@@ -50,12 +50,12 @@ namespace DrawingEnvironment
                         else if (parameters.Equals("OFF")) { parsedParameters.Add(0); }
                     }
 
-                    if (!CheckNumbers(splitParam[i]))
+                    else if (!CheckNumbers(splitParam[i]))
                     {
                         throw new ArgumentException("Not numerical parameter");
                     }
 
-                    else if (CheckNumbers(splitParam[i]))
+                    else
                     {
                         // Converting the parameters and adding them to the list
                         parsedParameters.Add(Convert.ToInt32(splitParam[i]));

@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace DrawingEnvironment
 {
-    internal class MoveCommand : Command
+    internal class MoveCommandNOTUSEd : Command
     {
         int position { get; set; }
-        public MoveCommand()
+        public MoveCommandNOTUSEd()
         {
             this.name = "MOVETO";
             

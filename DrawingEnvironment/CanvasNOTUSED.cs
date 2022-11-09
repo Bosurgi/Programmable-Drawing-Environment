@@ -15,12 +15,12 @@ namespace DrawingEnvironment
     /// It will be used as the actual drawing environment to picture the shapes.
     /// Also, it will be integrated through Managed Code in the Drag and drop section in the Toolbox.
     /// </summary>
-    public partial class Canvas : UserControl
+    public partial class CanvasNOTUSED : UserControl
     {
         /// <summary>
         /// Constructor which initialise the Canvas.
         /// </summary>
-        public Canvas()
+        public CanvasNOTUSED()
         {
             InitializeComponent();
             // Method called to prevent flickering and general optimization of the canvas.

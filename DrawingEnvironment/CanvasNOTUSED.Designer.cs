@@ -2,7 +2,7 @@
 
 namespace DrawingEnvironment
 {
-    partial class Canvas
+    partial class CanvasNOTUSED
     {
         /// <summary> 
         /// Required designer variable.
