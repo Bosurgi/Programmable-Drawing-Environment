@@ -14,7 +14,14 @@ namespace DrawingEnvironment
     /// </summary>
     internal class Triangle : Shape
     {
-        private int lenght { get; set; }
+        /// <summary>
+        /// Properties of the triangle.
+        /// </summary>
+        private int lenght { get; set; } // Length of the triangle
+
+        /// <summary>
+        /// Vertices of the triangle
+        /// </summary>
         private Point A { get; set; }
         private Point B { get; set; }
         private Point C { get; set; }

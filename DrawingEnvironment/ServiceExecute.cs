@@ -18,10 +18,10 @@ namespace DrawingEnvironment
         Graphics g;
         Pen pen;
         bool isFilling;
-
+        // Initialising the Parser.
         Parser parser = new Parser();
         ShapeFactory factory = new ShapeFactory(); // Factory for generating the shapes.
-
+        // Initialising Cursor, Error and Position Labels to display in the Form.
         CustomCursor pointer = new CustomCursor();
         Label ErrorLabel = new Label();
         Label PositionLabel;
@@ -503,7 +503,6 @@ namespace DrawingEnvironment
         /// </summary>
         /// <param name="g">Graphical element</param>
         /// <param name="pen">the pen used to draw</param>
-        /// <param name="factory">TO BE IMPLEMENTED: The shape factory which will create shapes</param>
         /// <param name="pointer">the cursor</param>
         /// <param name="errorLabel">the error label to display the messages on the form</param>
         /// <param name="LablePosition">the label which manages the current position of the cursor</param>
@@ -512,7 +511,6 @@ namespace DrawingEnvironment
         {
             this.g = g;
             this.pen = pen;
-            //this.factory = factory;
             this.pointer = pointer;
             this.ErrorLabel = errorLabel;
             PositionLabel = LablePosition;

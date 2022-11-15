@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DrawingEnvironment
 {
+    /// <summary>
+    /// This class represents a Rectangle which inherits from Shape class.
+    /// </summary>
     internal class Rectangle : Shape
     {
         // Rectangle properties
@@ -16,10 +19,10 @@ namespace DrawingEnvironment
         /// <summary>
         /// Constructor for Rectangle taking four parameters
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="w"></param>
-        /// <param name="h"></param>
+        /// <param name="x">Position X of the rectangle</param>
+        /// <param name="y">Position Y of the rectangle</param>
+        /// <param name="w">width of the rectangle which defines its dimension</param>
+        /// <param name="h">height of the rectangle which defines its dimension</param>
         public Rectangle(int x, int y, int w, int h) : base(x, y)
         {
             this.X = x;
@@ -41,7 +44,6 @@ namespace DrawingEnvironment
         /// Draw method to draw a rectangle on the canvas.
         /// </summary>
         /// <param name="graphics">the canvas where to draw</param>
-        /// <param name="pen">the pen used to draw</param>
         public override void Draw(Graphics graphics)
         {            
             if (!isFill)

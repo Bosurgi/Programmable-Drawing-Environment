@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace DrawingEnvironment
 {
+    /// <summary>
+    /// The command class represents the actual available commands in the Drawing Environment.
+    /// Other commands can be added below.
+    /// </summary>
     public class Command
     {
         /// <summary>
@@ -29,6 +33,10 @@ namespace DrawingEnvironment
             RUN,    // 6
         }
 
+        /// <summary>
+        /// Overriding the ToString method.
+        /// </summary>
+        /// <returns>the name of the command.</returns>
         public override string ToString()
         {
             return name;

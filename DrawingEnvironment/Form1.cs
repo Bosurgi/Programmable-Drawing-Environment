@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace DrawingEnvironment
 {
+    /// <summary>
+    /// Windows form where the actual GUI of the Drawing Environment is.
+    /// </summary>
     public partial class Form1 : Form
     {
         /// <summary>
@@ -44,9 +47,29 @@ namespace DrawingEnvironment
             pen = new Pen(penColour, 1);            
         }
 
+        /// <summary>
+        /// Clicking the help button will display all the available commands to the user.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void helpButton_Click(object sender, EventArgs e)
         {
+            string BoxTitle = "Available Commands";
+            string HelpCommands = "MoveTo <X>,<Y> - Moving the cursor from actual position to X and Y\n" +
+                "\nClear - it clears the canvas\n" +
+                "\nReset - it clears and reset the cursor to original position 0 , 0\n" +
+                "\nFill <ON> or <OFF> - Toggles the Filling on or off function\n" +
+                "\nRun - it runs the commands on the programming area\n" +
+                "\nDrawTo <X>,<Y> - It draws a line with the current colour from present position to X,Y\n" +
+                "\nRectangle <Width>,<Height> - Draws a rectangle at the current position with Width W and height H\n" +
+                "\nCircle <Radius> - It draws a Circle with specified radius\n" +
+                "\nTriangle <Length> - It draws a Triangle with specified length\n" +
+                "\nWhite - Changes colour to white\n" +
+                "\nRed - Changes colour to red\n" +
+                "\nGreen - Changes colour to green\n" +
+                "\nBlue - Changes colour to blue";
 
+            MessageBox.Show(HelpCommands, BoxTitle); // Showing the Box with the commands
         }
 
         /// <summary>
@@ -80,6 +103,11 @@ namespace DrawingEnvironment
             LabelFill.Text = "Fill: " + isFilling.ToString();
         }
 
+        /// <summary>
+        /// Paint Method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void drawingArea_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -111,7 +139,7 @@ namespace DrawingEnvironment
 
         private void syntaxCheckButton_Click(object sender, EventArgs e)
         {
-            // TODO: Implement syntax check
+            // TODO: Implement syntax check for PART 2
         }
 
         private void ToolsRedItem_Click(object sender, EventArgs e)
@@ -178,6 +206,11 @@ namespace DrawingEnvironment
             rect.Draw(areaGraphics);
         }
 
+        /// <summary>
+        /// Save File command from Menu strip
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveFileStripItem_Click(object sender, EventArgs e)
         {
             // Opening the save dialog and save the file as TXT extension
@@ -190,6 +223,11 @@ namespace DrawingEnvironment
             }
         }
 
+        /// <summary>
+        /// Load File command from Meny strip
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void loadFileStripItem_Click(object sender, EventArgs e)
         {
             // Load dialog to load a file previously saved.

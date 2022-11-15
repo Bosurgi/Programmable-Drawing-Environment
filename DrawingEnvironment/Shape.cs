@@ -40,6 +40,11 @@ namespace DrawingEnvironment
         // Brush used to fill shapes
         protected Brush brush;
 
+        /// <summary>
+        /// Abstract method to Draw the shape into a graphics environment.
+        /// It is inherited from the Interface IShape.
+        /// </summary>
+        /// <param name="graphics">the graphic elements where to draw the shape.</param>
         public abstract void Draw(Graphics graphics);
 
         /// <summary>

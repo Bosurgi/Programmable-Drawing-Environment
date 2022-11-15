@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace DrawingEnvironment
 {
+    /// <summary>
+    /// Class representing a circle, inherited from the Shape class.
+    /// </summary>
     internal class Circle : Shape
     {
         /// <summary>

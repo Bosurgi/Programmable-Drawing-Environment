@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace DrawingEnvironment
 {
+    /// <summary>
+    /// Custom Canvas to draw shapes and other graphical objects on it.
+    /// </summary>
     public class CanvasCustom
     {
         Graphics g;
@@ -25,6 +28,10 @@ namespace DrawingEnvironment
             pen = new Pen(Color.White);
         }
 
+        /// <summary>
+        /// Getter method for the graphics context
+        /// </summary>
+        /// <returns>the graphic context to draw</returns>
         public Graphics GetGraphics()
         {
             return g;
