@@ -35,7 +35,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Method which allows the user input to be parsed and executed if there are no errors.
         /// </summary>
-        /// <param Name="command">the user input</param>
+        /// <param name="command">the user input</param>
         public void ExecuteService(string command)
         {
             try
@@ -69,7 +69,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Method which executes the specified command based on its Name and Parameters.
         /// </summary>
-        /// <param Name="command">the command to execute</param>
+        /// <param name="command">the command to execute</param>
         /// <exception cref="IndexOutOfRangeException">it throws this error if there is no Parameters available</exception>
         public void Execute(Command command)
         {
@@ -500,12 +500,12 @@ namespace DrawingEnvironment
         /// <summary>
         /// Constructor for the service which will be used to execute the commands out of the Form context
         /// </summary>
-        /// <param Name="g">Graphical element</param>
-        /// <param Name="pen">the pen used to draw</param>
-        /// <param Name="pointer">the cursor</param>
-        /// <param Name="errorLabel">the error label to display the messages on the form</param>
-        /// <param Name="LablePosition">the label which manages the current position of the cursor</param>
-        /// <param Name="isFilling">the current state of the filling function</param>
+        /// <param name="g">Graphical element</param>
+        /// <param name="pen">the pen used to draw</param>
+        /// <param name="pointer">the cursor</param>
+        /// <param name="errorLabel">the error label to display the messages on the form</param>
+        /// <param name="LablePosition">the label which manages the current position of the cursor</param>
+        /// <param name="isFilling">the current state of the filling function</param>
         public ServiceExecute(Graphics g, Pen pen, CustomCursor pointer, Label errorLabel, Label LablePosition, bool isFilling, TextBox programmingArea)
         {
             this.g = g;

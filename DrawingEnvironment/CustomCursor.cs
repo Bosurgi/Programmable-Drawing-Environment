@@ -31,7 +31,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Method to draw the cursor in the canvas.
         /// </summary>
-        /// <param Name="graphics">the graphic elements where the method will draw</param>
+        /// <param name="graphics">the graphic elements where the method will draw</param>
         public override void Draw(Graphics graphics)
         {
             Rectangle rect = new Rectangle(X, Y, 5, 5);
@@ -44,9 +44,9 @@ namespace DrawingEnvironment
         /// Method to refresh the position of the cursor.
         /// Making the previous one transparent and drawing a new one.
         /// </summary>
-        /// <param Name="x"></param>
-        /// <param Name="y"></param>
-        /// <param Name="g"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="g"></param>
         public void UpdatePosition(int x, int y, Graphics g)
         {             
             Bitmap updatedCursor = new Bitmap(10, 10);

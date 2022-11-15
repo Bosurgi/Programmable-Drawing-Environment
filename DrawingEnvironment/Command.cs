@@ -62,8 +62,8 @@
         /// <summary>
         /// Constructor for the Command class
         /// </summary>
-        /// <param Name="name">the Name of the command</param>
-        /// <param Name="Parameters">the Parameters passed for the command</param>
+        /// <param name="name">the Name of the command</param>
+        /// <param name="parameters">the Parameters passed for the command</param>
         public Command(string name, int[] parameters)
         {
             this.Name = name;

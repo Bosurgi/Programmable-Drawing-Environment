@@ -15,7 +15,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Command parser which will divide the command and Parameters passed and store them into the attributes.
         /// </summary>
-        /// <param Name="cmd">the command the user writes in the command line</param>
+        /// <param name="cmd">the command the user writes in the command line</param>
         /// <exception cref="FormatException">exception thrown when parameter not numerical or invalid no. of Parameters</exception>
         /// <returns>the command with its Name and parameter stored.</returns>
         public Command ParseCommands(string cmd)
@@ -75,7 +75,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// This method parses different lines of code in sequence by dividing the commands using \n new line key.
         /// </summary>
-        /// <param Name="commands">the user input</param>
+        /// <param name="commands">the user input</param>
         /// <exception cref="FormatException">exception thrown when parameter not numerical or invalid no. of Parameters</exception>
         /// <returns>a list of different commands with their Parameters.</returns>
         public List<Command> ParseCommandMultiLine(string commands)
@@ -95,7 +95,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Method which checks if a parameter could be converted into a number to avoid errors.
         /// </summary>
-        /// <param Name="param">the parameter in string we are trying to convert.</param>
+        /// <param name="param">the parameter in string we are trying to convert.</param>
         /// <returns>true if successful, false if not</returns>
         public bool CheckNumbers(string param)
         {
@@ -112,7 +112,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Methods which checks if the commands is valid among the options available
         /// </summary>
-        /// <param Name="userInput">the input inserted by the user</param>
+        /// <param name="userInput">the input inserted by the user</param>
         /// <returns>true if the command is present, and false if is not</returns>
         public bool isValidCommand(string userInput)
         {

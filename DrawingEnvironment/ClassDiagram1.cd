@@ -1,14 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="DrawingEnvironment.Canvas" Collapsed="true">
-    <Position X="12" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAKAAAAACAAAAAAAACAAAACAAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Canvas.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="DrawingEnvironment.CanvasCustom" Collapsed="true">
-    <Position X="13.75" Y="0.5" Width="1.5" />
+    <Position X="13.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAYAA=</HashCode>
       <FileName>CanvasCustom.cs</FileName>
@@ -17,37 +10,22 @@
   <Class Name="DrawingEnvironment.Circle">
     <Position X="5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAAAAAAAABgAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAIAAAAAAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Circle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrawingEnvironment.Colors" Collapsed="true">
     <Position X="7.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Colors.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrawingEnvironment.Command" Collapsed="true">
     <Position X="5" Y="4.5" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="DrawingEnvironment.Command.Commands" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Commands.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQEAAAAAAAAAAAEAAAAAAAAAACAAAA=</HashCode>
-      <FileName>Commands.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="DrawingEnvironment.CommandsDraw" Collapsed="true">
-    <Position X="2.75" Y="5.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAEAAAAAAAEAAAAAAgAAACAAAg=</HashCode>
-      <FileName>CommandsDraw.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Command.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrawingEnvironment.CustomCursor">
@@ -60,21 +38,14 @@
   <Class Name="DrawingEnvironment.Form1" Collapsed="true">
     <Position X="15.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BbMAEiAgjmgTIJgKAQijiSoiQAgACgQQGgQBBAjAMAE=</HashCode>
+      <HashCode>BbMAEwAgnCgTIJwKAQijiSoiQAgACgQQGgQBBAjAMAE=</HashCode>
       <FileName>Form1.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="DrawingEnvironment.MoveCommand" Collapsed="true">
-    <Position X="5" Y="6" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAQAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>MoveCommand.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrawingEnvironment.Parser">
     <Position X="11.25" Y="1.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAIAAABAAAAAAAAAAAABAAAAAEAAgAAAABA=</HashCode>
+      <HashCode>AAAACAAAAAAAAAAAAAAAACAAAAQAAAAAAEAAAQAAAAA=</HashCode>
       <FileName>Parser.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -93,9 +64,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DrawingEnvironment.ServiceExecute" Collapsed="true">
-    <Position X="12" Y="4.5" Width="1.5" />
+    <Position X="9.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAEAAAACAAAAAAgAACAAgAAACAAIAAABgAAAIAE=</HashCode>
+      <HashCode>AAAAAEAAAAgiAAQAIAggAAAAAAAAAIAIAAgBCAAAIIE=</HashCode>
       <FileName>ServiceExecute.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -108,7 +79,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="DrawingEnvironment.ShapeFactory" Collapsed="true">
-    <Position X="15.5" Y="2.5" Width="1.5" />
+    <Position X="9.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
       <FileName>ShapeFactory.cs</FileName>
@@ -117,7 +88,7 @@
   <Class Name="DrawingEnvironment.Triangle">
     <Position X="7.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAABApAEAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAABgAAAAAAAAAAAAAAAAAAAABAoAEAAAA=</HashCode>
       <FileName>Triangle.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -128,20 +99,13 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DrawingEnvironment.Properties.Settings" Collapsed="true">
-    <Position X="15.5" Y="3.5" Width="1.5" />
+    <Position X="15.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Interface Name="DrawingEnvironment.ICommand" Collapsed="true">
-    <Position X="12" Y="5.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ICommand.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="DrawingEnvironment.IShape" Collapsed="true">
-    <Position X="13.75" Y="5.25" Width="1.5" />
+    <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IShape.cs</FileName>
