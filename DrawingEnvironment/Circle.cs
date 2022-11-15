@@ -24,8 +24,8 @@ namespace DrawingEnvironment
         /// <summary>
         /// Drawing method to display a circle in a canvas if fill on it will fill the area if not just drawing the shape empty.
         /// </summary>
-        /// <param name="graphics">the graphic object where to draw</param>
-        /// <param name="pen">the pen to draw the circle</param>
+        /// <param Name="graphics">the graphic object where to draw</param>
+        /// <param Name="pen">the pen to draw the circle</param>
         public override void Draw(Graphics graphics)
         {
             if (!isFill)
@@ -44,8 +44,8 @@ namespace DrawingEnvironment
         /// <summary>
         /// Set method for the circle, it sets the color and coordinates of the specified circle shape.
         /// </summary>
-        /// <param name="colour">the color of the circle</param>
-        /// <param name="parameterList">the list of parameters the circle takes.
+        /// <param Name="colour">the color of the circle</param>
+        /// <param Name="parameterList">the list of Parameters the circle takes.
         /// 0 - X , 1 - Y, 2 - Radius</param>
         public override void Set(Color colour, params int[] parameterList)
         {
@@ -56,9 +56,9 @@ namespace DrawingEnvironment
         /// <summary>
         /// Circle shape constructor
         /// </summary>
-        /// <param name="radius">the radius of the circle</param>
-        /// <param name="x">the x position of the circle</param>
-        /// <param name="y">the y position of the circle</param>
+        /// <param Name="radius">the radius of the circle</param>
+        /// <param Name="x">the x position of the circle</param>
+        /// <param Name="y">the y position of the circle</param>
         public Circle(Color colour, int x, int y, float radius) : base(colour, x, y)
         {
             this.Radius = radius;
@@ -67,9 +67,9 @@ namespace DrawingEnvironment
         /// <summary>
         /// Constructor for the Circle with just position and radius.
         /// </summary>
-        /// <param name="x">X position</param>
-        /// <param name="y">y position</param>
-        /// <param name="radius">the radius of the circle</param>
+        /// <param Name="x">X position</param>
+        /// <param Name="y">y position</param>
+        /// <param Name="radius">the radius of the circle</param>
         public Circle(int x, int y, float radius) : base(x, y)
         {
             this.Radius = radius;

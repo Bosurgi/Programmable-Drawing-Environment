@@ -30,14 +30,14 @@ namespace AseTests
             Command makeRectangle = parser.ParseCommands("rectangle 30,40");
 
             // act
-            Shape shape = factory.GetShape(makeRectangle.name);
-            shape.Set(Color.White, 0 , 0, makeRectangle.parameters[0], makeRectangle.parameters[1]);
+            Shape shape = factory.GetShape(makeRectangle.Name);
+            shape.Set(Color.White, 0 , 0, makeRectangle.Parameters[0], makeRectangle.Parameters[1]);
 
             // assert
             Assert.IsNotNull(shape);
             Assert.IsInstanceOfType(shape, typeof(Rectangle));
-            Assert.AreEqual(30, makeRectangle.parameters[0]);
-            Assert.AreEqual(40, makeRectangle.parameters[1]);
+            Assert.AreEqual(30, makeRectangle.Parameters[0]);
+            Assert.AreEqual(40, makeRectangle.Parameters[1]);
         }
         /// <summary>
         /// Testing the shape for rectangle
@@ -49,14 +49,14 @@ namespace AseTests
             Command makeRectangle = parser.ParseCommands("rEcTangLe 30,40");
 
             // act
-            Shape shape = factory.GetShape(makeRectangle.name);
-            shape.Set(Color.White, 0, 0, makeRectangle.parameters[0], makeRectangle.parameters[1]);
+            Shape shape = factory.GetShape(makeRectangle.Name);
+            shape.Set(Color.White, 0, 0, makeRectangle.Parameters[0], makeRectangle.Parameters[1]);
 
             // assert
             Assert.IsNotNull(shape);
             Assert.IsInstanceOfType(shape, typeof(Rectangle));
-            Assert.AreEqual(30, makeRectangle.parameters[0]);
-            Assert.AreEqual(40, makeRectangle.parameters[1]);
+            Assert.AreEqual(30, makeRectangle.Parameters[0]);
+            Assert.AreEqual(40, makeRectangle.Parameters[1]);
         }
         /// <summary>
         /// Testing the shape for Circle
@@ -69,13 +69,13 @@ namespace AseTests
             Command makeCircle = parser.ParseCommands("Circle 30");
 
             // act
-            Shape shape = factory.GetShape(makeCircle.name);
-            shape.Set(Color.White, 0, 10, makeCircle.parameters[0]);
+            Shape shape = factory.GetShape(makeCircle.Name);
+            shape.Set(Color.White, 0, 10, makeCircle.Parameters[0]);
 
             // assert
             Assert.IsNotNull(shape);
             Assert.IsInstanceOfType(shape, typeof(Circle)); // Testing the class - Polymorphism | Inheritance
-            Assert.AreEqual(30, makeCircle.parameters[0]);
+            Assert.AreEqual(30, makeCircle.Parameters[0]);
             Assert.AreEqual(0, shape.X);
             Assert.AreEqual(10, shape.Y);
         }
@@ -90,14 +90,14 @@ namespace AseTests
             Command makeCircle = parser.ParseCommands("cIrClE 30");
 
             // act
-            Shape shape = factory.GetShape(makeCircle.name);
-            shape.Set(Color.White, 0, 10, makeCircle.parameters[0]);
+            Shape shape = factory.GetShape(makeCircle.Name);
+            shape.Set(Color.White, 0, 10, makeCircle.Parameters[0]);
 
 
             // assert
             Assert.IsNotNull(shape);
             Assert.IsInstanceOfType(shape, typeof(Circle));
-            Assert.AreEqual(30, makeCircle.parameters[0]);
+            Assert.AreEqual(30, makeCircle.Parameters[0]);
             Assert.AreEqual(0, shape.X);
             Assert.AreEqual(10, shape.Y);
         }
@@ -112,13 +112,13 @@ namespace AseTests
             Command makeTriangle = parser.ParseCommands("triangle 40");
 
             // act
-            Shape shape = factory.GetShape(makeTriangle.name);
-            shape.Set(Color.White, 0, 10, makeTriangle.parameters[0]);
+            Shape shape = factory.GetShape(makeTriangle.Name);
+            shape.Set(Color.White, 0, 10, makeTriangle.Parameters[0]);
 
             // assert
             Assert.IsNotNull(shape);
             Assert.IsInstanceOfType(shape, typeof(Triangle));
-            Assert.AreEqual(40, makeTriangle.parameters[0]);
+            Assert.AreEqual(40, makeTriangle.Parameters[0]);
             Assert.AreEqual(0, shape.X);
             Assert.AreEqual(10, shape.Y);
         }
@@ -133,13 +133,13 @@ namespace AseTests
             Command makeTriangle = parser.ParseCommands("tRiAnglE 40");
 
             // act
-            Shape shape = factory.GetShape(makeTriangle.name);
-            shape.Set(Color.White, 0, 0, makeTriangle.parameters[0]);
+            Shape shape = factory.GetShape(makeTriangle.Name);
+            shape.Set(Color.White, 0, 0, makeTriangle.Parameters[0]);
 
             // assert
             Assert.IsNotNull(shape);
             Assert.IsInstanceOfType(shape, typeof(Triangle));
-            Assert.AreEqual(40, makeTriangle.parameters[0]);
+            Assert.AreEqual(40, makeTriangle.Parameters[0]);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace AseTests
             Command makeNotValidShape = parser.ParseCommands("Octagon 50");
 
             // Act
-            Shape shape = factory.GetShape(makeNotValidShape.name);
+            Shape shape = factory.GetShape(makeNotValidShape.Name);
 
             // assert
             Assert.IsNotNull(makeNotValidShape);
@@ -171,7 +171,7 @@ namespace AseTests
             Command makeNotValidShape = parser.ParseCommands("");
 
             // Act
-            Shape shape = factory.GetShape(makeNotValidShape.name);
+            Shape shape = factory.GetShape(makeNotValidShape.Name);
 
             // assert
             Assert.IsNull(makeNotValidShape);

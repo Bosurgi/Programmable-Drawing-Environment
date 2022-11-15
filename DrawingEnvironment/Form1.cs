@@ -13,7 +13,7 @@ namespace DrawingEnvironment
     public partial class Form1 : Form
     {
         /// <summary>
-        /// Canvas size parameters set as constants.
+        /// Canvas size Parameters set as constants.
         /// </summary>
         public const int canX = 480;
         public const int canY = 270;
@@ -50,8 +50,8 @@ namespace DrawingEnvironment
         /// <summary>
         /// Clicking the help button will display all the available commands to the user.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param Name="sender"></param>
+        /// <param Name="e"></param>
         private void helpButton_Click(object sender, EventArgs e)
         {
             string BoxTitle = "Available Commands";
@@ -75,8 +75,8 @@ namespace DrawingEnvironment
         /// <summary>
         /// Method which manages the Run button each time is clicked
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param Name="sender"></param>
+        /// <param Name="e"></param>
         private void runButton_Click(object sender, EventArgs e)
         {
             errorLabel.Text = ""; // Resetting the error label
@@ -106,8 +106,8 @@ namespace DrawingEnvironment
         /// <summary>
         /// Paint Method
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param Name="sender"></param>
+        /// <param Name="e"></param>
         private void drawingArea_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -172,8 +172,8 @@ namespace DrawingEnvironment
         /// <summary>
         /// Handler for the button to draw a default circle on canvas.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param Name="sender"></param>
+        /// <param Name="e"></param>
         private void ToolsCircleItem_Click(object sender, EventArgs e)
         {
             Graphics areaGraphics = drawingArea.CreateGraphics();
@@ -209,8 +209,8 @@ namespace DrawingEnvironment
         /// <summary>
         /// Save File command from Menu strip
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param Name="sender"></param>
+        /// <param Name="e"></param>
         private void saveFileStripItem_Click(object sender, EventArgs e)
         {
             // Opening the save dialog and save the file as TXT extension
@@ -226,8 +226,8 @@ namespace DrawingEnvironment
         /// <summary>
         /// Load File command from Meny strip
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param Name="sender"></param>
+        /// <param Name="e"></param>
         private void loadFileStripItem_Click(object sender, EventArgs e)
         {
             // Load dialog to load a file previously saved.

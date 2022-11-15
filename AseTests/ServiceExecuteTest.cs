@@ -8,7 +8,7 @@ namespace AseTests
 {
     /// <summary>
     /// This class will test the ServiceExecute class, which executes various commands.
-    /// In this way other classes will be tested as the service will take from a parsed commands its parameters and the commands.
+    /// In this way other classes will be tested as the service will take from a parsed commands its Parameters and the commands.
     /// It will then execute the command if valid and return a shape or other functions.
     /// </summary>
     [TestClass]
@@ -174,7 +174,7 @@ namespace AseTests
             try
             {
                 Command rectCommand = parser.ParseCommands("Rectangle 40,x");
-                //ex.Execute(rectCommand.name, rectCommand.parameters);
+                //ex.Execute(rectCommand.Name, rectCommand.Parameters);
                 ex.Execute(rectCommand);
             }
 
@@ -248,7 +248,7 @@ namespace AseTests
             ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
 
             string command = "moveto 100,20\ncircle 30,20";
-            string ErrorMessage = "Invalid parameters at line: 2\nCircle <Radius>";
+            string ErrorMessage = "Invalid Parameters at line: 2\nCircle <Radius>";
             // Act
             ex.ExecuteService(command);
             // Assert

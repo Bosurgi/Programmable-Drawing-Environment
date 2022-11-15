@@ -25,7 +25,7 @@ namespace AseTests
             Variable variable = (Variable)parser.ParseCommands("x = 5");
 
             // assert
-            Assert.AreEqual(variable.parameters, 5);
+            Assert.AreEqual(variable.Parameters, 5);
         }
 
         /// <summary>
@@ -42,9 +42,9 @@ namespace AseTests
             Variable variable = (Variable)parser.ParseCommands(input);
             Command command = (Command)parser.ParseCommands(input);
             // Assert
-            Assert.AreEqual(variable.parameters[0], 5);
-            Assert.AreEqual(variable.parameters[1], 10);
-            Assert.IsTrue(variable.name == "DRAWTO");
+            Assert.AreEqual(variable.Parameters[0], 5);
+            Assert.AreEqual(variable.Parameters[1], 10);
+            Assert.IsTrue(variable.Name == "DRAWTO");
         }
 
         /// <summary>
@@ -61,9 +61,9 @@ namespace AseTests
             Variable var = (Variable)parser.ParseCommands(input);
             List<Command> command = parser.ParseCommandMultiLine(input);
             // assert
-            Assert.AreEqual("RECTANGLE", command[0].name);
-            Assert.AreEqual(new int[] {5,5}, var.parameters);
-            Assert.AreEqual("CIRCLE", command[1].name);
+            Assert.AreEqual("RECTANGLE", command[0].Name);
+            Assert.AreEqual(new int[] {5,5}, var.Parameters);
+            Assert.AreEqual("CIRCLE", command[1].Name);
         }
     }
 }

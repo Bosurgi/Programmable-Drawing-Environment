@@ -17,12 +17,12 @@ namespace DrawingEnvironment
         private int Height { get; set; }
 
         /// <summary>
-        /// Constructor for Rectangle taking four parameters
+        /// Constructor for Rectangle taking four Parameters
         /// </summary>
-        /// <param name="x">Position X of the rectangle</param>
-        /// <param name="y">Position Y of the rectangle</param>
-        /// <param name="w">width of the rectangle which defines its dimension</param>
-        /// <param name="h">height of the rectangle which defines its dimension</param>
+        /// <param Name="x">Position X of the rectangle</param>
+        /// <param Name="y">Position Y of the rectangle</param>
+        /// <param Name="w">width of the rectangle which defines its dimension</param>
+        /// <param Name="h">height of the rectangle which defines its dimension</param>
         public Rectangle(int x, int y, int w, int h) : base(x, y)
         {
             this.X = x;
@@ -43,7 +43,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Draw method to draw a rectangle on the canvas.
         /// </summary>
-        /// <param name="graphics">the canvas where to draw</param>
+        /// <param Name="graphics">the canvas where to draw</param>
         public override void Draw(Graphics graphics)
         {            
             if (!isFill)
@@ -63,10 +63,10 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
-        /// Method which sets the colors and parameters of the Rectangle
+        /// Method which sets the colors and Parameters of the Rectangle
         /// </summary>
-        /// <param name="color">the color of the rectangle</param>
-        /// <param name="parametersList">parameters passed for the rectangle</param>
+        /// <param Name="color">the color of the rectangle</param>
+        /// <param Name="parametersList">Parameters passed for the rectangle</param>
         public override void Set(Color color, params int[] parametersList)
         {
             base.Set(color, parametersList[0], parametersList[1]);

@@ -58,7 +58,7 @@
     <Compile Include="Rectangle.cs" />
     <Compile Include="CustomCursor.cs" />
     <Compile Include="Shape.cs" />
-    <Compile Include="Commands.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

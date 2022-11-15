@@ -13,36 +13,38 @@ namespace DrawingEnvironment
         public int LineCounter { get; set; }
 
         /// <summary>
-        /// Command parser which will divide the command and parameters passed and store them into the attributes.
+        /// Command parser which will divide the command and Parameters passed and store them into the attributes.
         /// </summary>
-        /// <param name="cmd">the command the user writes in the command line</param>
-        /// <exception cref="FormatException">exception thrown when parameter not numerical or invalid no. of parameters</exception>
-        /// <returns>the command with its name and parameter stored.</returns>
+        /// <param Name="cmd">the command the user writes in the command line</param>
+        /// <exception cref="FormatException">exception thrown when parameter not numerical or invalid no. of Parameters</exception>
+        /// <returns>the command with its Name and parameter stored.</returns>
         public Command ParseCommands(string cmd)
         {
             string command;
             string parameters;
 
             var line = cmd.ToUpper().Trim(); // Tidying and standardizing the line of command
-            var splitLine = line.Split(' '); // Splitting the command and parameters [0] command and [1] param            
+            var splitLine = line.Split(' '); // Splitting the command and Parameters [0] command and [1] param            
             List<int> parsedParameters = new List<int>();
 
             if (splitLine.Length > 2)
             {
-                throw new ArgumentException("Invalid number of parameters");
+                throw new ArgumentException("Invalid number of Parameters");
             }
-            // If line has arguments then dividing parameters and commands accordingly
+            // If line has arguments then dividing Parameters and commands accordingly
             else if( splitLine.Length == 2)
             {
-                // Splitting the commands: 0 command and 1 for parameters.
+                // Splitting the commands: 0 command and 1 for Parameters.
                 command = splitLine[0];
                 parameters = splitLine[1];
 
+                // Splitting Parameters with comma
                 var splitParam = parameters.Split(',');
-
+                
+                // For each parameter after the split
                 for (int i = 0; i < splitParam.Length; i++)
                 {
-                    // Handling the only command with literals parameters (ON and OFF)
+                    // Handling the only command with literals Parameters (ON and OFF)
                     if (command.Equals("FILL") && parameters != null)
                     {
                         // Sets value 1 for On and Value 0 to OFF
@@ -57,7 +59,7 @@ namespace DrawingEnvironment
 
                     else
                     {
-                        // Converting the parameters and adding them to the list
+                        // Converting the Parameters and adding them to the list
                         parsedParameters.Add(Convert.ToInt32(splitParam[i]));
                     }
                 }
@@ -73,9 +75,9 @@ namespace DrawingEnvironment
         /// <summary>
         /// This method parses different lines of code in sequence by dividing the commands using \n new line key.
         /// </summary>
-        /// <param name="commands">the user input</param>
-        /// <exception cref="FormatException">exception thrown when parameter not numerical or invalid no. of parameters</exception>
-        /// <returns>a list of different commands with their parameters.</returns>
+        /// <param Name="commands">the user input</param>
+        /// <exception cref="FormatException">exception thrown when parameter not numerical or invalid no. of Parameters</exception>
+        /// <returns>a list of different commands with their Parameters.</returns>
         public List<Command> ParseCommandMultiLine(string commands)
         {
             List<Command> commandList = new List<Command>();
@@ -93,7 +95,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Method which checks if a parameter could be converted into a number to avoid errors.
         /// </summary>
-        /// <param name="param">the parameter in string we are trying to convert.</param>
+        /// <param Name="param">the parameter in string we are trying to convert.</param>
         /// <returns>true if successful, false if not</returns>
         public bool CheckNumbers(string param)
         {
@@ -110,7 +112,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Methods which checks if the commands is valid among the options available
         /// </summary>
-        /// <param name="userInput">the input inserted by the user</param>
+        /// <param Name="userInput">the input inserted by the user</param>
         /// <returns>true if the command is present, and false if is not</returns>
         public bool isValidCommand(string userInput)
         {

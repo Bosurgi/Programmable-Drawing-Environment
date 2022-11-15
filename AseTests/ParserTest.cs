@@ -7,7 +7,7 @@ namespace AseTests
 {
     /// <summary>
     /// Test class to test the Parser functions. 
-    /// It will test how it validates the Commands, the parameters and multiple lines of commands.
+    /// It will test how it validates the Commands, the Parameters and multiple lines of commands.
     /// </summary>
     [TestClass]
     public class ParserTest
@@ -33,12 +33,12 @@ namespace AseTests
             Command command = parser.ParseCommands(example);
 
             // Assert
-            Assert.IsNotNull(command.parameters);
-            Assert.AreEqual(command.parameters[0], expectedInt[0]);
-            Assert.AreEqual(command.parameters[1], expectedInt[1]);
-            Assert.AreNotEqual(command.parameters[0], expectedInt[1]);
-            Assert.IsTrue(command.parameters.Length == 2);
-            Assert.AreEqual(command.name, "MOVETO");
+            Assert.IsNotNull(command.Parameters);
+            Assert.AreEqual(command.Parameters[0], expectedInt[0]);
+            Assert.AreEqual(command.Parameters[1], expectedInt[1]);
+            Assert.AreNotEqual(command.Parameters[0], expectedInt[1]);
+            Assert.IsTrue(command.Parameters.Length == 2);
+            Assert.AreEqual(command.Name, "MOVETO");
         }
 
         /// <summary>
@@ -97,8 +97,8 @@ namespace AseTests
             Assert.IsNotNull(command);
             Assert.IsNotNull(actual);
             Assert.IsFalse(actual);
-            Assert.AreEqual(command.parameters[0], expectedParameters[0]);
-            Assert.AreEqual(command.parameters[1], expectedParameters[1]);
+            Assert.AreEqual(command.Parameters[0], expectedParameters[0]);
+            Assert.AreEqual(command.Parameters[1], expectedParameters[1]);
         }
 
         /// <summary>
@@ -137,8 +137,8 @@ namespace AseTests
             // Assert
             Assert.IsNotNull(actualCommand);
             Assert.IsTrue(parser.isValidCommand(input));
-            Assert.AreEqual(actualCommand.name, expectedCommand.name);
-            Assert.AreEqual(actualCommand.parameters[0], expectedCommand.parameters[0]);
+            Assert.AreEqual(actualCommand.Name, expectedCommand.Name);
+            Assert.AreEqual(actualCommand.Parameters[0], expectedCommand.Parameters[0]);
         }
         /// <summary>
         /// Testing if the parser sets up the Fill off option correctly.
@@ -157,8 +157,8 @@ namespace AseTests
             // Assert
             Assert.IsNotNull(actualCommand);
             Assert.IsTrue(parser.isValidCommand(input));
-            Assert.AreEqual(actualCommand.name, expectedCommand.name);
-            Assert.AreEqual(actualCommand.parameters[0], expectedCommand.parameters[0]);
+            Assert.AreEqual(actualCommand.Name, expectedCommand.Name);
+            Assert.AreEqual(actualCommand.Parameters[0], expectedCommand.Parameters[0]);
         }
 
         /// <summary>
@@ -178,8 +178,8 @@ namespace AseTests
             // Assert
             Assert.IsNotNull(actualCommand);
             Assert.IsTrue(parser.isValidCommand(input));
-            Assert.AreEqual(actualCommand.name, expectedCommand.name);
-            Assert.IsTrue(actualCommand.parameters.Length == 0);
+            Assert.AreEqual(actualCommand.Name, expectedCommand.Name);
+            Assert.IsTrue(actualCommand.Parameters.Length == 0);
         }
 
         /// <summary>
@@ -202,23 +202,23 @@ namespace AseTests
             // Testing if it returns a list of commands
             Assert.IsNotNull(actualCommand);
             Assert.IsInstanceOfType(actualCommand, typeof(List<Command>));
-            // Testing the name of the commands
-            Assert.AreEqual(actualCommand[0].name, drawCommand.name);
-            Assert.AreEqual(actualCommand[1].name, rectangleCommand.name);
-            Assert.AreEqual(actualCommand[2].name, circleCommand.name);
-            // Testing the parameters
+            // Testing the Name of the commands
+            Assert.AreEqual(actualCommand[0].Name, drawCommand.Name);
+            Assert.AreEqual(actualCommand[1].Name, rectangleCommand.Name);
+            Assert.AreEqual(actualCommand[2].Name, circleCommand.Name);
+            // Testing the Parameters
             Assert.IsNotNull(actualCommand);
-            Assert.AreEqual(actualCommand[0].parameters[0], drawCommand.parameters[0]);
-            Assert.AreEqual(actualCommand[0].parameters[1], drawCommand.parameters[1]);
-            Assert.AreEqual(actualCommand[1].parameters[0], rectangleCommand.parameters[0]);
-            Assert.AreEqual(actualCommand[1].parameters[1], rectangleCommand.parameters[1]);
-            Assert.AreEqual(actualCommand[2].parameters[0], circleCommand.parameters[0]);
-            // Passing the parameters manually for each parameter
-            Assert.AreEqual(actualCommand[0].parameters[0], 10);
-            Assert.AreEqual(actualCommand[0].parameters[1], 30);
-            Assert.AreEqual(actualCommand[1].parameters[0], 10);
-            Assert.AreEqual(actualCommand[1].parameters[1], 20);
-            Assert.AreEqual(actualCommand[2].parameters[0], 20);
+            Assert.AreEqual(actualCommand[0].Parameters[0], drawCommand.Parameters[0]);
+            Assert.AreEqual(actualCommand[0].Parameters[1], drawCommand.Parameters[1]);
+            Assert.AreEqual(actualCommand[1].Parameters[0], rectangleCommand.Parameters[0]);
+            Assert.AreEqual(actualCommand[1].Parameters[1], rectangleCommand.Parameters[1]);
+            Assert.AreEqual(actualCommand[2].Parameters[0], circleCommand.Parameters[0]);
+            // Passing the Parameters manually for each parameter
+            Assert.AreEqual(actualCommand[0].Parameters[0], 10);
+            Assert.AreEqual(actualCommand[0].Parameters[1], 30);
+            Assert.AreEqual(actualCommand[1].Parameters[0], 10);
+            Assert.AreEqual(actualCommand[1].Parameters[1], 20);
+            Assert.AreEqual(actualCommand[2].Parameters[0], 20);
         }
 
         /// <summary>
@@ -241,23 +241,23 @@ namespace AseTests
             // Testing if it returns a list of commands
             Assert.IsNotNull(actualCommand);
             Assert.IsInstanceOfType(actualCommand, typeof(List<Command>));
-            // Testing the name of the commands
-            Assert.AreEqual(actualCommand[0].name, drawCommand.name);
-            Assert.AreEqual(actualCommand[1].name, rectangleCommand.name);
-            Assert.AreEqual(actualCommand[2].name, circleCommand.name);
-            // Testing the parameters
+            // Testing the Name of the commands
+            Assert.AreEqual(actualCommand[0].Name, drawCommand.Name);
+            Assert.AreEqual(actualCommand[1].Name, rectangleCommand.Name);
+            Assert.AreEqual(actualCommand[2].Name, circleCommand.Name);
+            // Testing the Parameters
             Assert.IsNotNull(actualCommand);
-            Assert.AreEqual(actualCommand[0].parameters[0], drawCommand.parameters[0]);
-            Assert.AreEqual(actualCommand[0].parameters[1], drawCommand.parameters[1]);
-            Assert.AreEqual(actualCommand[1].parameters[0], rectangleCommand.parameters[0]);
-            Assert.AreEqual(actualCommand[1].parameters[1], rectangleCommand.parameters[1]);
-            Assert.AreEqual(actualCommand[2].parameters[0], circleCommand.parameters[0]);
-            // Passing the parameters manually for each parameter
-            Assert.AreEqual(actualCommand[0].parameters[0], 10);
-            Assert.AreEqual(actualCommand[0].parameters[1], 30);
-            Assert.AreEqual(actualCommand[1].parameters[0], 10);
-            Assert.AreEqual(actualCommand[1].parameters[1], 20);
-            Assert.AreEqual(actualCommand[2].parameters[0], 20);
+            Assert.AreEqual(actualCommand[0].Parameters[0], drawCommand.Parameters[0]);
+            Assert.AreEqual(actualCommand[0].Parameters[1], drawCommand.Parameters[1]);
+            Assert.AreEqual(actualCommand[1].Parameters[0], rectangleCommand.Parameters[0]);
+            Assert.AreEqual(actualCommand[1].Parameters[1], rectangleCommand.Parameters[1]);
+            Assert.AreEqual(actualCommand[2].Parameters[0], circleCommand.Parameters[0]);
+            // Passing the Parameters manually for each parameter
+            Assert.AreEqual(actualCommand[0].Parameters[0], 10);
+            Assert.AreEqual(actualCommand[0].Parameters[1], 30);
+            Assert.AreEqual(actualCommand[1].Parameters[0], 10);
+            Assert.AreEqual(actualCommand[1].Parameters[1], 20);
+            Assert.AreEqual(actualCommand[2].Parameters[0], 20);
         }
 
         /// <summary>
@@ -277,7 +277,7 @@ namespace AseTests
             catch (ArgumentException e)
             {
                 // Assert
-                Assert.AreEqual("Invalid number of parameters", e.Message);
+                Assert.AreEqual("Invalid number of Parameters", e.Message);
             }
 
         }

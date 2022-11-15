@@ -21,7 +21,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Constructor for the Canvas class, where the drawings will be drawn.
         /// </summary>
-        /// <param name="g">the graphical object that will be drawn</param>
+        /// <param Name="g">the graphical object that will be drawn</param>
         public CanvasCustom(Graphics g)
         {
             this.g = g;

@@ -30,7 +30,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// It draws the triangle into a graphic context.
         /// </summary>
-        /// <param name="graphics">the graphic context we want to draw into</param>
+        /// <param Name="graphics">the graphic context we want to draw into</param>
         public override void Draw(Graphics graphics)
         {
             Point[] vertices = { A, B, C }; // Array of points where the lines are going to be
@@ -55,8 +55,8 @@ namespace DrawingEnvironment
         /// And lenght of the triangle as parameter list 2.
         /// It then sets the vertices of the Triangle using the Point class.
         /// </summary>
-        /// <param name="color"></param>
-        /// <param name="parametersList"></param>
+        /// <param Name="color"></param>
+        /// <param Name="parametersList"></param>
         public override void Set(Color color, params int[] parametersList)
         {
             base.Set(color, parametersList[0], parametersList[1]);
@@ -69,10 +69,10 @@ namespace DrawingEnvironment
         /// <summary>
         /// Constructor for the class Triangle.
         /// </summary>
-        /// <param name="lenght">the length of the sides</param>
-        /// <param name="pen">the pen used to draw</param>
-        /// <param name="x">the X position of the shape on the canvas based on where the cursor is</param>
-        /// <param name="y">the Y position of the shape on the canvas based on where the cursor is</param>
+        /// <param Name="lenght">the length of the sides</param>
+        /// <param Name="pen">the pen used to draw</param>
+        /// <param Name="x">the X position of the shape on the canvas based on where the cursor is</param>
+        /// <param Name="y">the Y position of the shape on the canvas based on where the cursor is</param>
         public Triangle(int lenght, int x, int y) : base(x, y)
         {
             this.lenght = lenght;
