@@ -1,5 +1,6 @@
 ﻿using DrawingEnvironment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace AseTests
@@ -253,6 +254,28 @@ namespace AseTests
             Assert.AreEqual(actualCommand[1].parameters[0], 10);
             Assert.AreEqual(actualCommand[1].parameters[1], 20);
             Assert.AreEqual(actualCommand[2].parameters[0], 20);
+        }
+
+        /// <summary>
+        /// Testing if the parser is able to parse multiple lines of commands displaying the error.
+        /// </summary>
+        [TestMethod]
+        public void parseSingleCommand_WithInvalidNumberParameters()
+        {
+            // Set up
+            var input = "circle 30 40";
+
+            // Act
+            try
+            {
+                List<Command> actualCommand = parser.ParseCommandMultiLine(input);
+            }
+            catch (ArgumentException e)
+            {
+                // Assert
+                Assert.AreEqual("Invalid number of parameters", e.Message);
+            }
+
         }
     }
 }

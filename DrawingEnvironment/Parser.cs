@@ -11,12 +11,12 @@ namespace DrawingEnvironment
         /// This will help to keep track where an error is thrown.
         /// </summary>
         public int LineCounter { get; set; }
-        
+
         /// <summary>
         /// Command parser which will divide the command and parameters passed and store them into the attributes.
         /// </summary>
         /// <param name="cmd">the command the user writes in the command line</param>
-        /// <exception cref="FormatException">exception thrown when parameter not numerical</exception>
+        /// <exception cref="FormatException">exception thrown when parameter not numerical or invalid no. of parameters</exception>
         /// <returns>the command with its name and parameter stored.</returns>
         public Command ParseCommands(string cmd)
         {
@@ -74,6 +74,7 @@ namespace DrawingEnvironment
         /// This method parses different lines of code in sequence by dividing the commands using \n new line key.
         /// </summary>
         /// <param name="commands">the user input</param>
+        /// <exception cref="FormatException">exception thrown when parameter not numerical or invalid no. of parameters</exception>
         /// <returns>a list of different commands with their parameters.</returns>
         public List<Command> ParseCommandMultiLine(string commands)
         {

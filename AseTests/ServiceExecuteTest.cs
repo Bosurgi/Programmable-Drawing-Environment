@@ -1,13 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using DrawingEnvironment;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Drawing;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DrawingEnvironment;
-using Rectangle = DrawingEnvironment.Rectangle;
 
 namespace AseTests
 {
@@ -93,11 +88,31 @@ namespace AseTests
                 ex.ExecuteService(command);
             }
             catch (FormatException e)
-            {                
+            {
                 // Assert
                 Assert.AreEqual(ErrorMessage, e.Message);
             }
         }
+
+        /// <summary>
+        /// Testing Parameter error - With single line
+        /// </summary>
+        [TestMethod]
+        public void executingService_WithParameterError_SingleLineParameter()
+        {
+            // Set up
+            g = pictureBox.CreateGraphics();
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+
+            string command = "circle x";
+            string ErrorMessage = "Line: 1 Not numerical parameter";
+            // Act
+            ex.ExecuteService(command);
+
+            // Assert
+            Assert.AreEqual(ErrorMessage, ErrorLabel.Text);
+        }
+
         /// <summary>
         /// Testing Parameter error - Multiple lines
         /// </summary>
@@ -107,21 +122,16 @@ namespace AseTests
             // Set up
             g = pictureBox.CreateGraphics();
             ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
-            
+
             string command = "moveto 100,20\ncircle x";
-            string ErrorMessage = "Invalid parameters at line: 2\nCircle <Radius>";
+            string ErrorMessage = "Line: 2 Not numerical parameter";
             // Act
-            try
-            {
-                
-                ex.ExecuteService(command);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                // Assert
-                Assert.AreEqual(ErrorLabel.Text, ErrorMessage);
-            }
+            ex.ExecuteService(command);
+
+            // Assert
+            Assert.AreEqual(ErrorMessage, ErrorLabel.Text);
         }
+
         /// <summary>
         /// Testing Command Error - multiple lines
         /// </summary>
@@ -140,7 +150,7 @@ namespace AseTests
 
                 ex.ExecuteService(command);
             }
-            catch (ArgumentOutOfRangeException e)
+            catch (ArgumentOutOfRangeException)
             {
                 // Assert
                 Assert.AreEqual(ErrorLabel.Text, ErrorMessage);
@@ -158,22 +168,26 @@ namespace AseTests
             // Set up
             g = pictureBox.CreateGraphics();
             ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
-            Command rectCommand = parser.ParseCommands("Rectangle 40,x");
+
 
             // Act
             try
             {
+                Command rectCommand = parser.ParseCommands("Rectangle 40,x");
                 //ex.Execute(rectCommand.name, rectCommand.parameters);
                 ex.Execute(rectCommand);
             }
 
-            catch(ArgumentOutOfRangeException e)
+            catch (ArgumentException e)
             {
                 // Assert
-                Assert.AreEqual("Invalid parameters at line:  1\nRectangle <width> , <height> NOTE: Use the comma between parameters.", e.Message);
-            }                                
+                Assert.AreEqual("Not numerical parameter", e.Message);
+            }
         }
 
+        /// <summary>
+        /// Testing the rectangle with an empty parameter
+        /// </summary>
         [TestMethod]
 
         /// Testing Rectangle
@@ -193,10 +207,13 @@ namespace AseTests
             catch (ArgumentOutOfRangeException e)
             {
                 // Assert
-                Assert.AreEqual("Invalid parameters at line:  1\nRectangle <width> , <height> NOTE: Use the comma between parameters.", e.Message);
+                Assert.AreEqual("Not numerical parameter", e.Message);
             }
         }
 
+        /// <summary>
+        /// Testing circle with wrong non numerical input.
+        /// </summary>
         [TestMethod]
 
         /// Testing Circle
@@ -205,19 +222,37 @@ namespace AseTests
             // Set up
             g = pictureBox.CreateGraphics();
             ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
-            Command rectCommand = parser.ParseCommands("Circle x");
 
             // Act
             try
             {
+                Command rectCommand = parser.ParseCommands("Circle x");
                 ex.Execute(rectCommand);
             }
 
-            catch (ArgumentOutOfRangeException e)
+            catch (ArgumentException e)
             {
                 // Assert
-                Assert.AreEqual("Invalid parameters at line:  1\nRectangle <width> , <height> NOTE: Use the comma between parameters.", e.Message);
+                Assert.AreEqual("Not numerical parameter", e.Message);
             }
+        }
+
+        /// <summary>
+        /// Testing Error of parameter with wrong number on second line
+        /// </summary>
+        [TestMethod]
+        public void executingService_WithCommandError_multilineCommandWithWrongNumOfParameters()
+        {
+            // Set up
+            g = pictureBox.CreateGraphics();
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+
+            string command = "moveto 100,20\ncircle 30,20";
+            string ErrorMessage = "Invalid parameters at line: 2\nCircle <Radius>";
+            // Act
+            ex.ExecuteService(command);
+            // Assert
+            Assert.AreEqual(ErrorLabel.Text, ErrorMessage);
         }
     }
 }
