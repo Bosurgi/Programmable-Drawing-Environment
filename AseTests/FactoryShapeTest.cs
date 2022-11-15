@@ -19,11 +19,11 @@ namespace AseTests
     {
         ShapeFactory factory = new ShapeFactory();
         Parser parser = new Parser();
-
-        [TestMethod]
+        
         /// <summary>
         /// Testing the shape for rectangle
         /// </summary>
+        [TestMethod]
         public void testFactory_Rectangle_withCorrectValues()
         {
             // Set up
@@ -39,11 +39,10 @@ namespace AseTests
             Assert.AreEqual(30, makeRectangle.parameters[0]);
             Assert.AreEqual(40, makeRectangle.parameters[1]);
         }
-
-        [TestMethod]
         /// <summary>
         /// Testing the shape for rectangle
         /// </summary>
+        [TestMethod]
         public void testFactory_Rectangle_withCorrectValues_and_CaseSensitive()
         {
             // Set up
@@ -59,11 +58,11 @@ namespace AseTests
             Assert.AreEqual(30, makeRectangle.parameters[0]);
             Assert.AreEqual(40, makeRectangle.parameters[1]);
         }
-
-        [TestMethod]
         /// <summary>
         /// Testing the shape for Circle
         /// </summary>
+        [TestMethod]
+
         public void testFactory_Circle_withCorrectValues()
         {
             // Set up
@@ -80,11 +79,11 @@ namespace AseTests
             Assert.AreEqual(0, shape.X);
             Assert.AreEqual(10, shape.Y);
         }
-
-        [TestMethod]
         /// <summary>
         /// Testing the shape for Circle with correct value and testing the case sensitivity
         /// </summary>
+        [TestMethod]
+
         public void testFactory_Circle_withCorrectValuesand_CaseSensitive()
         {
             // Set up
@@ -102,11 +101,11 @@ namespace AseTests
             Assert.AreEqual(0, shape.X);
             Assert.AreEqual(10, shape.Y);
         }
-
-        [TestMethod]
         /// <summary>
         /// Testing the shape for Triangle with correct value
         /// </summary>
+        [TestMethod]
+
         public void testFactory_Triangle_withCorrectValues()
         {
             // Set up

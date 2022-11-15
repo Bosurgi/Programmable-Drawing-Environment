@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace AseTests
 {
+    /// <summary>
+    /// Test class to test the Parser functions. 
+    /// It will test how it validates the Commands, the parameters and multiple lines of commands.
+    /// </summary>
     [TestClass]
     public class ParserTest
     {

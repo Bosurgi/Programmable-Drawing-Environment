@@ -12,6 +12,9 @@ namespace AseTests
     [TestClass]
     public class Part2Tests
     {
+        /// <summary>
+        /// Testing the variables if they take a specific value
+        /// </summary>
         [TestMethod]
         public void TestVariables()
         {
