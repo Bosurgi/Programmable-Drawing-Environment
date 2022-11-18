@@ -14,6 +14,20 @@ namespace DrawingEnvironment
 
         /// <summary>
         /// Command parser which will divide the command and Parameters passed and store them into the attributes.
+        /// 
+        /// <example>Initialising the parser and then passing a string of commands in the ParseCommands method:
+        ///     <code>
+        ///         // Initialising parser and declaring Command
+        ///         Parser parser = new Parser();
+        ///         Command parsedCommand;
+        ///         
+        ///         // Taking user input
+        ///         string input = "Rectangle 100,200";
+        ///         
+        ///         // Parsed command
+        ///         parsedCommand = parser.ParseCommands(command);
+        ///     </code>
+        /// </example>
         /// </summary>
         /// <param name="cmd">the command the user writes in the command line</param>
         /// <exception cref="FormatException">exception thrown when parameter not numerical or invalid no. of Parameters</exception>
@@ -74,6 +88,21 @@ namespace DrawingEnvironment
 
         /// <summary>
         /// This method parses different lines of code in sequence by dividing the commands using \n new line key.
+        /// <example>
+        ///     Storing a list of Commands taken from multi line input:
+        ///         <code>
+        ///             // Initialising parser and list
+        ///             
+        ///             Parser parser = new Parser();
+        ///             List &lt;Command&gt; commands = new List&lt;Command&gt;();
+        ///             
+        ///             // The user input
+        ///             string multiLineInput = "Circle 100\nTriangle 30\nRectangle 30,40";
+        ///             
+        ///             // Parsing input
+        ///             commands = parser.ParseCommandMultiLine(multiLineInput);       
+        ///         </code>
+        /// </example>
         /// </summary>
         /// <param name="commands">the user input</param>
         /// <exception cref="FormatException">exception thrown when parameter not numerical or invalid no. of Parameters</exception>
@@ -111,6 +140,19 @@ namespace DrawingEnvironment
 
         /// <summary>
         /// Methods which checks if the commands is valid among the options available
+        /// <example>Checking if the command passed is a valid command:
+        ///     <code>
+        ///         // Initialising parser and boolean variable
+        ///         Parser parser = new Parser();
+        ///         bool isValid;
+        ///         
+        ///         // User Input
+        ///         string command = "Circle";
+        ///         
+        ///         // Storing the variable with parser method
+        ///         isValid = parser.isValidCommand(command);
+        ///     </code>
+        /// </example>
         /// </summary>
         /// <param name="userInput">the input inserted by the user</param>
         /// <returns>true if the command is present, and false if is not</returns>

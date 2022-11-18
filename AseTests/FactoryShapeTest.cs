@@ -122,11 +122,11 @@ namespace AseTests
             Assert.AreEqual(0, shape.X);
             Assert.AreEqual(10, shape.Y);
         }
-
-        [TestMethod]
         /// <summary>
         /// Testing the shape for Triangle with correct value and case sensitivity
         /// </summary>
+        [TestMethod]
+
         public void testFactory_Triangle_withCorrectValues_and_CaseSensitivity()
         {
             // Set up

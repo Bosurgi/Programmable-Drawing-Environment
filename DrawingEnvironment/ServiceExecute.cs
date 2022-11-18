@@ -295,7 +295,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Setting a shape to be fillable changing its attribute.
         /// </summary>
-        /// <param Name="shape">the shape we want to change the parameter</param>
+        /// <param name="shape">the shape we want to change the parameter</param>
         private void SetFill(Shape shape)
         {
             if (isFilling)
@@ -322,8 +322,8 @@ namespace DrawingEnvironment
         /// <summary>
         /// Deprecated method which takes a command Name and a list of Parameters to execute the right command based on command Name and its Parameters.
         /// </summary>
-        /// <param Name="command">the Name of the command</param>
-        /// <param Name="Parameters">the list of Parameters passed</param>
+        /// <param name="command">the Name of the command</param>
+        /// <param name="Parameters">the list of Parameters passed</param>
         public void ExecuteIfs(string command, int[] parameters)
         {
             if (command.Equals("RECTANGLE"))

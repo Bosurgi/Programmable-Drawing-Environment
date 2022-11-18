@@ -72,6 +72,13 @@
   </Class>
   <Class Name="DrawingEnvironment.Shape" Collapsed="true">
     <Position X="6" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="DrawingEnvironment.Shape.Shapes" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Shape.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>EAAAAAAAAgAABgAAAAgAAAAAABAAAAAAgAAAAAAAYAA=</HashCode>
       <FileName>Shape.cs</FileName>
