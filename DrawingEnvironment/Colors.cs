@@ -8,6 +8,7 @@ namespace DrawingEnvironment
 {
     /// <summary>
     /// Class representing colours. Other colours can be added here.
+    /// All the available colors are collected in this class and it allows to 
     /// </summary>
     abstract class Colors : Command
     {
@@ -16,10 +17,10 @@ namespace DrawingEnvironment
         /// </summary>
         public enum ColorTypes
         {
-            RED,
-            GREEN,
-            BLUE,
-            WHITE,
+            RED,    // 1
+            GREEN,  // 2
+            BLUE,   // 3
+            WHITE,  // 4
         }
     }
 }

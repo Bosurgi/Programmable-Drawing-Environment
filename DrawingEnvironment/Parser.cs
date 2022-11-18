@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace DrawingEnvironment
 {
+    /// <summary>
+    /// The Parser class is used to parse user inputs appropriately, and it will standarizing the user inputs,
+    /// eventually it will generate a command dividing the input and the parameters, checking if the parameters are valid numbers.
+    /// </summary>
     internal class Parser
     {
         /// <summary>
@@ -41,6 +45,7 @@ namespace DrawingEnvironment
             var splitLine = line.Split(' '); // Splitting the command and Parameters [0] command and [1] param            
             List<int> parsedParameters = new List<int>();
 
+            // More than two elements will need to throw an error as we expect only a command and a list of parameters.
             if (splitLine.Length > 2)
             {
                 throw new ArgumentException("Invalid number of Parameters");
@@ -66,6 +71,7 @@ namespace DrawingEnvironment
                         else if (parameters.Equals("OFF")) { parsedParameters.Add(0); }
                     }
 
+                    // Checking if the string passed on the parameters are valid integers
                     else if (!CheckNumbers(splitParam[i]))
                     {
                         throw new ArgumentException("Not numerical parameter");
@@ -80,7 +86,8 @@ namespace DrawingEnvironment
             }
             // if only command storing just command
             else { command = splitLine[0]; }
-
+            
+            // Initialising the command based on the parsed values
             Command parsedCommand = new Command(command, parsedParameters.ToArray());
 
             return parsedCommand;

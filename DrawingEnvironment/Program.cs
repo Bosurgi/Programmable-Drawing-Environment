@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace DrawingEnvironment
 {
+    /// <summary>
+    /// Program is the main entry point of the program where the program will start executing
+    /// </summary>
     internal static class Program
     {
         /// <summary>

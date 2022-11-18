@@ -25,10 +25,15 @@ namespace DrawingEnvironment
             TRIANGLE,  // 3
             LINE       // 4
         }
-        // Position of the shape
+        /// <summary>
+        /// Position attributes for the Shape
+        /// </summary>
         internal int X { get; set; }
         internal int Y { get; set; }
 
+        /// <summary>
+        /// Filling toggle ON/OFF flag
+        /// </summary>
         internal bool isFill;
 
         // Color of the shape

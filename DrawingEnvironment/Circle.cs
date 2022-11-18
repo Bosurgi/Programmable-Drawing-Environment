@@ -25,7 +25,6 @@ namespace DrawingEnvironment
         /// Drawing method to display a circle in a canvas if fill on it will fill the area if not just drawing the shape empty.
         /// </summary>
         /// <param name="graphics">the graphic object where to draw</param>
-        /// <param name="pen">the pen to draw the circle</param>
         public override void Draw(Graphics graphics)
         {
             if (!isFill)
@@ -56,6 +55,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Circle shape constructor
         /// </summary>
+        /// <param name="colour">the color of the circle</param>
         /// <param name="radius">the radius of the circle</param>
         /// <param name="x">the x position of the circle</param>
         /// <param name="y">the y position of the circle</param>
@@ -68,7 +68,7 @@ namespace DrawingEnvironment
         /// Constructor for the Circle with just position and radius.
         /// </summary>
         /// <param name="x">X position</param>
-        /// <param name="y">y position</param>
+        /// <param name="y">Y position</param>
         /// <param name="radius">the radius of the circle</param>
         public Circle(int x, int y, float radius) : base(x, y)
         {

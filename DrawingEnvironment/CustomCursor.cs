@@ -44,9 +44,9 @@ namespace DrawingEnvironment
         /// Method to refresh the position of the cursor.
         /// Making the previous one transparent and drawing a new one.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="g"></param>
+        /// <param name="x">new X position of the cursor</param>
+        /// <param name="y">new Y position of the cursor</param>
+        /// <param name="g">the graphic element where to draw the cursor</param>
         public void UpdatePosition(int x, int y, Graphics g)
         {             
             Bitmap updatedCursor = new Bitmap(10, 10);

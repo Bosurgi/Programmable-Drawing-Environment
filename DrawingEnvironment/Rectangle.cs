@@ -12,7 +12,9 @@ namespace DrawingEnvironment
     /// </summary>
     internal class Rectangle : Shape
     {
-        // Rectangle properties
+        /// <summary>
+        /// Rectangle properties, width and Height which defines the Rectangle shape
+        /// </summary>
         private int Width { get; set; }
         private int Height { get; set; }
 
@@ -39,7 +41,6 @@ namespace DrawingEnvironment
 
         }
 
-
         /// <summary>
         /// Draw method to draw a rectangle on the canvas.
         /// </summary>
@@ -58,8 +59,7 @@ namespace DrawingEnvironment
                 brush = new SolidBrush(colour);
                 graphics.FillRectangle(brush, X, Y, Width, Height);               
                 brush.Dispose();
-            }
-            
+            }           
         }
 
         /// <summary>

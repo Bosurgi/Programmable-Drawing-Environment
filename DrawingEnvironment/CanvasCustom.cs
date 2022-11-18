@@ -36,7 +36,5 @@ namespace DrawingEnvironment
         {
             return g;
         }
-
-
     }
 }

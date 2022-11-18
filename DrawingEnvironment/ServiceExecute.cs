@@ -6,6 +6,7 @@ using System.Windows.Forms;
 namespace DrawingEnvironment
 {
     /// <summary>
+    /// The service class uses the Dependency injection design patter.
     /// The service class is used to process the information provided by the form.
     /// The service will take most of the elements from the form and it will process it.
     /// It will take care of executing the commands and drawing on the graphical object.
@@ -25,8 +26,8 @@ namespace DrawingEnvironment
         CustomCursor pointer = new CustomCursor();
         Label ErrorLabel = new Label();
         Label PositionLabel;
-
         TextBox programmingArea;
+        // The list where the commands are going to be stored
         List<Command> CommandList;
 
         // The line counter for the multiline execution
@@ -76,10 +77,12 @@ namespace DrawingEnvironment
             switch (command.Name)
             {
                 //******************
-                //   SHAPES
+                //      SHAPES
                 //******************
 
-                // Rectangle
+                //------------
+                //  Rectangle
+                //------------
                 case "RECTANGLE":
                     try
                     {
@@ -105,7 +108,9 @@ namespace DrawingEnvironment
                     catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid Parameters at line:  " + lineCounter + "\nRectangle <width> , <height> NOTE: Use the comma between Parameters."; }
                     break;
 
-                // Circle
+                //----------
+                //  Circle
+                //----------
                 case "CIRCLE":
                     try
                     {
@@ -130,7 +135,10 @@ namespace DrawingEnvironment
                     catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid Parameters at line: " + lineCounter + "\nCircle <Radius>"; }
                     break;
 
-                // Triangle
+
+                //------------
+                //  Triangle
+                //------------
                 case "TRIANGLE":
 
                     try
@@ -155,11 +163,13 @@ namespace DrawingEnvironment
                     catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid parameter - Triangle <Length>"; }
                     break;
 
-                //*******************
-                // GENERAL COMMANDS
-                //*******************
+                //*********************
+                //  GENERAL COMMANDS
+                //*********************
 
-                // Moving the cursor
+                //--------------------
+                //  Moving the cursor
+                //--------------------
                 case "MOVETO":
                     // Max Parameters 2 - X, Y
                     if (command.Parameters.Length > 2)
@@ -183,7 +193,9 @@ namespace DrawingEnvironment
                         break;
                     }
 
-                // Command to draw a line from the pointer to a set point
+                //---------------------
+                //  Draw line to X, Y
+                //---------------------
                 case "DRAWTO":
                     if (command.Parameters.Length > 2)
 
@@ -205,7 +217,9 @@ namespace DrawingEnvironment
                         break;
                     }
 
-                // Clear function.
+                //--------------------
+                //  Clear the screen
+                //--------------------
                 case "CLEAR":
                     try
                     {
@@ -220,7 +234,9 @@ namespace DrawingEnvironment
                     catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid Parameters at line: " + lineCounter + "\nClear"; }
                     break;
 
-                // Reset Function
+                //---------------------------
+                //  Reset cursor and colour
+                //---------------------------
                 case "RESET":
                     try
                     {
@@ -238,7 +254,9 @@ namespace DrawingEnvironment
                     catch (FormatException) { ErrorLabel.Text = "Invalid Command"; }
                     break;
 
-                // FIlling command options
+                //---------------------
+                //  Fill toggle ON/OFF
+                //---------------------
                 case "FILL":
                     try
                     {
@@ -259,14 +277,15 @@ namespace DrawingEnvironment
                     }
                     catch (FormatException) { ErrorLabel.Text = "Invalid Parameters at line: " + lineCounter + "\nFill <ON> or <OFF>"; }
                     break;
-
-                // Run command
+                //---------------
+                //  Run command
+                //---------------
                 case "RUN":
                     ExecuteService(programmingArea.Text);
                     break;
 
                 //***************
-                //  COLOURS
+                //   COLOURS
                 //***************
 
                 case "RED":
@@ -299,10 +318,10 @@ namespace DrawingEnvironment
         private void SetFill(Shape shape)
         {
             if (isFilling)
-            {
-                shape.isFill = true;
-            }
-            else { shape.isFill = false; }
+            { shape.isFill = true; }
+
+            else
+            { shape.isFill = false; }
         }
 
         /// <summary>
@@ -312,190 +331,13 @@ namespace DrawingEnvironment
         internal bool GetFill()
         {
             if (isFilling)
-            {
-                return true;
-            }
-            else { return false; }
+
+            { return true; }
+
+            else
+
+            { return false; }
         }
-
-
-        /// <summary>
-        /// Deprecated method which takes a command Name and a list of Parameters to execute the right command based on command Name and its Parameters.
-        /// </summary>
-        /// <param name="command">the Name of the command</param>
-        /// <param name="Parameters">the list of Parameters passed</param>
-        public void ExecuteIfs(string command, int[] parameters)
-        {
-            if (command.Equals("RECTANGLE"))
-            {
-                try
-                {
-                    Rectangle rect = new Rectangle(pointer.X, pointer.Y, parameters[0], parameters[1]);
-                    if (isFilling)
-                    {
-                        SetFill(rect);
-                    }
-                    rect.SetColour(pen.Color);
-                    rect.Draw(g);
-                }
-                catch (ArgumentException) { ErrorLabel.Text = "Line: " + lineCounter + "\nInvalid parameter"; }
-                catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid Parameters at line:  " + lineCounter + "\nRectangle <width> , <height> NOTE: Use the comma between Parameters."; }
-            }
-
-            if (command.Equals("MOVETO"))
-            {
-                try
-                {
-                    // assigning X and Y values to the pointer
-                    pointer.UpdatePosition(parameters[0], parameters[1], g);
-                    pointer.SetColour(pointer.colour);
-
-                    // Updating the cursor
-                    PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
-                }
-                catch (FormatException) { ErrorLabel.Text = "Invalid Parameter"; }
-                catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid Parameters at line: " + lineCounter + "\nMoveto <x Value> , <y Value> NOTE: Use the comma between Parameters."; }
-
-            }
-            // Command Circle draw a circle
-            if (command.Equals("CIRCLE"))
-            {
-                try
-                {
-                    Circle circle = new Circle(pointer.X, pointer.Y, parameters[0]);
-
-                    if (isFilling)
-                    {
-                        SetFill(circle);
-                    }
-                    circle.SetColour(pen.Color);
-                    circle.Draw(g);
-                }
-
-                catch (FormatException) { ErrorLabel.Text = "Invalid Parameter"; }
-                catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid Parameters at line: " + lineCounter + "\nCircle <Radius>"; }
-            }
-
-
-            // Triangle figure
-            if (command.Equals("TRIANGLE"))
-            {
-                try
-                {
-                    Triangle tri = new Triangle(parameters[0], pointer.X, pointer.Y);
-                    if (isFilling)
-                    {
-                        SetFill(tri);
-                    }
-                    tri.SetColour(pen.Color);
-                    tri.Draw(g);
-                }
-                catch (FormatException) { ErrorLabel.Text = "Invalid Parameters at line: " + lineCounter + "\nTriangle <Length>"; }
-                catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid parameter - Triangle <Length>"; }
-            }
-
-
-            // Command to draw a line from the pointer to a set point
-            if (command.Equals("DRAWTO"))
-            {
-                try
-                {
-                    g.DrawLine(pen, pointer.X, pointer.Y, parameters[0], parameters[1]);
-                    pointer.UpdatePosition(parameters[0], parameters[1], g);
-                    // Update label positions
-                    PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
-                }
-
-                catch (FormatException) { ErrorLabel.Text = "Invalid Parameter"; }
-                catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid Parameters at line: " + lineCounter + "\ndrawTo <x Value> , <y Value> NOTE: Use the comma between Parameters."; }
-            }
-
-            // Clear function.
-            if (command.Equals("CLEAR"))
-            {
-                try
-                {
-                    {
-                        // Refreshing the canvas without deleting the pointer.                 
-                        g.Clear(Color.Black);
-                        pointer.Draw(g);
-                        ErrorLabel.Text = "";
-                    }
-                }
-                catch (FormatException) { ErrorLabel.Text = "Invalid Command"; }
-                catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid Parameters at line: " + lineCounter + "\nClear"; }
-            }
-
-            // Reset Function
-            if (command.Equals("RESET"))
-            {
-                try
-                {
-                    {
-                        // Refreshing the canvas without deleting the pointer.                      
-                        pointer.X = 0;
-                        pointer.Y = 0;
-                        PositionLabel.Text = "X: " + pointer.X.ToString() + " ,Y: " + pointer.Y.ToString();
-                        isFilling = false;
-                        g.Clear(Color.Black);
-                        pen.Color = Color.White;
-                        pointer.SetColour(pen.Color);
-                        pointer.Draw(g);
-                    }
-                }
-                catch (FormatException) { ErrorLabel.Text = "Invalid Command"; }
-            }
-
-            // Filling commands options
-            try
-            {
-                if (command.Equals("FILL"))
-                {
-                    if (parameters.Length == 0)
-                    {
-                        throw new FormatException("Invalid parameter");
-                    }
-                    // If command 1 it should be ON
-                    else if (parameters[0] == 1)
-                    {
-                        isFilling = true;
-                    }
-                    // If command 0 = it should be OFF
-                    else if (parameters[0] == 0)
-                    {
-                        isFilling = false;
-                    }
-                }
-            }
-            catch (FormatException) { ErrorLabel.Text = "Invalid Parameters at line: " + lineCounter + "\nFill <ON> or <OFF>"; }
-            //***************
-            //  COLOURS
-            //***************
-            if (command.Equals("RED"))
-            {
-                pointer.SetColour(Color.Red);
-                pen.Color = Color.Red;
-            }
-
-            if (command.Equals("GREEN"))
-            {
-                pointer.SetColour(Color.Green);
-                pen.Color = Color.Green;
-            }
-
-            if (command.Equals("BLUE"))
-            {
-                pointer.SetColour(Color.Blue);
-                pen.Color = Color.Blue;
-            }
-
-            if (command.Equals("WHITE"))
-            {
-                pointer.SetColour(Color.White);
-                pen.Color = Color.White;
-            }
-        } // End of Method
-
 
         /// <summary>
         /// Constructor for the service which will be used to execute the commands out of the Form context
@@ -506,6 +348,7 @@ namespace DrawingEnvironment
         /// <param name="errorLabel">the error label to display the messages on the form</param>
         /// <param name="LablePosition">the label which manages the current position of the cursor</param>
         /// <param name="isFilling">the current state of the filling function</param>
+        /// <param name="programmingArea">the programming area text box from the form</param>
         public ServiceExecute(Graphics g, Pen pen, CustomCursor pointer, Label errorLabel, Label LablePosition, bool isFilling, TextBox programmingArea)
         {
             this.g = g;
