@@ -45,8 +45,15 @@ namespace DrawingEnvironment
             var splitLine = line.Split(' '); // Splitting the command and Parameters [0] command and [1] param            
             List<int> parsedParameters = new List<int>();
 
+            // TODO: Checking for variables
+            if (CheckVariables(cmd))
+            {
+                Variable variable = ParseVariable(cmd);
+                return variable;
+            }
+
             // More than two elements will need to throw an error as we expect only a command and a list of parameters.
-            if (splitLine.Length > 2)
+            else if (splitLine.Length > 2)
             {
                 throw new ArgumentException("Invalid number of Parameters");
             }
@@ -152,7 +159,7 @@ namespace DrawingEnvironment
         /// <returns>true if there is an assign sign false otherwise</returns>
         public bool CheckVariables(string input)
         {
-            if(!input.Contains('='))
+            if (!input.Contains('='))
             {
                 return false;
             }
@@ -209,12 +216,18 @@ namespace DrawingEnvironment
         {
             // Parsing the input and normalize it
             string[] parsedInput = input.Trim().ToUpper().Split('=');
-            // Converting the second element of the input which should be an integer
-            int value = Convert.ToInt32(parsedInput[1].Trim());
 
-            // Assigning the parameters to the Variable
-            Variable variable = new Variable(parsedInput[0], value);
-            return variable;
+            // If the value is an accepted integer then the value will be assigned.
+            if (Int32.TryParse(parsedInput[1], out int value))
+            {
+                value = Convert.ToInt32(parsedInput[1].Trim());
+                int[] parsedValue = { value };
+                
+                // returning the variable
+                Variable variable = new Variable(parsedInput[0], parsedValue);
+                return variable;
+            }
+            else { return null; }
         }
 
         /// <summary>

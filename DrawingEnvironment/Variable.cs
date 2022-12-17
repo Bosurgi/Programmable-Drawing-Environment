@@ -13,24 +13,14 @@ namespace DrawingEnvironment
     public class Variable : Command
     {
         /// <summary>
-        /// The value of the variable
-        /// </summary>
-        private int value { get; set; }
-
-        /// <summary>
-        /// The name of the Variable
-        /// </summary>
-        private string name { get; set; }
-
-        /// <summary>
-        /// Constructor for Variable
+        /// Constructor for variables which assigns name and values
         /// </summary>
         /// <param name="name">the name of the variable</param>
-        /// <param name="value">the value of the variable</param>
-        public Variable(string name, int value)
+        /// <param name="parameters">the value of the variable</param>
+        public Variable(string name, int[] parameters) : base(name, parameters)
         {
-            this.name = name;
-            this.value = value;
+            this.Name = name;
+            this.Parameters = parameters;
         }
 
         /// <summary>
@@ -38,7 +28,6 @@ namespace DrawingEnvironment
         /// </summary>
         public Variable()
         {
-
         }
     }
 }

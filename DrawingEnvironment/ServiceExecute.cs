@@ -30,6 +30,10 @@ namespace DrawingEnvironment
         // The list where the commands are going to be stored
         List<Command> CommandList;
 
+        // The list of variables and variables flag
+        List<Variable> VariableList = new List<Variable>();
+        bool isVariable;
+
         // The line counter for the multiline execution
         int lineCounter = 1;
 
@@ -53,7 +57,14 @@ namespace DrawingEnvironment
                     CommandList = parser.ParseCommandMultiLine(command);
                     for (int i = 0; i < CommandList.Count; i++)
                     {
-                        if (parser.isValidCommand(CommandList[i].Name))
+                        // TODO: implement variable control
+                        if (CommandList[i].GetType().Equals(typeof(Variable)))
+                        {
+                            isVariable= true;
+                            VariableList.Add((Variable)CommandList[i]);
+                        }
+
+                        else if (parser.isValidCommand(CommandList[i].Name))
                         {
                             // Executing the command with Execute method
                             Execute(CommandList[i]);
