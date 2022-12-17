@@ -15,6 +15,7 @@ namespace DrawingEnvironment
         /// This will help to keep track where an error is thrown.
         /// </summary>
         public int LineCounter { get; set; }
+        public List<Variable> VariableList = new List<Variable>();
 
         /// <summary>
         /// Command parser which will divide the command and Parameters passed and store them into the attributes.
@@ -78,8 +79,14 @@ namespace DrawingEnvironment
                         else if (parameters.Equals("OFF")) { parsedParameters.Add(0); }
                     }
 
+                    // TODO: Implement this
+                    else if (VariableList.Count > 0)
+                    {
+                        parsedParameters.Add(VariableList[0].Parameters[0]);
+                    }
+
                     // Checking if the string passed on the parameters are valid integers
-                    else if (!CheckNumbers(splitParam[i]))
+                    else if (!CheckNumbers(splitParam[i]) && VariableList.Count.Equals(0))
                     {
                         throw new ArgumentException("Not numerical parameter");
                     }
@@ -225,9 +232,28 @@ namespace DrawingEnvironment
                 
                 // returning the variable
                 Variable variable = new Variable(parsedInput[0], parsedValue);
+                VariableList.Add(variable);
                 return variable;
             }
             else { return null; }
+        }
+
+        /// <summary>
+        /// It returns the list of variables to be used.
+        /// </summary>
+        /// <returns>the list of variables</returns>
+        public List<Variable> GetVariables()
+        {
+            return VariableList;
+        }
+
+        /// <summary>
+        /// Setter for the Variable list
+        /// </summary>
+        /// <param name="listVariable"></param>
+        public void SetListVariable(List<Variable> listVariable)
+        {
+            this.VariableList = listVariable;
         }
 
         /// <summary>

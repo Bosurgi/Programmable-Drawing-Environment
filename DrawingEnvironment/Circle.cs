@@ -53,6 +53,18 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
+        /// It sets the circle shape using variables parameters
+        /// </summary>
+        /// <param name="color">the color of the cirlce</param>
+        /// <param name="parameterList">the list of Parameters the circle takes.</param>
+        /// <param name="variable">the variable used for the circle</param>
+        public void Set(Color color, int[] parameterList, Variable variable)
+        {
+            base.Set(colour, parameterList[0], parameterList[1]);
+            this.Radius = variable.Parameters[0];
+        }
+
+        /// <summary>
         /// Circle shape constructor
         /// </summary>
         /// <param name="colour">the color of the circle</param>
@@ -81,6 +93,6 @@ namespace DrawingEnvironment
         public Circle() : base()
         {
 
-        }        
+        }
     }
 }

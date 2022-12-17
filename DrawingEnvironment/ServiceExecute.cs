@@ -19,6 +19,7 @@ namespace DrawingEnvironment
         Graphics g;
         Pen pen;
         bool isFilling;
+
         // Initialising the Parser.
         Parser parser = new Parser();
         ShapeFactory factory = new ShapeFactory(); // Factory for generating the shapes.
@@ -32,7 +33,6 @@ namespace DrawingEnvironment
 
         // The list of variables and variables flag
         List<Variable> VariableList = new List<Variable>();
-        bool isVariable;
 
         // The line counter for the multiline execution
         int lineCounter = 1;
@@ -53,15 +53,15 @@ namespace DrawingEnvironment
 
                 else
                 {
-                    // Parsing the commands from the user
+                    // Parsing the commands from the user                                        
                     CommandList = parser.ParseCommandMultiLine(command);
                     for (int i = 0; i < CommandList.Count; i++)
                     {
-                        // TODO: implement variable control
+                        // TODO: implement usable variables
                         if (CommandList[i].GetType().Equals(typeof(Variable)))
                         {
-                            isVariable= true;
                             VariableList.Add((Variable)CommandList[i]);
+                            parser.SetListVariable(VariableList);
                         }
 
                         else if (parser.isValidCommand(CommandList[i].Name))
@@ -129,6 +129,13 @@ namespace DrawingEnvironment
 
                         {
                             throw new IndexOutOfRangeException();
+                        }
+
+                        // TODO: Implementing a way to read the variables parameters
+                        else if (command.Parameters[0].Equals(VariableList[0].Name))
+                        {
+                            Shape circ = factory.GetShape(command.Name);
+                            circ.Set(pen.Color, pointer.X, pointer.Y, VariableList[0].Parameters[0]);
                         }
                         else
                         {
