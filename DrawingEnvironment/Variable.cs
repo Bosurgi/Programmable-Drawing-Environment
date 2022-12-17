@@ -9,19 +9,36 @@ namespace DrawingEnvironment
     /// <summary>
     /// Class which defines Variables - Part 2
     /// Variables will allow users to set different variables and use the stored value later
-    /// TODO: to be implemented
     /// </summary>
     public class Variable : Command
     {
-        // The value of the variable
+        /// <summary>
+        /// The value of the variable
+        /// </summary>
         private int value { get; set; }
 
         /// <summary>
-        /// Constructor for the variable class - Empty at the moment
+        /// The name of the Variable
+        /// </summary>
+        private string name { get; set; }
+
+        /// <summary>
+        /// Constructor for Variable
+        /// </summary>
+        /// <param name="name">the name of the variable</param>
+        /// <param name="value">the value of the variable</param>
+        public Variable(string name, int value)
+        {
+            this.name = name;
+            this.value = value;
+        }
+
+        /// <summary>
+        /// Empty constructor for a Variable
         /// </summary>
         public Variable()
         {
-            // TODO: implementing the variable class and constructor
+
         }
     }
 }

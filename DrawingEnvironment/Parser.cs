@@ -51,7 +51,7 @@ namespace DrawingEnvironment
                 throw new ArgumentException("Invalid number of Parameters");
             }
             // If line has arguments then dividing Parameters and commands accordingly
-            else if( splitLine.Length == 2)
+            else if (splitLine.Length == 2)
             {
                 // Splitting the commands: 0 command and 1 for Parameters.
                 command = splitLine[0];
@@ -59,7 +59,7 @@ namespace DrawingEnvironment
 
                 // Splitting Parameters with comma
                 var splitParam = parameters.Split(',');
-                
+
                 // For each parameter after the split
                 for (int i = 0; i < splitParam.Length; i++)
                 {
@@ -86,7 +86,7 @@ namespace DrawingEnvironment
             }
             // if only command storing just command
             else { command = splitLine[0]; }
-            
+
             // Initialising the command based on the parsed values
             Command parsedCommand = new Command(command, parsedParameters.ToArray());
 
@@ -119,11 +119,11 @@ namespace DrawingEnvironment
             List<Command> commandList = new List<Command>();
             var splitCommands = commands.Split('\n');
             LineCounter = 0;
-            
+
             for (int i = 0; i < splitCommands.Length; i++)
             {
-                    LineCounter++; // Updating LineCounter to keep track of the line executing.
-                    commandList.Add(ParseCommands(splitCommands[i])); // applying the single line parsecommand to the current line and adding it to the list.
+                LineCounter++; // Updating LineCounter to keep track of the line executing.
+                commandList.Add(ParseCommands(splitCommands[i])); // applying the single line parsecommand to the current line and adding it to the list.
             }
             return commandList;
         }
@@ -143,6 +143,21 @@ namespace DrawingEnvironment
                 return false;
             }
             else return true;
+        }
+
+        /// <summary>
+        /// It checks if in the user input there is a possible variable.
+        /// </summary>
+        /// <param name="input">the user input passed on command line</param>
+        /// <returns>true if there is an assign sign false otherwise</returns>
+        public bool CheckVariables(string input)
+        {
+            if(!input.Contains('='))
+            {
+                return false;
+            }
+
+            else { return true; }
         }
 
         /// <summary>
@@ -183,6 +198,23 @@ namespace DrawingEnvironment
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// It parses the user input to assign a value and a variable name.
+        /// </summary>
+        /// <param name="input">the user input</param>
+        /// <returns>the variable the user wants to assign the value to</returns>
+        public Variable ParseVariable(string input)
+        {
+            // Parsing the input and normalize it
+            string[] parsedInput = input.Trim().ToUpper().Split('=');
+            // Converting the second element of the input which should be an integer
+            int value = Convert.ToInt32(parsedInput[1].Trim());
+
+            // Assigning the parameters to the Variable
+            Variable variable = new Variable(parsedInput[0], value);
+            return variable;
         }
 
         /// <summary>
