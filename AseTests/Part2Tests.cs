@@ -1,6 +1,7 @@
 ﻿using DrawingEnvironment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AseTests
 {
@@ -13,19 +14,60 @@ namespace AseTests
     public class Part2Tests
     {
         /// <summary>
-        /// Testing the variables if they take a specific value
+        /// Testing the variables if they take a specific value in lower case
         /// </summary>
         [TestMethod]
-        public void TestVariables()
+        public void TestVariablesValues_LowerCase()
         {
             // set up
             Parser parser = new Parser();
 
             // act
-            Variable variable = (Variable)parser.ParseCommands("x = 5");
+            Variable x = parser.ParseVariable("x=10");
+            Variable y = parser.ParseVariable("y=100");
+
 
             // assert
-            Assert.AreEqual(variable.Parameters, 5);
+            Assert.AreEqual(10, x.Parameters[0]);
+            Assert.AreEqual(100, y.Parameters[0]);
+        }
+
+        /// <summary>
+        /// Testing the variables if they take a specific value in upper case
+        /// </summary>
+        [TestMethod]
+        public void TestVariablesValues_UpperCase()
+        {
+            // set up
+            Parser parser = new Parser();
+
+            // act
+
+            Variable x = parser.ParseVariable("X=50");
+            Variable y = parser.ParseVariable("Y=150");
+
+            // Assert
+            Assert.AreEqual(50, x.Parameters[0]);
+            Assert.AreEqual(150, y.Parameters[0]);
+        }
+
+        /// <summary>
+        /// Testing the variables if they take a specific name
+        /// </summary>
+        [TestMethod]
+        public void TestVariablesName()
+        {
+            // set up
+            Parser parser = new Parser();
+
+            // act
+
+            Variable x = parser.ParseVariable("X=50");
+            Variable y = parser.ParseVariable("Y=150");
+
+            // Assert
+            Assert.AreEqual("X", x.Name);
+            Assert.AreEqual("Y", y.Name);
         }
 
         /// <summary>
