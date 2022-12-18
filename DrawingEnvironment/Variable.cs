@@ -8,7 +8,7 @@ namespace DrawingEnvironment
 {
     /// <summary>
     /// Class which defines Variables - Part 2
-    /// Variables will allow users to set different variables and use the stored value later
+    /// Variables allow users to set different variables and use the stored value later.
     /// </summary>
     public class Variable : Command
     {

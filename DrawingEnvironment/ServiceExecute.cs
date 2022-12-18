@@ -55,22 +55,16 @@ namespace DrawingEnvironment
                 {
                     // Parsing the commands from the user and populating the list of commands                                       
                     CommandList = parser.ParseCommandMultiLine(command);
-                   
+
                     for (int i = 0; i < CommandList.Count; i++)
                     {
-                        
-                        // Checking if there are variables in Command list
+                        // Checking if there are variables in Command list - Variables are inherited from Commands
                         if (CommandList[i].GetType().Equals(typeof(Variable)))
                         {
-                            // Adding variable to the Service List                            
-                            VariableList.Add((Variable)CommandList[i]);
-                            
-                            
-                            // Updating the parser's list of variables
+                            // Refreshing the parser's list of variables in use
                             parser.SetListVariable(VariableList);
-                            
                         }
-                       
+
                         else if (parser.isValidCommand(CommandList[i].Name))
                         {
                             // Executing the command with Execute method
@@ -138,12 +132,6 @@ namespace DrawingEnvironment
                             throw new IndexOutOfRangeException();
                         }
 
-                        // TODO: Fix multiple variables
-                        else if (command.Parameters[0].Equals(VariableList[0].Name))
-                        {
-                            Shape circ = factory.GetShape(command.Name);
-                            circ.Set(pen.Color, pointer.X, pointer.Y, VariableList[0].Parameters[0]);
-                        }
                         else
                         {
                             Shape circ = factory.GetShape(command.Name);

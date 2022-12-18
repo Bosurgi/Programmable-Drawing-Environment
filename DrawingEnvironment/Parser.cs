@@ -18,7 +18,7 @@ namespace DrawingEnvironment
         public List<Variable> VariableList = new List<Variable>();
 
         // Dictionary which will store unique key pairs for the Variables stored in memory
-        public Dictionary<string, int> VariableDictionary= new Dictionary<string, int>();      
+        public Dictionary<string, int> VariableDictionary = new Dictionary<string, int>();
 
         /// <summary>
         /// Command parser which will divide the command and Parameters passed and store them into the attributes.
@@ -52,8 +52,8 @@ namespace DrawingEnvironment
             // If variable detected in user input it will parse into a Variable
             if (CheckVariables(cmd))
             {
-                Variable variable = ParseVariable(cmd);      
-                
+                Variable variable = ParseVariable(cmd);
+
                 VariableDictionary.Add(variable.Name, variable.Parameters[0]); // Update the dictionary
                 return variable;
             }
@@ -71,7 +71,7 @@ namespace DrawingEnvironment
                 parameters = splitLine[1];
 
                 // Splitting Parameters with comma
-                var splitParam = parameters.Split(',');                            
+                var splitParam = parameters.Split(',');
 
                 // For each parameter after the split
                 for (int i = 0; i < splitParam.Length; i++)
@@ -178,16 +178,6 @@ namespace DrawingEnvironment
             else { return true; }
         }
 
-        /*
-        public int SetVariableParameter(List<Variable> variableList)
-        {
-            for (int i = 0; i < variableList.Count; i++)
-            {
-                if (variableList[i].Name.Equals())
-            }
-        }
-        */
-
         /// <summary>
         /// Methods which checks if the commands is valid among the options available
         /// <example>Checking if the command passed is a valid command:
@@ -252,7 +242,7 @@ namespace DrawingEnvironment
             }
             else { return null; }
         }
-        
+
         /// <summary>
         /// It returns the list of variables to be used.
         /// </summary>
@@ -261,8 +251,7 @@ namespace DrawingEnvironment
         {
             return VariableList;
         }
-        
-        
+
         /// <summary>
         /// Setter for the Variable list
         /// </summary>
@@ -271,7 +260,6 @@ namespace DrawingEnvironment
         {
             this.VariableList = listVariable;
         }
-        
 
         /// <summary>
         /// Empty constructor to initialise the parser
