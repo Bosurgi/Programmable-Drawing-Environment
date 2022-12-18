@@ -71,6 +71,17 @@
         }
 
         /// <summary>
+        /// Constructor taking the command name and the variable parameters
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="variable"></param>
+        public Command(string name, Variable variable)
+        {
+            this.Name = name;
+            this.Parameters = variable.Parameters;
+        }
+
+        /// <summary>
         /// Empty Constructor for command class.
         /// </summary>
         public Command()

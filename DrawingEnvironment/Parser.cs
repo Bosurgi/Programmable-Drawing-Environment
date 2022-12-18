@@ -17,6 +17,9 @@ namespace DrawingEnvironment
         public int LineCounter { get; set; }
         public List<Variable> VariableList = new List<Variable>();
 
+        // Dictionary which will store unique key pairs for the Variables stored in memory
+        public Dictionary<string, int> VariableDictionary= new Dictionary<string, int>();      
+
         /// <summary>
         /// Command parser which will divide the command and Parameters passed and store them into the attributes.
         /// 
@@ -46,10 +49,12 @@ namespace DrawingEnvironment
             var splitLine = line.Split(' '); // Splitting the command and Parameters [0] command and [1] param            
             List<int> parsedParameters = new List<int>();
 
-            // TODO: Checking for variables
+            // If variable detected in user input it will parse into a Variable
             if (CheckVariables(cmd))
             {
-                Variable variable = ParseVariable(cmd);
+                Variable variable = ParseVariable(cmd);      
+                
+                VariableDictionary.Add(variable.Name, variable.Parameters[0]); // Update the dictionary
                 return variable;
             }
 
@@ -66,27 +71,25 @@ namespace DrawingEnvironment
                 parameters = splitLine[1];
 
                 // Splitting Parameters with comma
-                var splitParam = parameters.Split(',');
+                var splitParam = parameters.Split(',');                            
 
                 // For each parameter after the split
                 for (int i = 0; i < splitParam.Length; i++)
                 {
+                    if (VariableDictionary.ContainsKey(splitParam[i]))
+                    {
+                        parsedParameters.Add(VariableDictionary[splitParam[i]]);
+                    }
                     // Handling the only command with literals Parameters (ON and OFF)
-                    if (command.Equals("FILL") && parameters != null)
+                    else if (command.Equals("FILL") && parameters != null)
                     {
                         // Sets value 1 for On and Value 0 to OFF
                         if (parameters.Equals("ON")) { parsedParameters.Add(1); }
                         else if (parameters.Equals("OFF")) { parsedParameters.Add(0); }
                     }
 
-                    // TODO: Implement this
-                    else if (VariableList.Count > 0)
-                    {
-                        parsedParameters.Add(VariableList[0].Parameters[0]);
-                    }
-
                     // Checking if the string passed on the parameters are valid integers
-                    else if (!CheckNumbers(splitParam[i]) && VariableList.Count.Equals(0))
+                    else if (!CheckNumbers(splitParam[i]) /*&& VariableList.Count.Equals(0)*/)
                     {
                         throw new ArgumentException("Not numerical parameter");
                     }
@@ -97,6 +100,7 @@ namespace DrawingEnvironment
                         parsedParameters.Add(Convert.ToInt32(splitParam[i]));
                     }
                 }
+
             }
             // if only command storing just command
             else { command = splitLine[0]; }
@@ -174,6 +178,16 @@ namespace DrawingEnvironment
             else { return true; }
         }
 
+        /*
+        public int SetVariableParameter(List<Variable> variableList)
+        {
+            for (int i = 0; i < variableList.Count; i++)
+            {
+                if (variableList[i].Name.Equals())
+            }
+        }
+        */
+
         /// <summary>
         /// Methods which checks if the commands is valid among the options available
         /// <example>Checking if the command passed is a valid command:
@@ -215,7 +229,7 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
-        /// It parses the user input to assign a value and a variable name.
+        /// It parses the user input to assign a value and a variable name, it then updates the list of Variables
         /// </summary>
         /// <param name="input">the user input</param>
         /// <returns>the variable the user wants to assign the value to</returns>
@@ -229,15 +243,16 @@ namespace DrawingEnvironment
             {
                 value = Convert.ToInt32(parsedInput[1].Trim());
                 int[] parsedValue = { value };
-                
-                // returning the variable
+
+                // Initialising the variables with the parsed values
                 Variable variable = new Variable(parsedInput[0], parsedValue);
-                VariableList.Add(variable);
+                // Adding the variable to the list
+                //VariableList.Add(variable);
                 return variable;
             }
             else { return null; }
         }
-
+        
         /// <summary>
         /// It returns the list of variables to be used.
         /// </summary>
@@ -246,7 +261,8 @@ namespace DrawingEnvironment
         {
             return VariableList;
         }
-
+        
+        
         /// <summary>
         /// Setter for the Variable list
         /// </summary>
@@ -255,6 +271,7 @@ namespace DrawingEnvironment
         {
             this.VariableList = listVariable;
         }
+        
 
         /// <summary>
         /// Empty constructor to initialise the parser
