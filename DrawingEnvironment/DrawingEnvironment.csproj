@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="CanvasCustom.cs" />
     <Compile Include="Circle.cs" />
+    <Compile Include="Expression.cs" />
+    <Compile Include="Loop.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Colors.cs" />
     <Compile Include="Triangle.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace DrawingEnvironment
 {
@@ -259,6 +260,18 @@ namespace DrawingEnvironment
         public void SetListVariable(List<Variable> listVariable)
         {
             this.VariableList = listVariable;
+        }
+
+        /// <summary>
+        /// Parsing a mathematical expression, performing the calculation.
+        /// </summary>
+        /// <param name="input">the user input</param>
+        public bool CheckExpression(string input)
+        {
+            string pattern = @"-|\+|\*|\/";
+            Regex rg = new Regex(pattern);
+            // TODO: find operators. If operators present use DataTable.Compute(string) to calculate
+            return false;
         }
 
         /// <summary>

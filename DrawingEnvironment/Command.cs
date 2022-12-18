@@ -48,6 +48,11 @@
             /// Run to execute the command in the multiline
             /// </summary>
             RUN,    // 6
+
+            /// <summary>
+            /// While loop command
+            /// </summary>
+            WHILE, //7
         }
 
         /// <summary>
