@@ -76,7 +76,7 @@ namespace DrawingEnvironment
                 // Splitting Parameters with comma
                 var splitParam = parameters.Split(',');
 
-                // For each parameter after the split
+                // For each parameter after the split it checks if is a variable or number
                 for (int i = 0; i < splitParam.Length; i++)
                 {
                     // Checking if the variable name matches the one contained in the Dictionary
@@ -94,7 +94,7 @@ namespace DrawingEnvironment
                     }
 
                     // Checking if the string passed on the parameters are valid integers
-                    else if (!CheckNumbers(splitParam[i]) /*&& VariableList.Count.Equals(0)*/)
+                    else if (!CheckNumbers(splitParam[i]))
                     {
                         throw new ArgumentException("Not numerical parameter");
                     }
@@ -236,8 +236,9 @@ namespace DrawingEnvironment
             // Checking if the variable is assigned through a mathematical operation
             if (CheckExpression(parsedInput[1]))
             {
-                // Initialising a new expression and calculating its result
-                Expression expression = new Expression(parsedInput[1]);
+                // Initialising a new expression by passing eventual variables
+                Expression expression = new Expression(parsedInput[1], VariableDictionary);
+                // Calculating the result of the expression
                 string result = expression.CalculateExpression();
 
                 // Storing the result as Integer as a Variable

@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 
 namespace DrawingEnvironment
 {
@@ -20,23 +21,72 @@ namespace DrawingEnvironment
         string Espressione;
 
         /// <summary>
-        /// It calculates the mathematical expression.
+        /// Dictionary where the variables are stored to evaluate them
         /// </summary>
-        /// <returns></returns>
+        public Dictionary<string, int> VariableDictionary = new Dictionary<string, int>();
+
+        /// <summary>
+        /// The single elements of the expression divided
+        /// </summary>
+        string[] ExpressionElements;
+
+        /// <summary>
+        /// It calculates the mathematical expression for between numbers and variables
+        /// </summary>
+        /// <returns>the result of the mathematical expression</returns>
         public string CalculateExpression()
         {
-            string result = new DataTable().Compute(Espressione, "").ToString();
+            // If there is no variables the method will process numerical values
+            if (VariableDictionary.Count == 0)
+            {
+                string result = new DataTable().Compute(Espressione, "").ToString();
+                return result;
+            }
 
-            return result;
+            // If the expression contains variables it will process them for the calculation
+            else
+            {
+                for (int i = 0; i < ExpressionElements.Length; i++)
+                {
+                    /* If a variable with the name of the specific element is found it will convert
+                     * get the value corresponding to that variable and
+                     * replace the element of the expression with its value converted to string
+                     * then it will proceed with the normal operation.
+                     */
+                    if (VariableDictionary.ContainsKey(ExpressionElements[i]))
+                    {
+                        string valueToString = Convert.ToString(VariableDictionary[ExpressionElements[i]]);                       
+                        Espressione = Espressione.Replace(ExpressionElements[i], valueToString);
+                    }
+                }
+                string result = new DataTable().Compute(Espressione, "").ToString();
+                return result;
+            }
         }
 
         /// <summary>
-        /// Constructor which defines what an expression is.
+        /// It divides the operands found in the expression by mathematical operators.
         /// </summary>
-        /// <param name="input">the expression as user input</param>
-        public Expression(string input)
+        /// <param name="expression">the mathematical expression passed by the user.</param>
+        /// <returns>an array of strings with each single element of the expression</returns>
+        public string[] DivideOperands(string expression)
         {
-            Espressione= input;
+            string pattern = @"-|\+|\*|\/";
+            Regex rg = new Regex(pattern);
+
+            return rg.Split(expression);
+        }
+
+        /// <summary>
+        /// Constructor defining the expression
+        /// </summary>
+        /// <param name="input">the user's input</param>
+        /// <param name="variableDictionary">the stored variables</param>
+        public Expression(string input, Dictionary<string, int> variableDictionary)
+        {
+            VariableDictionary = variableDictionary;
+            Espressione = input;
+            ExpressionElements = DivideOperands(input);
         }
     }
 }
