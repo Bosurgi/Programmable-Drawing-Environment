@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms.VisualStyles;
 
 namespace DrawingEnvironment
 {
@@ -36,15 +31,9 @@ namespace DrawingEnvironment
         /// <returns>the result of the mathematical expression</returns>
         public string CalculateExpression()
         {
+            // TODO: implementing error handling
             // If there is no variables the method will process numerical values
-            if (VariableDictionary.Count == 0)
-            {
-                string result = new DataTable().Compute(Espressione, "").ToString();
-                return result;
-            }
-
-            // If the expression contains variables it will process them for the calculation
-            else
+            if (VariableDictionary.Count > 0)
             {
                 for (int i = 0; i < ExpressionElements.Length; i++)
                 {
@@ -55,13 +44,14 @@ namespace DrawingEnvironment
                      */
                     if (VariableDictionary.ContainsKey(ExpressionElements[i]))
                     {
-                        string valueToString = Convert.ToString(VariableDictionary[ExpressionElements[i]]);                       
+                        string valueToString = Convert.ToString(VariableDictionary[ExpressionElements[i]]);
                         Espressione = Espressione.Replace(ExpressionElements[i], valueToString);
                     }
                 }
-                string result = new DataTable().Compute(Espressione, "").ToString();
-                return result;
             }
+            // Computing the expression with Compute method
+            string result = new DataTable().Compute(Espressione, "").ToString();
+            return result;
         }
 
         /// <summary>
