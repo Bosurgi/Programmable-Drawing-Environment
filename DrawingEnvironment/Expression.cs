@@ -4,29 +4,39 @@ using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DrawingEnvironment
 {
     /// <summary>
-    /// Class which handles expressions between variables and strings
+    /// Representation of a mathematical expression using normal operators.
     /// </summary>
     internal class Expression
     {
-        Variable variable;
-        string expression;
-        string result;
+        /// <summary>
+        /// The expression contained as a string
+        /// </summary>
+        string Espressione;
 
-
-
-        public Expression(string expression)
+        /// <summary>
+        /// It calculates the mathematical expression.
+        /// </summary>
+        /// <returns></returns>
+        public string CalculateExpression()
         {
-            this.expression = expression;           
+            string result = new DataTable().Compute(Espressione, "").ToString();
+
+            return result;
         }
 
-        public Expression()
+        /// <summary>
+        /// Constructor which defines what an expression is.
+        /// </summary>
+        /// <param name="input">the expression as user input</param>
+        public Expression(string input)
         {
-
+            Espressione= input;
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace DrawingEnvironment
 {
@@ -77,8 +79,10 @@ namespace DrawingEnvironment
                 // For each parameter after the split
                 for (int i = 0; i < splitParam.Length; i++)
                 {
+                    // Checking if the variable name matches the one contained in the Dictionary
                     if (VariableDictionary.ContainsKey(splitParam[i]))
                     {
+                        // Adding the values into the parameters list
                         parsedParameters.Add(VariableDictionary[splitParam[i]]);
                     }
                     // Handling the only command with literals Parameters (ON and OFF)
@@ -228,17 +232,29 @@ namespace DrawingEnvironment
         {
             // Parsing the input and normalize it
             string[] parsedInput = input.Trim().ToUpper().Split('=');
+            
+            // Checking if the variable is assigned through a mathematical operation
+            if (CheckExpression(parsedInput[1]))
+            {
+                // Initialising a new expression and calculating its result
+                Expression expression = new Expression(parsedInput[1]);
+                string result = expression.CalculateExpression();
 
+                // Storing the result as Integer as a Variable
+                int calculatedValue = Convert.ToInt32(result);
+                int[] parsedValue = { calculatedValue };
+                Variable variable = new Variable(parsedInput[0], parsedValue);
+                return variable;
+
+            }
             // If the value is an accepted integer then the value will be assigned.
-            if (Int32.TryParse(parsedInput[1], out int value))
+            else if (Int32.TryParse(parsedInput[1], out int value))
             {
                 value = Convert.ToInt32(parsedInput[1].Trim());
                 int[] parsedValue = { value };
 
                 // Initialising the variables with the parsed values
                 Variable variable = new Variable(parsedInput[0], parsedValue);
-                // Adding the variable to the list
-                //VariableList.Add(variable);
                 return variable;
             }
             else { return null; }
@@ -263,15 +279,19 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
-        /// Parsing a mathematical expression, performing the calculation.
+        /// Checks if the input passed by the user has mathematical operators
         /// </summary>
         /// <param name="input">the user input</param>
+        /// <returns>true if there is an expression, false otherwise</returns>
         public bool CheckExpression(string input)
         {
+            // Using Regex to find if one of the mathematical operators is part of the input
             string pattern = @"-|\+|\*|\/";
             Regex rg = new Regex(pattern);
-            // TODO: find operators. If operators present use DataTable.Compute(string) to calculate
-            return false;
+            
+            if(rg.IsMatch(input)) { return true; }
+            
+            else { return false; }
         }
 
         /// <summary>
