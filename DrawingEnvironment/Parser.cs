@@ -17,6 +17,9 @@ namespace DrawingEnvironment
         /// Parser has a property - LineCounter which will be used to count the lines for multiple line commands.
         /// This will help to keep track where an error is thrown.
         /// </summary>
+
+        // TODO: Fix line counter for variables assignment - Variables don't count as lines
+
         public int LineCounter { get; set; }
         public List<Variable> VariableList = new List<Variable>();
 
@@ -84,6 +87,12 @@ namespace DrawingEnvironment
                     {
                         // Adding the values into the parameters list
                         parsedParameters.Add(VariableDictionary[splitParam[i]]);
+                    }
+
+                    // If the variable is not present, it will throw an error
+                    else if (!VariableDictionary.ContainsKey(splitParam[i]))
+                    {
+                        throw new ArgumentException("Variable not found");
                     }
                     // Handling the only command with literals Parameters (ON and OFF)
                     else if (command.Equals("FILL") && parameters != null)
@@ -293,6 +302,22 @@ namespace DrawingEnvironment
             if(rg.IsMatch(input)) { return true; }
             
             else { return false; }
+        }
+
+        /// <summary>
+        /// It checks if there is a loop in the user input
+        /// </summary>
+        /// <param name="input">the user's input</param>
+        /// <returns>true if there is a form of loop, false otherwise</returns>
+        public bool CheckLoop(string input)
+        {
+            if (input.Contains("FOR")) { return true; }
+            else { return false; }
+        }
+
+        public void ParseLoop()
+        {
+            
         }
 
         /// <summary>

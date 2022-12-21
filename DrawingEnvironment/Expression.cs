@@ -46,7 +46,7 @@ namespace DrawingEnvironment
                     {
                         string valueToString = Convert.ToString(VariableDictionary[ExpressionElements[i]]);
                         Espressione = Espressione.Replace(ExpressionElements[i], valueToString);
-                    }
+                    }                   
                 }
             }
             // Computing the expression with Compute method

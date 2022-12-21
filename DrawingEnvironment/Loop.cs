@@ -14,6 +14,17 @@ namespace DrawingEnvironment
         Parser parser = new Parser();
 
         // TODO: Implement a for loop with variables
+        bool isExecuting = true;
+        int lineCounter = 0;
+        int numberLoops = 0;
+
+
+        
+        public Loop(Expression expression, int[] parameters) 
+        {
+
+        }
+
 
         public Loop(string name, int[] parameters) : base(name, parameters)
         {
