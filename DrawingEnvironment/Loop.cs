@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -13,60 +14,48 @@ namespace DrawingEnvironment
     /// </summary>
     internal class Loop : Command
     {
-        Parser parser = new Parser();
+        Parser parser2 = new Parser();
 
         // TODO: Implement a for loop with variables
         // TODO: Remove useless variables
-        bool ExecutionFlag = true;
+        public bool ExecutionFlag = true;
         int LineCounter = 0;
         int NumberLoops = 0;
-        Variable LoopVariable;
-        Expression Expression;
-        Dictionary<string, int[]> DictionaryVariables = new Dictionary<string, int[]>();
-        List<Command> CommandsToExecute = new List<Command>();
-        string[] Body;
-        char Operator;
+        public Variable LoopVariable;
+        public Expression Expression;
+        public Dictionary<string, int> DictionaryVariables = new Dictionary<string, int>();
+        public List<Command> CommandsToExecute = new List<Command>();
+        public string[] Body;
+        public string Operator;
 
         /// <summary>
         /// It checks when the loop reaches its end
         /// </summary>
-        public void IsExecuting()
+        public bool IsExecuting()
         {
-            for (int i = 0; i < Body.Length; i++)
-            {
-                LineCounter++; // Updating the linecounter
-                string element = Body[i];
-                if (element.ToUpper().Trim().Equals("ENDFOR"))
-                {
-                    ExecutionFlag= false;
-                }
-                else
-                {
-                    continue;
-                }
-            }
+            return ExecutionFlag;
         }
 
         /// <summary>
         /// It parses the condition to follow for the loop and sets up the variables
         /// </summary>
         /// <param name="condition">the condition to follow</param>
-        public void parseCondition(string condition)
+        public void ParseCondition(string condition)
         {
             string[] dividedCondition = condition.Split(' ');
             foreach (var element in dividedCondition)
             {
                 if (dividedCondition.Contains("<"))
                 {
-                    Operator = '<';
+                    Operator = "<";
                 }
                 else if (dividedCondition.Contains(">"))
                 {
-                    Operator = '>';
+                    Operator = ">";
                 }
             }
             // Initialising a new expression and updating the Loop expression
-            Expression expression = new Expression(dividedCondition[1], parser.VariableDictionary);
+            Expression expression = new Expression(dividedCondition[1], parser2.VariableDictionary);
             Expression = expression;
             /* Dividing the elements of the expression. Example a>10
              * where a is loopOperands[0] and 10 is loopOperands[1]
@@ -78,17 +67,52 @@ namespace DrawingEnvironment
             LoopVariable = new Variable(loopOperands[0], parameter);
         }
 
-        /// <summary>
-        /// Constructor for the Loop
-        /// </summary>
-        /// <param name="input">the user input</param>
-        public Loop(string condition, string body) 
+        public void ExecuteCondition(string Operator, Dictionary<string,int> dictionaryVariables)
         {
-                        
+            switch (Operator)
+            {
+                case ">":
+                    if (dictionaryVariables[LoopVariable.Name] > LoopVariable.Parameters[0])
+                    {
+                        ExecutionFlag = false;
+                    }
+                    break;
+
+                case "<":
+                    if (dictionaryVariables[LoopVariable.Name] < LoopVariable.Parameters[0])
+                    {
+                        ExecutionFlag = false;
+                    }
+                    break;
+
+                default:
+                    ExecutionFlag = true;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Parsing the body of the loop into commands to execute until it finds ENDFOR
+        /// </summary>
+        /// <param name="input">the user input in the programming line</param>
+        public List<Command> ParseBody(string[] input)
+        {
+            return parser2.ParseCommandMultiLine(Convert.ToString(input));
+        }
+
+        /// <summary>
+        /// Representing the loop with a condition and a body
+        /// </summary>
+        /// <param name="condition">the condition set for the loop</param>
+        /// <param name="body">the body of the loop until keyword expressed</param>
+        public Loop(string condition, string[] body, Dictionary<string, int> dictionaryVariables)
+        { 
+            ParseCondition(condition);
+            DictionaryVariables = dictionaryVariables;            
         }
 
 
-        public Loop(string name, int[] parameters) : base(name, parameters)
+        public Loop()
         {
 
         }

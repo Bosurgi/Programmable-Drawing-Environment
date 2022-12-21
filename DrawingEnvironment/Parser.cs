@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
@@ -21,7 +22,9 @@ namespace DrawingEnvironment
         // TODO: Check if line counter for variables works updated line 66
 
         public int LineCounter { get; set; }
-        public List<Variable> VariableList = new List<Variable>();
+        public List<Variable> VariableList;
+        public List<string> LoopBody;
+        public Loop loop;
 
         // Dictionary which will store unique key pairs for the Variables stored in memory
         public Dictionary<string, int> VariableDictionary = new Dictionary<string, int>();
@@ -101,7 +104,7 @@ namespace DrawingEnvironment
                     }
 
                     // If the variable is not present, it will throw an error only if there are variables
-                    else if (!VariableDictionary.ContainsKey(splitParam[i]) && VariableDictionary.Count > 0)
+                    else if (!VariableDictionary.ContainsKey(splitParam[i]) && VariableDictionary.Count == 0)
                     {
                         throw new ArgumentException("Variable not found");
                     }
@@ -111,6 +114,12 @@ namespace DrawingEnvironment
                         // Sets value 1 for On and Value 0 to OFF
                         if (parameters.Equals("ON")) { parsedParameters.Add(1); }
                         else if (parameters.Equals("OFF")) { parsedParameters.Add(0); }
+                    }
+
+                    else if (command.Equals("FOR"))
+                    {
+                        // Gather the body of the for loop
+                        loop = new Loop(splitParam[i], LoopBody.ToArray(), VariableDictionary);
                     }
 
                     // Checking if the string passed on the parameters are valid integers
@@ -165,8 +174,26 @@ namespace DrawingEnvironment
 
             for (int i = 0; i < splitCommands.Length; i++)
             {
-                LineCounter++; // Updating LineCounter to keep track of the line executing.
-                commandList.Add(ParseCommands(splitCommands[i])); // applying the single line parsecommand to the current line and adding it to the list.
+                // TODO: Adding if statement to parse the body of the loop
+                if (!splitCommands[i].ToUpper().Trim().Contains("FOR"))
+                {
+                    LineCounter++; // Updating LineCounter to keep track of the line executing.
+                    commandList.Add(ParseCommands(splitCommands[i])); // applying the single line parsecommand to the current line and adding it to the list.
+                }
+
+                // If a loop is detected the program needs to create the loop body
+                else if (splitCommands[i].ToUpper().Trim().Equals("FOR"))
+                {
+                    for(int j = i; j < splitCommands.Length; j++)
+                    {
+                        if (!splitCommands[j].Equals("ENDFOR"))
+                        {
+                            LoopBody.Add(splitCommands[j]);
+                            LineCounter++;
+                        }
+                        else { break; }
+                    }
+                }
             }
             return commandList;
         }
@@ -325,12 +352,6 @@ namespace DrawingEnvironment
             if (input.Contains("FOR")) { return true; }
             else { return false; }
         }
-
-        public void ParseLoop()
-        {
-            
-        }
-
         /// <summary>
         /// Empty constructor to initialise the parser
         /// </summary>
