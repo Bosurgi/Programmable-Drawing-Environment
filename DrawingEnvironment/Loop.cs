@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DrawingEnvironment
 {
@@ -15,15 +16,16 @@ namespace DrawingEnvironment
         Parser parser = new Parser();
 
         // TODO: Implement a for loop with variables
+        // TODO: Remove useless variables
         bool ExecutionFlag = true;
         int LineCounter = 0;
         int NumberLoops = 0;
-        string LoopName;
-        string[] LoopRules;
         Variable LoopVariable;
-        Dictionary<string, int[]> DictionaryVariables;
-        List<Command> CommandsToExecute;
+        Expression Expression;
+        Dictionary<string, int[]> DictionaryVariables = new Dictionary<string, int[]>();
+        List<Command> CommandsToExecute = new List<Command>();
         string[] Body;
+        char Operator;
 
         /// <summary>
         /// It checks when the loop reaches its end
@@ -46,13 +48,42 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
+        /// It parses the condition to follow for the loop and sets up the variables
+        /// </summary>
+        /// <param name="condition">the condition to follow</param>
+        public void parseCondition(string condition)
+        {
+            string[] dividedCondition = condition.Split(' ');
+            foreach (var element in dividedCondition)
+            {
+                if (dividedCondition.Contains("<"))
+                {
+                    Operator = '<';
+                }
+                else if (dividedCondition.Contains(">"))
+                {
+                    Operator = '>';
+                }
+            }
+            // Initialising a new expression and updating the Loop expression
+            Expression expression = new Expression(dividedCondition[1], parser.VariableDictionary);
+            Expression = expression;
+            /* Dividing the elements of the expression. Example a>10
+             * where a is loopOperands[0] and 10 is loopOperands[1]
+             */
+            string[] loopOperands = expression.DivideOperands(dividedCondition[1]);
+            // Converting the parameter of the expression
+            int[] parameter = { Convert.ToInt32(loopOperands[1]) };
+            // Initialising the Loop variable
+            LoopVariable = new Variable(loopOperands[0], parameter);
+        }
+
+        /// <summary>
         /// Constructor for the Loop
         /// </summary>
         /// <param name="input">the user input</param>
-        public Loop(string input) 
+        public Loop(string condition, string body) 
         {
-            LoopRules = input.Split(' ');
-
                         
         }
 

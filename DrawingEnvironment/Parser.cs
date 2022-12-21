@@ -18,7 +18,7 @@ namespace DrawingEnvironment
         /// This will help to keep track where an error is thrown.
         /// </summary>
 
-        // TODO: Fix line counter for variables assignment - Variables don't count as lines
+        // TODO: Check if line counter for variables works updated line 66
 
         public int LineCounter { get; set; }
         public List<Variable> VariableList = new List<Variable>();
@@ -63,12 +63,14 @@ namespace DrawingEnvironment
                 if (!VariableDictionary.ContainsKey(variable.Name))
                 {
                     VariableDictionary.Add(variable.Name, variable.Parameters[0]); // Update the dictionary
+                    LineCounter++;
                 }
 
                 // If key already there updating its value to avoid ArgumentExeption as Dictionary can take only one key
                 else
                 {
                     VariableDictionary[variable.Name] = variable.Parameters[0];
+                    LineCounter++;
                 }
                 return variable;
             }

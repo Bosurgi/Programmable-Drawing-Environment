@@ -61,7 +61,7 @@ namespace DrawingEnvironment
         /// <returns>an array of strings with each single element of the expression</returns>
         public string[] DivideOperands(string expression)
         {
-            string pattern = @"-|\+|\*|\/";
+            string pattern = @"-|\+|\*|\/|\<|\>";
             Regex rg = new Regex(pattern);
 
             return rg.Split(expression);
