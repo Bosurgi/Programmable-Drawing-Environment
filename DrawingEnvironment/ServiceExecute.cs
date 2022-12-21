@@ -29,13 +29,13 @@ namespace DrawingEnvironment
         Label PositionLabel;
         TextBox programmingArea;
         // The list where the commands are going to be stored
-        List<Command> CommandList;
-        List<Command> LoopCommands = new List<Command>();
+       public List<Command> CommandList;
+       public List<Command> LoopCommands = new List<Command>();
         
-        Loop loop;
+       public Loop loop;
 
         // The list of variables and variables flag
-        List<Variable> VariableList = new List<Variable>();
+       public List<Variable> VariableList = new List<Variable>();
 
         // The line counter for the multiline execution
         int lineCounter = 1;
@@ -70,7 +70,7 @@ namespace DrawingEnvironment
                         }
                         // TODO: If it is a valid loop execute the loop Command List
 
-                        else if (CommandList[i].Name.ToUpper().Equals("FOR"))
+                        else if (LoopCommands.Count > 0)
                         {
                             loop = parser.loop;
                             List<string> LoopBody = parser.LoopBody;

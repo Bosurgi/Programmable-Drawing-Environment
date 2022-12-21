@@ -1,0 +1,5 @@
+a=50
+for a>0
+circle a
+a=a-5
+endfor

@@ -14,7 +14,7 @@ namespace DrawingEnvironment
     /// </summary>
     internal class Loop : Command
     {
-        Parser parser2 = new Parser();
+        Parser parser = new Parser();
 
         // TODO: Implement a for loop with variables
         // TODO: Remove useless variables
@@ -40,27 +40,26 @@ namespace DrawingEnvironment
         /// It parses the condition to follow for the loop and sets up the variables
         /// </summary>
         /// <param name="condition">the condition to follow</param>
-        public void ParseCondition(string condition)
+        public void ParseCondition(string[] condition)
         {
-            string[] dividedCondition = condition.Split(' ');
-            foreach (var element in dividedCondition)
+            foreach (var element in condition)
             {
-                if (dividedCondition.Contains("<"))
+                if (condition.Contains("<"))
                 {
                     Operator = "<";
                 }
-                else if (dividedCondition.Contains(">"))
+                else if (condition.Contains(">"))
                 {
                     Operator = ">";
                 }
             }
             // Initialising a new expression and updating the Loop expression
-            Expression expression = new Expression(dividedCondition[1], parser2.VariableDictionary);
+            Expression expression = new Expression(condition[1], parser.VariableDictionary);
             Expression = expression;
             /* Dividing the elements of the expression. Example a>10
              * where a is loopOperands[0] and 10 is loopOperands[1]
              */
-            string[] loopOperands = expression.DivideOperands(dividedCondition[1]);
+            string[] loopOperands = expression.DivideOperands(condition[1]);
             // Converting the parameter of the expression
             int[] parameter = { Convert.ToInt32(loopOperands[1]) };
             // Initialising the Loop variable
@@ -97,7 +96,7 @@ namespace DrawingEnvironment
         /// <param name="input">the user input in the programming line</param>
         public List<Command> ParseBody(string[] input)
         {
-            return parser2.ParseCommandMultiLine(Convert.ToString(input));
+            return parser.ParseCommandMultiLine(Convert.ToString(input));
         }
 
         /// <summary>
@@ -105,7 +104,7 @@ namespace DrawingEnvironment
         /// </summary>
         /// <param name="condition">the condition set for the loop</param>
         /// <param name="body">the body of the loop until keyword expressed</param>
-        public Loop(string condition, string[] body, Dictionary<string, int> dictionaryVariables)
+        public Loop(string[] condition, string[] body, Dictionary<string, int> dictionaryVariables)
         { 
             ParseCondition(condition);
             DictionaryVariables = dictionaryVariables;            

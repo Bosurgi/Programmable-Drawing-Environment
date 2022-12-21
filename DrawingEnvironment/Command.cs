@@ -57,7 +57,12 @@
             /// <summary>
             /// For loop command
             /// </summary>
-            FOR //8
+            FOR, //8
+
+            /// <summary>
+            /// Endfor signals the end of the for loop
+            /// </summary>
+            ENDFOR, //9
         }
 
         /// <summary>
