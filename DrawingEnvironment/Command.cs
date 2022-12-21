@@ -53,6 +53,11 @@
             /// While loop command
             /// </summary>
             WHILE, //7
+
+            /// <summary>
+            /// For loop command
+            /// </summary>
+            FOR //8
         }
 
         /// <summary>

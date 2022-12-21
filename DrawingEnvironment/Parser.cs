@@ -60,7 +60,16 @@ namespace DrawingEnvironment
             {
                 Variable variable = ParseVariable(cmd);
 
-                VariableDictionary.Add(variable.Name, variable.Parameters[0]); // Update the dictionary
+                if (!VariableDictionary.ContainsKey(variable.Name))
+                {
+                    VariableDictionary.Add(variable.Name, variable.Parameters[0]); // Update the dictionary
+                }
+
+                // If key already there updating its value to avoid ArgumentExeption as Dictionary can take only one key
+                else
+                {
+                    VariableDictionary[variable.Name] = variable.Parameters[0];
+                }
                 return variable;
             }
 
@@ -89,8 +98,8 @@ namespace DrawingEnvironment
                         parsedParameters.Add(VariableDictionary[splitParam[i]]);
                     }
 
-                    // If the variable is not present, it will throw an error
-                    else if (!VariableDictionary.ContainsKey(splitParam[i]))
+                    // If the variable is not present, it will throw an error only if there are variables
+                    else if (!VariableDictionary.ContainsKey(splitParam[i]) && VariableDictionary.Count > 0)
                     {
                         throw new ArgumentException("Variable not found");
                     }
