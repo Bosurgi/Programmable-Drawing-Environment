@@ -115,7 +115,7 @@ namespace DrawingEnvironment
                     }
 
                     // If the variable is not present, it will throw an error only if there are variables
-                    else if (!VariableDictionary.ContainsKey(splitParam[i]) && VariableDictionary.Count == 0)
+                    else if (!VariableDictionary.ContainsKey(splitParam[i]) && VariableDictionary.Count != 0)
                     {
                         throw new ArgumentException("Variable not found");
                     }
