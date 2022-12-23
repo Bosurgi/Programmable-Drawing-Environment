@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 // TODO: Just store the list of Loop commands in the parser, transfer that list in Service and Execute them from there
 namespace DrawingEnvironment
@@ -24,7 +21,8 @@ namespace DrawingEnvironment
 
         public int LineCounter { get; set; }
         public List<Variable> VariableList = new List<Variable>();
-        public List<string> LoopBody = new List<string>();
+        public List<Command> LoopBody = new List<Command>();
+        public List<Command> CommandList = new List<Command>();
         public Loop loop;
 
         // Dictionary which will store unique key pairs for the Variables stored in memory
@@ -58,17 +56,17 @@ namespace DrawingEnvironment
             var line = cmd.ToUpper().Trim(); // Tidying and standardizing the line of command
             var splitLine = line.Split(' '); // Splitting the command and Parameters [0] command and [1] param            
             List<int> parsedParameters = new List<int>();
-/*
-            // TODO: Fix this. Loop out of range
-            if (LoopBody.Count > 0 && loop is null)
-            {
-                command = splitLine[0];
-                parameters = splitLine[1];
-                var splitParam2 = splitLine[1].Split(',');
+            /*
+                        // TODO: Fix this. Loop out of range
+                        if (LoopBody.Count > 0 && loop is null)
+                        {
+                            command = splitLine[0];
+                            parameters = splitLine[1];
+                            var splitParam2 = splitLine[1].Split(',');
 
-                loop = new Loop(splitParam2, LoopBody.ToArray(), VariableDictionary);
-            }
-*/
+                            loop = new Loop(splitParam2, LoopBody.ToArray(), VariableDictionary);
+                        }
+            */
 
             // If variable detected in user input it will parse into a Variable
             if (CheckVariables(cmd) && !cmd.ToUpper().Contains("FOR"))
@@ -128,12 +126,14 @@ namespace DrawingEnvironment
                         else if (parameters.Equals("OFF")) { parsedParameters.Add(0); }
                     }
 
+                    // Extracting the elements from the loop
                     else if (command.Equals("FOR"))
                     {
                         // TODO: Forming the loop with three elements here
                         // Splitting the three elements of the loop
-                        string[] loopElements = parameters.Trim().Split(';');
 
+                        string[] loopElements = parameters.Trim().Split(';');
+                        loop = new Loop(VariableDictionary, loopElements);
                     }
 
                     // Checking if the string passed on the parameters are valid integers
@@ -180,39 +180,41 @@ namespace DrawingEnvironment
         /// <param name="commands">the user input</param>
         /// <exception cref="FormatException">exception thrown when parameter not numerical or invalid no. of Parameters</exception>
         /// <returns>a list of different commands with their Parameters.</returns>
-        public List<Command> ParseCommandMultiLine(string commands)
+        public void ParseCommandMultiLine(string commands)
         {
-            List<Command> commandList = new List<Command>();
+            //List<Command> commandList = new List<Command>();
             var splitCommands = commands.Split('\n');
             LineCounter = 0;
 
             for (int i = 0; i < splitCommands.Length; i++)
             {
                 // TODO: Adding if statement to parse the body of the loop
-                //if (!splitCommands[i].ToUpper().Trim().Contains("FOR"))
+                if (!splitCommands[i].ToUpper().Trim().Contains("FOR"))
                 {
                     LineCounter++; // Updating LineCounter to keep track of the line executing.
-                    commandList.Add(ParseCommands(splitCommands[i])); // applying the single line parsecommand to the current line and adding it to the list.
+                    CommandList.Add(ParseCommands(splitCommands[i])); // applying the single line parsecommand to the current line and adding it to the list.
                 }
-                /*
+
                 // If a loop is detected the program needs to create the loop body
                 else if (splitCommands[i].ToUpper().Trim().Contains("FOR"))
                 {
-                    for(int j = i; j < splitCommands.Length; j++)
+                    // TODO: Create a new loop with the conditions to initialise the variables.
+                    for (int j = i + 1; j < splitCommands.Length; j++)
                     {
-                        LoopBody.Add(splitCommands[j]);
-                        LineCounter++;
-
                         if (splitCommands[j].ToUpper().Trim().Equals("ENDFOR"))
                         {
                             break;
                         }
-                    } 
-                } */
+                        else
+                        {
+                            LoopBody.Add(ParseCommands(splitCommands[j]));
+                            LineCounter++;
+                        }
+                    } // End for
+                } // End else if
             }
-
-            return commandList;
-        }
+        } // End Method
+        
 
         /// <summary>
         /// Method which checks if a parameter could be converted into a number to avoid errors.
@@ -295,7 +297,7 @@ namespace DrawingEnvironment
         {
             // Parsing the input and normalize it
             string[] parsedInput = input.Trim().ToUpper().Split('=');
-            
+
             // Checking if the variable is assigned through a mathematical operation
             if (CheckExpression(parsedInput[1]))
             {
@@ -352,9 +354,9 @@ namespace DrawingEnvironment
             // Using Regex to find if one of the mathematical operators is part of the input
             string pattern = @"-|\+|\*|\/";
             Regex rg = new Regex(pattern);
-            
-            if(rg.IsMatch(input)) { return true; }
-            
+
+            if (rg.IsMatch(input)) { return true; }
+
             else { return false; }
         }
 

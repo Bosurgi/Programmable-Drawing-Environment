@@ -100,5 +100,16 @@ namespace DrawingEnvironment
             SetOperation(Espressione);
             ExpressionElements = DivideOperands(input);
         }
+
+        /// <summary>
+        /// Constructor for expression without the variable dictionary
+        /// </summary>
+        /// <param name="input">the user's input for the expression given</param>
+        public Expression(string input)
+        {
+            Espressione = input;
+            SetOperation(Espressione);
+            ExpressionElements= DivideOperands(input);
+        }
     }
 }
