@@ -58,7 +58,7 @@ namespace DrawingEnvironment
             var line = cmd.ToUpper().Trim(); // Tidying and standardizing the line of command
             var splitLine = line.Split(' '); // Splitting the command and Parameters [0] command and [1] param            
             List<int> parsedParameters = new List<int>();
-
+/*
             // TODO: Fix this. Loop out of range
             if (LoopBody.Count > 0 && loop is null)
             {
@@ -68,9 +68,10 @@ namespace DrawingEnvironment
 
                 loop = new Loop(splitParam2, LoopBody.ToArray(), VariableDictionary);
             }
+*/
 
             // If variable detected in user input it will parse into a Variable
-            if (CheckVariables(cmd))
+            if (CheckVariables(cmd) && !cmd.ToUpper().Contains("FOR"))
             {
                 Variable variable = ParseVariable(cmd);
 
@@ -127,15 +128,13 @@ namespace DrawingEnvironment
                         else if (parameters.Equals("OFF")) { parsedParameters.Add(0); }
                     }
 
-                    // TODO: Execution never gets here
-                    
-                    /*
-                    else if (LoopBody.Count > 0)
+                    else if (command.Equals("FOR"))
                     {
-                        // Gather the body of the for loop
-                        loop = new Loop(splitParam[i], LoopBody.ToArray(), VariableDictionary);
+                        // TODO: Forming the loop with three elements here
+                        // Splitting the three elements of the loop
+                        string[] loopElements = parameters.Trim().Split(';');
+
                     }
-                    */
 
                     // Checking if the string passed on the parameters are valid integers
                     else if (!CheckNumbers(splitParam[i]))
@@ -190,12 +189,12 @@ namespace DrawingEnvironment
             for (int i = 0; i < splitCommands.Length; i++)
             {
                 // TODO: Adding if statement to parse the body of the loop
-                if (!splitCommands[i].ToUpper().Trim().Contains("FOR"))
+                //if (!splitCommands[i].ToUpper().Trim().Contains("FOR"))
                 {
                     LineCounter++; // Updating LineCounter to keep track of the line executing.
                     commandList.Add(ParseCommands(splitCommands[i])); // applying the single line parsecommand to the current line and adding it to the list.
                 }
-
+                /*
                 // If a loop is detected the program needs to create the loop body
                 else if (splitCommands[i].ToUpper().Trim().Contains("FOR"))
                 {
@@ -208,8 +207,8 @@ namespace DrawingEnvironment
                         {
                             break;
                         }
-                    }
-                }
+                    } 
+                } */
             }
 
             return commandList;

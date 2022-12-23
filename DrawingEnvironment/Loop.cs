@@ -21,7 +21,7 @@ namespace DrawingEnvironment
         public bool ExecutionFlag = true;
         int LineCounter = 0;
         int NumberLoops = 0;
-        public Variable LoopVariable;
+        internal Variable LoopVariable;
         public Expression Expression;
         public Dictionary<string, int> DictionaryVariables = new Dictionary<string, int>();
         public List<Command> CommandsToExecute = new List<Command>();
@@ -111,7 +111,7 @@ namespace DrawingEnvironment
         }
 
 
-        public Loop()
+        public Loop(Dictionary<string, int> dictionaryVariables, Expression condition)
         {
 
         }

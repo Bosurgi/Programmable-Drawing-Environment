@@ -52,6 +52,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpressionTest.cs" />
     <Compile Include="Part2Tests.cs" />
     <Compile Include="FactoryShapeTest.cs" />
     <Compile Include="ServiceExecuteTest.cs" />

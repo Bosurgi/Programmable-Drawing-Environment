@@ -23,7 +23,12 @@ namespace DrawingEnvironment
         /// <summary>
         /// The single elements of the expression divided
         /// </summary>
-        string[] ExpressionElements;
+        internal string[] ExpressionElements;
+
+        /// <summary>
+        /// The operation the expressions carries with
+        /// </summary>
+        internal string operation;
 
         /// <summary>
         /// It calculates the mathematical expression for between numbers and variables
@@ -63,8 +68,24 @@ namespace DrawingEnvironment
         {
             string pattern = @"-|\+|\*|\/|\<|\>";
             Regex rg = new Regex(pattern);
-
             return rg.Split(expression);
+        }
+
+        /// <summary>
+        /// It sets what kind of operation the Expression is carrying between greater than or lower than.
+        /// </summary>
+        /// <param name="expression">the expression passed</param>
+        public void SetOperation(string expression)
+        {
+            switch (expression)
+            {
+                case var a when a.Contains(">"): operation = ">"; break;
+                case var a when a.Contains("<"): operation = "<"; break;
+                case var a when a.Contains("+"): operation = "+"; break;
+                case var a when a.Contains("-"): operation = "-"; break;
+                case var a when a.Contains("*"): operation = "*"; break;
+                case var a when a.Contains("/"): operation = "/"; break;
+            }
         }
 
         /// <summary>
@@ -76,6 +97,7 @@ namespace DrawingEnvironment
         {
             VariableDictionary = variableDictionary;
             Espressione = input;
+            SetOperation(Espressione);
             ExpressionElements = DivideOperands(input);
         }
     }
