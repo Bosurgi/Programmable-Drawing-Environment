@@ -198,6 +198,9 @@ namespace DrawingEnvironment
                 // If a loop is detected the program needs to create the loop body
                 else if (splitCommands[i].ToUpper().Trim().Contains("FOR"))
                 {
+                    Variable loopVar = ParseLoopVariable(splitCommands[i]);
+                    VariableDictionary.Add(loop.Name, Convert.ToInt32(loop.Parameters));
+
                     // TODO: Create a new loop with the conditions to initialise the variables.
                     for (int j = i + 1; j < splitCommands.Length; j++)
                     {
@@ -246,6 +249,18 @@ namespace DrawingEnvironment
             }
 
             else { return true; }
+        }
+
+        /// <summary>
+        /// It parses the variable found in a loop declaration
+        /// </summary>
+        /// <param name="loopDeclaration">the loop declaration divided by semicolumns</param>
+        /// <returns></returns>
+        public Variable ParseLoopVariable(string loopDeclaration)
+        {
+            string[] loopElements = loopDeclaration.Split(';');
+            string loopVariable = loopElements[0];
+            return ParseVariable(loopVariable);
         }
 
         /// <summary>

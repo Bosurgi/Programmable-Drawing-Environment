@@ -19,6 +19,7 @@ namespace DrawingEnvironment
         internal List<Command> loopBody; // TODO: implementing the list to execute
         internal bool IsExecuting = true;
 
+
         public Loop(Dictionary<string, int> dictionaryVariables, string[] loopElements)
         {
 

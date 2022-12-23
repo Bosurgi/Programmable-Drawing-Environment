@@ -63,6 +63,8 @@ namespace DrawingEnvironment
                     // Updating the Service List of commands
                     CommandList = parser.CommandList;
                     LoopCommands = parser.LoopBody;
+                    // Updating the Variables taken from the parser
+                    parser.SetListVariable(VariableList);
 
                     for (int i = 0; i < CommandList.Count; i++)
                     {
