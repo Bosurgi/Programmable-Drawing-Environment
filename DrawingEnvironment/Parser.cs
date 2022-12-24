@@ -191,7 +191,7 @@ namespace DrawingEnvironment
                 else if (splitCommands[i].ToUpper().Trim().Contains("FOR"))
                 {
                     // Parsing the elements of the loop
-                    string[] LoopElements = ParseLoopElements(splitCommands[i]);
+                    LoopElements = ParseLoopElements(splitCommands[i]);
 
                     // Instantiating the Expression for the loop
                     Expression loopExpression = new Expression(LoopElements[1]);

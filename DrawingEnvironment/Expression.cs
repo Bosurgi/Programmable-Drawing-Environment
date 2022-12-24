@@ -48,7 +48,7 @@ namespace DrawingEnvironment
                      * replace the element of the expression with its value converted to string
                      * then it will proceed with the normal operation.
                      */
-                    if (VariableDictionary.ContainsKey(ExpressionElements[i]))
+                    if (VariableDictionary.ContainsKey(ExpressionElements[i].ToUpper()))
                     {
                         string valueToString = Convert.ToString(VariableDictionary[ExpressionElements[i]]);
                         Espressione = Espressione.Replace(ExpressionElements[i], valueToString);

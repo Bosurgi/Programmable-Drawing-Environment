@@ -21,7 +21,7 @@ namespace DrawingEnvironment
         /// <returns>true if the condition is not met the loop can still go, false otherwise</returns>
         public void SetCondition(Expression expression)
         {
-            string variableName = expression.ExpressionElements[0];
+            string variableName = expression.ExpressionElements[0].ToUpper().Trim();
             int variableValue = Convert.ToInt32(expression.ExpressionElements[1]);
 
             switch (expression.operation)
@@ -29,24 +29,24 @@ namespace DrawingEnvironment
                 case ">":
                     if (PresentVariables[variableName] > variableValue)
                     {
-                        IsExecuting = false;
+                        IsExecuting = true;
                         break;
                     }
                     else
                     {
-                        IsExecuting = true;
+                        IsExecuting = false;
                         break;
                     }
 
                 case "<":
                     if (PresentVariables[variableName] < variableValue)
                     {
-                        IsExecuting = false;
+                        IsExecuting = true;
                         break;
                     }
                     else
                     {
-                        IsExecuting = true;
+                        IsExecuting = false;
                         break;
                     }
 
@@ -63,10 +63,10 @@ namespace DrawingEnvironment
         /// <exception cref="ArgumentException">If there is no value it will throw an error</exception>
         public void UpdateVariableValue(string updateComponent)
         {
-            string[] updateElements = updateComponent.Split('=');
+            string[] updateElements = updateComponent.ToUpper().Trim().Split('=');
             if (PresentVariables.ContainsKey(updateElements[0]))
             {
-                Expression expression = new Expression(updateElements[0], PresentVariables);
+                Expression expression = new Expression(updateElements[1], PresentVariables);
                 string result = expression.CalculateExpression();
                 int calculateValue = Convert.ToInt32(result);
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DrawingEnvironment
@@ -74,9 +75,12 @@ namespace DrawingEnvironment
                             {
                                 if (loop.IsExecuting)
                                 {
-                                    loop.SetCondition(loop.condition);
-                                    Execute(LoopCommands[i]);
                                     loop.UpdateVariableValue(parser.LoopElements[2]);
+                                    // TODO: Need to update parameters for commands JUST EXAMPLE for now
+                                    int[] newVariableValue = { loop.PresentVariables["A"] };
+                                    LoopCommands[i].Parameters = newVariableValue;
+                                    loop.SetCondition(loop.condition);                                    
+                                    Execute(LoopCommands[i]);
                                 }
                             }
                         }
