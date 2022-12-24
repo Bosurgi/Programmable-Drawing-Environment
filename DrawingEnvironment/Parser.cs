@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text.RegularExpressions;
 
 // TODO: Just store the list of Loop commands in the parser, transfer that list in Service and Execute them from there
@@ -24,6 +25,7 @@ namespace DrawingEnvironment
         public List<Command> LoopBody = new List<Command>();
         public List<Command> CommandList = new List<Command>();
         public Loop loop;
+        public string[] LoopElements;
 
         // Dictionary which will store unique key pairs for the Variables stored in memory
         public Dictionary<string, int> VariableDictionary = new Dictionary<string, int>();
@@ -56,17 +58,6 @@ namespace DrawingEnvironment
             var line = cmd.ToUpper().Trim(); // Tidying and standardizing the line of command
             var splitLine = line.Split(' '); // Splitting the command and Parameters [0] command and [1] param            
             List<int> parsedParameters = new List<int>();
-            /*
-                        // TODO: Fix this. Loop out of range
-                        if (LoopBody.Count > 0 && loop is null)
-                        {
-                            command = splitLine[0];
-                            parameters = splitLine[1];
-                            var splitParam2 = splitLine[1].Split(',');
-
-                            loop = new Loop(splitParam2, LoopBody.ToArray(), VariableDictionary);
-                        }
-            */
 
             // If variable detected in user input it will parse into a Variable
             if (CheckVariables(cmd) && !cmd.ToUpper().Contains("FOR"))
@@ -131,9 +122,10 @@ namespace DrawingEnvironment
                     {
                         // TODO: Forming the loop with three elements here
                         // Splitting the three elements of the loop
-
+                        /*
                         string[] loopElements = parameters.Trim().Split(';');
                         loop = new Loop(VariableDictionary, loopElements);
+                        */
                     }
 
                     // Checking if the string passed on the parameters are valid integers
@@ -182,7 +174,7 @@ namespace DrawingEnvironment
         /// <returns>a list of different commands with their Parameters.</returns>
         public void ParseCommandMultiLine(string commands)
         {
-            //List<Command> commandList = new List<Command>();
+            
             var splitCommands = commands.Split('\n');
             LineCounter = 0;
 
@@ -198,14 +190,26 @@ namespace DrawingEnvironment
                 // If a loop is detected the program needs to create the loop body
                 else if (splitCommands[i].ToUpper().Trim().Contains("FOR"))
                 {
-                    Variable loopVar = ParseLoopVariable(splitCommands[i]);
-                    VariableDictionary.Add(loop.Name, Convert.ToInt32(loop.Parameters));
+                    // Parsing the elements of the loop
+                    string[] LoopElements = ParseLoopElements(splitCommands[i]);
 
-                    // TODO: Create a new loop with the conditions to initialise the variables.
+                    // Instantiating the Expression for the loop
+                    Expression loopExpression = new Expression(LoopElements[1]);
+                    
+                    Variable loopVar = ParseLoopVariable(splitCommands[i]);
+                    VariableDictionary.Add(loopVar.Name, loopVar.Parameters[0]);
+
+                    /*
+                     * Nested for loop to populate the commands for the For loop body.
+                     * Not stylish, as did it with fever and flu but hopefully working!
+                     */
+
                     for (int j = i + 1; j < splitCommands.Length; j++)
                     {
                         if (splitCommands[j].ToUpper().Trim().Equals("ENDFOR"))
                         {
+                            LineCounter++;
+                            i = j; // Updating i to avoid OutOfBound
                             break;
                         }
                         else
@@ -214,6 +218,8 @@ namespace DrawingEnvironment
                             LineCounter++;
                         }
                     } // End for
+                    // Instantiating the loop
+                    loop = new Loop(VariableDictionary, LoopBody, loopExpression, LoopElements[2]);
                 } // End else if
             }
         } // End Method
@@ -251,6 +257,16 @@ namespace DrawingEnvironment
             else { return true; }
         }
 
+        public string[] ParseLoopElements(string loopDeclaration)
+        {
+            // Splitting the for statement from the body
+            string[] loopDeclarationSplit = loopDeclaration.Split(' ');
+            // Splitting the operations of the for loop [0] as the variable, [1] condition, [2] increment
+            string[] loopElements = loopDeclarationSplit[1].Split(';');
+            
+            return loopElements;
+        }
+
         /// <summary>
         /// It parses the variable found in a loop declaration
         /// </summary>
@@ -258,10 +274,13 @@ namespace DrawingEnvironment
         /// <returns></returns>
         public Variable ParseLoopVariable(string loopDeclaration)
         {
-            string[] loopElements = loopDeclaration.Split(';');
-            string loopVariable = loopElements[0];
-            return ParseVariable(loopVariable);
+            // Setting the loop elements
+            string[] loopElements = ParseLoopElements(loopDeclaration);
+            
+            // Returning the first element which is going to be the declared variable
+            return ParseVariable(loopElements[0]); // The Variable declaration for the loop
         }
+
 
         /// <summary>
         /// Methods which checks if the commands is valid among the options available

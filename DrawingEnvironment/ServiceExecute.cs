@@ -56,8 +56,6 @@ namespace DrawingEnvironment
 
                 else
                 {
-                    // TODO: Setting a Loop list to separate it from the normal one
-
                     // Updating the parser's list of commands
                     parser.ParseCommandMultiLine(command);
                     // Updating the Service List of commands
@@ -65,6 +63,24 @@ namespace DrawingEnvironment
                     LoopCommands = parser.LoopBody;
                     // Updating the Variables taken from the parser
                     parser.SetListVariable(VariableList);
+
+                    // TODO: Comment and test this
+                    if (parser.loop != null)
+                    {
+                        loop = parser.loop;
+                        while(loop.IsExecuting)
+                        {
+                            for (int i = 0; i < LoopCommands.Count; i++)
+                            {
+                                if (loop.IsExecuting)
+                                {
+                                    loop.SetCondition(loop.condition);
+                                    Execute(LoopCommands[i]);
+                                    loop.UpdateVariableValue(parser.LoopElements[2]);
+                                }
+                            }
+                        }
+                    }
 
                     for (int i = 0; i < CommandList.Count; i++)
                     {
@@ -74,7 +90,6 @@ namespace DrawingEnvironment
                             // Refreshing the parser's list of variables in use
                             parser.SetListVariable(VariableList);
                         }
-                        // TODO: If it is a valid loop execute the loop Command List
 
                         else if (parser.isValidCommand(CommandList[i].Name))
                         {

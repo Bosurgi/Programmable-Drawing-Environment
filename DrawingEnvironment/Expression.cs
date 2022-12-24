@@ -42,7 +42,8 @@ namespace DrawingEnvironment
             {
                 for (int i = 0; i < ExpressionElements.Length; i++)
                 {
-                    /* If a variable with the name of the specific element is found it will convert
+                    /* 
+                     * If a variable with the name of the specific element is found it will convert
                      * get the value corresponding to that variable and
                      * replace the element of the expression with its value converted to string
                      * then it will proceed with the normal operation.
