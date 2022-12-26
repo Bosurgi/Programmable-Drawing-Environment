@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace DrawingEnvironment
@@ -21,6 +21,9 @@ namespace DrawingEnvironment
         Pen pen;
         bool isFilling;
 
+        bool threadFlag = true;
+        PictureBox CurrentColourBox;
+
         // Initialising the Parser.
         Parser parser = new Parser();
         ShapeFactory factory = new ShapeFactory(); // Factory for generating the shapes.
@@ -30,16 +33,18 @@ namespace DrawingEnvironment
         Label PositionLabel;
         TextBox programmingArea;
         // The list where the commands are going to be stored
-       public List<Command> CommandList;
-       public List<Command> LoopCommands = new List<Command>();
-        
-       public Loop loop;
+        public List<Command> CommandList;
+        public List<Command> LoopCommands = new List<Command>();
+
+        public Loop loop;
 
         // The list of variables and variables flag
-       public List<Variable> VariableList = new List<Variable>();
+        public List<Variable> VariableList = new List<Variable>();
 
         // The line counter for the multiline execution
         int lineCounter = 1;
+
+        // TODO: Bug with colours and loops as it executes first the commands
 
         /// <summary>
         /// Method which allows the user input to be parsed and executed if there are no errors.
@@ -64,31 +69,6 @@ namespace DrawingEnvironment
                     LoopCommands = parser.LoopBody;
                     // Updating the Variables taken from the parser
                     parser.SetListVariable(VariableList);
-                    
-                    // Checking if there is a loop
-                    if (parser.loop != null)
-                    {
-                        // Updating the loop in local environment
-                        loop = parser.loop;
-                        // Executing the loop until the requirements are met
-                        while(loop.IsExecuting)
-                        {
-                            for (int i = 0; i < LoopCommands.Count; i++)
-                            {
-                                if (loop.IsExecuting)
-                                {
-                                    // Updating the Loop variable
-                                    loop.UpdateVariableValue(parser.LoopElements[2]);                                   
-                                    int[] newVariableValue = loop.variable.Parameters;
-                                    LoopCommands[i].Parameters = newVariableValue;
-                                    // Evaluating the comparable condition
-                                    loop.SetCondition(loop.condition);                                    
-                                    // Executing the commands in the loop body
-                                    Execute(LoopCommands[i]);
-                                }
-                            }
-                        }
-                    }
 
                     for (int i = 0; i < CommandList.Count; i++)
                     {
@@ -106,6 +86,30 @@ namespace DrawingEnvironment
                             lineCounter++;
                         }
                         else { throw new FormatException("Error at line: " + lineCounter + "\n" + CommandList[i].Name + " is not a valid command."); }
+                    }
+                }
+                // Checking if there is a loop
+                if (parser.loop != null)
+                {
+                    // Updating the loop in local environment
+                    loop = parser.loop;
+                    // Executing the loop until the requirements are met
+                    while (loop.IsExecuting)
+                    {
+                        for (int i = 0; i < LoopCommands.Count; i++)
+                        {
+                            if (loop.IsExecuting)
+                            {
+                                // Updating the Loop variable
+                                loop.UpdateVariableValue(parser.LoopElements[2]);
+                                int[] newVariableValue = loop.variable.Parameters;
+                                LoopCommands[i].Parameters = newVariableValue;
+                                // Evaluating the comparable condition
+                                loop.SetCondition(loop.condition);
+                                // Executing the commands in the loop body
+                                Execute(LoopCommands[i]);
+                            }
+                        }
                     }
                 }
             }
@@ -355,6 +359,20 @@ namespace DrawingEnvironment
                     pointer.SetColour(Color.White);
                     pen.Color = Color.White;
                     break;
+
+                case "REDGREEN":
+                    // TODO: Adding thread commands - REDGREEN
+                    Thread thread = new Thread(StartRedGreen);
+                    thread.Start();
+                    break;
+
+                case "BLUEYELLOW":
+                    // TODO: Adding thread commands - BLUEYELLOW
+                    break;
+
+                case "BLACKWHITE":
+                    // TODO: Adding thread commands - BLACKWHITE
+                    break;
             }
         } // End of Method
 
@@ -386,6 +404,28 @@ namespace DrawingEnvironment
             { return false; }
         }
 
+        public void StartRedGreen()
+        {
+            while(true)
+            {
+                if (threadFlag == true)
+                {
+                    pen.Color = Color.Red;
+                    pointer.SetColour(pen.Color);
+                    CurrentColourBox.BackColor= pen.Color;
+                    threadFlag= false;
+                }
+                else
+                {
+                    pen.Color = Color.Green;
+                    pointer.SetColour(pen.Color);
+                    CurrentColourBox.BackColor= pen.Color;
+                    threadFlag = true;
+                }
+                Thread.Sleep(100);
+            }
+        }
+
         /// <summary>
         /// Constructor for the service which will be used to execute the commands out of the Form context
         /// </summary>
@@ -396,7 +436,7 @@ namespace DrawingEnvironment
         /// <param name="LablePosition">the label which manages the current position of the cursor</param>
         /// <param name="isFilling">the current state of the filling function</param>
         /// <param name="programmingArea">the programming area text box from the form</param>
-        public ServiceExecute(Graphics g, Pen pen, CustomCursor pointer, Label errorLabel, Label LablePosition, bool isFilling, TextBox programmingArea)
+        public ServiceExecute(Graphics g, Pen pen, CustomCursor pointer, Label errorLabel, Label LablePosition, bool isFilling, TextBox programmingArea, PictureBox CurrentColourBox)
         {
             this.g = g;
             this.pen = pen;
@@ -405,6 +445,8 @@ namespace DrawingEnvironment
             PositionLabel = LablePosition;
             this.isFilling = isFilling;
             this.programmingArea = programmingArea;
+            // TODO: Added this to experiment
+            this.CurrentColourBox = CurrentColourBox;
         }
     }
 }

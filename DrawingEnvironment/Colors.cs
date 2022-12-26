@@ -17,10 +17,13 @@ namespace DrawingEnvironment
         /// </summary>
         public enum ColorTypes
         {
-            RED,    // 1
-            GREEN,  // 2
-            BLUE,   // 3
-            WHITE,  // 4
+            RED,        // 1
+            GREEN,      // 2
+            BLUE,       // 3
+            WHITE,      // 4
+            REDGREEN,   // 5
+            BLUEYELLOW, // 6
+            BLACKWHITE  // 7
         }
     }
 }

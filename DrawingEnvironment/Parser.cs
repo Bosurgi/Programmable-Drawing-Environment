@@ -4,7 +4,6 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
 
-// TODO: Just store the list of Loop commands in the parser, transfer that list in Service and Execute them from there
 namespace DrawingEnvironment
 {
     /// <summary>
@@ -17,8 +16,6 @@ namespace DrawingEnvironment
         /// Parser has a property - LineCounter which will be used to count the lines for multiple line commands.
         /// This will help to keep track where an error is thrown.
         /// </summary>
-
-        // TODO: Check if line counter for variables works updated line 66
 
         public int LineCounter { get; set; }
         public Variable loopVar;
@@ -104,29 +101,20 @@ namespace DrawingEnvironment
                         // Adding the values into the parameters list
                         parsedParameters.Add(VariableDictionary[splitParam[i]]);
                     }
-
+                    /*
+                    // TODO: This causes a bug if a command is issued after declaring a variable
                     // If the variable is not present, it will throw an error only if there are variables
                     else if (!VariableDictionary.ContainsKey(splitParam[i]) && VariableDictionary.Count != 0)
                     {
                         throw new ArgumentException("Variable not found");
                     }
+                    */
                     // Handling the only command with literals Parameters (ON and OFF)
                     else if (command.Equals("FILL") && parameters != null)
                     {
                         // Sets value 1 for On and Value 0 to OFF
                         if (parameters.Equals("ON")) { parsedParameters.Add(1); }
                         else if (parameters.Equals("OFF")) { parsedParameters.Add(0); }
-                    }
-
-                    // Extracting the elements from the loop
-                    else if (command.Equals("FOR"))
-                    {
-                        // TODO: Forming the loop with three elements here
-                        // Splitting the three elements of the loop
-                        /*
-                        string[] loopElements = parameters.Trim().Split(';');
-                        loop = new Loop(VariableDictionary, loopElements);
-                        */
                     }
 
                     // Checking if the string passed on the parameters are valid integers
@@ -141,7 +129,6 @@ namespace DrawingEnvironment
                         parsedParameters.Add(Convert.ToInt32(splitParam[i]));
                     }
                 }
-
             }
             // if only command storing just command
             else { command = splitLine[0]; }

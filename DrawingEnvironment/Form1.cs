@@ -95,7 +95,7 @@ namespace DrawingEnvironment
             areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;         
 
             // Initialising the service which will manage all the input and execution of commands
-            ServiceExecute ex = new ServiceExecute(areaGraphics, pen, pointer, errorLabel, PositionLabel, isFilling, programmingArea);
+            ServiceExecute ex = new ServiceExecute(areaGraphics, pen, pointer, errorLabel, PositionLabel, isFilling, programmingArea, BoxCurrentColor);
             ex.ExecuteService(cmd); // Executing the service
             isFilling = ex.GetFill(); // Updating form filling flag
             userInput.Text = ""; // Resetting the user input text field to empty text
