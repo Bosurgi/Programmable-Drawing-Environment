@@ -62,7 +62,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// It updates the Variable to meet the condition for execution
         /// </summary>
-        /// <param name="updateComponent">the component of the loop to update which is like a variable</param>
+        /// <param name="updateComponent">the component of the loop to update which is a variable value</param>
         /// <exception cref="ArgumentException">If there is no value it will throw an error</exception>
         public void UpdateVariableValue(string updateComponent)
         {
@@ -83,6 +83,13 @@ namespace DrawingEnvironment
             else { throw new ArgumentException("Variable not found!"); }
         }
 
+        /// <summary>
+        /// Constructor representing the loop.
+        /// </summary>
+        /// <param name="dictionaryVariables">the variables presents in the loop</param>
+        /// <param name="loopBody">the commands that needs to be executed</param>
+        /// <param name="condition">the loop condition to be executed</param>
+        /// <param name="updateComponent">the increment or decrement component of the loop</param>
         public Loop(Dictionary<string, int> dictionaryVariables, List<Command> loopBody, Expression condition, string updateComponent)
         {
             this.loopBody = loopBody;

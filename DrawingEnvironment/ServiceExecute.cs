@@ -64,22 +64,26 @@ namespace DrawingEnvironment
                     LoopCommands = parser.LoopBody;
                     // Updating the Variables taken from the parser
                     parser.SetListVariable(VariableList);
-
-                    // TODO: Comment and test this
+                    
+                    // Checking if there is a loop
                     if (parser.loop != null)
                     {
+                        // Updating the loop in local environment
                         loop = parser.loop;
+                        // Executing the loop until the requirements are met
                         while(loop.IsExecuting)
                         {
                             for (int i = 0; i < LoopCommands.Count; i++)
                             {
                                 if (loop.IsExecuting)
                                 {
-                                    loop.UpdateVariableValue(parser.LoopElements[2]);
-                                    // TODO: Need to update parameters for commands JUST EXAMPLE for now
+                                    // Updating the Loop variable
+                                    loop.UpdateVariableValue(parser.LoopElements[2]);                                   
                                     int[] newVariableValue = loop.variable.Parameters;
                                     LoopCommands[i].Parameters = newVariableValue;
+                                    // Evaluating the comparable condition
                                     loop.SetCondition(loop.condition);                                    
+                                    // Executing the commands in the loop body
                                     Execute(LoopCommands[i]);
                                 }
                             }
