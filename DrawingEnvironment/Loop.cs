@@ -8,9 +8,12 @@ namespace DrawingEnvironment
     /// </summary>
     internal class Loop : Command
     {
+        internal List<Variable> variables = new List<Variable>();
+        internal Variable variable;
+
         internal Dictionary<string, int> PresentVariables = new Dictionary<string, int>();
         internal Expression condition;
-        internal List<Command> loopBody; // TODO: implementing the list to execute
+        internal List<Command> loopBody;
         internal string UpdateExpression; // The increment or decrement expression
         internal bool IsExecuting = true;
 
@@ -65,12 +68,16 @@ namespace DrawingEnvironment
         {
             string[] updateElements = updateComponent.ToUpper().Trim().Split('=');
             if (PresentVariables.ContainsKey(updateElements[0]))
-            {
+            {                
                 Expression expression = new Expression(updateElements[1], PresentVariables);
                 string result = expression.CalculateExpression();
                 int calculateValue = Convert.ToInt32(result);
+                int[] valueArray = { calculateValue };
 
                 PresentVariables[updateElements[0]] = calculateValue;
+
+                variable = new Variable(updateElements[0], valueArray);
+                variables.Add(variable);
             }
 
             else { throw new ArgumentException("Variable not found!"); }

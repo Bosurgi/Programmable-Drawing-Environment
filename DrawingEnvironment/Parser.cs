@@ -21,6 +21,7 @@ namespace DrawingEnvironment
         // TODO: Check if line counter for variables works updated line 66
 
         public int LineCounter { get; set; }
+        public Variable loopVar;
         public List<Variable> VariableList = new List<Variable>();
         public List<Command> LoopBody = new List<Command>();
         public List<Command> CommandList = new List<Command>();
@@ -180,7 +181,6 @@ namespace DrawingEnvironment
 
             for (int i = 0; i < splitCommands.Length; i++)
             {
-                // TODO: Adding if statement to parse the body of the loop
                 if (!splitCommands[i].ToUpper().Trim().Contains("FOR"))
                 {
                     LineCounter++; // Updating LineCounter to keep track of the line executing.
@@ -196,7 +196,10 @@ namespace DrawingEnvironment
                     // Instantiating the Expression for the loop
                     Expression loopExpression = new Expression(LoopElements[1]);
                     
-                    Variable loopVar = ParseLoopVariable(splitCommands[i]);
+                    // Instantiating the variable present in the loop
+                    loopVar = ParseLoopVariable(splitCommands[i]);
+                    
+                    // Adding the variable into the Dictionary
                     VariableDictionary.Add(loopVar.Name, loopVar.Parameters[0]);
 
                     /*

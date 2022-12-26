@@ -1,3 +1,4 @@
-for a=50;a>0;a=a-10
-circle a
+moveto 130,150
+for a=100;a>0;a=a-10
+    circle a
 endfor
