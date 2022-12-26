@@ -12,10 +12,10 @@ namespace DrawingEnvironment
         internal Variable variable;
 
         internal Dictionary<string, int> PresentVariables = new Dictionary<string, int>();
-        internal Expression condition;
-        internal List<Command> loopBody;
+        internal Expression condition; // the comparison condition
+        internal List<Command> loopBody; // Commands part of the loop body
         internal string UpdateExpression; // The increment or decrement expression
-        internal bool IsExecuting = true;
+        internal bool IsExecuting = true; // Executing flag
 
         /// <summary>
         /// It check if the condition given by the expression is met, this allows the execution of the loop
@@ -67,16 +67,19 @@ namespace DrawingEnvironment
         public void UpdateVariableValue(string updateComponent)
         {
             string[] updateElements = updateComponent.ToUpper().Trim().Split('=');
+            // Checking if the variable is in the dictionary
             if (PresentVariables.ContainsKey(updateElements[0]))
-            {                
+            {   
+                // If it is it will calculate the expression and update its value in the dictionary
                 Expression expression = new Expression(updateElements[1], PresentVariables);
                 string result = expression.CalculateExpression();
                 int calculateValue = Convert.ToInt32(result);
                 int[] valueArray = { calculateValue };
-
+                // Updating its value in the dictionary
                 PresentVariables[updateElements[0]] = calculateValue;
-
+                // Updating the variables present for the loop
                 variable = new Variable(updateElements[0], valueArray);
+                // Adding it into the list
                 variables.Add(variable);
             }
 
