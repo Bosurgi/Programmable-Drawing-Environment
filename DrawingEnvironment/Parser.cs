@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
+using System.Windows.Forms.VisualStyles;
 
 namespace DrawingEnvironment
 {
@@ -21,8 +22,10 @@ namespace DrawingEnvironment
         public Variable loopVar;
         public List<Variable> VariableList = new List<Variable>();
         public List<Command> LoopBody = new List<Command>();
+        public List<Command> IfBody = new List<Command>();
         public List<Command> CommandList = new List<Command>();
         public Loop loop;
+        public IfStatement ifStatement;
         public string[] LoopElements;
 
         // Dictionary which will store unique key pairs for the Variables stored in memory
@@ -168,6 +171,7 @@ namespace DrawingEnvironment
 
             for (int i = 0; i < splitCommands.Length; i++)
             {
+                // If does not contain the keyword For it adds the commands to execute in the normal Command List
                 if (!splitCommands[i].ToUpper().Trim().Contains("FOR"))
                 {
                     LineCounter++; // Updating LineCounter to keep track of the line executing.
@@ -189,10 +193,8 @@ namespace DrawingEnvironment
                     // Adding the variable into the Dictionary
                     VariableDictionary.Add(loopVar.Name, loopVar.Parameters[0]);
 
-                    /*
-                     * Nested for loop to populate the commands for the For loop body.
-                     * Not stylish, as did it with fever and flu but hopefully working!
-                     */
+                    
+                     // Nested for loop to populate the commands for the For loop body. 
 
                     for (int j = i + 1; j < splitCommands.Length; j++)
                     {
@@ -211,6 +213,32 @@ namespace DrawingEnvironment
                     // Instantiating the loop
                     loop = new Loop(VariableDictionary, LoopBody, loopExpression, LoopElements[2]);
                 } // End else if
+
+                // Determine if there is an IF statement to parse
+                else if (splitCommands[i].ToUpper().Trim().Contains("IF"))
+                {
+                    string IfExpression = ParseIfStatement(splitCommands[i]);
+                    Expression ifExpression = new Expression(IfExpression, VariableDictionary);
+                    //IfStatement ifStatement = new IfStatement(VariableDictionary, ifExpression);
+                    
+                    for (int j = i + 1; j < splitCommands.Length; j++)
+                    {
+                        if (splitCommands[j].ToUpper().Trim().Equals("ENDIF"))
+                        {
+                            LineCounter++;
+                            i = j; // Updating i to avoid OutOfBound
+                            break;
+                        }
+                        else
+                        {
+                            IfBody.Add(ParseCommands(splitCommands[j]));
+                            LineCounter++;
+                        }
+                    } // End for
+                    
+                    // Instantiating the If Statement
+                    ifStatement = new IfStatement(VariableDictionary, ifExpression, IfBody);
+                }
             }
         } // End Method
         
@@ -247,6 +275,11 @@ namespace DrawingEnvironment
             else { return true; }
         }
 
+        /// <summary>
+        /// It parses the element contained in a loop dividing the expressions by semicolumns.
+        /// </summary>
+        /// <param name="loopDeclaration">the declaration of the loop, the first element of the loop</param>
+        /// <returns></returns>
         public string[] ParseLoopElements(string loopDeclaration)
         {
             // Splitting the for statement from the body
@@ -255,6 +288,18 @@ namespace DrawingEnvironment
             string[] loopElements = loopDeclarationSplit[1].Split(';');
             
             return loopElements;
+        }
+
+        /// <summary>
+        /// It parses the if statement by dividing the declaration from the expression
+        /// </summary>
+        /// <param name="ifDeclaration">the declaration of If statement</param>
+        /// <returns></returns>
+        public string ParseIfStatement(string ifDeclaration)
+        {
+            string[] ifStatementSplit = ifDeclaration.Split(' ');
+            
+            return ifStatementSplit[1];
         }
 
         /// <summary>
