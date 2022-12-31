@@ -172,7 +172,7 @@ namespace DrawingEnvironment
             for (int i = 0; i < splitCommands.Length; i++)
             {
                 // If does not contain the keyword For it adds the commands to execute in the normal Command List
-                if (!splitCommands[i].ToUpper().Trim().Contains("FOR"))
+                if (!splitCommands[i].ToUpper().Trim().Contains("FOR") && !splitCommands[i].ToUpper().Trim().Contains("IF"))
                 {
                     LineCounter++; // Updating LineCounter to keep track of the line executing.
                     CommandList.Add(ParseCommands(splitCommands[i])); // applying the single line parsecommand to the current line and adding it to the list.
@@ -219,7 +219,6 @@ namespace DrawingEnvironment
                 {
                     string IfExpression = ParseIfStatement(splitCommands[i]);
                     Expression ifExpression = new Expression(IfExpression, VariableDictionary);
-                    //IfStatement ifStatement = new IfStatement(VariableDictionary, ifExpression);
                     
                     for (int j = i + 1; j < splitCommands.Length; j++)
                     {

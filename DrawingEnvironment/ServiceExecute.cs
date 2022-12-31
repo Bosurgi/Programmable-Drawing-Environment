@@ -38,6 +38,8 @@ namespace DrawingEnvironment
 
         public Loop loop;
 
+        public IfStatement ifStatement;
+
         // The list of variables and variables flag
         public List<Variable> VariableList = new List<Variable>();
 
@@ -111,11 +113,32 @@ namespace DrawingEnvironment
                             }
                         }
                     }
-                }
-            }
+                } // End of if
+
+                if (parser.ifStatement != null)
+                {
+                    // Updating the if statement in the parser
+                    ifStatement = parser.ifStatement;
+                    // Evaluating the if condition
+                    ifStatement.EvaluateExpression(ifStatement.IfExpression);
+                    // If the condition is met it will execute the If Body
+                    if (ifStatement.IsExecuting)
+                    {
+                        for(int i = 0; i < parser.IfBody.Count; i++)
+                        {
+                            Execute(parser.IfBody[i]);
+                        }
+                    }
+                    
+                    // If the if statement condition is not met the user will receive a prompt.
+                    else { throw new FormatException("If condition not met. \nNot executing the If statement."); }
+                } // End of If                
+
+            } // End of Try
             catch (ArgumentException ex) { ErrorLabel.Text = "Line: " + parser.LineCounter + " " + ex.Message; }
             catch (FormatException ex) { ErrorLabel.Text = ex.Message; }
-        }
+
+        } // End of Method
 
         /// <summary>
         /// Method which executes the specified command based on its Name and Parameters.
