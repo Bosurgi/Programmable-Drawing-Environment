@@ -23,6 +23,7 @@ namespace DrawingEnvironment
         public List<Variable> VariableList = new List<Variable>();
         public List<Command> LoopBody = new List<Command>();
         public List<Command> IfBody = new List<Command>();
+        public List<Command> MethodBody = new List<Command>();
         public List<Command> CommandList = new List<Command>();
         public Loop loop;
         public IfStatement ifStatement;
@@ -172,7 +173,9 @@ namespace DrawingEnvironment
             for (int i = 0; i < splitCommands.Length; i++)
             {
                 // If does not contain the keyword For it adds the commands to execute in the normal Command List
-                if (!splitCommands[i].ToUpper().Trim().Contains("FOR") && !splitCommands[i].ToUpper().Trim().Contains("IF"))
+                if (!splitCommands[i].ToUpper().Trim().Contains("FOR") 
+                    && !splitCommands[i].ToUpper().Trim().Contains("IF") 
+                    && !splitCommands[i].ToUpper().Trim().Contains("METHOD"))
                 {
                     LineCounter++; // Updating LineCounter to keep track of the line executing.
                     CommandList.Add(ParseCommands(splitCommands[i])); // applying the single line parsecommand to the current line and adding it to the list.
@@ -238,6 +241,30 @@ namespace DrawingEnvironment
                     // Instantiating the If Statement
                     ifStatement = new IfStatement(VariableDictionary, ifExpression, IfBody);
                 }
+
+                // Determine if there is a Method declaration to parse TODO: implement this
+                else if (splitCommands[i].ToUpper().Trim().Contains("METHOD"))
+                {
+                    Method method = ParseMethod(splitCommands[i]);
+
+                    for (int j = i + 1; j < splitCommands.Length; j++)
+                    {
+                        if (splitCommands[j].ToUpper().Trim().Equals("ENDMETHOD"))
+                        {
+                            LineCounter++;
+                            i = j; // Updating i to avoid OutOfBound
+                            break;
+                        }
+                        else
+                        {
+                            MethodBody.Add(ParseCommands(splitCommands[j]));
+                            LineCounter++;
+                        }
+                    } // End for
+
+                    // Set the body of the method to execute
+                    method.SetBody(MethodBody);
+                }
             }
         } // End Method
         
@@ -293,7 +320,7 @@ namespace DrawingEnvironment
         /// It parses the if statement by dividing the declaration from the expression
         /// </summary>
         /// <param name="ifDeclaration">the declaration of If statement</param>
-        /// <returns></returns>
+        /// <returns>the if statement condition as a string</returns>
         public string ParseIfStatement(string ifDeclaration)
         {
             string[] ifStatementSplit = ifDeclaration.Split(' ');
@@ -305,7 +332,7 @@ namespace DrawingEnvironment
         /// It parses the variable found in a loop declaration
         /// </summary>
         /// <param name="loopDeclaration">the loop declaration divided by semicolumns</param>
-        /// <returns></returns>
+        /// <returns>The variable declared</returns>
         public Variable ParseLoopVariable(string loopDeclaration)
         {
             // Setting the loop elements
@@ -313,6 +340,30 @@ namespace DrawingEnvironment
             
             // Returning the first element which is going to be the declared variable
             return ParseVariable(loopElements[0]); // The Variable declaration for the loop
+        }
+
+        /// <summary>
+        /// It parses eventual methods dividing name and parameters
+        /// </summary>
+        /// <param name="methodDeclaration">the declaration of the methods by the user</param>
+        /// <returns>returns the method</returns>
+        public Method ParseMethod(string methodDeclaration)
+        {
+            // It contains the elements of the method, at index 1 it should be name of method and its parameters
+            string[] MethodsElements = methodDeclaration.Split(' ');
+
+            // TODO: dividing the name of the method and its parameters via Regex
+            
+            // Dividing the parameters of the Method
+            string pattern = @"(?<=\()[^()]*(?=\))";
+            Regex rg = new Regex(pattern, RegexOptions.Compiled);
+
+            // Getting the parameters
+            string parameters = rg.Match(MethodsElements[1]).ToString().ToUpper();
+            // Instantiating the Method
+            Method method = new Method();
+
+            return method;
         }
 
 
