@@ -6,16 +6,31 @@ using System.Threading.Tasks;
 
 namespace DrawingEnvironment
 {
+    /// <summary>
+    /// The if Statement class which allows the execution of logical operations
+    /// Use of Chain of resposibility pattern in Loops and Ifs
+    /// </summary>
     internal class IfStatement : Command
     {
+        /// <summary>
+        /// The if Body containing the commands to execute
+        /// </summary>
         internal List<Command> IfBody = new List<Command>();
-
+        /// <summary>
+        /// The list of variables declared
+        /// </summary>
         internal List<Variable> Variables = new List<Variable>();
-
+        /// <summary>
+        /// The Dictionary containing the keys and values for the variables
+        /// </summary>
         internal Dictionary<string, int> PresentVariables = new Dictionary<string, int>();
-
+        /// <summary>
+        /// The if condition
+        /// </summary>
         internal Expression IfExpression;
-
+        /// <summary>
+        /// The flag for the if condition if executing or not
+        /// </summary>
         internal bool IsExecuting = true;
 
         /// <summary>

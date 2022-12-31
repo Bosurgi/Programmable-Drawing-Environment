@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="CanvasCustom.cs" />
     <Compile Include="Circle.cs" />
+    <Compile Include="Method.cs" />
     <Compile Include="IfStatement.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Loop.cs" />
