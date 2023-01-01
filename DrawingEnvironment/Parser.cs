@@ -351,17 +351,18 @@ namespace DrawingEnvironment
         {
             // It contains the elements of the method, at index 1 it should be name of method and its parameters
             string[] MethodsElements = methodDeclaration.Split(' ');
-
-            // TODO: dividing the name of the method and its parameters via Regex
             
             // Dividing the parameters of the Method
             string pattern = @"(?<=\()[^()]*(?=\))";
             Regex rg = new Regex(pattern, RegexOptions.Compiled);
 
             // Getting the parameters
+            string methodName = MethodsElements[1].Split('(').FirstOrDefault();
+            //string methodName = methodSplit[0];
+            
             string parameters = rg.Match(MethodsElements[1]).ToString().ToUpper();
             // Instantiating the Method
-            Method method = new Method();
+            Method method = new Method(methodName, parameters);
 
             return method;
         }
