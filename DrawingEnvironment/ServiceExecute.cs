@@ -74,6 +74,8 @@ namespace DrawingEnvironment
                     CommandList = parser.CommandList;
                     // Updating the Loop block of commands if any
                     LoopCommands = parser.LoopBody;
+                    // Update the list of methods
+                    MethodList = parser.Methods;
                     // Updating the Variables taken from the parser
                     parser.SetListVariable(VariableList);
 
@@ -84,6 +86,11 @@ namespace DrawingEnvironment
                         {
                             // Refreshing the parser's list of variables in use
                             parser.SetListVariable(VariableList);
+                        }
+
+                        else if (CommandList[i].GetType().Equals(typeof(Method)))
+                        {
+                            
                         }
 
                         else if (parser.isValidCommand(CommandList[i].Name))
