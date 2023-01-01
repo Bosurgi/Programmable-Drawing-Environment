@@ -44,6 +44,7 @@ namespace DrawingEnvironment
         public List<Variable> VariableList = new List<Variable>();
         
         // The list of the Methods declared
+        // TODO: Updating this list and then checking for methods in command list
         public List<Method> MethodList = new List<Method>();
 
         // The line counter for the multiline execution
