@@ -1,4 +1,6 @@
-﻿namespace DrawingEnvironment
+﻿using System.Windows.Forms.VisualStyles;
+
+namespace DrawingEnvironment
 {
     /// <summary>
     /// The command class represents the actual available commands in the Drawing Environment.
@@ -11,6 +13,8 @@
         /// </summary>
         internal string Name { get; set; }
         internal int[] Parameters { get; set; }
+
+        internal string[] stringParameters { get; set; }
 
         /// <summary>
         /// Enumerator for commands available
@@ -83,6 +87,27 @@
         {
             this.Name = name;
             this.Parameters = parameters;
+        }
+
+        /// <summary>
+        /// Constructor for a command taking strings for parameters
+        /// </summary>
+        /// <param name="name">the name of the command</param>
+        /// <param name="parameters">the parameters passed</param>
+        public Command(string name, string[] parameters)
+        {
+            this.Name = name;
+            this.stringParameters = parameters;
+            
+        }
+
+        /// <summary>
+        /// Constructor for a command taking only the name
+        /// </summary>
+        /// <param name="name">the name of the command</param>
+        public Command(string name)
+        {
+            this.Name = name;
         }
 
         /// <summary>

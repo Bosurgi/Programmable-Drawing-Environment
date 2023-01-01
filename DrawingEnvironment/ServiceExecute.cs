@@ -42,6 +42,9 @@ namespace DrawingEnvironment
 
         // The list of variables and variables flag
         public List<Variable> VariableList = new List<Variable>();
+        
+        // The list of the Methods declared
+        public List<Method> MethodList = new List<Method>();
 
         // The line counter for the multiline execution
         int lineCounter = 1;
@@ -68,6 +71,7 @@ namespace DrawingEnvironment
                     parser.ParseCommandMultiLine(command);
                     // Updating the Service List of commands
                     CommandList = parser.CommandList;
+                    // Updating the Loop block of commands if any
                     LoopCommands = parser.LoopBody;
                     // Updating the Variables taken from the parser
                     parser.SetListVariable(VariableList);

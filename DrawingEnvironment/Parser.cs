@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Text.RegularExpressions;
-using System.Windows.Forms.VisualStyles;
 
 namespace DrawingEnvironment
 {
@@ -24,6 +22,7 @@ namespace DrawingEnvironment
         public List<Command> LoopBody = new List<Command>();
         public List<Command> IfBody = new List<Command>();
         public List<Command> MethodBody = new List<Command>();
+        public List<Method> Methods = new List<Method>();
         public List<Command> CommandList = new List<Command>();
         public Loop loop;
         public IfStatement ifStatement;
@@ -166,15 +165,15 @@ namespace DrawingEnvironment
         /// <returns>a list of different commands with their Parameters.</returns>
         public void ParseCommandMultiLine(string commands)
         {
-            
+
             var splitCommands = commands.Split('\n');
             LineCounter = 0;
 
             for (int i = 0; i < splitCommands.Length; i++)
             {
                 // If does not contain the keyword For it adds the commands to execute in the normal Command List
-                if (!splitCommands[i].ToUpper().Trim().Contains("FOR") 
-                    && !splitCommands[i].ToUpper().Trim().Contains("IF") 
+                if (!splitCommands[i].ToUpper().Trim().Contains("FOR")
+                    && !splitCommands[i].ToUpper().Trim().Contains("IF")
                     && !splitCommands[i].ToUpper().Trim().Contains("METHOD"))
                 {
                     LineCounter++; // Updating LineCounter to keep track of the line executing.
@@ -189,15 +188,15 @@ namespace DrawingEnvironment
 
                     // Instantiating the Expression for the loop
                     Expression loopExpression = new Expression(LoopElements[1]);
-                    
+
                     // Instantiating the variable present in the loop
                     loopVar = ParseLoopVariable(splitCommands[i]);
-                    
+
                     // Adding the variable into the Dictionary
                     VariableDictionary.Add(loopVar.Name, loopVar.Parameters[0]);
 
-                    
-                     // Nested for loop to populate the commands for the For loop body. 
+
+                    // Nested for loop to populate the commands for the For loop body. 
 
                     for (int j = i + 1; j < splitCommands.Length; j++)
                     {
@@ -213,7 +212,8 @@ namespace DrawingEnvironment
                             LineCounter++;
                         }
                     } // End for
-                    // Instantiating the loop
+                      // Instantiating the loop
+
                     loop = new Loop(VariableDictionary, LoopBody, loopExpression, LoopElements[2]);
                 } // End else if
 
@@ -222,7 +222,7 @@ namespace DrawingEnvironment
                 {
                     string IfExpression = ParseIfStatement(splitCommands[i]);
                     Expression ifExpression = new Expression(IfExpression, VariableDictionary);
-                    
+
                     for (int j = i + 1; j < splitCommands.Length; j++)
                     {
                         if (splitCommands[j].ToUpper().Trim().Equals("ENDIF"))
@@ -237,7 +237,7 @@ namespace DrawingEnvironment
                             LineCounter++;
                         }
                     } // End for
-                    
+
                     // Instantiating the If Statement
                     ifStatement = new IfStatement(VariableDictionary, ifExpression, IfBody);
                 }
@@ -257,17 +257,18 @@ namespace DrawingEnvironment
                         }
                         else
                         {
-                            MethodBody.Add(ParseCommands(splitCommands[j]));
+                            MethodBody.Add(ParseMethodCommands(splitCommands[j]));
                             LineCounter++;
                         }
                     } // End for
 
                     // Set the body of the method to execute
                     method.SetBody(MethodBody);
+                    Methods.Add(method);
                 }
             }
         } // End Method
-        
+
 
         /// <summary>
         /// Method which checks if a parameter could be converted into a number to avoid errors.
@@ -302,6 +303,49 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
+        /// It parses commands for the Methods which will not have variables declared hence
+        /// they need to be parsed differently.
+        /// </summary>
+        /// <param name="input">the user input</param>
+        /// <returns>A command with Name and Variable</returns>
+        public Command ParseMethodCommands(string input)
+        {           
+            string commandName;
+            string commandParameters;
+
+            // Splitting the input - index 0 command name and index 1 parameters
+            string[] splitLine = input.Split(' ');
+
+            // The command that will be parsed
+            Command command;
+
+            if (splitLine.Length > 2)
+            {
+                throw new ArgumentException("Invalid number of Parameters");
+            }
+            // If line has arguments then dividing Parameters and commands accordingly
+            else if (splitLine.Length == 2)
+            {
+                // Splitting the commands: 0 command and 1 for Parameters.
+                commandName = splitLine[0];
+                commandParameters = splitLine[1];
+
+                // Splitting Parameters with comma
+                var splitParam = commandParameters.ToUpper().Split(',');
+
+                command = new Command(commandName, splitParam);
+            }
+            // if only command storing just command
+
+            else
+            {
+                commandName = splitLine[0];
+                command = new Command(commandName);
+            }
+
+            return command;
+        }
+        /// <summary>
         /// It parses the element contained in a loop dividing the expressions by semicolumns.
         /// </summary>
         /// <param name="loopDeclaration">the declaration of the loop, the first element of the loop</param>
@@ -312,7 +356,7 @@ namespace DrawingEnvironment
             string[] loopDeclarationSplit = loopDeclaration.Split(' ');
             // Splitting the operations of the for loop [0] as the variable, [1] condition, [2] increment
             string[] loopElements = loopDeclarationSplit[1].Split(';');
-            
+
             return loopElements;
         }
 
@@ -324,7 +368,7 @@ namespace DrawingEnvironment
         public string ParseIfStatement(string ifDeclaration)
         {
             string[] ifStatementSplit = ifDeclaration.Split(' ');
-            
+
             return ifStatementSplit[1];
         }
 
@@ -337,7 +381,7 @@ namespace DrawingEnvironment
         {
             // Setting the loop elements
             string[] loopElements = ParseLoopElements(loopDeclaration);
-            
+
             // Returning the first element which is going to be the declared variable
             return ParseVariable(loopElements[0]); // The Variable declaration for the loop
         }
@@ -351,7 +395,7 @@ namespace DrawingEnvironment
         {
             // It contains the elements of the method, at index 1 it should be name of method and its parameters
             string[] MethodsElements = methodDeclaration.Split(' ');
-            
+
             // Dividing the parameters of the Method
             string pattern = @"(?<=\()[^()]*(?=\))";
             Regex rg = new Regex(pattern, RegexOptions.Compiled);
@@ -359,14 +403,13 @@ namespace DrawingEnvironment
             // Getting the parameters
             string methodName = MethodsElements[1].Split('(').FirstOrDefault();
             //string methodName = methodSplit[0];
-            
+
             string parameters = rg.Match(MethodsElements[1]).ToString().ToUpper();
             // Instantiating the Method
             Method method = new Method(methodName, parameters);
 
             return method;
         }
-
 
         /// <summary>
         /// Methods which checks if the commands is valid among the options available
