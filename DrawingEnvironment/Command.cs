@@ -11,7 +11,7 @@ namespace DrawingEnvironment
         /// <summary>
         /// Command class properties, names and Parameters.
         /// </summary>
-        internal string Name { get; set; }
+        public string Name { get; set; }
         internal int[] Parameters { get; set; }
 
         internal string[] stringParameters { get; set; }

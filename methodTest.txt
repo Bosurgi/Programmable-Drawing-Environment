@@ -2,3 +2,4 @@ method trianglecircle(a,b)
 triangle a
 circle b
 endmethod
+trianglecircle(12,30)

@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DrawingEnvironment
-{    
+{
     /// <summary>
     /// It represents a Method that can be declared for later execution in the program
     /// </summary>
-    internal class Method
+    internal class Method : Command
     {
         internal List<Command> MethodBody = new List<Command>();
-        
-        internal Dictionary<string,int> Variables = new Dictionary<string,int>();
+
+        internal Dictionary<string, int> Variables = new Dictionary<string, int>();
 
         internal string MethodName;
 
@@ -35,13 +33,32 @@ namespace DrawingEnvironment
         public void SetParameters(string Parameters)
         {
             string[] splitParameters = Parameters.Split(',');
-            
+
             foreach (var parameter in splitParameters)
             {
                 Variables.Add(parameter.Trim(), 0);
-            }            
+            }
         }
 
+        /// <summary>
+        /// It sets the value on method execution with the values declared
+        /// </summary>
+        /// <param name="parametersValue">the values declared in the method execution</param>
+        public void SetParametersValues(int[] parametersValue)
+        {
+
+            foreach (var command in MethodBody)
+            {
+                for(int i = 0; i < command.stringParameters.Length; i++)
+                {
+                    if (Variables.ContainsKey(command.stringParameters[i]))
+                    {
+                        Variables[command.stringParameters[i]] = parametersValue[i];
+                    }
+                    else { throw new FormatException("Variable not present"); }
+                }
+            }
+        }
 
         /// <summary>
         /// Method constructor taking the name and the Parameters
@@ -56,9 +73,9 @@ namespace DrawingEnvironment
         /// <summary>
         /// Empty Constructor for the Method class
         /// </summary>
-        public Method() 
-        { 
-        
+        public Method()
+        {
+
         }
     }
 }
