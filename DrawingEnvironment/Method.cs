@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DrawingEnvironment
 {    
+    /// <summary>
+    /// It represents a Method that can be declared for later execution in the program
+    /// </summary>
     internal class Method
     {
         internal List<Command> MethodBody = new List<Command>();
@@ -23,6 +26,20 @@ namespace DrawingEnvironment
         public void SetBody(List<Command> MethodBody)
         {
             this.MethodBody = MethodBody;
+        }
+
+        /// <summary>
+        /// It sets the parameters into the Dictionary of variables with default value 0
+        /// </summary>
+        /// <param name="Parameters">the string with parameters</param>
+        public void SetParameters(string Parameters)
+        {
+            string[] splitParameters = Parameters.Split(',');
+            
+            foreach (var parameter in splitParameters)
+            {
+                Variables.Add(parameter.Trim(), 0);
+            }            
         }
 
 

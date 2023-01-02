@@ -314,7 +314,7 @@ namespace DrawingEnvironment
             string commandParameters;
 
             // Splitting the input - index 0 command name and index 1 parameters
-            string[] splitLine = input.Split(' ');
+            string[] splitLine = input.Trim().ToUpper().Split(' ');
 
             // The command that will be parsed
             Command command;
@@ -394,17 +394,18 @@ namespace DrawingEnvironment
         public Method ParseMethod(string methodDeclaration)
         {
             // It contains the elements of the method, at index 1 it should be name of method and its parameters
-            string[] MethodsElements = methodDeclaration.Split(' ');
+            string[] MethodsElements = methodDeclaration.ToUpper().Trim().Split(' ');
 
             // Dividing the parameters of the Method
             string pattern = @"(?<=\()[^()]*(?=\))";
             Regex rg = new Regex(pattern, RegexOptions.Compiled);
 
-            // Getting the parameters
-            string methodName = MethodsElements[1].Split('(').FirstOrDefault();
-            //string methodName = methodSplit[0];
-
+            // Getting the method name by dividing for the first parenthesis
+            string methodName = MethodsElements[1].Trim().ToUpper().Split('(').FirstOrDefault();
+            
+            // The parameters are matching the regex declared before inside the parenthesis
             string parameters = rg.Match(MethodsElements[1]).ToString().ToUpper();
+
             // Instantiating the Method
             Method method = new Method(methodName, parameters);
 
