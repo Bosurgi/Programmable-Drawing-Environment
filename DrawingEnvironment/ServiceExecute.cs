@@ -88,10 +88,10 @@ namespace DrawingEnvironment
                             parser.SetListVariable(VariableList);
                         }
 
-                        // TODO: Recognize the method
+                        
                         else if (CommandList[i].Name.Contains(MethodList[i].MethodName))
                         {
-                            Console.WriteLine("CIao");
+                            // TODO: Set variables values
                         }
 
                         else if (parser.isValidCommand(CommandList[i].Name))
