@@ -13,8 +13,6 @@ namespace DrawingEnvironment
 
         internal Dictionary<string, int> Variables = new Dictionary<string, int>();
 
-        internal string MethodName;
-
         internal string Parameters;
 
         /// <summary>
@@ -61,13 +59,22 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
+        /// Overridden method for toString which displays the name of the method
+        /// </summary>
+        /// <returns>the name of the method</returns>
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        /// <summary>
         /// Method constructor taking the name and the Parameters
         /// </summary>
         /// <param name="name">name of the method delcared</param>
         /// <param name="Parameters">parameters declared in the method</param>
-        public Method(string name, string Parameters)
+        public Method(string name, string Parameters) : base(name)
         {
-            this.MethodName = name;
+            this.Name = name;
             this.Parameters = Parameters;
         }
         /// <summary>

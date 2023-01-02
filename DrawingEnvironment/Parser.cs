@@ -53,8 +53,8 @@ namespace DrawingEnvironment
         /// <returns>the command with its Name and parameter stored.</returns>
         public Command ParseCommands(string cmd)
         {
-            string command;
-            string parameters;
+            string command = "";
+            string parameters = "";
 
             var line = cmd.ToUpper().Trim(); // Tidying and standardizing the line of command
             var splitLine = line.Split(' '); // Splitting the command and Parameters [0] command and [1] param            
@@ -133,6 +133,36 @@ namespace DrawingEnvironment
                     }
                 }
             }
+
+            else if (splitLine[0].Contains('('))
+            {
+                string[] methodSplit = splitLine[0].Split('(');
+                for (int i = 0; i < Methods.Count; i++)
+                {
+                    if (Methods[i].Name.StartsWith(methodSplit[0]))
+                    {
+                        // Dividing the parameters of the Method
+                        string pattern = @"(?<=\()[^()]*(?=\))";
+                        Regex rg = new Regex(pattern, RegexOptions.Compiled);
+
+                        // The parameters are matching the regex declared before inside the parenthesis
+                        string parametersMethods = rg.Match(splitLine[0]).ToString();
+                        string[] parametersSplit = parametersMethods.Split(',');
+                        
+                        // Converting the array to int array
+                        int[] intsParameter = Array.ConvertAll(parametersSplit, int.Parse);
+                        
+                        // Setting the method values as integers
+                        Methods[i].SetParametersValues(intsParameter);
+                        command = methodSplit[0];                                              
+                        
+                        // Returning the method so it will be added to the list
+                        return Methods[i];
+                        
+                    }
+                }
+            }
+
             // if only command storing just command
             else { command = splitLine[0]; }
 
@@ -349,7 +379,7 @@ namespace DrawingEnvironment
         /// It parses the element contained in a loop dividing the expressions by semicolumns.
         /// </summary>
         /// <param name="loopDeclaration">the declaration of the loop, the first element of the loop</param>
-        /// <returns></returns>
+        /// <returns>the elements of the loop as string array</returns>
         public string[] ParseLoopElements(string loopDeclaration)
         {
             // Splitting the for statement from the body

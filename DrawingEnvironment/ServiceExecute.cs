@@ -42,7 +42,7 @@ namespace DrawingEnvironment
 
         // The list of variables and variables flag
         public List<Variable> VariableList = new List<Variable>();
-        
+
         // The list of the Methods declared
         // TODO: Updating this list and then checking for methods in command list
         public List<Method> MethodList = new List<Method>();
@@ -88,11 +88,7 @@ namespace DrawingEnvironment
                             parser.SetListVariable(VariableList);
                         }
 
-                        
-                        else if (CommandList[i].Name.Contains(MethodList[i].MethodName))
-                        {
-                            // TODO: Set variables values
-                        }
+                        // TODO: If the command is a typeof Method execute method body
 
                         else if (parser.isValidCommand(CommandList[i].Name))
                         {
@@ -137,12 +133,12 @@ namespace DrawingEnvironment
                     // If the condition is met it will execute the If Body
                     if (ifStatement.IsExecuting)
                     {
-                        for(int i = 0; i < parser.IfBody.Count; i++)
+                        for (int i = 0; i < parser.IfBody.Count; i++)
                         {
                             Execute(parser.IfBody[i]);
                         }
                     }
-                    
+
                     // If the if statement condition is not met the user will receive a prompt.
                     else { throw new FormatException("If condition not met. \nNot executing the If statement."); }
                 } // End of If                
@@ -442,20 +438,20 @@ namespace DrawingEnvironment
 
         public void StartRedGreen()
         {
-            while(true)
+            while (true)
             {
                 if (threadFlag == true)
                 {
                     pen.Color = Color.Red;
                     pointer.SetColour(pen.Color);
-                    CurrentColourBox.BackColor= pen.Color;
-                    threadFlag= false;
+                    CurrentColourBox.BackColor = pen.Color;
+                    threadFlag = false;
                 }
                 else
                 {
                     pen.Color = Color.Green;
                     pointer.SetColour(pen.Color);
-                    CurrentColourBox.BackColor= pen.Color;
+                    CurrentColourBox.BackColor = pen.Color;
                     threadFlag = true;
                 }
                 Thread.Sleep(100);
