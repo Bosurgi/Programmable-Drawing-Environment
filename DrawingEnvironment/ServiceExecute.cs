@@ -88,7 +88,16 @@ namespace DrawingEnvironment
                             parser.SetListVariable(VariableList);
                         }
 
-                        // TODO: If the command is a typeof Method execute method body
+                        else if (CommandList[i].GetType().Equals(typeof(Method)))
+                        {
+                            for(int j = 0; j < MethodList.Count; j++)
+                            {
+                                if (CommandList[i].Name.Equals(MethodList[j].Name))
+                                {
+                                    MethodList[j].MethodBody.ForEach(c => Execute(c));
+                                }
+                            }
+                        }                        
 
                         else if (parser.isValidCommand(CommandList[i].Name))
                         {

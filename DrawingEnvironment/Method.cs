@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace DrawingEnvironment
@@ -14,7 +13,6 @@ namespace DrawingEnvironment
         internal Dictionary<string, int> Variables = new Dictionary<string, int>();
 
         internal string Parameters;
-
         /// <summary>
         /// Setter for the Body of the Method to execute
         /// </summary>
@@ -39,36 +37,29 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
-        /// It sets the value on method execution with the values declared
+        /// It sets the values for the variables in order of index
         /// </summary>
-        /// <param name="parametersValue">the values declared in the method execution</param>
-        public void SetParametersValuesTOFIX(int[] parametersValue)
-        {
-            // TODO: Fix this method
-            foreach (var command in MethodBody)
-            {
-                for(int i = 0; i < command.stringParameters.Length; i++)
-                {
-                    if (Variables.ContainsKey(command.stringParameters[i]))
-                    {
-                        Variables[command.stringParameters[i]] = parametersValue[i];
-                    }
-                    else { throw new FormatException("Variable not present"); }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parametersValue"></param>
+        /// <param name="parametersValue">the values of the variables</param>
         public void SetParametersValues(int[] parametersValue)
         {
-            for (int i = 0; i < Variables.Count; i++)
+            for (int i = 0; i < MethodBody.Count; i++)
             {
-                
+                // Updating the Variable dictionary with the declared value in the method
+                string varName = Variables.ElementAt(i).Key;
+                Variables[varName] = parametersValue[i];
+
+                // Assigning the value to the right variable based on its name
+                foreach (var parameter in MethodBody[i].stringParameters)
+                {
+                    if (parameter.Equals(Variables.ElementAt(i).Key))
+                    {
+                        int[] varValue = { Variables[varName]};
+                        MethodBody[i].Parameters = varValue;
+                    }
+                }
             }
-        }
+            
+        } // End Method
 
         /// <summary>
         /// Overridden method for toString which displays the name of the method
@@ -88,7 +79,7 @@ namespace DrawingEnvironment
         {
             this.Name = name;
             this.Parameters = Parameters;
-            
+
             SetParameters(Parameters);
         }
         /// <summary>
