@@ -43,8 +43,7 @@ namespace DrawingEnvironment
         // The list of variables and variables flag
         public List<Variable> VariableList = new List<Variable>();
 
-        // The list of the Methods declared
-        // TODO: Updating this list and then checking for methods in command list
+        // The list of the Methods declared        
         public List<Method> MethodList = new List<Method>();
 
         // The line counter for the multiline execution
@@ -486,7 +485,6 @@ namespace DrawingEnvironment
             PositionLabel = LablePosition;
             this.isFilling = isFilling;
             this.programmingArea = programmingArea;
-            // TODO: Added this to experiment
             this.CurrentColourBox = CurrentColourBox;
         }
     }

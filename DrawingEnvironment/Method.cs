@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DrawingEnvironment
@@ -45,21 +46,36 @@ namespace DrawingEnvironment
             for (int i = 0; i < MethodBody.Count; i++)
             {
                 // Updating the Variable dictionary with the declared value in the method
-                string varName = Variables.ElementAt(i).Key;
-                Variables[varName] = parametersValue[i];
-
+                AssignValues(parametersValue);
                 // Assigning the value to the right variable based on its name
                 foreach (var parameter in MethodBody[i].stringParameters)
                 {
-                    if (parameter.Equals(Variables.ElementAt(i).Key))
+                    // If the variable is present it will then assign the right value to the right key
+                    if (Variables.ContainsKey(parameter))
                     {
-                        int[] varValue = { Variables[varName]};
+                        int[] varValue = { Variables[parameter] };
                         MethodBody[i].Parameters = varValue;
                     }
+
+                    else { throw new ArgumentException("Value not correct"); }
                 }
             }
             
         } // End Method
+
+        /// <summary>
+        /// It assign the appropriate values based on the name to the dictionary of variables
+        /// </summary>
+        /// <param name="parameterValues">the values parsed as integers</param>
+        public void AssignValues(int[] parameterValues)
+        {
+            for (int i = 0; i < MethodBody.Count;i++)
+            {
+                // Adding the value preserving the order of declaration
+                string varName = Variables.ElementAt(i).Key;
+                Variables[varName] = parameterValues[i];
+            }
+        }
 
         /// <summary>
         /// Overridden method for toString which displays the name of the method
