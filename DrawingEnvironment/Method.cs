@@ -42,9 +42,9 @@ namespace DrawingEnvironment
         /// It sets the value on method execution with the values declared
         /// </summary>
         /// <param name="parametersValue">the values declared in the method execution</param>
-        public void SetParametersValues(int[] parametersValue)
+        public void SetParametersValuesTOFIX(int[] parametersValue)
         {
-
+            // TODO: Fix this method
             foreach (var command in MethodBody)
             {
                 for(int i = 0; i < command.stringParameters.Length; i++)
@@ -55,6 +55,18 @@ namespace DrawingEnvironment
                     }
                     else { throw new FormatException("Variable not present"); }
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parametersValue"></param>
+        public void SetParametersValues(int[] parametersValue)
+        {
+            for (int i = 0; i < Variables.Count; i++)
+            {
+                
             }
         }
 
@@ -76,6 +88,8 @@ namespace DrawingEnvironment
         {
             this.Name = name;
             this.Parameters = Parameters;
+            
+            SetParameters(Parameters);
         }
         /// <summary>
         /// Empty Constructor for the Method class

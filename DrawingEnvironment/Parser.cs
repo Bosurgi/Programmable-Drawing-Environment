@@ -154,7 +154,7 @@ namespace DrawingEnvironment
                         
                         // Setting the method values as integers
                         Methods[i].SetParametersValues(intsParameter);
-                        command = methodSplit[0];                                              
+                        command = methodSplit[0];                                          
                         
                         // Returning the method so it will be added to the list
                         return Methods[i];
