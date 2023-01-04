@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace DrawingEnvironment
@@ -17,6 +15,9 @@ namespace DrawingEnvironment
         /// </summary>
         public const int canX = 480;
         public const int canY = 270;
+
+        ServiceExecute exe;
+
         /// <summary>
         /// Initialising the parser;
         /// </summary>
@@ -44,7 +45,7 @@ namespace DrawingEnvironment
             pointer.Draw(Graphics.FromImage(OutputBitmap));
             PositionLabel.Text = "X: " + pointer.X.ToString() + " - Y: " + pointer.Y.ToString();
             LabelFill.Text = "Fill: " + isFilling.ToString();
-            pen = new Pen(penColour, 1);            
+            pen = new Pen(penColour, 1);
         }
 
         /// <summary>
@@ -80,27 +81,45 @@ namespace DrawingEnvironment
         private void runButton_Click(object sender, EventArgs e)
         {
             errorLabel.Text = ""; // Resetting the error label
-            //string cmd = userInput.Text; // The user input
-            //string multiCmd = programmingArea.Text; // The user input in Multiline
-            
+                                  //string cmd = userInput.Text; // The user input
+                                  //string multiCmd = programmingArea.Text; // The user input in Multiline
+
             if (!programmingArea.Text.Equals(""))
             {
                 cmd = programmingArea.Text;
             }
-            else 
-            { 
+            else
+            {
                 cmd = userInput.Text;
             }
             Graphics areaGraphics = drawingArea.CreateGraphics(); // The area where to draw                             
-            areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;         
+            areaGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-            // Initialising the service which will manage all the input and execution of commands
-            ServiceExecute ex = new ServiceExecute(areaGraphics, pen, pointer, errorLabel, PositionLabel, isFilling, programmingArea, BoxCurrentColor);
-            ex.ExecuteService(cmd); // Executing the service
-            isFilling = ex.GetFill(); // Updating form filling flag
-            userInput.Text = ""; // Resetting the user input text field to empty text
-            BoxCurrentColor.BackColor = pointer.colour; // Updating the color of the current colour picture box
-            LabelFill.Text = "Fill: " + isFilling.ToString();
+            // If the service doesn't exist it will be initialised and commands will be run
+            if (exe == null || !exe.isThreadRunning)
+            {
+                // Initialising the service which will manage all the input and execution of commands
+                exe = new ServiceExecute(areaGraphics, pen, pointer, errorLabel, PositionLabel, isFilling, programmingArea, BoxCurrentColor);
+                exe.ExecuteService(cmd); // Executing the service
+                isFilling = exe.GetFill(); // Updating form filling flag
+                userInput.Text = ""; // Resetting the user input text field to empty text
+                BoxCurrentColor.BackColor = pointer.colour; // Updating the color of the current colour picture box
+                LabelFill.Text = "Fill: " + isFilling.ToString();                
+            }
+            
+            // If the thread is running it will execute the command until the thread runs
+            else if (exe.isThreadRunning)
+            {
+                while (exe.isThreadRunning)
+                {
+                    exe.ExecuteService(cmd);
+                    BoxCurrentColor.BackColor = pointer.colour; // Updating the color of the current colour picture box
+                    isFilling = exe.GetFill(); // Updating form filling flag
+                    userInput.Text = ""; // Resetting the user input text field to empty text
+                    LabelFill.Text = "Fill: " + isFilling.ToString();
+                }
+
+            }
         }
 
         /// <summary>
@@ -181,7 +200,7 @@ namespace DrawingEnvironment
             circle.SetColour(pen.Color);
             circle.Draw(areaGraphics);
         }
-        
+
         private void ToolsTriangleItem_Click(object sender, EventArgs e)
         {
             Graphics areaGraphics = drawingArea.CreateGraphics();
@@ -234,8 +253,8 @@ namespace DrawingEnvironment
             OpenFileDialog openDialog = new OpenFileDialog();
             openDialog.Filter = "*.txt|*.txt";
             openDialog.RestoreDirectory = true;
-            if(openDialog.ShowDialog() == DialogResult.OK)
-            {                
+            if (openDialog.ShowDialog() == DialogResult.OK)
+            {
                 programmingArea.Text = File.ReadAllText(openDialog.FileName);
             }
         }

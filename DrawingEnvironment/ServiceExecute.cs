@@ -22,7 +22,7 @@ namespace DrawingEnvironment
         bool isFilling;
 
         bool threadFlag = true;
-        PictureBox CurrentColourBox;
+        internal PictureBox CurrentColourBox;
 
         // Initialising the Parser.
         Parser parser = new Parser();
@@ -49,6 +49,8 @@ namespace DrawingEnvironment
         // The line counter for the multiline execution
         int lineCounter = 1;
 
+        // Thread flag and new thread to use
+        internal bool isThreadRunning;
         internal Thread thread;
 
         // TODO: Bug with colours and loops as it executes first the commands
@@ -91,14 +93,14 @@ namespace DrawingEnvironment
 
                         else if (CommandList[i].GetType().Equals(typeof(Method)))
                         {
-                            for(int j = 0; j < MethodList.Count; j++)
+                            for (int j = 0; j < MethodList.Count; j++)
                             {
                                 if (CommandList[i].Name.Equals(MethodList[j].Name))
                                 {
                                     MethodList[j].MethodBody.ForEach(c => Execute(c));
                                 }
                             }
-                        }                        
+                        }
 
                         else if (parser.isValidCommand(CommandList[i].Name))
                         {
@@ -151,7 +153,10 @@ namespace DrawingEnvironment
 
                     // If the if statement condition is not met the user will receive a prompt.
                     else { throw new FormatException("If condition not met. \nNot executing the If statement."); }
-                } // End of If                
+                } // End of If
+                
+                // Updating the command list after execution to not carry on previous parsed commands
+                parser.CommandList = new List<Command>();
 
             } // End of Try
             catch (ArgumentException ex) { ErrorLabel.Text = "Line: " + parser.LineCounter + " " + ex.Message; }
@@ -403,25 +408,21 @@ namespace DrawingEnvironment
                     break;
 
                 case "REDGREEN":
+                    isThreadRunning = true;
                     thread = new Thread(StartRedGreen);
                     thread.Start();
                     break;
 
                 case "BLUEYELLOW":
+                    isThreadRunning = true;
                     thread = new Thread(StartBlueYellow);
                     thread.Start();
                     break;
 
                 case "BLACKWHITE":
+                    isThreadRunning = true;
                     thread = new Thread(StartBlackWhite);
                     thread.Start();
-                    break;
-
-                case "STOP":
-                    if (thread.ThreadState== ThreadState.Running)
-                    {
-                        thread.Suspend();
-                    }
                     break;
             }
         } // End of Method
@@ -455,11 +456,12 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
-        /// Flash red and green pen which will flash for half a second
+        /// Flash red and green pen which will flash for half a second and for 30 times
         /// </summary>
         public void StartRedGreen()
         {
-            while (true)
+            int counter = 0;
+            while (counter < 30)
             {
                 if (threadFlag == true)
                 {
@@ -467,6 +469,7 @@ namespace DrawingEnvironment
                     pointer.SetColour(pen.Color);
                     CurrentColourBox.BackColor = pen.Color;
                     threadFlag = false;
+                    counter++;
                 }
                 else
                 {
@@ -474,17 +477,20 @@ namespace DrawingEnvironment
                     pointer.SetColour(pen.Color);
                     CurrentColourBox.BackColor = pen.Color;
                     threadFlag = true;
+                    counter++;
                 }
                 Thread.Sleep(500);
             }
+            isThreadRunning = false;
         }
 
         /// <summary>
-        /// Flash blue and yellow pen which will flash for half a second
+        /// Flash blue and yellow pen which will flash for half a second and for 30 times
         /// </summary>
         public void StartBlueYellow()
         {
-            while (true)
+            int counter = 0;
+            while (counter < 30)
             {
                 if (threadFlag == true)
                 {
@@ -492,6 +498,7 @@ namespace DrawingEnvironment
                     pointer.SetColour(pen.Color);
                     CurrentColourBox.BackColor = pen.Color;
                     threadFlag = false;
+                    counter++;
                 }
                 else
                 {
@@ -499,17 +506,20 @@ namespace DrawingEnvironment
                     pointer.SetColour(pen.Color);
                     CurrentColourBox.BackColor = pen.Color;
                     threadFlag = true;
+                    counter++;
                 }
                 Thread.Sleep(500);
             }
+            isThreadRunning = false;
         }
 
         /// <summary>
-        /// Flash Black and white pen which will flash for half a second
+        /// Flash Black and white pen which will flash for half a second and 30 times
         /// </summary>
         public void StartBlackWhite()
         {
-            while (true)
+            int counter = 0;
+            while (counter < 30)
             {
                 if (threadFlag == true)
                 {
@@ -517,6 +527,7 @@ namespace DrawingEnvironment
                     pointer.SetColour(pen.Color);
                     CurrentColourBox.BackColor = pen.Color;
                     threadFlag = false;
+                    counter++;
                 }
                 else
                 {
@@ -524,9 +535,11 @@ namespace DrawingEnvironment
                     pointer.SetColour(pen.Color);
                     CurrentColourBox.BackColor = pen.Color;
                     threadFlag = true;
+                    counter++;
                 }
                 Thread.Sleep(500);
             }
+            isThreadRunning = false;
         }
 
         /// <summary>
@@ -539,6 +552,7 @@ namespace DrawingEnvironment
         /// <param name="LablePosition">the label which manages the current position of the cursor</param>
         /// <param name="isFilling">the current state of the filling function</param>
         /// <param name="programmingArea">the programming area text box from the form</param>
+        /// <param name="CurrentColourBox">the program colour box which indicates what pen is on</param>
         public ServiceExecute(Graphics g, Pen pen, CustomCursor pointer, Label errorLabel, Label LablePosition, bool isFilling, TextBox programmingArea, PictureBox CurrentColourBox)
         {
             this.g = g;
@@ -549,6 +563,11 @@ namespace DrawingEnvironment
             this.isFilling = isFilling;
             this.programmingArea = programmingArea;
             this.CurrentColourBox = CurrentColourBox;
+        }
+
+        public ServiceExecute()
+        {
+
         }
     }
 }
