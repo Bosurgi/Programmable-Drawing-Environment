@@ -35,8 +35,7 @@ namespace DrawingEnvironment
         /// </summary>
         /// <returns>the result of the mathematical expression</returns>
         public string CalculateExpression()
-        {
-            // TODO: implementing error handling
+        {           
             // If there is no variables the method will process numerical values
             if (VariableDictionary.Count > 0)
             {

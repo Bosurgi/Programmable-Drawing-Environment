@@ -47,20 +47,39 @@ namespace DrawingEnvironment
             {
                 // Updating the Variable dictionary with the declared value in the method
                 AssignValues(parametersValue);
+                List<int> values = new List<int>();
                 // Assigning the value to the right variable based on its name
                 foreach (var parameter in MethodBody[i].stringParameters)
                 {
                     // If the variable is present it will then assign the right value to the right key
                     if (Variables.ContainsKey(parameter))
-                    {
-                        int[] varValue = { Variables[parameter] };
-                        MethodBody[i].Parameters = varValue;
+                    {                        
+                        if (MethodBody[i].stringParameters.Length == 1)
+                        {
+                            values.Add(Variables[parameter]);
+                            //int[] varValue = { Variables[parameter] };
+                            MethodBody[i].Parameters = values.ToArray();
+                        }
+
+                        else if (MethodBody[i].stringParameters.Length >= 2)
+                        {                            
+                            foreach (var variable in Variables)
+                            {
+                                if (variable.Key.Equals(parameter))
+                                {
+                                    values.Add(Variables[parameter]);
+                                }                                
+                                //int[] varValue = { Variables[variable.Key] };                                
+                            }
+                            // Updating the command parameters in the method block
+                            MethodBody[i].Parameters = values.ToArray();
+                        }
                     }
 
                     else { throw new ArgumentException("Value not correct"); }
                 }
             }
-            
+
         } // End Method
 
         /// <summary>
@@ -69,7 +88,7 @@ namespace DrawingEnvironment
         /// <param name="parameterValues">the values parsed as integers</param>
         public void AssignValues(int[] parameterValues)
         {
-            for (int i = 0; i < MethodBody.Count;i++)
+            for (int i = 0; i < MethodBody.Count; i++)
             {
                 // Adding the value preserving the order of declaration
                 string varName = Variables.ElementAt(i).Key;
