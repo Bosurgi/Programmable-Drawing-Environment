@@ -49,6 +49,8 @@ namespace DrawingEnvironment
         // The line counter for the multiline execution
         int lineCounter = 1;
 
+        internal Thread thread;
+
         // TODO: Bug with colours and loops as it executes first the commands
 
         /// <summary>
@@ -401,17 +403,25 @@ namespace DrawingEnvironment
                     break;
 
                 case "REDGREEN":
-                    // TODO: Adding thread commands - REDGREEN
-                    Thread thread = new Thread(StartRedGreen);
+                    thread = new Thread(StartRedGreen);
                     thread.Start();
                     break;
 
                 case "BLUEYELLOW":
-                    // TODO: Adding thread commands - BLUEYELLOW
+                    thread = new Thread(StartBlueYellow);
+                    thread.Start();
                     break;
 
                 case "BLACKWHITE":
-                    // TODO: Adding thread commands - BLACKWHITE
+                    thread = new Thread(StartBlackWhite);
+                    thread.Start();
+                    break;
+
+                case "STOP":
+                    if (thread.ThreadState== ThreadState.Running)
+                    {
+                        thread.Suspend();
+                    }
                     break;
             }
         } // End of Method
@@ -444,6 +454,9 @@ namespace DrawingEnvironment
             { return false; }
         }
 
+        /// <summary>
+        /// Flash red and green pen which will flash for half a second
+        /// </summary>
         public void StartRedGreen()
         {
             while (true)
@@ -462,7 +475,57 @@ namespace DrawingEnvironment
                     CurrentColourBox.BackColor = pen.Color;
                     threadFlag = true;
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(500);
+            }
+        }
+
+        /// <summary>
+        /// Flash blue and yellow pen which will flash for half a second
+        /// </summary>
+        public void StartBlueYellow()
+        {
+            while (true)
+            {
+                if (threadFlag == true)
+                {
+                    pen.Color = Color.Blue;
+                    pointer.SetColour(pen.Color);
+                    CurrentColourBox.BackColor = pen.Color;
+                    threadFlag = false;
+                }
+                else
+                {
+                    pen.Color = Color.Yellow;
+                    pointer.SetColour(pen.Color);
+                    CurrentColourBox.BackColor = pen.Color;
+                    threadFlag = true;
+                }
+                Thread.Sleep(500);
+            }
+        }
+
+        /// <summary>
+        /// Flash Black and white pen which will flash for half a second
+        /// </summary>
+        public void StartBlackWhite()
+        {
+            while (true)
+            {
+                if (threadFlag == true)
+                {
+                    pen.Color = Color.Black;
+                    pointer.SetColour(pen.Color);
+                    CurrentColourBox.BackColor = pen.Color;
+                    threadFlag = false;
+                }
+                else
+                {
+                    pen.Color = Color.White;
+                    pointer.SetColour(pen.Color);
+                    CurrentColourBox.BackColor = pen.Color;
+                    threadFlag = true;
+                }
+                Thread.Sleep(500);
             }
         }
 

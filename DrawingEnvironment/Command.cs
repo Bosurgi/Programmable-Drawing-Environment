@@ -67,6 +67,11 @@ namespace DrawingEnvironment
             /// Endfor signals the end of the for loop
             /// </summary>
             ENDFOR, //9
+
+            /// <summary>
+            /// Stopping the thread
+            /// </summary>
+            STOP,   //10
         }
 
         /// <summary>
