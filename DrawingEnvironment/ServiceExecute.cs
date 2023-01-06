@@ -298,7 +298,7 @@ namespace DrawingEnvironment
                     if (command.Parameters.Length > 2)
 
                     {
-                        throw new IndexOutOfRangeException();
+                        throw new IndexOutOfRangeException("Invalid parameters.");
                     }
                     else
                     {
@@ -408,23 +408,37 @@ namespace DrawingEnvironment
                     break;
 
                 case "REDGREEN":
-                    isThreadRunning = true;
-                    thread = new Thread(StartRedGreen);
-                    thread.Start();
+
+                    try
+                    {
+                        isThreadRunning = true;
+                        thread = new Thread(StartRedGreen);
+                        thread.Start(command.Parameters[0]);              
+                    }
+                    catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid Parameter - RedGreen <Duration>"; }                    
                     break;
 
                 case "BLUEYELLOW":
-                    isThreadRunning = true;
-                    thread = new Thread(StartBlueYellow);
-                    thread.Start();
+                    try
+                    {
+                        isThreadRunning = true;
+                        thread = new Thread(StartBlueYellow);
+                        thread.Start(command.Parameters[0]);
+                    }
+                    catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid Parameter - BlueYellow <Duration>"; }
                     break;
 
                 case "BLACKWHITE":
-                    isThreadRunning = true;
-                    thread = new Thread(StartBlackWhite);
-                    thread.Start();
+                    try
+                    {
+                        isThreadRunning = true;
+                        thread = new Thread(StartBlackWhite);
+                        thread.Start(command.Parameters[0]);
+                    }
+                    catch (IndexOutOfRangeException) { ErrorLabel.Text = "Invalid Parameter - BlackWhite <Duration>"; }
                     break;
-            }
+
+            } // End of switch
         } // End of Method
 
         /// <summary>
@@ -458,10 +472,10 @@ namespace DrawingEnvironment
         /// <summary>
         /// Flash red and green pen which will flash for half a second and for 30 times
         /// </summary>
-        public void StartRedGreen()
+        public void StartRedGreen(object param)
         {
             int counter = 0;
-            while (counter < 30)
+            while (counter < (int) param)
             {
                 if (threadFlag == true)
                 {
@@ -487,10 +501,10 @@ namespace DrawingEnvironment
         /// <summary>
         /// Flash blue and yellow pen which will flash for half a second and for 30 times
         /// </summary>
-        public void StartBlueYellow()
+        public void StartBlueYellow(object param)
         {
             int counter = 0;
-            while (counter < 30)
+            while (counter < (int) param)
             {
                 if (threadFlag == true)
                 {
@@ -516,10 +530,10 @@ namespace DrawingEnvironment
         /// <summary>
         /// Flash Black and white pen which will flash for half a second and 30 times
         /// </summary>
-        public void StartBlackWhite()
+        public void StartBlackWhite(object param)
         {
             int counter = 0;
-            while (counter < 30)
+            while (counter < (int) param)
             {
                 if (threadFlag == true)
                 {
