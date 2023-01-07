@@ -196,7 +196,8 @@ namespace AseTests
             Command circleCommand = new Command("CIRCLE", new int[] { 20 });
 
             // Act
-            List<Command> actualCommand = parser.ParseCommandMultiLine(input);
+            parser.ParseCommandMultiLine(input);
+            List<Command> actualCommand = parser.CommandList;
 
             // Assert
             // Testing if it returns a list of commands
@@ -235,7 +236,9 @@ namespace AseTests
             Command circleCommand = new Command("CIRCLE", new int[] { 20 });
 
             // Act
-            List<Command> actualCommand = parser.ParseCommandMultiLine(input);
+            List<Command> actualCommand = new List<Command>();
+            parser.ParseCommandMultiLine(input);
+            actualCommand = parser.CommandList;
 
             // Assert
             // Testing if it returns a list of commands
@@ -272,7 +275,7 @@ namespace AseTests
             // Act
             try
             {
-                List<Command> actualCommand = parser.ParseCommandMultiLine(input);
+                parser.ParseCommandMultiLine(input);
             }
             catch (ArgumentException e)
             {

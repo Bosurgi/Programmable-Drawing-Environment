@@ -11,7 +11,7 @@ namespace AseTests
     /// During the development of part 2, the aim will be them to pass.
     /// </summary>
     [TestClass]
-    public class Part2Tests
+    public class VariablesTest
     {
         /// <summary>
         /// Testing the variables if they take a specific value in lower case
@@ -78,34 +78,18 @@ namespace AseTests
         public void TestVariables_With_CommandsTakingVariables()
         {
             // set up
-            Parser parser = new Parser();
+            Parser parser = new Parser();           
             string input = "x=5\ny=10\ndrawto x,y";
             // act
-            Variable variable = (Variable)parser.ParseCommands(input);
-            Command command = (Command)parser.ParseCommands(input);
+            parser.ParseCommandMultiLine(input);
+            Dictionary<string, int> variableValues = parser.VariableDictionary;
             // Assert
-            Assert.AreEqual(variable.Parameters[0], 5);
-            Assert.AreEqual(variable.Parameters[1], 10);
-            Assert.IsTrue(variable.Name == "DRAWTO");
-        }
-
-        /// <summary>
-        /// Testing if statement and assigning right variables to the commands in use.
-        /// </summary>
-        [TestMethod]
-        public void TestVariables_With_IfStatement()
-        {
-            // set up
-            Parser parser = new Parser();
-            string input = "if x=5\nrectangle 5,5\ncircle 5\nendif";
-            Rectangle rectangle = new Rectangle(0, 0, 5,5);
-            // act
-            Variable var = (Variable)parser.ParseCommands(input);
-            List<Command> command = parser.ParseCommandMultiLine(input);
-            // assert
-            Assert.AreEqual("RECTANGLE", command[0].Name);
-            Assert.AreEqual(new int[] {5,5}, var.Parameters);
-            Assert.AreEqual("CIRCLE", command[1].Name);
+            Assert.AreEqual(2, variableValues.Count);
+            Assert.AreEqual(5, variableValues["X"]);
+            Assert.AreEqual(10, variableValues["Y"]);
+            Assert.AreEqual(5, parser.CommandList[2].Parameters[0]);
+            Assert.AreEqual(10, parser.CommandList[2].Parameters[1]);
+            Assert.AreEqual("DRAWTO", parser.CommandList[2].Name);
         }
     }
 }

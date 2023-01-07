@@ -34,7 +34,7 @@ namespace AseTests
         public void executingServiceWithEmptyCommand()
         {
             // Set up
-            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea, pictureBox);
             string command = "";
             string errorMessage;
 
@@ -57,7 +57,7 @@ namespace AseTests
         public void executingService_WithParameterError()
         {
             // Set up
-            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea, pictureBox);
             string command = "moveto x,x";
 
             // Act
@@ -79,7 +79,7 @@ namespace AseTests
         public void executingService_WithCommandError()
         {
             // Set up
-            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea, pictureBox);
             string command = "move 100,20";
             string ErrorMessage = "Error at line: 1" + "\n" + "MOVE is not a valid command.";
             // Act
@@ -102,7 +102,7 @@ namespace AseTests
         {
             // Set up
             g = pictureBox.CreateGraphics();
-            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea, pictureBox);
 
             string command = "circle x";
             string ErrorMessage = "Line: 1 Not numerical parameter";
@@ -121,7 +121,7 @@ namespace AseTests
         {
             // Set up
             g = pictureBox.CreateGraphics();
-            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea, pictureBox);
 
             string command = "moveto 100,20\ncircle x";
             string ErrorMessage = "Line: 2 Not numerical parameter";
@@ -140,7 +140,7 @@ namespace AseTests
         {
             // Set up
             g = pictureBox.CreateGraphics();
-            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea, pictureBox);
 
             string command = "moveto 100,20\ncir 30";
             string ErrorMessage = "Error at line: 2" + "\n" + "CIR is not a valid command.";
@@ -167,7 +167,7 @@ namespace AseTests
         {
             // Set up
             g = pictureBox.CreateGraphics();
-            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea, pictureBox);
 
 
             // Act
@@ -195,7 +195,7 @@ namespace AseTests
         {
             // Set up
             g = pictureBox.CreateGraphics();
-            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea, pictureBox);
             Command rectCommand = parser.ParseCommands("Rectangle ");
 
             // Act
@@ -221,7 +221,7 @@ namespace AseTests
         {
             // Set up
             g = pictureBox.CreateGraphics();
-            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea, pictureBox);
 
             // Act
             try
@@ -245,7 +245,7 @@ namespace AseTests
         {
             // Set up
             g = pictureBox.CreateGraphics();
-            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea);
+            ServiceExecute ex = new ServiceExecute(g, pen, cursor, ErrorLabel, LabelPosition, isFilling, programArea, pictureBox);
 
             string command = "moveto 100,20\ncircle 30,20";
             string ErrorMessage = "Invalid Parameters at line: 2\nCircle <Radius>";

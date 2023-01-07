@@ -174,6 +174,7 @@ namespace DrawingEnvironment
 
         /// <summary>
         /// This method parses different lines of code in sequence by dividing the commands using \n new line key.
+        /// and it sets the Commands in the parser lists either for multi lines commands or loops or ifs and methods.
         /// <example>
         ///     Storing a list of Commands taken from multi line input:
         ///         <code>
@@ -186,13 +187,13 @@ namespace DrawingEnvironment
         ///             string multiLineInput = "Circle 100\nTriangle 30\nRectangle 30,40";
         ///             
         ///             // Parsing input
-        ///             commands = parser.ParseCommandMultiLine(multiLineInput);       
+        ///             parser.ParseCommandMultiLine(multiLineInput);
+        ///             commands = parser.CommandList;   
         ///         </code>
         /// </example>
         /// </summary>
         /// <param name="commands">the user input</param>
         /// <exception cref="FormatException">exception thrown when parameter not numerical or invalid no. of Parameters</exception>
-        /// <returns>a list of different commands with their Parameters.</returns>
         public void ParseCommandMultiLine(string commands)
         {
 
