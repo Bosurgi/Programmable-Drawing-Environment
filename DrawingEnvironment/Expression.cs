@@ -49,8 +49,8 @@ namespace DrawingEnvironment
                      */
                     if (VariableDictionary.ContainsKey(ExpressionElements[i].ToUpper()))
                     {
-                        string valueToString = Convert.ToString(VariableDictionary[ExpressionElements[i]]);
-                        Espressione = Espressione.Replace(ExpressionElements[i], valueToString);
+                        string valueToString = Convert.ToString(VariableDictionary[ExpressionElements[i].ToUpper().Trim()]);
+                        Espressione = Espressione.Replace(ExpressionElements[i], valueToString).ToUpper().Trim();
                     }                   
                 }
             }

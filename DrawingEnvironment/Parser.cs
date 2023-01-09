@@ -250,7 +250,7 @@ namespace DrawingEnvironment
                 // Determine if there is an IF statement to parse
                 else if (splitCommands[i].ToUpper().Trim().Contains("IF"))
                 {
-                    string IfExpression = ParseIfStatement(splitCommands[i]);
+                    string IfExpression = ParseIfStatement(splitCommands[i].Trim().ToUpper());
                     Expression ifExpression = new Expression(IfExpression, VariableDictionary);
 
                     for (int j = i + 1; j < splitCommands.Length; j++)

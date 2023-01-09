@@ -42,7 +42,7 @@ namespace AseTests
         }
 
         /// <summary>
-        /// Testing the method variables assignment
+        /// Testing the method variables assignment and commands parameters
         /// </summary>
         [TestMethod]
         public void Test_MethodVariables()
@@ -60,13 +60,13 @@ namespace AseTests
             Assert.IsTrue(parser.CommandList[0].GetType().Equals( typeof(Method)));
             Assert.IsTrue(parser.CommandList[0].Name.Equals("TESTINGMETHOD"));
             // Checking the updated variables when method called
-            Assert.AreEqual(actualMethod.Variables["A"], 10);
-            Assert.AreEqual(actualMethod.Variables["B"], 15);
+            Assert.AreEqual(10, actualMethod.Variables["A"]);
+            Assert.AreEqual(15, actualMethod.Variables["B"]);
             // Asserting if the commands in the method body have the right parameters
-            Assert.AreEqual(actualMethod.MethodBody[0].Name, "CIRCLE");
-            Assert.AreEqual(actualMethod.MethodBody[0].Parameters[0], 10);
-            Assert.AreEqual(actualMethod.MethodBody[1].Name, "TRIANGLE");
-            Assert.AreEqual(actualMethod.MethodBody[1].Parameters[0], 15);
+            Assert.AreEqual("CIRCLE", actualMethod.MethodBody[0].Name);
+            Assert.AreEqual(10, actualMethod.MethodBody[0].Parameters[0]);
+            Assert.AreEqual("TRIANGLE", actualMethod.MethodBody[1].Name);
+            Assert.AreEqual(15, actualMethod.MethodBody[1].Parameters[0]);
         }
     }
 }

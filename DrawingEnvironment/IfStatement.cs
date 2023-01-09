@@ -39,8 +39,17 @@ namespace DrawingEnvironment
         /// <param name="expression">the expression to evaluate</param>
         public void EvaluateExpression(Expression expression)
         {
-            string variableName = expression.ExpressionElements[0].ToUpper().Trim();
-            int variableValue = Convert.ToInt32(expression.ExpressionElements[1]);
+            int variableValue;
+            string variableName = expression.ExpressionElements[0];
+
+            // Checking if the second element of the expression is a Variable
+            if (PresentVariables.ContainsKey(expression.ExpressionElements[1]))
+            {
+                variableValue = PresentVariables[expression.ExpressionElements[1]];
+            }
+            // if not it will convert the value to integer
+            
+            else { variableValue = Convert.ToInt32(expression.ExpressionElements[1]); }
 
             switch (expression.operation)
             {
@@ -75,7 +84,7 @@ namespace DrawingEnvironment
         }
 
         /// <summary>
-        /// Constructor for the If statement. 
+        /// Constructor for the If statement.
         /// </summary>
         /// <param name="presentVariables">the variables declared</param>
         /// <param name="ifExpression">the condition set by the if statement</param>
