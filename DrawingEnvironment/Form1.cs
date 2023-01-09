@@ -258,5 +258,15 @@ namespace DrawingEnvironment
                 programmingArea.Text = File.ReadAllText(openDialog.FileName);
             }
         }
+
+        /// <summary>
+        /// Command List menu from the Tool Strip
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void commandListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            helpButton_Click(sender, e);
+        }
     }
 }

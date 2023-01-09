@@ -204,6 +204,7 @@
             // 
             this.commandListToolStripMenuItem.Name = "commandListToolStripMenuItem";
             resources.ApplyResources(this.commandListToolStripMenuItem, "commandListToolStripMenuItem");
+            this.commandListToolStripMenuItem.Click += new System.EventHandler(this.commandListToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
