@@ -52,6 +52,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IfTest.cs" />
     <Compile Include="MethodTests.cs" />
     <Compile Include="LoopTests.cs" />
     <Compile Include="ExpressionTest.cs" />

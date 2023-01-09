@@ -42,7 +42,7 @@ namespace DrawingEnvironment
                 for (int i = 0; i < ExpressionElements.Length; i++)
                 {
                     /* 
-                     * If a variable with the name of the specific element is found it will convert
+                     * If a variable with the name of the specific element is found it will convert it and
                      * get the value corresponding to that variable and
                      * replace the element of the expression with its value converted to string
                      * then it will proceed with the normal operation.
@@ -50,7 +50,7 @@ namespace DrawingEnvironment
                     if (VariableDictionary.ContainsKey(ExpressionElements[i].ToUpper()))
                     {
                         string valueToString = Convert.ToString(VariableDictionary[ExpressionElements[i].ToUpper().Trim()]);
-                        Espressione = Espressione.Replace(ExpressionElements[i], valueToString).ToUpper().Trim();
+                        Espressione = Espressione.Replace(ExpressionElements[i].ToUpper(), valueToString).ToUpper().Trim();
                     }                   
                 }
             }
@@ -96,7 +96,7 @@ namespace DrawingEnvironment
         public Expression(string input, Dictionary<string, int> variableDictionary)
         {
             VariableDictionary = variableDictionary;
-            Espressione = input;
+            Espressione = input.ToUpper();
             SetOperation(Espressione);
             ExpressionElements = DivideOperands(input);
         }
