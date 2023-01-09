@@ -35,7 +35,7 @@ namespace AseTests
             Assert.AreEqual("a>0", parser.LoopElements[1]);
             Assert.AreEqual("a=a-1", parser.LoopElements[2]);
             // Testing the variable
-            Assert.AreEqual( a.Name, parser.loopVar.Name );
+            Assert.AreEqual( a.Name, parser.loopVar.Name);
             Assert.AreEqual(a.Parameters[0], parser.loopVar.Parameters[0]);
         }
 
@@ -57,7 +57,8 @@ namespace AseTests
             Assert.IsTrue(actualLoop.PresentVariables.ContainsKey("A"));
             Assert.IsTrue(actualLoop.PresentVariables["A"].Equals(10));
             Assert.AreEqual(actualLoop.loopBody.Count, 2);
-
+            Assert.AreEqual(actualLoop.loopBody[0].Name, "CIRCLE");
+            Assert.AreEqual(actualLoop.loopBody[1].Name, "RECTANGLE");
         }
 
     }

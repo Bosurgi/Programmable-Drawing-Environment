@@ -39,7 +39,7 @@ namespace DrawingEnvironment
             // If the shape doesn't exist throwing an error.
             else
             {
-                System.ArgumentException shapeException = new ArgumentException(shape + " is not a valid type of Shape.");
+                ArgumentException shapeException = new ArgumentException(shape + " is not a valid type of Shape.");
                 throw shapeException;
             }
         }

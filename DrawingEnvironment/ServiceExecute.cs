@@ -91,6 +91,7 @@ namespace DrawingEnvironment
                             parser.SetListVariable(VariableList);
                         }
 
+                        // If a method is found in the command List it will execute the method block stored in memory
                         else if (CommandList[i].GetType().Equals(typeof(Method)))
                         {
                             for (int j = 0; j < MethodList.Count; j++)
@@ -136,6 +137,7 @@ namespace DrawingEnvironment
                     }
                 } // End of if
 
+                // Checking if there is an if statement
                 if (parser.ifStatement != null)
                 {
                     // Updating the if statement in the parser

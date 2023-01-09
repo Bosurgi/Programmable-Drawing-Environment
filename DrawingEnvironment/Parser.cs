@@ -157,8 +157,7 @@ namespace DrawingEnvironment
                         command = methodSplit[0];                                          
                         
                         // Returning the method so it will be added to the list
-                        return Methods[i];
-                        
+                        return Methods[i];                    
                     }
                 }
             }
@@ -202,10 +201,10 @@ namespace DrawingEnvironment
 
             for (int i = 0; i < splitCommands.Length; i++)
             {
-                // If does not contain the keyword For it adds the commands to execute in the normal Command List
+                // If does not contain the keywords for if, for or methods it adds the commands to execute in the normal Command List
                 if (!splitCommands[i].ToUpper().Trim().Contains("FOR")
                     && !splitCommands[i].ToUpper().Trim().Contains("IF")
-                    && !splitCommands[i].ToUpper().Trim().Contains("METHOD"))
+                    && !splitCommands[i].ToUpper().Trim().StartsWith("METHOD"))
                 {
                     LineCounter++; // Updating LineCounter to keep track of the line executing.
                     CommandList.Add(ParseCommands(splitCommands[i])); // applying the single line parsecommand to the current line and adding it to the list.
@@ -273,8 +272,8 @@ namespace DrawingEnvironment
                     ifStatement = new IfStatement(VariableDictionary, ifExpression, IfBody);
                 }
 
-                // Determine if there is a Method declaration to parse TODO: implement this
-                else if (splitCommands[i].ToUpper().Trim().Contains("METHOD"))
+                // Determine if there is a Method declaration to parse
+                else if (splitCommands[i].ToUpper().Trim().StartsWith("METHOD"))
                 {
                     Method method = ParseMethod(splitCommands[i]);
 

@@ -68,8 +68,7 @@ namespace DrawingEnvironment
                                 if (variable.Key.Equals(parameter))
                                 {
                                     values.Add(Variables[parameter]);
-                                }                                
-                                //int[] varValue = { Variables[variable.Key] };                                
+                                }                                                             
                             }
                             // Updating the command parameters in the method block
                             MethodBody[i].Parameters = values.ToArray();
