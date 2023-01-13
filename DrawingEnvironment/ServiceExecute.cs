@@ -53,8 +53,6 @@ namespace DrawingEnvironment
         internal bool isThreadRunning;
         internal Thread thread;
 
-        // TODO: Bug with colours and loops as it executes first the commands
-
         /// <summary>
         /// Method which allows the user input to be parsed and executed if there are no errors.
         /// </summary>

@@ -158,7 +158,7 @@ namespace DrawingEnvironment
 
         private void syntaxCheckButton_Click(object sender, EventArgs e)
         {
-            // TODO: Implement syntax check for PART 2
+            
         }
 
         private void ToolsRedItem_Click(object sender, EventArgs e)

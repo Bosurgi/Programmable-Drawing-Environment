@@ -5,6 +5,34 @@ namespace DrawingEnvironment
 {
     /// <summary>
     /// This simulates a for loop into the Drawing environment.
+    /// <example>
+    ///     Initialising a Loop:
+    ///         <code>
+    ///             
+    ///             // Initialising the dictionary for the variables
+    ///             Dictionary&lt;string, int&gt; variables = new Dictionary&lt;string, int&gt; ()
+    ///             
+    ///             // The list of command to use within the loop block
+    ///             List&lt;Command&gt; loopBlock;
+    ///             
+    ///             // The Loop condition to be met
+    ///             Expression loopCondition;
+    ///             
+    ///             // The increment or decrement of the for loop
+    ///             string updateComponent
+    ///             
+    ///             // Initialising the Loop
+    ///             Loop loop = new Loop(variables, loopBlock, loopCondition, updateComponent);
+    ///             
+    ///             while(loop.isExecuting) {
+    ///                             foreach(Command command in loopBlock) {
+    ///                                 
+    ///                                 Execute(command);
+    ///                                 loop.UpdateVariableValue(loop.updateComponent)
+    ///                                 }
+    ///                             }
+    ///         </code>
+    /// </example>
     /// </summary>
     internal class Loop : Command
     {

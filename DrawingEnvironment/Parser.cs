@@ -104,14 +104,7 @@ namespace DrawingEnvironment
                         // Adding the values into the parameters list
                         parsedParameters.Add(VariableDictionary[splitParam[i]]);
                     }
-                    /*
-                    // TODO: This causes a bug if a command is issued after declaring a variable
-                    // If the variable is not present, it will throw an error only if there are variables
-                    else if (!VariableDictionary.ContainsKey(splitParam[i]) && VariableDictionary.Count != 0)
-                    {
-                        throw new ArgumentException("Variable not found");
-                    }
-                    */
+
                     // Handling the only command with literals Parameters (ON and OFF)
                     else if (command.Equals("FILL") && parameters != null)
                     {
