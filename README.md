@@ -27,3 +27,22 @@ The project was part of the Advanced Software Engineering Module - Year 6 MEng C
 
 # Class diagram
 ![image](https://github.com/Bosurgi/ASE_DrawingEnvironment/assets/87176210/32d647f8-8ea0-4036-8302-0782b368cb04)
+
+# Example code to run
+
+```txt
+for count=50;count>0;count=count-1
+     size=count*10
+     circle size
+endfor
+fill on
+green
+rectangle 50,50
+moveto 50,0
+white
+rectangle 50,50
+moveto 100,0
+red
+rectangle 50,50
+reset
+```
