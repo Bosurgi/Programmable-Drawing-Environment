@@ -9,7 +9,7 @@
 This is a .NET C# program which can take commands and translates them into geometrical forms.
 The application is able to recognize lexical patterns, so that the user can program the environment using For Loops, Methods and assigning variables.
 
-The project was part of the Advanced Software Engineering Module - Year 6 MEng Computer Science
+The project was part of the Advanced Software Engineering Module - Year 6 MEng Computer Science.
 
 # Features
 1. Programmable variables
